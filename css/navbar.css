@@ -18,7 +18,7 @@
 
 @media (max-width: 768px) {
     .navbar {
-        width: calc(100% - 20px);
+        width: calc(100% - 18px);
     }
 }
 

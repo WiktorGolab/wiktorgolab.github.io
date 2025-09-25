@@ -174,20 +174,23 @@
 
 @media (max-width: 768px) {
     .frame {
-        width: calc(100% - 20px);
+        width: calc(100vw - 20px);
         height: calc(100vh - 20px);
         aspect-ratio: auto;
         max-height: none;
         border-radius: 16px;
         clip-path: none;
     }
+
+    .custom-mask {
+        clip-path: none;
+    }
 }
 
 @media (max-width: 406px) {
     .frame {
-        width: calc(100% - 20px);
-        height: calc(100vh - 152px - 20px);
-        margin-top: 152px;
+        width: calc(100vw - 20px);
+        height: calc(100vh - 20px);
         aspect-ratio: auto;
         max-height: none;
         border-radius: 16px;
