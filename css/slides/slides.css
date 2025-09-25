@@ -174,8 +174,8 @@
 
 @media (max-width: 768px) {
     .frame {
-        width: calc(100svw - 20px);
-        height: calc(100svh - 20px);
+        width: calc(100lvw - 20px);
+        height: calc(100lvh - 20px);
         aspect-ratio: auto;
         max-height: none;
         border-radius: 16px;
@@ -189,8 +189,8 @@
 
 @media (max-width: 406px) {
     .frame {
-        width: calc(100svw - 20px);
-        height: calc(100svh - 20px);
+        width: calc(100lvw - 20px);
+        height: calc(100lvh - 20px);
         aspect-ratio: auto;
         max-height: none;
         border-radius: 16px;

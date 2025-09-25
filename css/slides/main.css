@@ -42,10 +42,11 @@
 
 @media (max-width: 425px) {
     .arrow-down {
-        bottom: 8px;
+        bottom: 60px;
     }
 
     .arrow-up {
-        top: 120px;
+        top: auto;
+        bottom: 120px;
     }
 }

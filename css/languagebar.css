@@ -19,12 +19,8 @@
     .langbar {
         top: auto;
         bottom: 8px;
-    }
-}
-
-@media (max-width: 425px) {
-    .langbar {
-        display: none;
+        background-color: rgba(0, 0, 0, 0.75);
+        filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.3));
     }
 }
 
