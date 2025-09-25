@@ -1,0 +1,127 @@
+/* Indywidualne kolory oświetlenia dla każdego slajdu */
+.slide:nth-child(1) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(96, 165, 250, 0.15) 0%,
+            rgba(59, 130, 246, 0.1) 30%,
+            rgba(37, 99, 235, 0.05) 70%,
+            rgba(30, 64, 175, 0.02) 100%);
+}
+
+.slide:nth-child(2) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(110, 231, 183, 0.15) 0%,
+            rgba(16, 185, 129, 0.1) 30%,
+            rgba(5, 150, 105, 0.05) 70%,
+            rgba(4, 120, 87, 0.02) 100%);
+}
+
+.slide:nth-child(3) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(245, 158, 11, 0.15) 0%,
+            rgba(239, 68, 68, 0.1) 30%,
+            rgba(220, 38, 38, 0.05) 70%,
+            rgba(185, 28, 28, 0.02) 100%);
+}
+
+.slide:nth-child(4) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(168, 85, 247, 0.15) 0%,
+            rgba(99, 102, 241, 0.1) 30%,
+            rgba(79, 70, 229, 0.05) 70%,
+            rgba(67, 56, 202, 0.02) 100%);
+}
+
+.slide:nth-child(5) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(244, 114, 182, 0.15) 0%,
+            rgba(236, 72, 153, 0.1) 30%,
+            rgba(219, 39, 119, 0.05) 70%,
+            rgba(190, 24, 93, 0.02) 100%);
+}
+
+.slide:nth-child(6) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(34, 211, 238, 0.15) 0%,
+            rgba(14, 165, 233, 0.1) 30%,
+            rgba(2, 132, 199, 0.05) 70%,
+            rgba(3, 105, 161, 0.02) 100%);
+}
+
+.slide:nth-child(7) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(52, 211, 153, 0.15) 0%,
+            rgba(5, 150, 105, 0.1) 30%,
+            rgba(4, 120, 87, 0.05) 70%,
+            rgba(6, 95, 70, 0.02) 100%);
+}
+
+.slide:nth-child(8) .frame::before {
+    background: linear-gradient(135deg,
+            rgba(248, 113, 113, 0.15) 0%,
+            rgba(220, 38, 38, 0.1) 30%,
+            rgba(185, 28, 28, 0.05) 70%,
+            rgba(153, 27, 27, 0.02) 100%);
+}
+
+/* Gradient backgrounds */
+.slide:nth-child(1) .frame {
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.slide:nth-child(2) .frame {
+    background: linear-gradient(135deg, #6ee7b7, #10b981);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.slide:nth-child(3) .frame {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.slide:nth-child(4) .frame {
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.slide:nth-child(5) .frame {
+    background: linear-gradient(135deg, #f472b6, #ec4899);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.slide:nth-child(6) .frame {
+    background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.slide:nth-child(7) .frame {
+    background: linear-gradient(135deg, #34d399, #059669);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.slide:nth-child(8) .frame {
+    background: linear-gradient(135deg, #f87171, #dc2626);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

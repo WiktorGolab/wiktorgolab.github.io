@@ -1,0 +1,27 @@
+/* Strzałki */
+.arrow {
+    position: fixed;
+    right: 0%;
+    transform: translateX(-50%) scale(1);
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 2000;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 1));
+}
+
+.arrow-down {
+    bottom: 10vh;
+}
+
+.arrow-up {
+    top: 10.5vh;
+}
+
+.arrow.hidden {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    pointer-events: none;
+}

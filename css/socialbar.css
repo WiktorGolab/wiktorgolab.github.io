@@ -1,0 +1,46 @@
+.socialbar {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    z-index: 1000;
+    background-color: rgb(14, 14, 14);
+    border-radius: 16px;
+    padding: 8px 10px;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 1));
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .socialbar {
+        top: auto;
+        bottom: 8px;
+    }
+}
+
+@media (max-width: 425px) {
+    .socialbar {
+        display: none;
+    }
+}
+
+.socialbar a {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background .25s;
+    font-size: 25px;
+    transform: translateY(2px);
+}
+
+.socialbar a:hover {
+    background: rgba(255, 255, 255, 0.08)
+}

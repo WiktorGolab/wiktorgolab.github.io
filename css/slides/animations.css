@@ -1,0 +1,124 @@
+/* Animacje slajdów */
+.parallax .content {
+    transform: translateY(60px);
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+}
+
+.parallax.active .content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.rotate3d .frame {
+    transform: rotateY(90deg) scale(.3);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(.77, 0, .175, 1), opacity 1s ease;
+}
+
+.rotate3d.active .frame {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+}
+
+.clip .frame {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+    transition: clip-path 1s cubic-bezier(.77, 0, .175, 1), opacity 1s ease;
+}
+
+.clip.active .frame {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+}
+
+.panels .frame::before,
+.panels .frame::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background: #111;
+    z-index: 3;
+    transition: transform 1s cubic-bezier(.77, 0, .175, 1);
+}
+
+.panels .frame::before {
+    left: 0;
+    transform: translateX(0);
+}
+
+.panels .frame::after {
+    right: 0;
+    transform: translateX(0);
+}
+
+.panels.active .frame::before {
+    transform: translateX(-100%);
+}
+
+.panels.active .frame::after {
+    transform: translateX(100%);
+}
+
+.split .bg,
+.split .fg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    transition: transform 1s ease;
+}
+
+.split .bg {
+    left: -100%;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.split .fg {
+    position: relative;
+    z-index: 2;
+    transform: translateX(100%);
+}
+
+.split.active .bg {
+    left: 0;
+}
+
+.split.active .fg {
+    transform: translateX(0);
+}
+
+.zoom .frame {
+    transform: scale(.6);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(.77, 0, .175, 1), opacity 1s ease;
+}
+
+.zoom.active .frame {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.wipe .frame {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    transition: clip-path 1s cubic-bezier(.77, 0, .175, 1), opacity 1s ease;
+}
+
+.wipe.active .frame {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+}
+
+.diagonal .frame {
+    transform: translate(100%, 100%);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(.77, 0, .175, 1), opacity 1s ease;
+}
+
+.diagonal.active .frame {
+    transform: translate(0, 0);
+    opacity: 1;
+}

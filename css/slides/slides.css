@@ -1,0 +1,203 @@
+:root {
+    --notch-w: 15%;
+    --notch-h: 2%;
+    --easing-w: 1.5%;
+}
+
+.slides {
+    width: 100%;
+    transition: transform 0.9s cubic-bezier(.77, 0, .175, 1);
+    will-change: transform;
+}
+
+.slide {
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    filter: drop-shadow(0 0 30px rgba(0, 0, 0, 1));
+}
+
+.frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: min(100vw, calc(100vh * 2.35));
+    aspect-ratio: 2.35 / 1;
+    max-height: calc(100vh - 40px);
+    transition: transform 1s cubic-bezier(.77, 0, .175, 1), opacity 1s ease;
+    opacity: 0;
+    -webkit-clip-path: polygon(
+      calc(var(--notch-w) + var(--easing-w)) 0,
+      calc(100% - var(--notch-w) - var(--easing-w)) 0,
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(100% - var(--notch-w)) calc(var(--notch-h)),
+      100% calc(var(--notch-h)),
+      100% calc(100% - var(--notch-h)),
+      calc(100% - var(--notch-w)) calc(100% - var(--notch-h)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(100% - var(--notch-w) - var(--easing-w)) 100%,
+      calc(var(--notch-w) + var(--easing-w)) 100%,
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(var(--notch-w)) calc(100% - var(--notch-h)),
+      0 calc(100% - var(--notch-h)),
+      0 calc(var(--notch-h)),
+      calc(var(--notch-w)) calc(var(--notch-h)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25)
+    );
+    clip-path: polygon(
+      calc(var(--notch-w) + var(--easing-w)) 0,
+      calc(100% - var(--notch-w) - var(--easing-w)) 0,
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(100% - var(--notch-w)) calc(var(--notch-h)),
+      100% calc(var(--notch-h)),
+      100% calc(100% - var(--notch-h)),
+      calc(100% - var(--notch-w)) calc(100% - var(--notch-h)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(100% - var(--notch-w) - var(--easing-w)) 100%,
+      calc(var(--notch-w) + var(--easing-w)) 100%,
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(var(--notch-w)) calc(100% - var(--notch-h)),
+      0 calc(100% - var(--notch-h)),
+      0 calc(var(--notch-h)),
+      calc(var(--notch-w)) calc(var(--notch-h)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25)
+    );
+}
+
+.custom-mask {
+    -webkit-clip-path: polygon(
+      /* --- TOP EDGE (lewo → prawo) --- */
+      /* start: punkt, gdzie lewy easing kończy się na 0 (y=0) */
+      calc(var(--notch-w) + var(--easing-w)) 0,
+      /* przejście do prawej strony (górna krawędź) */
+      calc(100% - var(--notch-w) - var(--easing-w)) 0,
+
+      /* --- PRAWE GÓRNE easing punkty (schodzimy w dół do var(--notch-h)) --- */
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(100% - var(--notch-w)) calc(var(--notch-h)),
+
+      /* --- PRAWE BOCZNE / narożnik --- */
+      100% calc(var(--notch-h)),
+      100% calc(100% - var(--notch-h)),
+
+      /* --- PRAWE DOLNE narożne punkty (mirroring bottom easing) --- */
+      calc(100% - var(--notch-w)) calc(100% - var(--notch-h)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(100% - var(--notch-w) - var(--easing-w)) 100%,
+
+      /* --- DOLNA KRAWĘDŹ (prawo → lewo) --- */
+      calc(var(--notch-w) + var(--easing-w)) 100%,
+      
+      /* --- LEWE DOLNE easing (schodzimy w górę) --- */
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(var(--notch-w)) calc(100% - var(--notch-h)),
+
+      /* --- LEWE BOCZNE / narożnik --- */
+      0 calc(100% - var(--notch-h)),
+      0 calc(var(--notch-h)),
+
+      /* --- LEWE GÓRNE easing (w górę do 0) --- */
+      calc(var(--notch-w)) calc(var(--notch-h)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25)
+      /* polygon automatycznie zamyka się do pierwszego punktu */
+    );
+    clip-path: polygon(
+      calc(var(--notch-w) + var(--easing-w)) 0,
+      calc(100% - var(--notch-w) - var(--easing-w)) 0,
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(100% - var(--notch-w)) calc(var(--notch-h)),
+      100% calc(var(--notch-h)),
+      100% calc(100% - var(--notch-h)),
+      calc(100% - var(--notch-w)) calc(100% - var(--notch-h)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(100% - var(--notch-w) - var(--easing-w)) 100%,
+      calc(var(--notch-w) + var(--easing-w)) 100%,
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
+      calc(var(--notch-w)) calc(100% - var(--notch-h)),
+      0 calc(100% - var(--notch-h)),
+      0 calc(var(--notch-h)),
+      calc(var(--notch-w)) calc(var(--notch-h)),
+      calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
+      calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
+      calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25)
+    );
+}
+
+.slide.active .frame {
+    opacity: 1;
+}
+
+.slide.active .frame::before {
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    .frame {
+        aspect-ratio: 32 / 15;
+    }
+}
+
+@media (max-width: 768px) {
+    .frame {
+        width: calc(100% - 20px);
+        height: calc(100vh - 20px);
+        aspect-ratio: auto;
+        max-height: none;
+        border-radius: 16px;
+        clip-path: none;
+    }
+}
+
+@media (max-width: 406px) {
+    .frame {
+        width: calc(100% - 20px);
+        height: calc(100vh - 152px - 20px);
+        margin-top: 152px;
+        aspect-ratio: auto;
+        max-height: none;
+        border-radius: 16px;
+    }
+
+    .frame::before {
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        filter: blur(10px);
+    }
+}
