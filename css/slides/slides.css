@@ -180,6 +180,8 @@
         max-height: none;
         border-radius: 16px;
         clip-path: none;
+        padding-bottom: env(safe-area-inset-bottom);
+        box-sizing: border-box;
     }
 
     .custom-mask {
@@ -194,6 +196,8 @@
         aspect-ratio: auto;
         max-height: none;
         border-radius: 16px;
+        padding-bottom: env(safe-area-inset-bottom);
+        box-sizing: border-box;
     }
 
     .frame::before {
