@@ -19,6 +19,8 @@
 @media (max-width: 768px) {
     .navbar {
         width: calc(100% - 18px);
+        background-color: rgba(0, 0, 0, 0.75);
+        filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.5));
     }
 }
 
