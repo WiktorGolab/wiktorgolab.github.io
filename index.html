@@ -187,9 +187,9 @@
             let touchStartY = 0;
 
             function setContainerHeight() {
-                const h = window.innerHeight;
-                slidesContainer.style.height = `${slides.length * h}px`;
-                slidesContainer.style.transform = `translateY(-${window.current * h}px)`;
+                const slideHeight = slides[0].getBoundingClientRect().height;
+                slidesContainer.style.height = `${slides.length * slideHeight}px`;
+                slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
             }
 
             function activateSlide(i) {
@@ -216,7 +216,7 @@
                 const noise = document.getElementById('noise');
                 if (noise) {
                     noise.style.opacity = 0.5;       // włącz opacity
-                    setTimeout(() => noise.style.opacity = 0, 300); // wyłącz po czasie fade (dopasowany do transition)
+                    setTimeout(() => noise.style.opacity = 0.3, 300); // wyłącz po czasie fade (dopasowany do transition)
                 }
 
                 // Fade out -> zmiana tła -> fade in
@@ -233,9 +233,11 @@
                 if (index === window.current) return;
                 locked = true;
                 window.current = index;
-                const h = window.innerHeight;
-                slidesContainer.style.transform = `translateY(-${window.current * h}px)`;
+
+                const slideHeight = slides[0].getBoundingClientRect().height;
+                slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
                 activateSlide(window.current);
+
                 setTimeout(() => locked = false, 120);
             }
 

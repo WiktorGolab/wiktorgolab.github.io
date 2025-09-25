@@ -46,7 +46,6 @@
     z-index: 9999;
     background-image: url('/assets/img/grain.png');
     background-size: cover;
-    opacity: 0.3;
     mix-blend-mode: overlay;
     animation: noiseAnim 0.2s steps(2) infinite;
     transition: opacity 0.3s ease-in-out;
@@ -76,7 +75,7 @@
 }
 
 @media (max-width: 768px) {
-    #vignette {
+    #vignette, #noise {
         display: none;
     }
 }
