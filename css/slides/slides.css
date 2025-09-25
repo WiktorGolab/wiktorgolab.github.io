@@ -192,10 +192,11 @@
 @media (max-width: 406px) {
     .frame {
         width: calc(100lvw - 20px);
-        height: calc(100lvh - 20px);
+        height: calc(100vh - 76px);
+        margin-bottom: 56px;
         aspect-ratio: auto;
         max-height: none;
-        border-radius: 16px;
+        border-radius: 15px;
         padding-bottom: env(safe-area-inset-bottom);
         box-sizing: border-box;
     }

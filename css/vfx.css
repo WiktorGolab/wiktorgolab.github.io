@@ -78,4 +78,8 @@
     #vignette, #noise {
         display: none;
     }
+
+    #ambient {
+        filter: brightness(0.45) blur(30px);
+    }
 }

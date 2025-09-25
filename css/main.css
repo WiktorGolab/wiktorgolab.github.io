@@ -19,7 +19,7 @@
 html,
 body {
     height: 100%;
-    background: #000;
+    background: #000000;
     color: #fff;
     font-family: var(--font), sans-serif;
     overflow: hidden;
