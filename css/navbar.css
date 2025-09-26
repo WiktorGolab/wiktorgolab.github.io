@@ -9,7 +9,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 4px 12px;;
-    z-index: 1000;
+    z-index: 10000;
     background-color: rgb(14, 14, 14);
     border-radius: 14px;
     padding: 8px 10px;

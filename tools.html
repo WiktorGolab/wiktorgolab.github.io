@@ -54,6 +54,8 @@
             <div class="loading-bar">
                 <div class="loading-bar__fill"></div>
             </div>
+
+            <h6>Ładowanie narzędzi...</h6>
         </div>
 
         <div id="dust-container"></div>
@@ -125,7 +127,6 @@
     <div class="dashboard">
         <!-- Top Panel -->
         <div class="top-panel">
-            <h1 id="pageTitle">Narzędzia</h1>
         </div>
 
         <!-- Main Content -->
@@ -208,6 +209,9 @@
             <!-- Content Area -->
             <main class="content-area" id="contentArea">
                 <div class="content-item active" id="dashboard-content">
+                    <div id="planetgradient"></div>
+                    <img src="assets/img/red_planet.png" draggable="false" id="redplanet">
+
                     <h2>Strona główna</h2>
                     <p>Wyszukaj sekcję z menu po lewej stronie lub wybierz interesujący Cię skrypt poniżej.</p>
 
@@ -246,7 +250,7 @@
                             <span>Zmień rozmiar obrazu</span>
                         </div>
 
-                        <div class="tile" data-title="Konwertuj HEX ↔ RGB ↔ HSL">
+                        <div class="tile" data-title="Konwertuj HEX RGB HSL">
                             <i class="fa-solid fa-brush"></i>
                             <span>Konwertuj HEX ↔ RGB ↔ HSL</span>
                         </div>
@@ -267,18 +271,67 @@
                     </div>
                 </div>
 
-                <div class="content-item" id="overview-content">
-                    <h2>Przegląd Dashboardu</h2>
-                    <p>Tutaj znajdziesz ogólne statystyki i podsumowanie.</p>
+                <div class="content-item" id="generator-qr-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Generator kodu QR
+                    </h2>
+                    <p>Zaawansowane analizy i raporty.</p>
                 </div>
 
-                <div class="content-item" id="generator-qr-content">
-                    <h2>Generator kodu QR</h2>
+                <div class="content-item" id="generator-kolorow-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Generator kolorów
+                    </h2>
                     <p>Zaawansowane analizy i raporty.</p>
                 </div>
 
                 <div class="content-item" id="generator-lorem-content">
-                    <h2>Generator Lorem Ipsum</h2>
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Generator Lorem Ipsum
+                    </h2>
+                    <p>Zaawansowane analizy i raporty.</p>
+                </div>
+
+                <div class="content-item" id="Konwertuj-hex-rgb-hsl-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Konwertuj HEX ↔ RGB ↔ HSL
+                    </h2>
+                    <p>Zaawansowane analizy i raporty.</p>
+                </div>
+
+                <div class="content-item" id="porownaj-tekst-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Porównaj tekst
+                    </h2>
+                    <p>Zaawansowane analizy i raporty.</p>
+                </div>
+
+                <div class="content-item" id="sprawdz-regex-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Sprawdź Regex
+                    </h2>
+                    <p>Zaawansowane analizy i raporty.</p>
+                </div>
+
+                <div class="content-item" id="stworz-gradient-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Stwórz gradient
+                    </h2>
+                    <p>Zaawansowane analizy i raporty.</p>
+                </div>
+
+                <div class="content-item" id="zmien-rozmiar-obrazu-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Zmień rozmiar obrazu
+                    </h2>
                     <p>Zaawansowane analizy i raporty.</p>
                 </div>
 

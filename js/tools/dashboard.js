@@ -7,7 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mapa tytułów kafelków -> id sekcji
     const tileToSectionMap = {
         "Generator kodu QR": "generator-qr-content",
-        "Generator Lorem Ipsum": "generator-lorem-content"
+        "Generator Lorem Ipsum": "generator-lorem-content",
+        "Generator kolorów": "generator-kolorow-content",
+        "Konwertuj HEX RGB HSL": "Konwertuj-hex-rgb-hsl-content",
+        "Porównaj tekst": "porownaj-tekst-content",
+        "Sprawdź Regex": "sprawdz-regex-content",
+        "Stwórz gradient": "stworz-gradient-content",
+        "Zmień rozmiar obrazu": "zmien-rozmiar-obrazu-content"
     };
 
     // Filtr kafelków

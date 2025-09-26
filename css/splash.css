@@ -43,9 +43,13 @@
     }
 }
 
-.splash-content p {
+.splash-content p, .splash-content h6 {
     font-weight: 100;
     font-family: var(--font2);
+}
+
+.splash-content h6 {
+  font-size: 14px;
 }
 
 #splash.hidden {

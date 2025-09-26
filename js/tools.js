@@ -3,7 +3,6 @@ class Dashboard {
         this.sidebar = document.getElementById('sidebar');
         this.sidebarToggle = document.getElementById('sidebarToggle');
         this.contentArea = document.getElementById('contentArea');
-        this.pageTitle = document.getElementById('pageTitle');
 
         this.init();
     }
@@ -123,7 +122,6 @@ class Dashboard {
         const sidebarWidth = isMobile ? 280 : 220;
 
         if (isCollapsed) {
-            this.sidebarToggle.style.left = '0';
 
             // ✅ Na mobile nie zmieniamy szerokości contentArea
             if (!isMobile) {
@@ -193,22 +191,9 @@ class Dashboard {
             activeContent.classList.add('active');
         }
 
-        // Update page title
-        this.updatePageTitle(title || this.getTitleFromContentId(contentId));
-
         // Auto-close sidebar on mobile after selection
         if (window.innerWidth <= 768 && this.sidebar && !this.sidebar.classList.contains('collapsed')) {
             this.toggleSidebar();
-        }
-    }
-
-    updatePageTitle(title) {
-        if (this.pageTitle && title) {
-            this.pageTitle.style.opacity = '0';
-            setTimeout(() => {
-                this.pageTitle.textContent = title;
-                this.pageTitle.style.opacity = '1';
-            }, 150);
         }
     }
 
@@ -274,11 +259,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Fallback for DOM elements
 document.addEventListener('DOMContentLoaded', () => {
-    const requiredElements = ['sidebar', 'sidebarToggle', 'contentArea', 'pageTitle'];
+    const requiredElements = ['sidebar', 'sidebarToggle', 'contentArea'];
 
     requiredElements.forEach(id => {
         if (!document.getElementById(id)) {
             console.warn(`Element with id '${id}' not found`);
         }
+    });
+});
+
+document.querySelectorAll('.back-to-dashboard').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Ukryj wszystkie content-item
+        document.querySelectorAll('.content-item').forEach(c => c.classList.remove('active'));
+        // Pokaż sekcję Narzędzia
+        const dashboard = document.getElementById('dashboard-content');
+        if (dashboard) dashboard.classList.add('active');
+        // Opcjonalnie przewiń do góry
+        dashboard.scrollIntoView({ behavior: 'smooth' });
     });
 });
