@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 99999;
   clip-path: circle(150% at center);
   transition: clip-path 1s ease-in-out;
   background: radial-gradient(circle at center, #111 0%, #000 100%);
