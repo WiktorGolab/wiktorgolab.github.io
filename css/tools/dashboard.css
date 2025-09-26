@@ -2,8 +2,9 @@
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* większe kafle */
-    gap: 30px;                /* większy odstęp */
+    gap: 15px 30px;                /* większy odstęp */
     margin-top: 30px;
+    margin-bottom: 60px;
 }
 
 .tile {
@@ -122,7 +123,7 @@
     user-select: none;
     opacity: 0.5;
     filter: drop-shadow(0 0 100px rgba(255, 255, 255, 0.2));
-    animation: planetRotate 20s ease-in-out infinite;
+    animation: planetRotate 15s ease-in-out infinite;
 }
 
 @keyframes planetRotate {
@@ -137,13 +138,18 @@
     }
 
     50% {
-        transform: scale(1.5) rotate(-10deg);
+        transform: scale(1.5) rotate(0deg);
+        filter: drop-shadow(0 0 100px rgba(255, 255, 255, 0.45));
+    }
+
+    75% {
+        transform: scale(1.5) rotate(-5deg);
         filter: drop-shadow(0 0 100px rgba(255, 255, 255, 0.3));
     }
 
     100% {
         transform: scale(1.5) rotate(0deg);
-        filter: drop-shadow(0 0 100px rgba(255, 255, 255, 0.4));
+        filter: drop-shadow(0 0 100px rgba(255, 255, 255, 0.2));
     }
 }
 
