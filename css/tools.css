@@ -1,0 +1,360 @@
+body, html {
+    overflow: auto !important;
+}
+
+.dashboard {
+    min-height: 100vh;
+}
+
+/* Top Panel */
+.top-panel {
+    height: 200px;
+    background: linear-gradient(to bottom, #000000, #0e0e0e);
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    position: relative;
+    padding: 30px;
+}
+
+.top-panel h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #f0f0f0;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    min-height: calc(100vh - 200px);
+    position: relative;
+}
+
+/* Sidebar Toggle */
+.sidebar-toggle {
+    position: absolute;
+    left: 220px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 60px;
+    background-color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+    border: 1px solid #111;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background-color: #111;
+}
+
+.sidebar-toggle i {
+    color: #f0f0f0;
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+
+/* Kierunek strzałki przez CSS */
+.sidebar-toggle i {
+    transform: rotate(0deg);
+}
+
+.sidebar.collapsed + .sidebar-toggle i {
+    transform: rotate(180deg);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: #0e0e0e;
+    border-right: 1px solid #111;
+    transform: translateX(0);
+    transition: all 0.3s ease;
+    z-index: 999;
+    height: calc(100vh - 200px);
+    position: relative;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-220px);
+    width: 0;
+}
+
+/* Toggle przy zwiniętym sidebarze */
+.sidebar.collapsed + .sidebar-toggle {
+    left: 0;
+}
+
+/* Content Area */
+.content-area {
+    flex: 1;
+    padding: 40px;
+    background-color: #000;
+    transition: all 0.3s ease;
+    min-height: calc(100vh - 200px);
+    width: calc(100% - 220px);
+    margin-left: 0;
+    overflow-y: auto;
+}
+
+.sidebar.collapsed ~ .content-area {
+    width: 100%;
+    margin-left: 0;
+}
+
+/* Sidebar Menu */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    border-bottom: 1px solid #111;
+}
+
+.menu-header {
+    padding: 15px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-header:hover {
+    background-color: #111;
+}
+
+.menu-header:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #f0f0f0;
+}
+
+.menu-header span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-header .arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.menu-header.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* Submenu */
+.submenu {
+    list-style: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #0a0a0a;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu.expanded {
+    max-height: 300px;
+}
+
+.submenu-item {
+    padding: 12px 20px 12px 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 3px solid rgb(41, 41, 41);
+}
+
+.submenu-item:hover {
+    background-color: #111;
+    border-left-color: #f0f0f0;
+    text-decoration: underline;
+}
+
+.submenu-item.active {
+    background-color: #111;
+    border-left-color: #f0f0f0;
+}
+
+/* Single Items (without submenu) */
+.single-item .menu-header .arrow {
+    display: none;
+}
+
+/* Content Items */
+.content-item {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.content-item.active {
+    display: block;
+}
+
+.content-item h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #f0f0f0;
+    font-weight: 300;
+}
+
+.content-item p {
+    line-height: 1.6;
+    color: #e7e7e7;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .top-panel {
+        height: 60px;
+        padding: 4px 15px;
+        align-items: center;
+        background: linear-gradient(to bottom, #0e0e0e, #0e0e0e);
+        justify-content: start;
+    }
+
+    .top-panel h1 {
+        font-size: 22px;
+    }
+
+    .sidebar {
+        position: fixed;
+        height: calc(100vh - 60px);
+        z-index: 998;
+        width: 280px;
+        transform: translateX(-280px);
+    }
+    
+    .sidebar:not(.collapsed) {
+        transform: translateX(0);
+    }
+    
+    .sidebar-toggle {
+        position: fixed;
+        left: 280px;
+        top: 50%;
+        z-index: 1001;
+        transition: left 0.3s ease;
+    }
+    
+    .sidebar.collapsed {
+        transform: translateX(-280px);
+    }
+    
+    .sidebar:not(.collapsed) + .sidebar-toggle {
+        left: 280px;
+    }
+    
+    .sidebar.collapsed + .sidebar-toggle {
+        left: 0;
+    }
+    
+    .content-area {
+        padding: 20px;
+        transition: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        min-height: calc(100vh - 200px);
+    }
+    
+    .content-area {
+        padding: 15px;
+    }
+    
+    .content-item h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Additional safety styles */
+.sidebar-menu .menu-item {
+    position: relative;
+}
+
+.submenu {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.submenu.expanded {
+    opacity: 1;
+}
+
+/* Ensure proper z-index for mobile */
+@media (max-width: 768px) {
+    .sidebar:not(.collapsed) {
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Loading state */
+.dashboard.loading * {
+    transition: none !important;
+}
+
+/* === Sidebar Search === */
+.sidebar-search {
+    padding: 12px 15px;
+    background-color: #0a0a0a;
+    border-bottom: 1px solid #111;
+}
+
+.sidebar-search input {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #111;
+    border: 1px solid #222;
+    border-radius: 4px;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+.sidebar-search input::placeholder {
+    color: #888;
+}
+
+.sidebar-search input:focus {
+    border-color: #444;
+    background-color: #0e0e0e;
+}

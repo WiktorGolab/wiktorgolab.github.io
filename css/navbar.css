@@ -63,7 +63,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         width: calc(100vw - 20px);
-        background: rgba(0, 0, 0, 0.75);
+        background: rgba(0, 0, 0, 0.9);
         border-radius: 14px;
         padding: 8px 10px;
         opacity: 0;

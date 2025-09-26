@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Wiktor Gołąb</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo/logo_32px.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo/logo_16px.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo/logo_180px.png">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/tools.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/socialbar.css">
+    <link rel="stylesheet" href="css/languagebar.css">
+    <link rel="stylesheet" href="css/splash.css">
+
+    <link rel="stylesheet" href="css/tools/dashboard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Treść */
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        .content h1 {
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            line-height: 1.1;
+            text-align: center;
+        }
+
+        .content p {
+            font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="splash">
+        <!-- wideo najpierw, zamykamy zaraz po nim -->
+        <video id="splash-video" src="assets/vid/stars.mp4" autoplay muted loop playsinline></video>
+
+        <!-- dopiero potem treść splasha -->
+        <div class="splash-content">
+            <img src="assets/img/logo/logo_full.png" draggable="false" alt="Logo">
+            <p>Wiktor Gołąb</p>
+
+            <div class="loading-bar">
+                <div class="loading-bar__fill"></div>
+            </div>
+        </div>
+
+        <div id="dust-container"></div>
+    </div>
+
+    <div class="navbar">
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="navbar-buttons" id="navbarButtons">
+            <button onclick="goTo(0)" title="Strona główna">
+                <!-- Ikona jak wcześniej -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24" height="24" fill="#ffffff"
+                    style="transform: translateY(2px);">
+                    <path
+                        d="M304 70.1C313.1 61.9 326.9 61.9 336 70.1L568 278.1C577.9 286.9 578.7 302.1 569.8 312C560.9 321.9 545.8 322.7 535.9 313.8L527.9 306.6L527.9 511.9C527.9 547.2 499.2 575.9 463.9 575.9L175.9 575.9C140.6 575.9 111.9 547.2 111.9 511.9L111.9 306.6L103.9 313.8C94 322.6 78.9 321.8 70 312C61.1 302.2 62 287 71.8 278.1L304 70.1zM320 120.2L160 263.7L160 512C160 520.8 167.2 528 176 528L224 528L224 424C224 384.2 256.2 352 296 352L344 352C383.8 352 416 384.2 416 424L416 528L464 528C472.8 528 480 520.8 480 512L480 263.7L320 120.3zM272 528L368 528L368 424C368 410.7 357.3 400 344 400L296 400C282.7 400 272 410.7 272 424L272 528z" />
+                </svg>
+            </button>
+            <button onclick="goTo(1)">O mnie</button>
+            <button onclick="goTo(2)">Projekty</button>
+            <button onclick="goTo(3)">Doświadczenie</button>
+            <button onclick="goTo(4)">Umiejętności</button>
+            <button onclick="goTo(5)" class="active">Narzędzia</button>
+            <button onclick="goTo(6)">Kontakt</button>
+        </div>
+    </div>
+
+    <div class="socialbar">
+        <a href="https://github.com/WiktorGolab" target="_blank" title="Profil Github"
+            style="height: 25px; transform: translateY(0);">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25" height="25">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M12 2C6.475 2 2 6.475 2 12C2 16.425 4.8625 20.1625 8.8375 21.4875C9.3375 21.575 9.525 21.275 9.525 21.0125C9.525 20.775 9.5125 19.9875 9.5125 19.15C7 19.6125 6.35 18.5375 6.15 17.975C6.0375 17.6875 5.55 16.8 5.125 16.5625C4.775 16.375 4.275 15.9125 5.1125 15.9C5.9 15.8875 6.4625 16.625 6.65 16.925C7.55 18.4375 8.9875 18.0125 9.5625 17.75C9.65 17.1 9.9125 16.6625 10.2 16.4125C7.975 16.1625 5.65 15.3 5.65 11.475C5.65 10.3875 6.0375 9.4875 6.675 8.7875C6.575 8.5375 6.225 7.5125 6.775 6.1375C6.775 6.1375 7.6125 5.875 9.525 7.1625C10.325 6.9375 11.175 6.825 12.025 6.825C12.875 6.825 13.725 6.9375 14.525 7.1625C16.4375 5.8625 17.275 6.1375 17.275 6.1375C17.825 7.5125 17.475 8.5375 17.375 8.7875C18.0125 9.4875 18.4 10.375 18.4 11.475C18.4 15.3125 16.0625 16.1625 13.8375 16.4125C14.2 16.725 14.5125 17.325 14.5125 18.2625C14.5125 19.6 14.5 20.675 14.5 21.0125C14.5 21.275 14.6875 21.5875 15.1875 21.4875C17.1727 20.8173 18.8977 19.5415 20.1198 17.8395C21.3419 16.1376 21.9995 14.0953 22 12C22 6.475 17.525 2 12 2Z"
+                    stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/wiktorgolab/" target="_blank" title="Profil LinkedIn"
+            style="height: 25px; transform: translateY(0);">
+            <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" fill="none" width="25px" height="25px">
+                <rect width="132" height="132" x="30" y="30" stroke="white" stroke-width="12" rx="16"></rect>
+                <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="12" d="M66 86v44">
+                </path>
+                <circle cx="66" cy="64" r="8" fill="white"></circle>
+                <path stroke="white" stroke-linecap="round" stroke-width="12"
+                    d="M126 130v-26c0-9.941-8.059-18-18-18v0c-9.941 0-18 8.059-18 18v26"></path>
+            </svg>
+        </a>
+        <a href="downloads/pl_Wiktor Gołąb CV.pdf" download title="Pobierz CV"
+            style="display:inline-block; width:25px; height:25px; transform: translateY(0);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="25" height="25" fill="white">
+                <path
+                    d="M240 112L128 112C119.2 112 112 119.2 112 128L112 512C112 520.8 119.2 528 128 528L208 528L208 576L128 576C92.7 576 64 547.3 64 512L64 128C64 92.7 92.7 64 128 64L261.5 64C278.5 64 294.8 70.7 306.8 82.7L429.3 205.3C441.3 217.3 448 233.6 448 250.6L448 400.1L400 400.1L400 272.1L312 272.1C272.2 272.1 240 239.9 240 200.1L240 112.1zM380.1 224L288 131.9L288 200C288 213.3 298.7 224 312 224L380.1 224zM272 444L304 444C337.1 444 364 470.9 364 504C364 537.1 337.1 564 304 564L292 564L292 592C292 603 283 612 272 612C261 612 252 603 252 592L252 464C252 453 261 444 272 444zM304 524C315 524 324 515 324 504C324 493 315 484 304 484L292 484L292 524L304 524zM400 444L432 444C460.7 444 484 467.3 484 496L484 560C484 588.7 460.7 612 432 612L400 612C389 612 380 603 380 592L380 464C380 453 389 444 400 444zM432 572C438.6 572 444 566.6 444 560L444 496C444 489.4 438.6 484 432 484L420 484L420 572L432 572zM508 464C508 453 517 444 528 444L576 444C587 444 596 453 596 464C596 475 587 484 576 484L548 484L548 508L576 508C587 508 596 517 596 528C596 539 587 548 576 548L548 548L548 592C548 603 539 612 528 612C517 612 508 603 508 592L508 464z" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="langbar">
+        <button title="Switch language to english">
+            EN
+        </button>
+        <button title="Zmień język na polski">
+            PL
+        </button>
+    </div>
+
+    <div class="dashboard">
+        <!-- Top Panel -->
+        <div class="top-panel">
+            <h1 id="pageTitle">Narzędzia</h1>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <nav class="sidebar" id="sidebar">
+                <!-- Sidebar Toggle -->
+                <div class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-chevron-right" id="toggleIcon"></i>
+                </div>
+                <div class="sidebar-search">
+                    <input type="text" id="menuSearch" placeholder="Szukaj..." aria-label="Wyszukaj w menu">
+                </div>
+                <ul class="sidebar-menu">
+
+                    <li class="menu-item single-item">
+                        <div class="menu-header" data-content="dashboard" data-title="Narzędzia">
+                            <span><i class="fas fa-home"></i>Narzędzia</span>
+                        </div>
+                    </li>
+
+                    <li class="menu-item">
+                        <div class="menu-header">
+                            <span><i class="fas fa-cog"></i> Generatory</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <ul class="submenu">
+                            <li class="submenu-item" data-content="generator-qr" data-title="Generator kodu QR">Generator kodu QR</li>
+                            <li class="submenu-item" data-content="generator-lorem" data-title="Generator Lorem Ipsum">Generator Lorem Ipsum</li>
+                            <li class="submenu-item" data-content="generator-kolorow" data-title="Generator kolorów">Generator kolorów</li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item">
+                        <div class="menu-header">
+                            <span><i class="fa-solid fa-fill-drip"></i> Kolory</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <ul class="submenu">
+                            <li class="submenu-item" data-content="generator-kolorow" data-title="Generator kolorów">Generator kolorów</li>
+                            <li class="submenu-item" data-content="Konwertuj-hex-rgb-hsl" data-title="Konwertuj HEX ↔ RGB ↔ HSL">Konwertuj HEX ↔ RGB ↔ HSL</li>
+                            <li class="submenu-item" data-content="stworz-gradient" data-title="Stwórz gradient">Stwórz gradient</li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item">
+                        <div class="menu-header">
+                            <span><i class="fa-solid fa-a"></i> Tekst</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <ul class="submenu">
+                            <li class="submenu-item" data-content="generator-lorem" data-title="Generator Lorem Ipsum">Generator Lorem Ipsum</li>
+                            <li class="submenu-item" data-content="porownaj-tekst" data-title="Porównaj tekst">Porównaj tekst</li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item">
+                        <div class="menu-header">
+                            <span><i class="fa-regular fa-images"></i> Obrazy</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <ul class="submenu">
+                            <li class="submenu-item" data-content="zmien-rozmiar-obrazu" data-title="Zmień rozmiar obrazu">Zmień rozmiar obrazu</li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item">
+                        <div class="menu-header">
+                            <span><i class="fa-solid fa-code"></i> Kod</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <ul class="submenu">
+                            <li class="submenu-item" data-content="sprawdz-regex" data-title="Sprawdź Regex">Sprawdź Regex</li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- Content Area -->
+            <main class="content-area" id="contentArea">
+                <div class="content-item active" id="dashboard-content">
+                    <h2>Strona główna</h2>
+                    <p>Wyszukaj sekcję z menu po lewej stronie lub wybierz interesujący Cię skrypt poniżej.</p>
+
+                    <div class="dashboard-search">
+                        <input type="text" id="tileSearch" placeholder="Szukaj skryptu..." />
+                    </div>
+
+                    <p>Dostępne narzędzia na stronie:</p>
+
+                    <div class="dashboard-sort">
+                        <label for="tileSort">Sortuj: </label>
+                        <select id="tileSort">
+                            <option value="alphabetical">Alfabetycznie (a-z)</option>
+                            <option value="reverse">Alfabetycznie (z-a)</option>
+                        </select>
+                    </div>
+
+                    <div class="dashboard-grid" id="dashboardGrid">
+                        <div class="tile" data-title="Generator kodu QR">
+                            <i class="fa-solid fa-qrcode"></i>
+                            <span>Generator kodu QR</span>
+                        </div>
+
+                        <div class="tile" data-title="Generator Lorem Ipsum">
+                            <i class="fa-solid fa-a"></i>
+                            <span>Generator Lorem Ipsum</span>
+                        </div>
+
+                        <div class="tile" data-title="Generator kolorów">
+                            <i class="fa-solid fa-palette"></i>
+                            <span>Generator kolorów</span>
+                        </div>
+
+                        <div class="tile" data-title="Zmień rozmiar obrazu">
+                            <i class="fa-solid fa-maximize"></i>
+                            <span>Zmień rozmiar obrazu</span>
+                        </div>
+
+                        <div class="tile" data-title="Konwertuj HEX ↔ RGB ↔ HSL">
+                            <i class="fa-solid fa-brush"></i>
+                            <span>Konwertuj HEX ↔ RGB ↔ HSL</span>
+                        </div>
+                        <div class="tile" data-title="Stwórz gradient">
+                            <i class="fa-solid fa-paint-roller"></i>
+                            <span>Stwórz gradient</span>
+                        </div>
+
+                        <div class="tile" data-title="Sprawdź Regex">
+                            <i class="fa-solid fa-code"></i>
+                            <span>Sprawdź Regex</span>
+                        </div>
+
+                        <div class="tile" data-title="Porównaj tekst">
+                            <i class="fa-regular fa-comments"></i>
+                            <span>Porównaj tekst</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-item" id="overview-content">
+                    <h2>Przegląd Dashboardu</h2>
+                    <p>Tutaj znajdziesz ogólne statystyki i podsumowanie.</p>
+                </div>
+
+                <div class="content-item" id="generator-qr-content">
+                    <h2>Generator kodu QR</h2>
+                    <p>Zaawansowane analizy i raporty.</p>
+                </div>
+
+                <div class="content-item" id="generator-lorem-content">
+                    <h2>Generator Lorem Ipsum</h2>
+                    <p>Zaawansowane analizy i raporty.</p>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="js/tools.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/splash.js"></script>
+    <script src="js/transition.js"></script>
+
+    <script src="js/tools/dashboard.js"></script>
+</body>
+
+</html>

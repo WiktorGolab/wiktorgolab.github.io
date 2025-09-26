@@ -1,0 +1,105 @@
+/* === Dashboard Grid & Tiles – duże kafelki === */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* większe kafle */
+    gap: 30px;                /* większy odstęp */
+    margin-top: 30px;
+}
+
+.tile {
+    display: flex;
+    align-items: center;
+    gap: 20px;                /* większy odstęp między ikoną a tekstem */
+    padding: 32px 36px;       /* większe wnętrze */
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 6px;
+    color: #f0f0f0;
+    font-size: 1.15rem;       /* większy font */
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.tile i {
+    font-size: 3rem;        /* większa ikona */
+    color: #f0f0f0;
+    opacity: 1;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.tile:hover {
+    background: #1a1a1a;
+    border-color: #444;
+    transform: translateY(-5px); /* większe uniesienie */
+}
+
+.tile:hover i {
+    transform: scale(1.15);
+}
+
+/* === Dashboard Search === */
+.dashboard-search {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-search input {
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    color: #f0f0f0;
+    background-color: #111;
+    border: 1px solid #222;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.3s ease;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.dashboard-search input::placeholder {
+    color: #888;
+}
+
+.dashboard-search input:focus {
+    background-color: #0e0e0e;
+    border-color: #444;
+}
+
+.dashboard-sort {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: start;
+}
+
+.dashboard-sort select {
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: none;
+    border: none;
+    color: #f0f0f0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dashboard-sort option {
+    background-color: #0e0e0e;
+    color: #f0f0f0;
+}
+
+.dashboard-sort select:hover {
+    border-color: #555;
+    background-color: #1a1a1a;
+}
+
+.dashboard-sort select:focus {
+    border-color: #888;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}

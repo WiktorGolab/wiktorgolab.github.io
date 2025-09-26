@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         splash.addEventListener('transitionend', (e) => {
             if (e.propertyName === 'clip-path') {
-                splash.remove();
+                splash.style.display = 'none';
             }
         });
         splash.classList.add('hidden');
@@ -14,38 +14,32 @@ window.addEventListener('load', () => {
 function createDust(num = 50) {
     const container = document.getElementById('dust-container');
 
-    // Czyścimy poprzednie pyłki
     container.innerHTML = '';
 
-    const radius = 350; // promień wokół logo
+    const radius = 350;
 
     for (let i = 0; i < num; i++) {
         const dust = document.createElement('div');
         dust.className = 'dust';
 
-        // Losowa pozycja w okręgu
         const angle = Math.random() * 2 * Math.PI;
         const r = Math.random() * radius;
         const x = r * Math.cos(angle);
         const y = r * Math.sin(angle);
 
-        const size = 2 + Math.random() * 8; // od 2px do 8px
+        const size = 2 + Math.random() * 8;
         dust.style.width = `${size}px`;
         dust.style.height = `${size}px`;
-
-
         dust.style.transform = `translate(${x}px, ${y}px)`;
 
-        // Opacity zależne od odległości od środka
-        const maxOpacity = 1; // zamiast 0.8
-        const minOpacity = 0.2; // zamiast 0.1
+        const maxOpacity = 1;
+        const minOpacity = 0.2;
         const opacity = maxOpacity - (r / radius) * (maxOpacity - minOpacity);
         dust.style.opacity = opacity;
 
-
         container.appendChild(dust);
 
-        animateDust(dust, radius); // animacja z uwzględnieniem promienia
+        animateDust(dust, radius);
     }
 }
 
@@ -76,15 +70,14 @@ window.addEventListener('load', () => {
 
 document.addEventListener('readystatechange', () => {
     const fill = document.querySelector('.loading-bar__fill');
-    // readyState: loading → interactive → complete
     switch (document.readyState) {
-        case 'loading': // początek
+        case 'loading':
             fill.style.width = '10%';
             break;
-        case 'interactive': // DOM gotowy, ale obrazki/filmy jeszcze nie
+        case 'interactive':
             fill.style.width = '60%';
             break;
-        case 'complete': // wszystkie zasoby pobrane
+        case 'complete':
             fill.style.width = '100%';
             break;
     }
@@ -93,7 +86,6 @@ document.addEventListener('readystatechange', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const splash = document.getElementById('splash');
 
-    // mały timeout / requestAnimationFrame – by przeglądarka zarejestrowała stan początkowy (opacity:0)
     requestAnimationFrame(() => {
         splash.classList.add('show-content');
     });

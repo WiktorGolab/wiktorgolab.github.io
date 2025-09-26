@@ -8,6 +8,8 @@
     opacity: 0.3;
     transition: background 2s ease, opacity 1s ease;
     filter: brightness(0.17) blur(30px);
+    pointer-events: none;
+    user-select: none;
 }
 
 #vignette {
@@ -20,6 +22,7 @@
     pointer-events: none;
     background: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.7) 100%);
     animation: scaling 2s ease-in-out infinite;
+    user-select: none;
 }
 
 @keyframes scaling {
@@ -50,6 +53,8 @@
     animation: noiseAnim 0.2s steps(2) infinite;
     transition: opacity 0.3s ease-in-out;
     transform: scale(2);
+    pointer-events: none;
+    user-select: none;
 }
 
 @keyframes noiseAnim {
