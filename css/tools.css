@@ -380,3 +380,8 @@ body, html {
 .back-to-dashboard:hover {
     color: #ffffff;
 }
+
+.spacer {
+    height: 50px;
+    width: auto;
+}
