@@ -14,6 +14,8 @@
     border-radius: 14px;
     padding: 8px 10px;
     filter: drop-shadow(0 0 30px rgba(0, 0, 0, 1));
+    max-width: 709px;
+    width: 50vw;
 }
 
 .navbar.transparent {
@@ -31,6 +33,14 @@
 
 .hamburger {
     display: none;
+}
+
+.navbar-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px 12px;
+    flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {

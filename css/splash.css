@@ -1,0 +1,37 @@
+/* Splash pełnoekranowy */
+#splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  clip-path: circle(150% at center);
+  transition: clip-path 1s ease-in-out;
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  overflow: hidden; /* żeby pseudo-element nie wystawał */
+}
+
+/* Pseudo-element generujący cień na krawędzi koła */
+#splash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  clip-path: inherit; /* ważne: dopasowuje kształt cienia do maski */
+  box-shadow: 0 0 60px rgba(0, 0, 0, 1); /* cień dookoła */
+  z-index: -1;
+}
+
+.splash-content {
+  color: white;
+  font-size: 2rem;
+  font-family: sans-serif;
+  text-align: center;
+  user-select: none;
+}
+
+/* Klasa, która zamyka maskę */
+#splash.hidden {
+  clip-path: circle(0% at center);
+}
