@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Wiktor Gołąb</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo/logo_32px.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo/logo_16px.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo/logo_180px.png">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/socialbar.css">
@@ -27,28 +30,34 @@
         }
 
         .content h1 {
-            /* Minimalny rozmiar 1.8rem, maksymalny 3rem, rośnie z szerokością ekranu */
             font-size: clamp(1.8rem, 5vw, 2.6rem);
             line-height: 1.1;
-            /* lekko większy line-height dla czytelności na małych ekranach */
             text-align: center;
-            /* opcjonalnie, dla lepszej responsywności */
         }
 
         .content p {
             font-size: clamp(0.9rem, 2.5vw, 1.05rem);
             line-height: 1.5;
-            /* lepsza czytelność */
         }
     </style>
 </head>
 
 <body>
-    <!-- SPLASH -->
     <div id="splash">
+        <!-- wideo najpierw, zamykamy zaraz po nim -->
+        <video id="splash-video" src="assets/vid/stars.mp4" autoplay muted loop playsinline></video>
+
+        <!-- dopiero potem treść splasha -->
         <div class="splash-content">
-            <h1>Moje Logo</h1>
+            <img src="assets/img/logo/logo_full.png" draggable="false" alt="Logo">
+            <p>Wiktor Gołąb</p>
+
+            <div class="loading-bar">
+                <div class="loading-bar__fill"></div>
+            </div>
         </div>
+        
+        <div id="dust-container"></div>
     </div>
 
     <canvas id="ambient"></canvas>
