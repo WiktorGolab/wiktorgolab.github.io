@@ -153,7 +153,7 @@
     }
 }
 
-#planetgradient {
+.planetWrapper #planetgradient {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -163,4 +163,27 @@
     user-select: none;
     bottom: -30px;
     left: 0;
+}
+
+.planetWrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.planetWrapper img {
+    z-index: -10;
+}
+
+.planetWrapper .scrollbarfix {
+    position: fixed;
+    background-color: black;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 100%;
 }
