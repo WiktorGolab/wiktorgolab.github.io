@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     gap: 20px;                /* większy odstęp między ikoną a tekstem */
-    padding: 32px 36px;       /* większe wnętrze */
+    padding: 22px 36px;       /* większe wnętrze */
     background: #111;
     border: 1px solid #222;
     border-radius: 6px;
@@ -161,6 +161,6 @@
     z-index: 1;
     pointer-events: none;
     user-select: none;
-    top: 0;
+    bottom: -30px;
     left: 0;
 }

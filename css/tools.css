@@ -102,14 +102,16 @@ body, html {
 /* Content Area */
 .content-area {
     flex: 1;
-    padding: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     background-color: #000;
     transition: all 0.3s ease;
-    min-height: calc(100vh - 76px);
+    height: calc(100vh - 76px);
     width: calc(100% - 220px);
-    margin-left: 0;
+    margin: 0;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .sidebar.collapsed ~ .content-area {
@@ -218,6 +220,7 @@ body, html {
 .content-item h2 {
     font-size: 4rem;
     margin-bottom: 20px;
+    margin-top: 20px;
     color: #f0f0f0;
     font-weight: 300;
     position: relative;
@@ -294,7 +297,6 @@ body, html {
     }
     
     .content-area {
-        padding: 20px;
         transition: none;
     }
 }
@@ -302,10 +304,6 @@ body, html {
 @media (max-width: 480px) {
     .main-content {
         min-height: calc(100vh - 200px);
-    }
-    
-    .content-area {
-        padding: 15px;
     }
     
     .content-item h2 {

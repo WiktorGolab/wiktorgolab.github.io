@@ -59,3 +59,7 @@
 #diffStatus {
     margin-top: 15px;
 }
+
+#compareBtn {
+    user-select: none;
+}

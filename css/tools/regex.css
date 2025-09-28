@@ -87,3 +87,7 @@
     accent-color: #ff987f; /* nowoczesny niebieski dla zaznaczenia */
     cursor: pointer;
 }
+
+#checkRegexBtn {
+    user-select: none;
+}

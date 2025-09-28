@@ -173,3 +173,7 @@
         min-height: auto;
     }
 }
+
+.qr-output-panel img, #qrSize, #qrFormat, #generateBtn, #downloadBtn {
+    user-select: none;
+}

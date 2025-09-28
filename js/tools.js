@@ -177,21 +177,33 @@ class Dashboard {
         }
     }
 
-    setActiveContent(contentId, title = null) {
+    setActiveContent(contentId) {
         if (!contentId) return;
 
-        // Hide all content items
-        document.querySelectorAll('.content-item').forEach(item => {
-            item.classList.remove('active');
-        });
+        // Ukryj wszystkie content-item
+        document.querySelectorAll('.content-item').forEach(item => item.classList.remove('active'));
 
-        // Show selected content
         const activeContent = document.getElementById(`${contentId}-content`);
         if (activeContent) {
             activeContent.classList.add('active');
+
+            // Poczekaj na zakończenie animacji CSS
+            const onAnimationEnd = () => {
+                // Scroll na górę
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'auto'
+                });
+                if (this.contentArea) this.contentArea.scrollTop = 0;
+
+                // Usuń listener
+                activeContent.removeEventListener('animationend', onAnimationEnd);
+            };
+
+            activeContent.addEventListener('animationend', onAnimationEnd);
         }
 
-        // Auto-close sidebar on mobile after selection
+        // Mobile sidebar auto-close
         if (window.innerWidth <= 768 && this.sidebar && !this.sidebar.classList.contains('collapsed')) {
             this.toggleSidebar();
         }
@@ -276,6 +288,8 @@ document.querySelectorAll('.back-to-dashboard').forEach(btn => {
         const dashboard = document.getElementById('dashboard-content');
         if (dashboard) dashboard.classList.add('active');
         // Opcjonalnie przewiń do góry
-        dashboard.scrollIntoView({ behavior: 'smooth' });
+        dashboard.scrollIntoView({
+            behavior: 'smooth'
+        });
     });
 });

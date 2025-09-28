@@ -33,3 +33,30 @@ body {
     font-family: var(--font), sans-serif;
     overflow: hidden;
 }
+
+/* Scrollbar dla WebKit (Chrome, Edge, Safari) */
+body::-webkit-scrollbar {
+    width: 10px;
+    z-index: 999999999999;
+}
+
+body::-webkit-scrollbar-track {
+    background: #1a1a1a; /* bardzo ciemny tor */
+    border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #333; /* ciemny uchwyt */
+    border-radius: 5px;
+    border: 2px solid #1a1a1a; /* odstęp od toru */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* nieco jaśniejszy przy hoverze */
+}
+
+/* Scrollbar dla Firefox */
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #333 #1a1a1a; /* uchwyt #333, tor #1a1a1a */
+}

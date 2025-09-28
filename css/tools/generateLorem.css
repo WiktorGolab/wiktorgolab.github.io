@@ -57,3 +57,7 @@
     overflow-y: auto;
     white-space: pre-wrap;
 }
+
+#loremType, #generateLoremBtn, #copyLoremBtn {
+    user-select: none;
+}

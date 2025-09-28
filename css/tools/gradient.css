@@ -82,3 +82,7 @@
 }
 
 .hidden { display: none; }
+
+#copyCss, #addStop, #gradientDirection, #gradientType {
+    user-select: none;
+}
