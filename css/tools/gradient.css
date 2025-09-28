@@ -1,0 +1,84 @@
+.gradient-builder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.gradient-settings {
+    flex: 1 1 260px;
+    max-width: 320px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 6px;
+    padding: 20px;
+    color: #f0f0f0;
+}
+
+.gradient-settings .row {
+    margin-bottom: 15px;
+}
+
+.gradient-settings select,
+.gradient-settings button {
+    width: 100%;
+    padding: 8px;
+    background: #222;
+    border: 1px solid #333;
+    color: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gradient-settings button:hover {
+    background: #333;
+}
+
+.stops-wrapper {
+    margin: 20px 0;
+}
+
+.stops-track {
+    position: relative;
+    height: 50px;
+    background: linear-gradient(to right, #ff0000 0%, #0000ff 100%);
+    border: 1px solid #333;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.stop-dot {
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,0.6);
+    cursor: pointer;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.gradient-preview {
+    flex: 1 1 320px;
+    min-height: 426px;
+    border: 1px solid #222;
+    border-radius: 6px;
+    background: #000;
+}
+
+.css-preview {
+    margin-top: 15px;
+    padding: 10px;
+    background: #000;
+    border: 1px solid #333;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #ff987f;
+    border-radius: 4px;
+    white-space: pre-wrap;
+}
+
+.hidden { display: none; }

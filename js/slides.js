@@ -80,7 +80,7 @@
         slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
         activateSlide(window.current);
 
-        setTimeout(() => locked = false, 120);
+        setTimeout(() => locked = false, 900);
     }
 
     window.goTo = goTo;

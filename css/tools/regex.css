@@ -1,0 +1,89 @@
+/* Kontener regex */
+.regex-checker {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    color: #f0f0f0;
+}
+
+/* Etykiety i inputy */
+.regex-checker label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.regex-checker input[type="text"],
+.regex-checker textarea {
+    background-color: #111;
+    color: #f0f0f0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Opcje regex */
+.regex-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.regex-options label {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* Przycisk */
+#checkRegexBtn {
+    background-color: #222;
+    color: #f0f0f0;
+    border: 1px solid #444;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+#checkRegexBtn:hover {
+    background-color: #333;
+    border-color: #666;
+}
+
+/* Status dopasowania */
+#regexStatus {
+    font-size: 14px;
+}
+
+/* Pole z wynikiem */
+#regexOutput {
+    background-color: #111;
+    color: #f0f0f0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+    min-height: 80px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Podświetlenia dopasowań */
+#regexOutput mark {
+    background-color: #ffcc00;
+    color: #111;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.regex-options input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #ff987f; /* nowoczesny niebieski dla zaznaczenia */
+    cursor: pointer;
+}

@@ -17,6 +17,13 @@
 
     <link rel="stylesheet" href="css/tools/dashboard.css">
     <link rel="stylesheet" href="css/tools/generateQrCode.css">
+    <link rel="stylesheet" href="css/tools/rgbhexhslCoverter.css">
+    <link rel="stylesheet" href="css/tools/colorGenerator.css">
+    <link rel="stylesheet" href="css/tools/generateLorem.css">
+    <link rel="stylesheet" href="css/tools/gradient.css">
+    <link rel="stylesheet" href="css/tools/compareText.css">
+    <link rel="stylesheet" href="css/tools/regex.css">
+    <link rel="stylesheet" href="css/tools/imageResize.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -224,7 +231,8 @@
                     <img src="assets/img/red_planet.png" draggable="false" id="redplanet">
 
                     <h2>Strona główna</h2>
-                    <p>Znajdź sekcję po kategorii z menu po lewej stronie lub wybierz interesujący Cię skrypt poniżej.</p>
+                    <p>Znajdź sekcję po kategorii z menu po lewej stronie lub wybierz interesujący Cię skrypt poniżej.
+                    </p>
 
                     <div class="dashboard-search">
                         <input type="text" id="tileSearch" placeholder="Szukaj skryptu..." />
@@ -386,63 +394,240 @@
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Generator kolorów
                     </h2>
-                    <p>Zaawansowane analizy i raporty.</p>
+                    <p>Generator kolorów pozwala szybko tworzyć zestawy kolorystyczne, które można wykorzystać w projektach graficznych, stronach internetowych, aplikacjach czy prezentacjach.</p>
+                    <div class="color-generator">
+                        <div class="controls">
+                            <button id="generateColorsBtn">Losuj</button>
+                            <span class="info">Kliknij w kolor aby skopiować HEX</span>
+                        </div>
+                        <div id="colorPalette" class="palette"></div>
+                    </div>
+                    <div class="color-picker">
+                        <h3>Wybierz własny kolor</h3>
+                        <div class="picker-controls">
+                            <input type="color" id="colorInput" value="#ff0000">
+                            <div class="picker-values">
+                                <label>HEX
+                                    <input type="text" id="hexValue" readonly>
+                                </label>
+                                <label>RGB
+                                    <input type="text" id="rgbValue" readonly>
+                                </label>
+                                <label>HSL
+                                    <input type="text" id="hslValue" readonly>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
 
                 <div class="content-item" id="generator-lorem-content">
                     <h2>
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Generator Lorem Ipsum
                     </h2>
-                    <p>Zaawansowane analizy i raporty.</p>
+                    <p>Generator Lorem Ipsum umożliwia szybkie tworzenie losowego tekstu zastępczego, który jest przydatny w projektowaniu stron internetowych, aplikacji i materiałów drukowanych.</p>
+                    <div class="lorem-generator">
+                        <div class="lorem-controls">
+                            <label>
+                                Typ:
+                                <select id="loremType">
+                                    <option value="paragraphs">Akapity</option>
+                                    <option value="sentences">Zdania</option>
+                                    <option value="words">Słowa</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Ilość:
+                                <input type="number" id="loremAmount" value="3" min="1" max="50">
+                            </label>
+
+                            <button id="generateLoremBtn">Generuj</button>
+                            <button id="copyLoremBtn">Kopiuj</button>
+                        </div>
+
+                        <div id="loremOutput" class="lorem-output"></div>
+                    </div>
                 </div>
+
 
                 <div class="content-item" id="Konwertuj-hex-rgb-hsl-content">
                     <h2>
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Konwertuj HEX ↔ RGB ↔ HSL
                     </h2>
-                    <p>Zaawansowane analizy i raporty.</p>
+                    <p>Pozwala szybko przekształcać kolory pomiędzy trzema najpopularniejszymi formatami stosowanymi w web designie i grafice.</p>
+                    <div class="color-converter">
+                        <div class="converter-panel">
+                            <div class="field">
+                                <label for="hexInput">HEX</label>
+                                <input type="text" id="hexInput" placeholder="#ff0000">
+                            </div>
+                            <div class="field">
+                                <label for="rgbInput">RGB</label>
+                                <input type="text" id="rgbInput" placeholder="255,0,0">
+                            </div>
+                            <div class="field">
+                                <label for="hslInput">HSL</label>
+                                <input type="text" id="hslInput" placeholder="0,100%,50%">
+                            </div>
+                        </div>
+                        <div class="preview">
+                            <p>Podgląd koloru:</p>
+                            <div id="colorPreview"></div>
+                        </div>
+                    </div>
                 </div>
+
 
                 <div class="content-item" id="porownaj-tekst-content">
                     <h2>
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Porównaj tekst
                     </h2>
-                    <p>Zaawansowane analizy i raporty.</p>
+                    <p>Wklej dwa teksty i sprawdź różnice wizualnie.</p>
+
+                    <div class="text-compare">
+                        <div class="inputs">
+                            <textarea id="textA" placeholder="Tekst A..."></textarea>
+                            <textarea id="textB" placeholder="Tekst B..."></textarea>
+                        </div>
+                        <button id="compareBtn">Porównaj</button>
+
+                        <div id="diffOutput" class="diff-output"></div>
+                    </div>
                 </div>
+
 
                 <div class="content-item" id="sprawdz-regex-content">
                     <h2>
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Sprawdź Regex
                     </h2>
-                    <p>Zaawansowane analizy i raporty.</p>
+                    <p>Wprowadź tekst i wyrażenie regularne, aby sprawdzić dopasowania.</p>
+
+                    <div class="regex-checker">
+                        <label for="regexInput">Wyrażenie regularne:</label>
+                        <input type="text" id="regexInput" placeholder="np. \b\w{4}\b">
+                        <div class="regex-options">
+                            <label><input type="checkbox" id="regexGlobal" checked> Global</label>
+                            <label><input type="checkbox" id="regexCase"> Ignore case</label>
+                        </div>
+
+                        <label for="textInput">Tekst do sprawdzenia:</label>
+                        <textarea id="textInput" rows="6" placeholder="Wpisz tekst do sprawdzenia..."></textarea>
+
+                        <button id="checkRegexBtn">Sprawdź Regex</button>
+
+                        <div id="regexStatus" style="font-weight:bold; margin-top:10px;"></div>
+                        <div id="regexOutput"
+                            style="white-space:pre-wrap; margin-top:10px; border:1px solid #444; padding:10px;"></div>
+                    </div>
                 </div>
+
 
                 <div class="content-item" id="stworz-gradient-content">
                     <h2>
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Stwórz gradient
                     </h2>
-                    <p>Zaawansowane analizy i raporty.</p>
+                    <p>Twórz własne gradienty z pełną kontrolą nad punktami kolorów.</p>
+
+                    <div class="gradient-builder">
+                        <aside class="gradient-settings">
+                            <div class="row">
+                                <label for="gradientType">Typ:</label>
+                                <select id="gradientType">
+                                    <option value="linear">Linear</option>
+                                    <option value="radial">Radial</option>
+                                </select>
+                            </div>
+
+                            <div class="row linear-options">
+                                <label for="gradientDirection">Kierunek (linear):</label>
+                                <select id="gradientDirection">
+                                    <option value="to right">→ w prawo</option>
+                                    <option value="to left">← w lewo</option>
+                                    <option value="to bottom">↓ w dół</option>
+                                    <option value="to top">↑ w górę</option>
+                                    <option value="to bottom right">↘ ukośny</option>
+                                    <option value="to bottom left">↙ ukośny</option>
+                                    <option value="to top right">↗ ukośny</option>
+                                    <option value="to top left">↖ ukośny</option>
+                                </select>
+                            </div>
+
+                            <div class="row radial-options hidden">
+                                <label for="radialShape">Kształt (radial):</label>
+                                <select id="radialShape">
+                                    <option value="circle">Circle</option>
+                                    <option value="ellipse">Ellipse</option>
+                                </select>
+                            </div>
+
+                            <div class="stops-wrapper">
+                                <button id="addStop">Dodaj punkt</button>
+                                <div id="stopsTrack" class="stops-track"></div>
+                            </div>
+
+                            <button id="copyCss">Kopiuj CSS</button>
+                            <pre id="cssPreview" class="css-preview"></pre>
+                        </aside>
+
+                        <section class="gradient-preview" id="gradientPreview"></section>
+                    </div>
                 </div>
+
 
                 <div class="content-item" id="zmien-rozmiar-obrazu-content">
                     <h2>
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Zmień rozmiar obrazu
                     </h2>
-                    <p>Zaawansowane analizy i raporty.</p>
+                    <p>Przeciągnij obrazy tutaj lub wybierz pliki. Następnie zmień ich rozmiar i pobierz.</p>
+
+                    <div class="image-resizer">
+                        <!-- Panel sterowania -->
+                        <div class="controls">
+                            <div id="dropZone" class="drop-zone">
+                                <p>Przeciągnij obrazy tutaj lub kliknij, aby wybrać</p>
+                                <input type="file" id="imageInput" accept="image/*" multiple>
+                            </div>
+
+                            <div class="size-mode">
+                                <label><input type="radio" name="sizeMode" value="px" checked>Piksele</label>
+                                <label><input type="radio" name="sizeMode" value="percent">Procent</label>
+                            </div>
+
+                            <div class="size-inputs">
+                                <label>Szerokość: <input type="number" id="widthInput" value="800" min="1"></label>
+                                <label>Wysokość: <input type="number" id="heightInput" value="600" min="1"></label>
+                            </div>
+
+                            <div class="format-select">
+                                <label>Format:
+                                    <select id="formatSelect">
+                                        <option value="png" selected>PNG</option>
+                                        <option value="jpeg">JPEG</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <button id="processAllBtn">Przetwórz wszystkie</button>
+                        </div>
+
+                        <!-- Podgląd obrazów -->
+                        <div id="previewList" class="preview-list"></div>
+                    </div>
                 </div>
+
+
 
             </main>
         </div>
     </div>
-
-
-
 
 
     <script src="js/tools.js"></script>
@@ -453,7 +638,16 @@
     <script src="js/tools/dashboard.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
     <script src="js/tools/generateQrCode.js"></script>
+    <script src="js/tools/rgbhexhslConverter.js"></script>
+    <script src="js/tools/colorGenerator.js"></script>
+    <script src="js/tools/generateLorem.js"></script>
+    <script src="js/tools/gradient.js"></script>
+    <script src="js/tools/compareText.js"></script>
+    <script src="js/tools/regex.js"></script>
+    <script src="js/tools/imageResize.js"></script>
 </body>
 
 </html>
