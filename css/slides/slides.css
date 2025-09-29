@@ -209,6 +209,7 @@
     animation: heroAnimation 5s ease-in-out infinite;
     user-select: none;
     pointer-events: none;
+    height: calc(80vh - 20px);
 }
 
 @keyframes heroAnimation {
@@ -232,7 +233,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to bottom, #000000 30%, #0f0600 100%);
+    background: linear-gradient(to bottom, #000000 30%, #140800 100%);
     z-index: -1;
 }
 
@@ -252,4 +253,138 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 10vw;
+}
+
+@media (max-width: 1023px) {
+    .heroContainer {
+        flex-wrap: wrap-reverse;
+    }
+}
+
+.heroButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    filter: drop-shadow(0 0 200px rgba(255, 115, 0, 1));
+}
+
+.heroButtonContainer button {
+    padding: 10px 20px;
+    background: rgba(255, 115, 0, 0.15);
+    border-radius: 35px;
+    border: 2px solid white;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.heroButtonContainer button:hover {
+    background-color: rgb(39, 39, 39);
+    transform: translateY(-5px);
+}
+
+#text-distortion canvas {
+    height: 150px !important;
+    width: auto !important;
+    font-size: clamp(50px, 15vh, 100px) !important;
+    overflow: auto !important;
+}
+
+#heroBackground {
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+}
+
+#heroBackground img {
+    object-fit: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    animation: backgroundHero 10s ease-in-out infinite;
+}
+
+@keyframes backgroundHero {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (min-width: 1920px) {
+    #heroimg {
+        height: 70vh;
+    }
+}
+
+@media (max-width: 1920px) {
+    #heroimg {
+        height: 70vh;
+    }
+}
+
+@media (max-width: 1439px) {
+    #heroimg {
+        height: 60vh;
+    }
+}
+
+@media (max-width: 1023px) {
+    #heroimg {
+        height: 55vh;
+        margin-right: 15px;
+    }
+    .heroContainer {
+        gap: 50px;
+    }
+    .heroContainer .content {
+        padding: 0;
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 711px) {
+    .heroContainer {
+        gap: 0;
+        flex-direction: column-reverse;
+    }
+
+    #heroimg {
+        height: 35vh;
+        margin-right: 0;
+    }
+
+    .heroContainer .content {
+        margin-left: 0;
+    }
+
+    .heroContainer {
+        margin-top: -70px;
+    }
+
+    .heroContainer .content #text-distortion {
+        transform: scale(0.5);
+        margin-top: -30px;
+        margin-bottom: -30px;
+    }
+
+    .heroContainer .content p {
+        text-align: center !important;
+    }
+
+    .heroButtonContainer {
+        justify-content: center;
+    }
 }

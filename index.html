@@ -131,12 +131,24 @@
 
     <div class="slides" id="slides">
         <section class="slide parallax active">
+            <div id="heroBackground">
+                <img src="assets/img/background_hero.png" draggable="false">
+            </div>
             <div class="heroContainer">
                 <canvas id="particles"></canvas>
 
                 <div class="content">
-                    <h1>Wiktor Gołąb</h1>
-                    <p>Scrolluj w dół aby zobaczyć kolejne sekcje.</p>
+                    <h1 style="height: 150px;" id="text-distortion"></h1>
+                    <p style="text-align: start;">Jestem <strong>Wiktor</strong>:)</p>
+                    <p style="text-align: start; margin-top: 5px;">Web Developer • Twórca internetowy</p>
+                    <div class="heroButtonContainer">
+                        <button onclick="goTo(2)">
+                            Projekty
+                        </button>
+                        <button onclick="goTo(5)">
+                            Narzędzia
+                        </button>
+                    </div>
                 </div>
 
                 <div class="heroGradient"></div>
@@ -218,6 +230,9 @@
     <script src="js/slides.js"></script>
     <script src="js/splash.js"></script>
     <script src="js/transition.js"></script>
+    <script src="js/Blotter-0.1.0/build/blotter.min.js"></script>
+    <script src="js/Blotter-0.1.0/build/materials/liquidDistortMaterial.js"></script>
+    <script src="js/blotter.js"></script>
 </body>
 
 </html>
