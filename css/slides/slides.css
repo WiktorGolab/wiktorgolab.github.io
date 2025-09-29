@@ -88,48 +88,30 @@
 
 .custom-mask {
     -webkit-clip-path: polygon(
-      /* --- TOP EDGE (lewo → prawo) --- */
-      /* start: punkt, gdzie lewy easing kończy się na 0 (y=0) */
       calc(var(--notch-w) + var(--easing-w)) 0,
-      /* przejście do prawej strony (górna krawędź) */
       calc(100% - var(--notch-w) - var(--easing-w)) 0,
-
-      /* --- PRAWE GÓRNE easing punkty (schodzimy w dół do var(--notch-h)) --- */
       calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25),
       calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
       calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
       calc(100% - var(--notch-w)) calc(var(--notch-h)),
-
-      /* --- PRAWE BOCZNE / narożnik --- */
       100% calc(var(--notch-h)),
       100% calc(100% - var(--notch-h)),
-
-      /* --- PRAWE DOLNE narożne punkty (mirroring bottom easing) --- */
       calc(100% - var(--notch-w)) calc(100% - var(--notch-h)),
       calc(100% - var(--notch-w) - (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
       calc(100% - var(--notch-w) - (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
       calc(100% - var(--notch-w) - (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
       calc(100% - var(--notch-w) - var(--easing-w)) 100%,
-
-      /* --- DOLNA KRAWĘDŹ (prawo → lewo) --- */
       calc(var(--notch-w) + var(--easing-w)) 100%,
-      
-      /* --- LEWE DOLNE easing (schodzimy w górę) --- */
       calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(100% - (var(--notch-h) * 0.25)),
       calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(100% - (var(--notch-h) * 0.5)),
       calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(100% - (var(--notch-h) * 0.75)),
       calc(var(--notch-w)) calc(100% - var(--notch-h)),
-
-      /* --- LEWE BOCZNE / narożnik --- */
       0 calc(100% - var(--notch-h)),
       0 calc(var(--notch-h)),
-
-      /* --- LEWE GÓRNE easing (w górę do 0) --- */
       calc(var(--notch-w)) calc(var(--notch-h)),
       calc(var(--notch-w) + (var(--easing-w) * 0.25)) calc(var(--notch-h) * 0.75),
       calc(var(--notch-w) + (var(--easing-w) * 0.5))  calc(var(--notch-h) * 0.5),
       calc(var(--notch-w) + (var(--easing-w) * 0.75)) calc(var(--notch-h) * 0.25)
-      /* polygon automatycznie zamyka się do pierwszego punktu */
     );
     clip-path: polygon(
       calc(var(--notch-w) + var(--easing-w)) 0,
@@ -224,6 +206,21 @@
     100% {
         transform: scale(1) scaleX(1);
         filter: drop-shadow(0 0 200px rgba(255, 115, 0, 0.4));
+    }
+}
+
+@keyframes heroAnimation2 {
+    0% {
+        transform: scale(1) scaleX(1);
+        filter: drop-shadow(0 0 85px rgba(255, 115, 0, 0.85));
+    }
+    50% {
+        transform: scale(1.04) scaleX(0.95);
+        filter: drop-shadow(0 0 75px rgba(255, 115, 0, 1));
+    }
+    100% {
+        transform: scale(1) scaleX(1);
+        filter: drop-shadow(0 0 85px rgba(255, 115, 0, 0.85));
     }
 }
 
@@ -346,9 +343,11 @@
         height: 55vh;
         margin-right: 15px;
     }
+
     .heroContainer {
         gap: 50px;
     }
+
     .heroContainer .content {
         padding: 0;
         margin-left: 15px;
@@ -386,5 +385,11 @@
 
     .heroButtonContainer {
         justify-content: center;
+    }
+}
+
+@media (max-width: 879px) {
+    #heroimg {
+        animation: heroAnimation2 5s ease-in-out infinite;
     }
 }

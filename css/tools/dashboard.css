@@ -1,8 +1,7 @@
-/* === Dashboard Grid & Tiles – duże kafelki === */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* większe kafle */
-    gap: 15px 30px;                /* większy odstęp */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px 30px;
     margin-top: 30px;
     margin-bottom: 60px;
 }
@@ -10,13 +9,13 @@
 .tile {
     display: flex;
     align-items: center;
-    gap: 20px;                /* większy odstęp między ikoną a tekstem */
-    padding: 22px 36px;       /* większe wnętrze */
+    gap: 20px;
+    padding: 22px 36px;
     background: #111;
     border: 1px solid #222;
     border-radius: 6px;
     color: #f0f0f0;
-    font-size: 1.15rem;       /* większy font */
+    font-size: 1.15rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -26,7 +25,7 @@
 }
 
 .tile i {
-    font-size: 3rem;        /* większa ikona */
+    font-size: 3rem;
     color: #f0f0f0;
     opacity: 1;
     flex-shrink: 0;
@@ -36,14 +35,13 @@
 .tile:hover {
     background: #1a1a1a;
     border-color: #444;
-    transform: translateY(-5px); /* większe uniesienie */
+    transform: translateY(-5px);
 }
 
 .tile:hover i {
     transform: scale(1.15);
 }
 
-/* === Dashboard Search === */
 .dashboard-search {
     margin-bottom: 20px;
     display: flex;

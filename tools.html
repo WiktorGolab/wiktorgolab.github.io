@@ -24,10 +24,10 @@
     <link rel="stylesheet" href="css/tools/compareText.css">
     <link rel="stylesheet" href="css/tools/regex.css">
     <link rel="stylesheet" href="css/tools/imageResize.css">
+    <link rel="stylesheet" href="css/tools/fileAttributes.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Treść */
         .content {
             position: relative;
             z-index: 2;
@@ -51,10 +51,8 @@
 
 <body>
     <div id="splash">
-        <!-- wideo najpierw, zamykamy zaraz po nim -->
         <video id="splash-video" src="assets/vid/stars.mp4" autoplay muted loop playsinline></video>
 
-        <!-- dopiero potem treść splasha -->
         <div class="splash-content">
             <img src="assets/img/logo/logo_full.png" draggable="false" alt="Logo">
             <p>Wiktor Gołąb</p>
@@ -134,15 +132,11 @@
     </div>
 
     <div class="dashboard">
-        <!-- Top Panel -->
         <div class="top-panel">
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
-            <!-- Sidebar -->
             <nav class="sidebar" id="sidebar">
-                <!-- Sidebar Toggle -->
                 <div class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
                     <i class="fas fa-chevron-right" id="toggleIcon"></i>
                 </div>
@@ -225,11 +219,9 @@
                 </ul>
             </nav>
 
-
-            <!-- Content Area -->
             <main class="content-area" id="contentArea">
                 <div class="content-item active" id="dashboard-content">
-                    
+
                     <div class="planetWrapper">
                         <div id="planetgradient"></div>
                         <div id="redplanetAnimation">
@@ -294,6 +286,11 @@
                             <i class="fa-regular fa-comments"></i>
                             <span>Porównaj tekst</span>
                         </div>
+
+                        <div class="tile" data-title="Zmień atrybuty pliku">
+                            <i class="fa-solid fa-info"></i>
+                            <span>Zmień atrybuty pliku</span>
+                        </div>
                     </div>
                 </div>
 
@@ -306,7 +303,6 @@
                     <p>Wprowadź dane po lewej, a QR pojawi się po prawej.</p>
 
                     <div class="qr-container">
-                        <!-- Panel do wpisywania tekstu -->
                         <div class="qr-input-panel">
                             <textarea id="qrInput" placeholder="Wprowadź tekst lub URL..."></textarea>
 
@@ -332,7 +328,6 @@
                             </div>
                         </div>
 
-                        <!-- Panel wyświetlający QR -->
                         <div class="qr-output-panel">
                             <div id="qrOutput"></div>
                         </div>
@@ -395,13 +390,13 @@
                 </div>
 
 
-
                 <div class="content-item" id="generator-kolorow-content">
                     <h2>
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Generator kolorów
                     </h2>
-                    <p>Generator kolorów pozwala szybko tworzyć zestawy kolorystyczne, które można wykorzystać w projektach graficznych, stronach internetowych, aplikacjach czy prezentacjach.</p>
+                    <p>Generator kolorów pozwala szybko tworzyć zestawy kolorystyczne, które można wykorzystać w
+                        projektach graficznych, stronach internetowych, aplikacjach czy prezentacjach.</p>
                     <div class="color-generator">
                         <div class="controls">
                             <button id="generateColorsBtn">Losuj</button>
@@ -434,7 +429,8 @@
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Generator Lorem Ipsum
                     </h2>
-                    <p>Generator Lorem Ipsum umożliwia szybkie tworzenie losowego tekstu zastępczego, który jest przydatny w projektowaniu stron internetowych, aplikacji i materiałów drukowanych.</p>
+                    <p>Generator Lorem Ipsum umożliwia szybkie tworzenie losowego tekstu zastępczego, który jest
+                        przydatny w projektowaniu stron internetowych, aplikacji i materiałów drukowanych.</p>
                     <div class="lorem-generator">
                         <div class="lorem-controls">
                             <label>
@@ -465,7 +461,8 @@
                         <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
                         Konwertuj HEX ↔ RGB ↔ HSL
                     </h2>
-                    <p>Pozwala szybko przekształcać kolory pomiędzy trzema najpopularniejszymi formatami stosowanymi w web designie i grafice.</p>
+                    <p>Pozwala szybko przekształcać kolory pomiędzy trzema najpopularniejszymi formatami stosowanymi w
+                        web designie i grafice.</p>
                     <div class="color-converter">
                         <div class="converter-panel">
                             <div class="field">
@@ -596,7 +593,6 @@
                     <p>Przeciągnij obrazy tutaj lub wybierz pliki. Następnie zmień ich rozmiar i pobierz.</p>
 
                     <div class="image-resizer">
-                        <!-- Panel sterowania -->
                         <div class="controls">
                             <div id="dropZone" class="drop-zone">
                                 <p>Przeciągnij obrazy tutaj lub kliknij, aby wybrać</p>
@@ -625,11 +621,18 @@
                             <button id="processAllBtn">Przetwórz wszystkie</button>
                         </div>
 
-                        <!-- Podgląd obrazów -->
                         <div id="previewList" class="preview-list"></div>
                     </div>
                 </div>
 
+
+                <div class="content-item" id="zmien-atrybuty-pliku-content">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Zmień atrybuty pliku
+                    </h2>
+                    <p>Przeciągnij pliki tutaj lub wybierz pliki. Następnie edytuj ich atrybuty i pobierz.</p>
+                </div>
 
 
             </main>
@@ -655,6 +658,7 @@
     <script src="js/tools/compareText.js"></script>
     <script src="js/tools/regex.js"></script>
     <script src="js/tools/imageResize.js"></script>
+    <script src="js/tools/fileAttributes.js"></script>
 </body>
 
 </html>

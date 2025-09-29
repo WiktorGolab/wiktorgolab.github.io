@@ -6,7 +6,6 @@ body, html {
     min-height: 100vh;
 }
 
-/* Top Panel */
 .top-panel {
     height: 76px;
     background: linear-gradient(to bottom, #000000, #0e0e0e);
@@ -27,14 +26,12 @@ body, html {
     transition: all 0.3s ease;
 }
 
-/* Main Content Layout */
 .main-content {
     display: flex;
     min-height: calc(100vh - 200px);
     position: relative;
 }
 
-/* Sidebar Toggle */
 .sidebar-toggle {
     position: absolute;
     left: 220px;
@@ -64,7 +61,6 @@ body, html {
     font-size: 0.8rem;
 }
 
-/* Kierunek strzałki przez CSS */
 .sidebar-toggle i {
     transform: rotate(0deg);
 }
@@ -73,7 +69,6 @@ body, html {
     transform: rotate(180deg);
 }
 
-/* Sidebar */
 .sidebar {
     width: 220px;
     background-color: #0e0e0e;
@@ -94,12 +89,10 @@ body, html {
     width: 0;
 }
 
-/* Toggle przy zwiniętym sidebarze */
 .sidebar.collapsed + .sidebar-toggle {
     left: 0;
 }
 
-/* Content Area */
 .content-area {
     flex: 1;
     padding-left: 20px;
@@ -119,7 +112,6 @@ body, html {
     margin-left: 0;
 }
 
-/* Sidebar Menu */
 .sidebar-menu {
     list-style: none;
     padding: 0;
@@ -169,7 +161,6 @@ body, html {
     transform: rotate(180deg);
 }
 
-/* Submenu */
 .submenu {
     list-style: none;
     max-height: 0;
@@ -202,12 +193,10 @@ body, html {
     border-left-color: #f0f0f0;
 }
 
-/* Single Items (without submenu) */
 .single-item .menu-header .arrow {
     display: none;
 }
 
-/* Content Items */
 .content-item {
     display: none;
     animation: fadeIn 0.5s ease;
@@ -234,7 +223,6 @@ body, html {
     position: relative;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -246,7 +234,6 @@ body, html {
     }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .main-content {
         flex-direction: column;
@@ -326,7 +313,6 @@ body, html {
     }
 }
 
-/* Additional safety styles */
 .sidebar-menu .menu-item {
     position: relative;
 }
@@ -340,19 +326,16 @@ body, html {
     opacity: 1;
 }
 
-/* Ensure proper z-index for mobile */
 @media (max-width: 768px) {
     .sidebar:not(.collapsed) {
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
     }
 }
 
-/* Loading state */
 .dashboard.loading * {
     transition: none !important;
 }
 
-/* === Sidebar Search === */
 .sidebar-search {
     padding: 12px 15px;
     background-color: #0a0a0a;
