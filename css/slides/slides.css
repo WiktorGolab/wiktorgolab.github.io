@@ -246,3 +246,10 @@
     transform: rotate(15deg);
     z-index: -1;
 }
+
+.heroContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
