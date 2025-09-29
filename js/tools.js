@@ -122,23 +122,24 @@ class Dashboard {
         const sidebarWidth = isMobile ? 280 : 220;
 
         if (isCollapsed) {
-
-            // ✅ Na mobile nie zmieniamy szerokości contentArea
             if (!isMobile) {
                 this.contentArea.style.width = '100%';
                 this.contentArea.style.marginLeft = '0';
             }
+            // 🔑 Toggle na mobile gdy sidebar schowany
+            if (isMobile) {
+                this.sidebarToggle.style.left = '280px !important';
+            }
         } else {
-            this.sidebarToggle.style.left = `${sidebarWidth}px`;
+            // 🔑 Toggle zawsze na 280px gdy mobile
+            this.sidebarToggle.style.left = isMobile ? '280px' : `${sidebarWidth}px`;
 
-            // ✅ Na mobile nie zmieniamy szerokości contentArea
             if (!isMobile) {
                 this.contentArea.style.width = `calc(100% - ${sidebarWidth}px)`;
                 this.contentArea.style.marginLeft = '0';
             }
         }
     }
-
 
     toggleSubmenu(menuItem) {
         if (!menuItem) return;
@@ -242,9 +243,10 @@ class Dashboard {
             }
             contentArea.style.width = '100%';
             contentArea.style.marginLeft = '0';
-            sidebarToggle.style.left = '0';
+            sidebarToggle.style.left = '280px';
         } else {
             // Desktop - przywróć stan
+            sidebarToggle.style.left = '220px';
             this.adjustLayout();
         }
     }

@@ -258,6 +258,8 @@ body, html {
         align-items: center;
         background: linear-gradient(to bottom, #0e0e0e, #0e0e0e);
         justify-content: start;
+        position: sticky;
+        top: 0;
     }
 
     .top-panel h1 {
@@ -269,6 +271,7 @@ body, html {
         height: calc(100vh - 60px);
         z-index: 998;
         width: 280px;
+        top: 60px;
         transform: translateX(-280px);
     }
     
@@ -299,6 +302,14 @@ body, html {
     .content-area {
         transition: none;
     }
+
+    .content-item h2 {
+        font-size: 2.6rem;
+    }
+
+    .content-item i {
+        font-size: 2.6rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -307,6 +318,10 @@ body, html {
     }
     
     .content-item h2 {
+        font-size: 1.5rem;
+    }
+
+    .content-item i {
         font-size: 1.5rem;
     }
 }

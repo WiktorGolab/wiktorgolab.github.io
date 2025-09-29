@@ -51,7 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetSection = document.getElementById(sectionId);
                 if (targetSection) targetSection.classList.add('active');
                 // Przewiń do góry (opcjonalnie)
-                targetSection.scrollIntoView({ behavior: 'smooth' });
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
             }
         });
     });
@@ -63,4 +65,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✅ Domyślnie sortuj alfabetycznie
     tileSort.value = 'alphabetical';
     sortTiles();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const planet = document.getElementById("redplanetAnimation");
+    if (!planet) return;
+
+    const maxMove = 25;
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+
+    const computed = window.getComputedStyle(planet);
+    const baseTransform = (computed.transform && computed.transform !== 'none')
+        ? computed.transform
+        : '';
+
+    function updateTarget(mouseX, mouseY) {
+        if (window.innerWidth < 1024) {
+            targetX = 0;
+            targetY = 0;
+            return;
+        }
+
+        const rect = planet.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const dx = mouseX - centerX;
+        const dy = mouseY - centerY;
+
+        const factorX = Math.max(-1, Math.min(1, dx / (window.innerWidth / 2)));
+        const factorY = Math.max(-1, Math.min(1, dy / (window.innerHeight / 2)));
+
+        targetX = factorX * maxMove;
+        targetY = factorY * maxMove;
+    }
+
+    document.addEventListener("mousemove", e => updateTarget(e.clientX, e.clientY));
+    document.addEventListener("mouseleave", () => { targetX = 0; targetY = 0; });
+
+    function animate() {
+        currentX += (targetX - currentX) * 0.1;
+        currentY += (targetY - currentY) * 0.1;
+
+        planet.style.transform = `${baseTransform} translate3d(${currentX}px, ${currentY}px, 0)`;
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth < 1024) {
+            targetX = 0;
+            targetY = 0;
+        }
+    });
 });

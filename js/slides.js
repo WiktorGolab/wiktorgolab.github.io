@@ -54,7 +54,11 @@
 
         const ambient = document.getElementById('ambient');
         const frame = slides[i].querySelector('.frame');
-        const bg = window.getComputedStyle(frame).backgroundImage;
+
+        let bg = "none";
+        if (frame) {
+            bg = window.getComputedStyle(frame).backgroundImage;
+        }
 
         const noise = document.getElementById('noise');
         if (noise) {
@@ -68,6 +72,7 @@
             ambient.style.opacity = 1;
         }, 300);
     }
+
 
     function goTo(index) {
         if (locked) return;
@@ -121,3 +126,74 @@
         slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
     });
 })();
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+const hero = document.getElementById('heroimg');
+
+let particles = [];
+const particleCount = 300;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function getHeroCenter() {
+    const rect = hero.getBoundingClientRect();
+    return {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+        radius: Math.max(rect.width, rect.height) / 1.5
+    };
+}
+
+function createParticles() {
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5
+        });
+    }
+}
+
+function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const heroCenter = getHeroCenter();
+
+    particles.forEach(p => {
+        // ruch
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        // odbijanie od krawędzi
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+        // dystans od środka hero
+        const dx = p.x - heroCenter.x;
+        const dy = p.y - heroCenter.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+
+        // im bliżej tym jaśniejsze (opacity maleje wraz z odległością)
+        const maxDist = heroCenter.radius;
+        let alpha = 1 - Math.min(dist / maxDist, 1);
+        alpha = Math.pow(alpha, 1.5); // nieliniowe rozjaśnienie
+
+        ctx.fillStyle = `rgba(255, 255, 200, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(drawParticles);
+}
+
+createParticles();
+drawParticles();
