@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Generowanie QR po załadowaniu strony
     const defaultURL = 'https://wiktorgolab.github.io';
     qrInput.value = defaultURL;
     generateQR(defaultURL, parseInt(qrSizeSelect.value, 10));
@@ -47,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
     });
 
-    // Back to dashboard
     const backBtn = document.querySelector('.back-to-dashboard');
     if (backBtn) {
         backBtn.addEventListener('click', () => {

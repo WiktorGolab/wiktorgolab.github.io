@@ -19,7 +19,6 @@ hamburger.addEventListener('click', (e) => {
     }
 });
 
-// zamykanie menu po kliknięciu w przycisk
 navbarButtons.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => {
         hamburger.classList.remove('active', 'hidden');
@@ -28,7 +27,6 @@ navbarButtons.querySelectorAll('button').forEach(btn => {
     });
 });
 
-// zamykanie po kliknięciu poza menu
 document.addEventListener('click', (e) => {
     if (!navbarButtons.contains(e.target) && !hamburger.contains(e.target)) {
         hamburger.classList.remove('active', 'hidden');

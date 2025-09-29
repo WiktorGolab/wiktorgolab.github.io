@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hslInput = document.getElementById('hslInput');
     const preview = document.getElementById('colorPreview');
 
-    // --- Funkcje pomocnicze ---
     function hexToRgb(hex) {
         hex = hex.replace(/^#/, '');
         if (hex.length === 3) hex = hex.split('').map(x => x + x).join('');
@@ -68,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
         preview.style.background = color;
     }
 
-    // --- Eventy ---
     hexInput.addEventListener('input', () => {
         const val = hexInput.value.trim();
         if (!/^#?[0-9A-Fa-f]{3,6}$/.test(val)) return;
@@ -102,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePreview(rgbToHex(r,g,b));
     });
 
-    // ✅ startowy kolor
     hexInput.value = '#ff0000';
     hexInput.dispatchEvent(new Event('input'));
 });

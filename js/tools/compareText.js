@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const compareBtn = document.getElementById('compareBtn');
     const diffOutput = document.getElementById('diffOutput');
 
-    // Dodajemy element na komunikat
     const statusMessage = document.createElement('div');
     statusMessage.id = 'diffStatus';
     statusMessage.style.marginBottom = '10px';
@@ -44,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Sprawdzamy zgodność
         if (oldText === newText) {
             statusMessage.textContent = "Teksty są zgodne";
             statusMessage.style.color = "limegreen";

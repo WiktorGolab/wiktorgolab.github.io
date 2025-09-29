@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
             dot.style.left = stop.position + '%';
             dot.style.background = stop.color;
 
-            // Dragging
             let drag = false;
             dot.addEventListener('mousedown', () => drag = true);
             window.addEventListener('mouseup', () => drag = false);
@@ -55,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 updatePreview();
             });
 
-            // Color picker
             dot.addEventListener('click', e => {
                 e.stopPropagation();
                 const input = document.createElement('input');
@@ -72,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('blur', () => input.remove());
             });
 
-            // Right click remove
             dot.addEventListener('contextmenu', e => {
                 e.preventDefault();
                 if (stops.length > 2) {
@@ -107,6 +104,5 @@ document.addEventListener('DOMContentLoaded', () => {
     dirSelect.addEventListener('input', updatePreview);
     shapeSelect.addEventListener('input', updatePreview);
 
-    // start
     updatePreview();
 });

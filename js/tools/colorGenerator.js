@@ -30,11 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     generateBtn.addEventListener('click', () => generatePalette());
-    // ✅ Wygeneruj startową paletę
     generatePalette();
 });
 
-// === Color Picker ===
 const colorInput = document.getElementById('colorInput');
 const hexValue   = document.getElementById('hexValue');
 const rgbValue   = document.getElementById('rgbValue');
@@ -85,5 +83,4 @@ colorInput.addEventListener('input', () => {
     updatePickerValues(colorInput.value);
 });
 
-// ✅ Ustaw wartości startowe
 updatePickerValues(colorInput.value);

@@ -118,10 +118,8 @@
         activateSlide(window.current);
     });
 
-    // 👇 KLUCZOWE – ponowne przeliczenie pozycji po zmianie rozmiaru okna
     window.addEventListener('resize', () => {
         setContainerHeight();
-        // Dodatkowo, aby uniknąć "przeskoków", przesuwamy kontener do aktywnego slajdu:
         const slideHeight = slides[0].getBoundingClientRect().height;
         slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
     });
@@ -168,23 +166,19 @@ function drawParticles() {
     const heroCenter = getHeroCenter();
 
     particles.forEach(p => {
-        // ruch
         p.x += p.speedX;
         p.y += p.speedY;
 
-        // odbijanie od krawędzi
         if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
         if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
 
-        // dystans od środka hero
         const dx = p.x - heroCenter.x;
         const dy = p.y - heroCenter.y;
         const dist = Math.sqrt(dx*dx + dy*dy);
 
-        // im bliżej tym jaśniejsze (opacity maleje wraz z odległością)
         const maxDist = heroCenter.radius;
         let alpha = 1 - Math.min(dist / maxDist, 1);
-        alpha = Math.pow(alpha, 1.5); // nieliniowe rozjaśnienie
+        alpha = Math.pow(alpha, 1.5);
 
         ctx.fillStyle = `rgba(255, 255, 200, ${alpha})`;
         ctx.beginPath();

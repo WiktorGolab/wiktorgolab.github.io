@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let files = [];
 
-    // --- Drag & Drop ---
     function handleFiles(selected) {
         for (let f of selected) {
             if (f.type.startsWith('image/')) files.push(f);
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fileInput.addEventListener('change', () => handleFiles(fileInput.files));
 
-    // --- Podgląd ---
     function renderPreviews() {
         previewList.innerHTML = '';
         files.forEach((file, index) => {
@@ -51,18 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
 
-                    // Przycisk pobierz
                     const downloadBtn = document.createElement('button');
                     downloadBtn.textContent = 'Pobierz';
                     downloadBtn.addEventListener('click', () => processAndDownload(img, canvas));
 
-                    // Przycisk usuń
                     const removeBtn = document.createElement('button');
                     removeBtn.textContent = '✕';
                     removeBtn.className = 'remove-btn';
                     removeBtn.addEventListener('click', () => {
-                        files.splice(index, 1); // usuń z tablicy
-                        renderPreviews(); // przerysuj kolejkę
+                        files.splice(index, 1);
+                        renderPreviews();
                     });
 
                     container.appendChild(canvas);
@@ -75,8 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // --- Przetwarzanie pojedynczego obrazu ---
     function processAndDownload(img, canvas) {
         const mode = [...sizeRadios].find(r => r.checked).value;
         const format = formatSelect.value;
@@ -99,11 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
     }
 
-    // --- Przetwarzanie wszystkich obrazów do ZIP ---
     processAllBtn.addEventListener('click', async () => {
         if (files.length === 0) return;
 
-        // Jeżeli tylko jeden obraz, pobierz normalnie
         if (files.length === 1) {
             const canvas = previewList.querySelector('canvas');
             const img = new Image();
@@ -112,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Wiele obrazów -> ZIP
         const zip = new JSZip();
         const mode = [...sizeRadios].find(r => r.checked).value;
         const format = formatSelect.value;
@@ -136,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Funkcja do zmiany rozmiaru obrazu ---
     function resizeImage(file, mode) {
         return new Promise(resolve => {
             const reader = new FileReader();
@@ -162,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Back to dashboard
     const backBtn = document.querySelector('#zmien-rozmiar-obrazu-content .back-to-dashboard');
     if (backBtn) {
         backBtn.addEventListener('click', () => {

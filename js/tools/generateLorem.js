@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn     = document.getElementById('copyLoremBtn');
     const loremOutput = document.getElementById('loremOutput');
 
-    // Podstawowy tekst
     const loremWords = (
     "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor " +
     "incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam quis nostrud " +
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ).split(/\s+/);
 
     function randomSentence() {
-        const len = Math.floor(Math.random() * 8) + 8; // 8–15 słów
+        const len = Math.floor(Math.random() * 8) + 8;
         const words = [];
         for (let i = 0; i < len; i++) {
             let w = loremWords[Math.floor(Math.random() * loremWords.length)];
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function randomParagraph() {
-        const sentenceCount = Math.floor(Math.random() * 3) + 3; // 3–5 zdań
+        const sentenceCount = Math.floor(Math.random() * 3) + 3;
         const sentences = [];
         for (let i = 0; i < sentenceCount; i++) sentences.push(randomSentence());
         return sentences.join(" ");
@@ -85,6 +84,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    // Wygeneruj domyślne lorem na start
     generateLorem();
 });

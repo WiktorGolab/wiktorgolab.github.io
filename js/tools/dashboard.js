@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const dashboardGrid = document.getElementById('dashboardGrid');
     const tiles = dashboardGrid.querySelectorAll('.tile');
 
-    // Mapa tytułów kafelków -> id sekcji
     const tileToSectionMap = {
         "Generator kodu QR": "generator-qr-content",
         "Generator Lorem Ipsum": "generator-lorem-content",
@@ -13,10 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         "Porównaj tekst": "porownaj-tekst-content",
         "Sprawdź Regex": "sprawdz-regex-content",
         "Stwórz gradient": "stworz-gradient-content",
-        "Zmień rozmiar obrazu": "zmien-rozmiar-obrazu-content"
+        "Zmień rozmiar obrazu": "zmien-rozmiar-obrazu-content",
+        "Zmień atrybuty pliku": "zmien-atrybuty-pliku-content"
     };
 
-    // Filtr kafelków
     function filterTiles() {
         const query = searchInput.value.toLowerCase();
         tiles.forEach(tile => {
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Sortowanie kafelków
     function sortTiles() {
         const tilesArray = Array.from(tiles);
         const sortValue = tileSort.value;
@@ -40,17 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         sortedTiles.forEach(tile => dashboardGrid.appendChild(tile));
     }
 
-    // Podpinanie kliknięcia kafelków do sekcji
     tiles.forEach(tile => {
         tile.addEventListener('click', () => {
             const sectionId = tileToSectionMap[tile.dataset.title];
             if (sectionId) {
-                // Ukryj wszystkie content-item
                 document.querySelectorAll('.content-item').forEach(c => c.classList.remove('active'));
-                // Pokaż wybraną sekcję
                 const targetSection = document.getElementById(sectionId);
                 if (targetSection) targetSection.classList.add('active');
-                // Przewiń do góry (opcjonalnie)
                 targetSection.scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -58,11 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Eventy wyszukiwania i sortowania
     searchInput.addEventListener('input', () => filterTiles());
     tileSort.addEventListener('change', () => sortTiles());
 
-    // ✅ Domyślnie sortuj alfabetycznie
     tileSort.value = 'alphabetical';
     sortTiles();
 });

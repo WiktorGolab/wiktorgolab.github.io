@@ -14,7 +14,6 @@ class Dashboard {
     }
 
     bindEvents() {
-        // Wyszukiwanie w menu
         const menuSearch = document.getElementById('menuSearch');
         if (menuSearch) {
             menuSearch.addEventListener('input', (e) => {
@@ -23,10 +22,8 @@ class Dashboard {
                     const text = item.innerText.toLowerCase();
                     const match = text.includes(query);
 
-                    // Pokaż/ukryj całe menu-item
                     item.style.display = match ? '' : 'none';
 
-                    // Jeśli wyszukiwanie aktywne, automatycznie rozwiń podmenu
                     if (query && item.querySelector('.submenu')) {
                         const submenu = item.querySelector('.submenu');
                         const header = item.querySelector('.menu-header');
@@ -34,7 +31,6 @@ class Dashboard {
                         submenu.classList.add('expanded');
                         if (header) header.classList.add('active');
                     } else if (!query) {
-                        // Przy pustym wyszukiwaniu przywróć domyślne zamknięcie
                         const submenu = item.querySelector('.submenu');
                         const header = item.querySelector('.menu-header');
                         if (submenu && header) {
@@ -47,25 +43,21 @@ class Dashboard {
             });
         }
 
-        // Tile clicks (dashboard grid)
         const tiles = document.querySelectorAll('#dashboardGrid .tile');
         tiles.forEach(tile => {
             tile.addEventListener('click', () => {
                 const title = tile.dataset.title;
                 if (!title) return;
 
-                // Zamiana tytułu na contentId (np. "Generator kodu QR" -> "generator-qr-content")
                 const contentId = title.toLowerCase().replace(/\s+/g, '-');
                 this.setActiveContent(contentId, title);
             });
         });
 
-        // Sidebar toggle
         if (this.sidebarToggle) {
             this.sidebarToggle.addEventListener('click', () => this.toggleSidebar());
         }
 
-        // Menu item clicks
         document.querySelectorAll('.menu-header').forEach(header => {
             header.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -85,7 +77,6 @@ class Dashboard {
             });
         });
 
-        // Submenu item clicks
         document.querySelectorAll('.submenu-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -94,14 +85,12 @@ class Dashboard {
                 if (contentId) {
                     this.setActiveContent(contentId, title);
 
-                    // Update active states
                     document.querySelectorAll('.submenu-item').forEach(i => i.classList.remove('active'));
                     e.currentTarget.classList.add('active');
                 }
             });
         });
 
-        // Window resize
         window.addEventListener('resize', () => this.handleResize());
     }
 
@@ -126,12 +115,10 @@ class Dashboard {
                 this.contentArea.style.width = '100%';
                 this.contentArea.style.marginLeft = '0';
             }
-            // 🔑 Toggle na mobile gdy sidebar schowany
             if (isMobile) {
                 this.sidebarToggle.style.left = '280px !important';
             }
         } else {
-            // 🔑 Toggle zawsze na 280px gdy mobile
             this.sidebarToggle.style.left = isMobile ? '280px' : `${sidebarWidth}px`;
 
             if (!isMobile) {
@@ -152,7 +139,6 @@ class Dashboard {
 
         const isExpanded = menuItem.classList.contains('expanded');
 
-        // Close all other submenus
         document.querySelectorAll('.menu-item').forEach(item => {
             if (item !== menuItem) {
                 const otherSubmenu = item.querySelector('.submenu');
@@ -166,7 +152,6 @@ class Dashboard {
             }
         });
 
-        // Toggle current submenu
         if (isExpanded) {
             menuItem.classList.remove('expanded');
             submenu.classList.remove('expanded');
@@ -181,30 +166,25 @@ class Dashboard {
     setActiveContent(contentId) {
         if (!contentId) return;
 
-        // Ukryj wszystkie content-item
         document.querySelectorAll('.content-item').forEach(item => item.classList.remove('active'));
 
         const activeContent = document.getElementById(`${contentId}-content`);
         if (activeContent) {
             activeContent.classList.add('active');
 
-            // Poczekaj na zakończenie animacji CSS
             const onAnimationEnd = () => {
-                // Scroll na górę
                 window.scrollTo({
                     top: 0,
                     behavior: 'auto'
                 });
                 if (this.contentArea) this.contentArea.scrollTop = 0;
 
-                // Usuń listener
                 activeContent.removeEventListener('animationend', onAnimationEnd);
             };
 
             activeContent.addEventListener('animationend', onAnimationEnd);
         }
 
-        // Mobile sidebar auto-close
         if (window.innerWidth <= 768 && this.sidebar && !this.sidebar.classList.contains('collapsed')) {
             this.toggleSidebar();
         }
@@ -236,7 +216,6 @@ class Dashboard {
         if (!sidebar || !contentArea || !sidebarToggle) return;
 
         if (window.innerWidth <= 768) {
-            // Mobile - sidebar zawsze schowany na start
             if (!sidebar.classList.contains('collapsed')) {
                 sidebar.classList.add('collapsed');
                 sidebarToggle.classList.add('collapsed');
@@ -245,18 +224,15 @@ class Dashboard {
             contentArea.style.marginLeft = '0';
             sidebarToggle.style.left = '280px';
         } else {
-            // Desktop - przywróć stan
             sidebarToggle.style.left = '220px';
             this.adjustLayout();
         }
     }
 }
 
-// Initialize dashboard when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new Dashboard();
 
-    // Ustaw początkowy stan na mobile
     if (window.innerWidth <= 768) {
         const sidebar = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
@@ -271,7 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Fallback for DOM elements
 document.addEventListener('DOMContentLoaded', () => {
     const requiredElements = ['sidebar', 'sidebarToggle', 'contentArea'];
 
@@ -284,12 +259,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.querySelectorAll('.back-to-dashboard').forEach(btn => {
     btn.addEventListener('click', () => {
-        // Ukryj wszystkie content-item
         document.querySelectorAll('.content-item').forEach(c => c.classList.remove('active'));
-        // Pokaż sekcję Narzędzia
         const dashboard = document.getElementById('dashboard-content');
         if (dashboard) dashboard.classList.add('active');
-        // Opcjonalnie przewiń do góry
         dashboard.scrollIntoView({
             behavior: 'smooth'
         });
