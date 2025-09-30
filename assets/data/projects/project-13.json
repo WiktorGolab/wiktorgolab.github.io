@@ -1,0 +1,35 @@
+{
+  "id": 13,
+  "title": "M3 Group",
+  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie",
+  "fullDescription": "Projekt firmy M3 Group obejmował kompleksowe przeniesienie istniejącej strony ze starego CMS na nowoczesną platformę WordPress z wykorzystaniem edytora Elementor. Efektem jest nowoczesna, łatwa w obsłudze i w pełni funkcjonalna strona wizytówka, zgodna z wymaganiami klienta.",
+  "image": "assets/img/projects/pic13.png",
+  "category": ["webpage"],
+  "tags": [
+    "WordPress",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "PHP",
+    "GIMP",
+    "Figma"
+  ],
+  "technologies": [
+    {
+      "name": "WordPress",
+      "version": "Elementor"
+    }
+  ],
+  "features": [
+    "Zaimplementowanie wszystkich treści z zachowaniem struktury linków oraz sitemapy, co pozwoliło utrzymać dotychczasową widoczność SEO",
+    "Przeniesienie dotychczasowych postów i materiałów na nową stronę",
+    "Pełna obsługa formularzy poprzez integrację Contact Form 7 z systemem Odoo przy użyciu PHP",
+    "Odtworzenie oryginalnego wyglądu strony z dostosowaniem do nowego środowiska edytora Elementor, co ułatwia dalszą edycję i rozwój serwisu"
+  ],
+  "status": "in-progress",
+  "completionDate": "X-2025",
+  "demoLink": "https://m3group.pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

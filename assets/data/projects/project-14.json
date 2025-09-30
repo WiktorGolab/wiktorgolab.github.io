@@ -1,0 +1,27 @@
+{
+  "id": 14,
+  "title": "Aktualne portfolio",
+  "description": "",
+  "fullDescription": "",
+  "image": "assets/img/projects/pic14.png",
+  "category": ["webpage", "web", "tools"],
+  "tags": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "JSON",
+    "GIMP",
+    "ChatGPT",
+    "DeepSeek"
+  ],
+  "features": [
+    ""
+  ],
+  "status": "in-progress",
+  "completionDate": "X-2025",
+  "demoLink": "https://wiktorgolab.github.io/",
+  "codeLink": "https://github.com/WiktorGolab/wiktorgolab.github.io",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

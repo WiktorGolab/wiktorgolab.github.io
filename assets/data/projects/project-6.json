@@ -1,0 +1,21 @@
+{
+  "id": 6,
+  "title": "Strona z portfolio",
+  "description": "Strona internetowa \"wizytówka\" stworzona na zajawce:)",
+  "fullDescription": "Moje portfolio online to projekt stworzony z założeniem ograniczenia technologicznego do wyłącznie HTML, CSS i JavaScript, co stanowiło inspirujące wyzwanie kreatywne i techniczne. Każda podstrona została zaprojektowana w unikalnym stylu tematycznym, co podkreśla różnorodność moich umiejętności w zakresie projektowania oraz dbałość o detale. Strona zawiera interaktywny formularz kontaktowy oraz chatbota opartego na API, co wzbogaca jej funkcjonalność i zapewnia nowoczesne doświadczenie użytkownika. Całość – od koncepcji projektu, przez design, aż po implementację – została w pełni zrealizowana przeze mnie. Aby poszerzyć dostępność i użytkowość strony, została ona przetłumaczona na dwa języki: polski i angielski, co umożliwia skuteczną komunikację z szerokim gronem odbiorców. Projekt jest dowodem moich umiejętności technicznych, estetycznego wyczucia oraz zdolności do samodzielnej realizacji złożonych zadań.",
+  "image": "assets/img/projects/pic6.png",
+  "category": ["webpage"],
+  "tags": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "JSON"
+  ],
+  "status": "archived",
+  "completionDate": "7-12-2024",
+  "demoLink": "https://wiktorgolab.github.io/old.wiktorgolab.github.io/",
+  "codeLink": "https://github.com/WiktorGolab/old.wiktorgolab.github.io",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

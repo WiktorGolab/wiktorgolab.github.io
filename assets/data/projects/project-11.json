@@ -1,0 +1,31 @@
+{
+  "id": 11,
+  "title": "Koło Łowieckie \"Cyranka\"",
+  "description": "Strona internetowa z systemem logowania dla Koła Łowieckiego.",
+  "fullDescription": "Strona internetowa cyranka-sroda.pl działa w oparciu o system WordPress i jest zbudowana przy użyciu wizualnego edytora Elementor. Dzięki temu możliwe jest tworzenie i edytowanie treści w trybie graficznym, z wykorzystaniem gotowych sekcji, widgetów oraz animacji, co pozwala na uzyskanie atrakcyjnego i responsywnego wyglądu strony bez konieczności pisania kodu. Na stronie działa system kont oparty na wtyczce Ultimate Member, który umożliwia logowanie jedynie wybranym osobom. Mechanizm ten pozwala administratorowi kontrolować dostęp do określonych treści i materiałów, takich jak dokumenty do pobrania, które mogą być dostępne tylko po zalogowaniu. Publikowane są również wpisy i aktualności, obsługiwane przez standardowe mechanizmy WordPressa, a także udostępniane pliki i formularze. Administracja strony obejmuje dodawanie i edytowanie treści, zarządzanie użytkownikami, kontrolę nad dostępem do wybranych sekcji oraz aktualizowanie wtyczek i elementów wizualnych. Całość jest prowadzona i utrzymywana w taki sposób, aby zapewnić sprawne działanie serwisu, jego czytelność oraz łatwą nawigację zarówno dla użytkowników publicznych, jak i zalogowanych członków.",
+  "image": "assets/img/projects/pic11.png",
+  "category": ["webpage", "web"],
+  "tags": [
+    "WordPress",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "GIMP",
+    "Ultimate Member"
+  ],
+  "technologies": [
+    {
+      "name": "WordPress",
+      "version": "Elementor"
+    },
+    {
+      "name": "Firebase"
+    }
+  ],
+  "status": "completed",
+  "completionDate": "26-02-2025",
+  "demoLink": "https://cyranka-sroda.pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

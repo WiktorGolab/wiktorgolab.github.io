@@ -1,0 +1,93 @@
+{
+  "//": "==================================================================",
+  "//": "SZABLON PROJEKTU - Wiktor Gołąb Portfolio",
+  "//": "==================================================================",
+  "//": "Wszystkie pola oznaczone '// OPTIONAL' są opcjonalne",
+  "//": "==================================================================",
+  
+  "//": "=== PODSTAWOWE INFORMACJE ===",
+  "id": 1,
+  "title": "Nazwa projektu",
+  "description": "Krótki opis projektu wyświetlany na karcie projektu (max 2-3 zdania)",
+  "fullDescription": "Szczegółowy opis projektu wyświetlany w modal. Może zawierać:\n- Cel projektu\n- Główne funkcjonalności\n- Wyzwania techniczne\n- Rozwiązania\n- Efekty",
+  
+  "//": "=== KATEGORYZACJA ===",
+  "//": "Może być pojedynczą kategorią (string) lub tablicą wielu kategorii",
+  "category": ["web", "tools"],
+  "//": "Dostępne kategorie: 'web', 'mobile', 'ai', 'data', 'games', 'tools', 'other'",
+  
+  "//": "=== TAGI I TECHNOLOGIE ===",
+  "tags": ["JavaScript", "React", "Node.js", "MongoDB"],
+  "technologies": [
+    {
+      "name": "React",
+      "version": "18.2.0",
+      "// OPTIONAL": "description"
+    },
+    {
+      "name": "Node.js",
+      "version": "18.0.0"
+    },
+    {
+      "name": "MongoDB",
+      "version": "6.0"
+    }
+  ],
+  
+  "//": "=== MEDIA I WIZUALIZACJE ===",
+  "image": "assets/img/projects/nazwa-projektu-thumb.jpg",
+  "images": [
+    "assets/img/projects/screenshots/nazwa-projektu/screen-1.jpg",
+    "assets/img/projects/screenshots/nazwa-projektu/screen-2.jpg",
+    "assets/img/projects/screenshots/nazwa-projektu/screen-3.jpg"
+  ],
+  
+  "//": "=== FUNKCJONALNOŚCI ===",
+  "features": [
+    "Responsywny interfejs użytkownika",
+    "Autentykacja i autoryzacja użytkowników",
+    "Panel administracyjny",
+    "API REST",
+    "System powiadomień",
+    "Eksport danych do PDF"
+  ],
+  
+  "//": "=== STATUS I DATY ===",
+  "status": "completed",
+  "//": "Dostępne statusy: 'completed', 'in-progress', 'planned', 'archived'",
+  "completionDate": "2023-10-15",
+  "//": "Format: YYYY-MM-DD",
+  
+  "//": "=== LINKI ===",
+  "demoLink": "https://demo-przyklad.com",
+  "codeLink": "https://github.com/WiktorGolab/nazwa-projektu",
+  "documentationLink": "https://docs.przyklad.com",
+  "videoLink": "https://youtube.com/watch?v=przyklad",
+  
+  "//": "=== USTAWIENIA WYŚWIETLANIA ===",
+  "priority": 1,
+  "//": "Niższy numer = wyższa pozycja (1 = najwyżej)",
+  "showcase": true,
+  "//": "Czy pokazywać projekt na stronie głównej",
+  
+  "//": "=== WSPÓŁPRACOWNICY ===",
+  "collaborators": [
+    {
+      "name": "Jan Kowalski",
+      "role": "Backend Developer",
+      "link": "https://github.com/jankowalski"
+    },
+    {
+      "name": "Anna Nowak",
+      "role": "UI/UX Designer"
+    }
+  ],
+  
+  "//": "=== DODATKOWE METADANE ===",
+  "client": "Nazwa klienta (jeśli dotyczy)",
+  "repositoryType": "public",
+  "//": "public, private, organization",
+  "license": "MIT",
+  "projectSize": "medium",
+  "//": "small, medium, large, enterprise"
+}

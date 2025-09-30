@@ -1,0 +1,32 @@
+{
+  "id": 8,
+  "title": "Projekt Outsider",
+  "description": "Poznaj moją internetową twórczość.",
+  "fullDescription": "Pod pseudonimem artystycznym zajmuję się produkcją muzyczną od 2018 roku, wykorzystując środowiska DAW (Digital Audio Workstation). Moje umiejętności obejmują dogłębną znajomość i biegłość w obsłudze wiodących narzędzi oraz wtyczek muzycznych, takich jak Xfer Serum, reFX Nexus, a także wielu innych narzędzi, które wspierają kreatywną produkcję dźwięku. W ramach mojej działalności tworzę i udostępniam profesjonalne presety i sample, które odzwierciedlają najnowsze trendy w muzyce elektronicznej. Moje portfolio obejmuje szeroki zakres prac, w tym oryginalne utwory, remix'y, edit'y, składanki oraz albumy, które zdobyły uznanie zarówno wśród słuchaczy, jak i innych twórców. Równolegle prowadzę działania na platformach społecznościowych, gdzie zarządzam swoimi stronami artystycznymi, angażując się w budowanie społeczności i promowanie swojej twórczości. Moja działalność łączy pasję do tworzenia muzyki z profesjonalizmem w zakresie produkcji i zarządzania wizerunkiem artystycznym.",
+  "image": "assets/img/projects/pic8.png",
+  "category": ["webpage", "tools", "other"],
+  "tags": [
+    "WordPress",
+    "My Spread Shop",
+    "GIMP",
+    "Adobe Premiere Pro",
+    "OBS Studio",
+    "XMedia Recode",
+    "FL Studio (12-21.1)",
+    "VirtualDJ",
+    "Topaz Gigapixel AI",
+    "ChatGPT"
+  ],
+  "technologies": [
+    {
+      "name": "FL Studio",
+      "version": "(12-21.1)"
+    }
+  ],
+  "status": "in-progress",
+  "demoLink": "https://outsidertracks.wordpress.com/",
+  "videoLink": "https://www.youtube.com/@OutsiderTracks",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

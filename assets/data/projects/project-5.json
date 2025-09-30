@@ -1,0 +1,27 @@
+{
+  "id": 5,
+  "title": "EKSERO24.PL",
+  "description": "Strona internetowa stworzona podczas stażu w M3Group:)",
+  "fullDescription": "Projekt interaktywnej strony internetowej dla PWT, który został stworzony od podstaw z pełnym uwzględnieniem responsywności i estetycznego dopasowania do specyfiki oraz potrzeb świadczonych usług. Strona została zaprojektowana tak, aby zapewnić użytkownikom intuicyjne doświadczenie, a jednocześnie skutecznie prezentować ofertę klienta. Dzięki zastosowaniu narzędzia Elementor, wzbogaciłem witrynę o dynamiczne animacje, które zwiększają atrakcyjność wizualną i angażują odwiedzających. Wprowadzono także system obsługi płatności online za pomocą Przelewy24, co umożliwia bezpieczne i wygodne dokonywanie transakcji przez użytkowników. Strona zawiera również w pełni funkcjonalny formularz kontaktowy, który ułatwia komunikację między firmą a klientami, oraz system kont użytkowników, który pozwala na personalizację doświadczenia i zarządzanie interakcjami z platformą. Projekt ten obejmował wszystkie etapy realizacji – od analizy wymagań i projektowania, po implementację i testowanie.",
+  "image": "assets/img/projects/pic5.png",
+  "category": ["webpage"],
+  "tags": [
+    "WordPress",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "PHP"
+  ],
+  "technologies": [
+    {
+      "name": "WordPress",
+      "version": "Elementor & WooCommerce"
+    }
+  ],
+  "status": "completed",
+  "completionDate": "07-2024",
+  "demoLink": "https://eksero24.pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

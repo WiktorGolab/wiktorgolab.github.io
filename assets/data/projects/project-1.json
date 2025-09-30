@@ -1,0 +1,42 @@
+{
+  "id": 1,
+  "title": "PONG",
+  "description": "Moja interpretacja klasycznej gry Pong z 1972 roku wydana przez Atari.",
+  "fullDescription": "Pong – klasyczna już gra komputerowa będąca symulacją tenisa stołowego przy użyciu grafiki dwuwymiarowej. Celem rozgrywki jest pokonanie przeciwnika poprzez uzyskanie wyższego wyniku punktowego. Gra wydana została w 1972 roku przez Atari i jest jedną z najstarszych przeznaczonych na automaty.",
+  "image": "assets/img/projects/pic1.png",
+  "category": ["web", "games"],
+  "tags": [
+    "JavaScript",
+    "HTML",
+    "Node.js",
+    "CSS",
+    "FL Studio"
+  ],
+  "technologies": [
+    {
+      "name": "Node.js",
+      "version": "18.0.0"
+    }
+  ],
+  "features": [
+    "Gra Pong w nowym wydaniu.",
+    "Nowe elementy wizualne (w tym szum VHS).",
+    "Efekty dźwiękowe.",
+    "Autorska muzyka stworzona przeze mnie.",
+    "Opcja wyłączenia muzyki oraz dźwięków specjalnych.",
+    "Możliwość pauzy gry (Klawisz ESC).",
+    "Zmień prędkość piłki.",
+    "Zmień czułość obu paletek.",
+    "Włącz/Wyłącz efekt szumu VHS.",
+    "Tryb minimalistyczny (wyłączający rozpraszające napisy podczas gry).",
+    "Dostosuj poziom głośności muzyki.",
+    "Graj bez limitu na punkty oraz ustaw swój własny próg na zwycięstwo."
+  ],
+  "status": "completed",
+  "completionDate": "8-11-2024",
+  "demoLink": "https://wiktorgolab.github.io/PONG/",
+  "codeLink": "https://github.com/WiktorGolab/PONG",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

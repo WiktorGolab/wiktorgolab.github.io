@@ -1,0 +1,23 @@
+{
+  "id": 3,
+  "title": "EDU-CZAR",
+  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie:)",
+  "fullDescription": "Wdrożono kompletny proces tworzenia i administrowania stroną internetową z wykorzystaniem WordPress'a, dostosowując rozwiązania do potrzeb edukacyjnych i komunikacyjnych organizacji, przyjaznej zarówno dla oka dziecka, jak i rodzica. Aktualizacja treści przez ponad rok i wprowadzanie na bieżąco nowych postów.",
+  "image": "assets/img/projects/pic3.png",
+  "category": ["webpage"],
+  "tags": [
+    "Wordpress"
+  ],
+  "technologies": [
+    {
+      "name": "Wordpress",
+      "version": "current"
+    }
+  ],
+  "status": "completed",
+  "completionDate": "4-12-2024",
+  "demoLink": "https://educzar.pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

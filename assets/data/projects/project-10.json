@@ -1,0 +1,20 @@
+{
+  "id": 10,
+  "title": "Salon Urody Estetic",
+  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie:)",
+  "fullDescription": "Celem było stworzenie eleganckiej, funkcjonalnej i responsywnej strony internetowej, która będzie skutecznie prezentować ofertę salonu kosmetycznego, budować zaufanie klientów oraz ułatwiać kontakt. Opracowanie nowoczesnego, estetycznego layoutu zgodnego z charakterem marki. Przeprowadzenie konsultacji z klientem w celu ustalenia kluczowych wymagań dotyczących funkcjonalności, stylu graficznego i zawartości strony.",
+  "image": "assets/img/projects/pic10.png",
+  "category": ["webpage"],
+  "tags": [
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "GIMP"
+  ],
+  "status": "completed",
+  "completionDate": "9-04-2025",
+  "demoLink": "https://www.salon-estetic.pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

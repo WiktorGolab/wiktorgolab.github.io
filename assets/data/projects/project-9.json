@@ -1,0 +1,35 @@
+{
+  "id": 9,
+  "title": "GTHR",
+  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie:)",
+  "fullDescription": "Strona internetowa dla GTHR to zaawansowany i funkcjonalny projekt przygotowany na podstawie szczegółowego projektu graficznego z Figmy. Serwis skupia się na prezentacji działalności firmy w atrakcyjny i intuicyjny sposób. Wszystkie podstrony zostały zaprojektowane z uwzględnieniem najnowszych trendów UX/UI, a strona wyróżnia się nowoczesnymi animacjami i responsywnością.",
+  "image": "assets/img/projects/pic9.png",
+  "category": ["webpage"],
+  "tags": [
+    "WordPress",
+    "Figma",
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "technologies": [
+    {
+      "name": "WordPress",
+      "version": "Elementor"
+    }
+  ],
+  "features": [
+    "Przygotowanie strony na podstawie projektu z Figmy,",
+    "Utworzenie i konfiguracja wszystkich stron,",
+    "Animacje i efekty wizualne,",
+    "Interaktywne mapy,",
+    "Posty i blogi,",
+    "Strona przetłumaczona przy użyciu TranslatePress"
+  ],
+  "status": "completed",
+  "completionDate": "13-03-2025",
+  "demoLink": "https://gthr.pl/pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

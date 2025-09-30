@@ -1,0 +1,24 @@
+{
+  "id": 7,
+  "title": "DermaExpert",
+  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie:)",
+  "fullDescription": "Stworzono kompleksową stronę internetową od podstaw, wykorzystując platformę WordPress, aby zapewnić nowoczesne i przyjazne dla użytkownika rozwiązanie. Proces obejmował projektowanie struktury i układu strony oraz implementację elementów wizualnych i treściowych, dostosowanych do specyfiki branży dermatologicznej. Skupiono się na zapewnieniu responsywności oraz intuicyjności interfejsu użytkownika.",
+  "image": "assets/img/projects/pic7.png",
+  "category": ["webpage"],
+  "tags": [
+    "Wordpress",
+    "GIMP"
+  ],
+  "technologies": [
+    {
+      "name": "Wordpress",
+      "version": "current"
+    }
+  ],
+  "status": "completed",
+  "completionDate": "2023",
+  "demoLink": "https://dermaexpert.pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}

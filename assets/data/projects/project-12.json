@@ -1,0 +1,26 @@
+{
+  "id": 12,
+  "title": "Skuzar",
+  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie:)",
+  "fullDescription": "Strona skuzar.pl działa w oparciu o system WordPress i jest zbudowana przy użyciu wizualnego edytora Elementor. Dzięki temu możliwe jest tworzenie i edytowanie treści w trybie graficznym, z wykorzystaniem gotowych sekcji, widgetów oraz animacji, co pozwala na uzyskanie atrakcyjnego i responsywnego wyglądu strony bez konieczności pisania kodu. Strona została stworzona na zlecenie M3 Group z wykorzystaniem motywu premium, co zapewnia stabilne i nowoczesne rozwiązania wizualne. Publikowane są również wpisy i aktualności, obsługiwane przez standardowe mechanizmy WordPressa, a także udostępniane pliki. Administracja strony obejmuje dodawanie i edytowanie treści, zarządzanie użytkownikami oraz aktualizowanie wtyczek i elementów wizualnych. Całość jest prowadzona i utrzymywana w taki sposób, aby zapewnić sprawne działanie serwisu, jego czytelność oraz łatwą nawigację.",
+  "image": "assets/img/projects/pic12.png",
+  "category": ["webpage"],
+  "tags": [
+    "WordPress",
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "technologies": [
+    {
+      "name": "WordPress",
+      "version": "Elementor"
+    }
+  ],
+  "status": "in-progress",
+  "completionDate": "X-2025",
+  "demoLink": "https://www.skuzar.pl/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}
