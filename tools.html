@@ -397,6 +397,7 @@
                     </h2>
                     <p>Generator kolorów pozwala szybko tworzyć zestawy kolorystyczne, które można wykorzystać w
                         projektach graficznych, stronach internetowych, aplikacjach czy prezentacjach.</p>
+
                     <div class="color-generator">
                         <div class="controls">
                             <button id="generateColorsBtn">Losuj</button>
@@ -404,23 +405,48 @@
                         </div>
                         <div id="colorPalette" class="palette"></div>
                     </div>
+
                     <div class="color-picker">
                         <h3>Wybierz własny kolor</h3>
                         <div class="picker-controls">
                             <input type="color" id="colorInput" value="#ff0000">
                             <div class="picker-values">
                                 <label>HEX
-                                    <input type="text" id="hexValue" readonly>
+                                    <div class="value-row">
+                                        <input type="text" id="hexValue" readonly>
+                                        <button class="copy-btn" data-target="hexValue">Kopiuj</button>
+                                    </div>
                                 </label>
                                 <label>RGB
-                                    <input type="text" id="rgbValue" readonly>
+                                    <div class="value-row">
+                                        <input type="text" id="rgbValue" readonly>
+                                        <button class="copy-btn" data-target="rgbValue">Kopiuj</button>
+                                    </div>
                                 </label>
                                 <label>HSL
-                                    <input type="text" id="hslValue" readonly>
+                                    <div class="value-row">
+                                        <input type="text" id="hslValue" readonly>
+                                        <button class="copy-btn" data-target="hslValue">Kopiuj</button>
+                                    </div>
                                 </label>
                             </div>
                         </div>
                     </div>
+
+                    <div class="derived-colors">
+                        <h3>Kolory pochodne</h3>
+                        <div class="color-actions">
+                            <button id="complementaryBtn">Kolor dopełniający</button>
+                            <button id="analogousBtn">Kolory analogiczne</button>
+                            <button id="triadicBtn">Kolory triadyczne</button>
+                            <button id="monochromaticBtn">Kolory monochromatyczne</button>
+                            <button id="shadesBtn">Odcienie</button>
+                            <button id="tintsBtn">Tonacje</button>
+                        </div>
+                        <div id="derivedPalette" class="palette"></div>
+                    </div>
+
+                    <div class="spacer"></div>
                 </div>
 
 

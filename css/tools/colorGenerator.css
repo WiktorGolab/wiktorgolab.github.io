@@ -85,6 +85,7 @@
     flex-wrap: wrap;
     gap: 20px;
     align-items: center;
+    z-index: 1;
 }
 
 #colorInput {
@@ -122,4 +123,64 @@
 
 #generateColorsBtn {
     user-select: none;
+}
+
+/* Nowe style dla sekcji kolorów pochodnych */
+.derived-colors {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.derived-colors h3 {
+    color: #f0f0f0;
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.color-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.color-actions button {
+    background: #222;
+    color: #f0f0f0;
+    padding: 8px 12px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.color-actions button:hover {
+    background: #333;
+}
+
+.value-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.copy-btn {
+    background: #222;
+    color: #f0f0f0;
+    padding: 6px 10px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.copy-btn:hover {
+    background: #333;
 }
