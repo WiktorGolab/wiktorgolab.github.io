@@ -2,7 +2,7 @@
   "id": 2,
   "title": "Kalkulator naukowy",
   "description": "Przyjemny w obsłudze kalkulator naukowy.",
-  "fullDescription": "Prosty kalkulator stworzony w JavaScript, który obsługuje podstawowe operacje matematyczne, funkcje specjalne, a także tryb ciemny oraz historię obliczeń. Kalkulator jest przyjazny dla użytkownika i intuicyjny w obsłudze.",
+  "fullDescription": "Prosty kalkulator stworzony w JavaScript, który obsługuje podstawowe <strong>operacje matematyczne</strong>, <strong>funkcje specjalne</strong>, a także <strong>tryb ciemny</strong> oraz <strong>historię obliczeń</strong>. Kalkulator jest przyjazny dla użytkownika i intuicyjny w obsłudze.",
   "image": "assets/img/projects/pic2.png",
   "category": ["web"],
   "tags": [
@@ -11,14 +11,14 @@
     "JavaScript"
   ],
   "features": [
-    "Podstawowe operacje (dodawanie, odejmowanie, mnożeniem, dzielenie, potęgowanie).",
-    "Specjalne funkcje (pierwiastek kwadratowy, funkcje trygonometryczne, logarytm dziesiętny, silnia, wartość bezwzględna).",
-    "Działania na nawiasach.",
-    "Historia obliczeń.",
+    "<strong>Podstawowe operacje</strong> (dodawanie, odejmowanie, mnożeniem, dzielenie, potęgowanie).",
+    "<strong>Specjalne funkcje</strong> (pierwiastek kwadratowy, funkcje trygonometryczne, logarytm dziesiętny, silnia, wartość bezwzględna).",
+    "<strong>Działania na nawiasach</strong>.",
+    "<strong>Historia obliczeń</strong>.",
     "Tryb jasny i ciemny.",
     "Możliwość zresetowania kalkulatora oraz usunięcia ostatnich znaków.",
     "Umożliwia obliczenie wyniku po wprowadzeniu wyrażenia.",
-    "Obsługa błędów."
+    "<strong>Obsługa błędów</strong>."
   ],
   "status": "archived",
   "demoLink": "https://wiktorgolab.github.io/Kalkulator-naukowy/",

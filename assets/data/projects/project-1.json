@@ -2,7 +2,7 @@
   "id": 1,
   "title": "PONG",
   "description": "Moja interpretacja klasycznej gry Pong z 1972 roku wydana przez Atari.",
-  "fullDescription": "Pong – klasyczna już gra komputerowa będąca symulacją tenisa stołowego przy użyciu grafiki dwuwymiarowej. Celem rozgrywki jest pokonanie przeciwnika poprzez uzyskanie wyższego wyniku punktowego. Gra wydana została w 1972 roku przez Atari i jest jedną z najstarszych przeznaczonych na automaty.",
+  "fullDescription": "<strong>Pong</strong> – klasyczna już gra komputerowa będąca symulacją tenisa stołowego przy użyciu grafiki dwuwymiarowej. Celem rozgrywki jest pokonanie przeciwnika poprzez uzyskanie wyższego wyniku punktowego. Gra wydana została w 1972 roku przez Atari i jest jedną z najstarszych przeznaczonych na automaty.",
   "image": "assets/img/projects/pic1.png",
   "category": ["web", "games"],
   "tags": [
@@ -20,9 +20,9 @@
   ],
   "features": [
     "Gra Pong w nowym wydaniu.",
-    "Nowe elementy wizualne (w tym szum VHS).",
+    "<strong>Nowe elementy wizualne</strong> (w tym szum VHS).",
     "Efekty dźwiękowe.",
-    "Autorska muzyka stworzona przeze mnie.",
+    "<strong>Autorska muzyka</strong> stworzona przeze mnie.",
     "Opcja wyłączenia muzyki oraz dźwięków specjalnych.",
     "Możliwość pauzy gry (Klawisz ESC).",
     "Zmień prędkość piłki.",
@@ -30,7 +30,7 @@
     "Włącz/Wyłącz efekt szumu VHS.",
     "Tryb minimalistyczny (wyłączający rozpraszające napisy podczas gry).",
     "Dostosuj poziom głośności muzyki.",
-    "Graj bez limitu na punkty oraz ustaw swój własny próg na zwycięstwo."
+    "Graj bez limitu na punkty oraz <strong>ustaw swój własny próg na zwycięstwo</strong>."
   ],
   "status": "completed",
   "completionDate": "8-11-2024",

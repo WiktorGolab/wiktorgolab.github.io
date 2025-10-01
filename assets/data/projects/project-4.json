@@ -2,13 +2,22 @@
   "id": 4,
   "title": "Wodna Służba Ratownicza",
   "description": "Strona internetowa stworzona podczas stażu w M3Group:)",
-  "fullDescription": "Zrealizowałem kompleksową modyfikację strony internetowej dla WSR, skupiając się na dostosowaniu jej do współczesnych standardów oraz odzwierciedleniu specyfiki i potrzeb usług oferowanych przez klienta. Strona została zoptymalizowana pod kątem pełnej responsywności, dzięki czemu użytkownicy mogą z niej wygodnie korzystać na różnych urządzeniach. Za pomocą narzędzia WP Bakery przeprowadziłem usprawnienia wizualne, poprawiając strukturę i estetykę witryny, co znacząco podniosło jej atrakcyjność i czytelność. Dokonałem również naprawy zauważonych błędów wizualnych, co poprawiło spójność i wydajność strony. Dodatkowe prace obejmowały aktualizację wtyczek, która zapewniła bezpieczeństwo i kompatybilność systemu WordPress, oraz modyfikację formularzy, dostosowując je do nowych wymagań poprzez dodanie dodatkowych pól danych. Wdrożyłem również funkcję wyskakującego okienka, które zwiększa interaktywność i skuteczność komunikacji z użytkownikami. Na stronie zaimplementowano również RSS Stream, co umożliwia automatyczne wyświetlanie aktualności i treści z innych źródeł, wzbogacając funkcjonalność i angażując użytkowników. Wszystkie działania miały na celu nie tylko poprawę działania strony, ale również jej lepsze dopasowanie do potrzeb klienta i użytkowników.",
+  "fullDescription": "Zrealizowano kompleksową modyfikację strony internetowej dla WSR, skupiającą się na dostosowaniu do współczesnych standardów oraz odzwierciedleniu specyfiki usług oferowanych przez klienta.<br><br>",
   "image": "assets/img/projects/pic4.png",
   "category": ["webpage"],
   "tags": [
     "WordPress",
     "HTML",
     "CSS"
+  ],
+  "features": [
+    "Pełna responsywność strony dla różnych urządzeń",
+    "Usprawnienia wizualne przy użyciu <strong>WP Bakery</strong>",
+    "Naprawa błędów wizualnych poprawiająca spójność i wydajność",
+    "Aktualizacja wtyczek zapewniająca bezpieczeństwo WordPress",
+    "Modyfikacja formularzy z dodatkowymi polami danych",
+    "Wdrożenie wyskakujących okienek zwiększających interaktywność",
+    "Implementacja <strong>RSS Stream</strong> do automatycznego wyświetlania aktualności"
   ],
   "technologies": [
     {
