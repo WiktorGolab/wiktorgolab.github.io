@@ -583,6 +583,21 @@
     border-color: rgba(255, 255, 255, 0.5);
 }
 
+.sort-select option {
+    background-color: #0e0e0e;
+    color: #f0f0f0;
+}
+
+.sort-select select:hover {
+    border-color: #555;
+    background-color: #1a1a1a;
+}
+
+.sort-select select:focus {
+    border-color: #888;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
 .categories {
     display: flex;
     flex-wrap: wrap;

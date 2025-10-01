@@ -45,7 +45,7 @@
         </button>
 
         <div class="navbar-buttons" id="navbarButtons">
-            <a href="index.html" class="splash-transition">
+            <a href="../index.html" class="splash-transition" data-slide="0">
                 <button title="Strona główna">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24" height="24" fill="#ffffff"
                         style="transform: translateY(2px);">
@@ -54,12 +54,12 @@
                     </svg>
                 </button>
             </a>
-            <button onclick="goTo(1)">O mnie</button>
-            <button onclick="goTo(2)" class="active">Projekty</button>
-            <button onclick="goTo(3)">Doświadczenie</button>
-            <button onclick="goTo(4)">Umiejętności</button>
-            <button onclick="goTo(5)">Narzędzia</button>
-            <button onclick="goTo(6)">Kontakt</button>
+            <button onclick="navigateWithTransition('../index.html', 1)">O mnie</button>
+            <button onclick="navigateWithTransition('../index.html', 2)" class="active">Projekty</button>
+            <button onclick="navigateWithTransition('../index.html', 3)">Doświadczenie</button>
+            <button onclick="navigateWithTransition('../index.html', 4)">Umiejętności</button>
+            <button onclick="navigateWithTransition('../index.html', 5)">Narzędzia</button>
+            <button onclick="navigateWithTransition('../index.html', 6)">Kontakt</button>
         </div>
     </div>
 
@@ -108,9 +108,7 @@
 
     <div class="projects-section">
         <div class="filters-container">
-            <div class="categories" id="categories">
-                <!-- Kategorie zostaną wypełnione przez JavaScript -->
-            </div>
+            <div class="categories" id="categories"></div>
             
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>

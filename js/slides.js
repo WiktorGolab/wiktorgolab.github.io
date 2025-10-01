@@ -1,9 +1,16 @@
 (function () {
+    // Sprawdź czy mamy zapisany target slide
+    const savedSlide = sessionStorage.getItem('targetSlide');
+    if (savedSlide !== null) {
+        window.current = parseInt(savedSlide);
+    } else {
+        window.current = 0;
+    }
+    
     const slides = Array.from(document.querySelectorAll('.slide'));
     const slidesContainer = document.getElementById('slides');
     const arrowDown = document.querySelector('.arrow-down');
     const arrowUp = document.querySelector('.arrow-up');
-    window.current = 0;
     let locked = false;
     let touchStartY = 0;
 
@@ -72,7 +79,6 @@
             ambient.style.opacity = 1;
         }, 300);
     }
-
 
     function goTo(index) {
         if (locked) return;
