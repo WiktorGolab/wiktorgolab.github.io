@@ -33,8 +33,10 @@ function createDust(num = 50) {
         dust.style.transform = `translate(${x}px, ${y}px)`;
 
         const maxOpacity = 1;
-        const minOpacity = 0.2;
-        const opacity = maxOpacity - (r / radius) * (maxOpacity - minOpacity);
+        const minOpacity = 0.1;
+        const factor = Math.pow(r / radius, 2);
+        const opacity = maxOpacity - factor * (maxOpacity - minOpacity);
+
         dust.style.opacity = opacity;
 
         container.appendChild(dust);

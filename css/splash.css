@@ -26,32 +26,37 @@
 }
 
 .splash-content img {
-    height: 100px;
-    transition: transform 0.5s ease-in-out;
-    animation: ufoScaling 2s ease-in-out infinite;
+  height: 100px;
+  transition: transform 0.5s ease-in-out;
+  animation: ufoScaling 2s ease-in-out infinite;
 }
 
 @keyframes ufoScaling {
-    0% {
-        transform: scale(1) rotate(0);
-    }
-    25% {
-        transform: scale(1.1) rotate(0);
-    }
-    50% {
-      transform: scale(1.1) rotate(360deg);
-    }
-    75% {
-        transform: scale(1) rotate(360deg);
-    }
-    100% {
-      transform: scale(1) rotate(0);
-    }
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  25% {
+    transform: scale(1.1) rotate(0);
+  }
+
+  50% {
+    transform: scale(1.1) rotate(360deg);
+  }
+
+  75% {
+    transform: scale(1) rotate(360deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
 }
 
-.splash-content p, .splash-content h6 {
-    font-weight: 100;
-    font-family: var(--font2);
+.splash-content p,
+.splash-content h6 {
+  font-weight: 100;
+  font-family: var(--font2);
 }
 
 .splash-content h6 {
@@ -74,19 +79,19 @@
 }
 
 .dust {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255,255,255,0) 70%);
-    pointer-events: none;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
 }
 
 .loading-bar {
   position: relative;
   width: 200px;
   height: 3px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 3px;
   overflow: hidden;
   margin-top: 15px;
@@ -112,11 +117,10 @@
   opacity: 1;
 }
 
-/* animacja odwrócona przy kliknięciu */
 #splash.reverse {
-    clip-path: circle(0% at center); /* start od środka */
+  clip-path: circle(0% at center);
 }
 
 #splash.reverse.show-content {
-    clip-path: circle(150% at center); /* rozwinięcie do pełnego ekranu */
+  clip-path: circle(150% at center);
 }
