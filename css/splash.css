@@ -67,26 +67,6 @@
   clip-path: circle(0% at center);
 }
 
-#dust-container {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: visible;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.5;
-}
-
-.dust {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 70%);
-  pointer-events: none;
-}
-
 .loading-bar {
   position: relative;
   width: 200px;

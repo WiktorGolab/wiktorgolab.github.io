@@ -350,7 +350,7 @@
 
 @media (max-width: 1023px) {
     #heroimg {
-        height: 55vh;
+        height: 37vh;
         margin-right: 15px;
     }
 
@@ -373,6 +373,7 @@
     #heroimg {
         height: 35vh;
         margin-right: 0;
+        animation: heroAnimation2 5s ease-in-out infinite;
     }
 
     .heroContainer .content {
@@ -401,11 +402,5 @@
     .heroButtonContainer button {
         padding: 7px 14px;
         font-size: 0.8rem;
-    }
-}
-
-@media (max-width: 879px) {
-    #heroimg {
-        animation: heroAnimation2 5s ease-in-out infinite;
     }
 }
