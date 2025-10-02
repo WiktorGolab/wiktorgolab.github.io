@@ -7,7 +7,7 @@
   z-index: 99999;
   clip-path: circle(150% at center);
   transition: clip-path 1s ease-in-out;
-  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  background: black;
   overflow: hidden;
 }
 
@@ -28,18 +28,24 @@
 .splash-content img {
     height: 100px;
     transition: transform 0.5s ease-in-out;
-    animation: ufoScaling 0.5s ease-in-out infinite;
+    animation: ufoScaling 2s ease-in-out infinite;
 }
 
 @keyframes ufoScaling {
     0% {
-        transform: scale(1);
+        transform: scale(1) rotate(0);
+    }
+    25% {
+        transform: scale(1.1) rotate(0);
     }
     50% {
-        transform: scale(1.1);
+      transform: scale(1.1) rotate(360deg);
+    }
+    75% {
+        transform: scale(1) rotate(360deg);
     }
     100% {
-        transform: scale(1);
+      transform: scale(1) rotate(0);
     }
 }
 
@@ -64,6 +70,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.5;
 }
 
 .dust {
@@ -73,16 +80,6 @@
     border-radius: 50%;
     background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgba(255,255,255,0) 70%);
     pointer-events: none;
-}
-
-#splash-video {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  opacity: 0.2;
 }
 
 .loading-bar {

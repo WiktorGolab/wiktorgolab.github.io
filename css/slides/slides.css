@@ -380,7 +380,7 @@
     }
 
     .heroContainer {
-        margin-top: -70px;
+        margin-top: -100px;
     }
 
     .heroContainer .content #text-distortion {
@@ -394,7 +394,13 @@
     }
 
     .heroButtonContainer {
+        margin-top: 20px;
         justify-content: center;
+    }
+
+    .heroButtonContainer button {
+        padding: 7px 14px;
+        font-size: 0.8rem;
     }
 }
 
