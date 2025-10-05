@@ -1,0 +1,31 @@
+{
+  "id": 15,
+  "title": "OutsiderTracks Library",
+  "description": "Narzędzie pomocnicze",
+  "fullDescription": "OutsiderTracks Library to zaawansowane narzędzie pomocnicze stworzone dla muzyki eksperymentalnej.<br><br>Projekt powstał jako <strong>bezpieczna, prywatna platforma do zarządzania biblioteką audio</strong>, umożliwiająca przechowywanie, organizację i odsłuchiwanie plików dźwiękowych w chmurze.<br><br>Kluczową cechą systemu jest <strong>kompleksowy system uwierzytelniania oparty na Firebase</strong>, który zapewnia, że dostęp do wrażliwych materiałów audio mają wyłącznie uprawnieni użytkownicy.<br><br>Aplikacja oferuje <strong>zaawansowany odtwarzacz audio z inteligentnym zarządzaniem</strong> - tylko jeden utwór może być odtwarzany w danym momencie, co eliminuje konflikty dźwiękowe i zapewnia komfort odsłuchu.<br><br>System wyposażony jest w <strong>rozbudowane narzędzia wyszukiwania i filtrowania</strong>, umożliwiające precyzyjne wyszukiwanie po nazwach plików, filtrowanie według zakresów dat oraz sortowanie według różnych kryteriów.<br><br>Interfejs użytkownika został zaprojektowany z myślą o <strong>telefonach i intuicyjności</strong>, zapewniając optymalne doświadczenie.<br><br>Projekt demonstruje <strong>umiejętność integracji nowoczesnych technologii webowych</strong> z praktycznymi potrzebami użytkowników, tworząc funkcjonalne i bezpieczne środowisko do pracy z materiałami audio.",
+  "image": "assets/img/projects/pic15.png",
+  "category": ["webpage", "web", "tools"],
+  "tags": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "JSON",
+    "Firebase",
+    "ChatGPT",
+    "DeepSeek"
+  ],
+  "features": [
+    "Bezpieczny system uwierzytelniania Firebase",
+    "Zaawansowany odtwarzacz audio z zarządzaniem jednym utworem na raz",
+    "System wyszukiwania i filtrowania po nazwie i dacie",
+    "Automatyczne generowanie listy plików z JSON",
+    "Ochrona dostępu dla niezalogowanych użytkowników",
+    "Możliwość resetowania filtrów"
+  ],
+  "status": "completed",
+  "completionDate": "5-10-2025",
+  "demoLink": "https://outsidertrackslibrary.web.app/",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}
