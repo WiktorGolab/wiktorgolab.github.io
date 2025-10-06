@@ -20,7 +20,8 @@
     "System wyszukiwania i filtrowania po nazwie i dacie",
     "Automatyczne generowanie listy plików z JSON",
     "Ochrona dostępu dla niezalogowanych użytkowników",
-    "Możliwość resetowania filtrów"
+    "Możliwość resetowania filtrów",
+    "Dynamiczna \"latająca wyspa\" z obecnie odtwarzanym audio"
   ],
   "status": "completed",
   "completionDate": "5-10-2025",
