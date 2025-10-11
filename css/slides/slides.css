@@ -259,6 +259,10 @@
     gap: 10vw;
 }
 
+.heroContainer .content p {
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+}
+
 @media (max-width: 1023px) {
     .heroContainer {
         flex-wrap: wrap-reverse;
@@ -286,6 +290,7 @@
     transition: all 0.2s ease-in-out;
     font-weight: 300;
     font-family: var(--font);
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 1));
 }
 
 .heroButtonContainer button:hover {
@@ -300,6 +305,7 @@
     width: auto !important;
     font-size: clamp(50px, 15vh, 100px) !important;
     overflow: auto !important;
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 1));
 }
 
 #heroBackground {
@@ -403,4 +409,9 @@
         padding: 7px 14px;
         font-size: 0.8rem;
     }
+}
+
+#galaxy-container canvas, #galaxy-container {
+    width: 100vw !important;
+    height: 100vh !important;
 }

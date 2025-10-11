@@ -123,7 +123,9 @@
     <div class="slides" id="slides">
         <section class="slide parallax active">
             <div id="heroBackground">
-                <img src="assets/img/background_hero.png" draggable="false">
+                <div id="galaxy-container">
+                    <canvas id="galaxy-canvas"></canvas>
+                </div>
             </div>
             <div class="heroContainer">
                 <canvas id="particles"></canvas>
@@ -230,11 +232,12 @@
     <script type="importmap">
         {
         "imports": {
-            "three": "./three.js/build/three.module.js"
+            "three": "./js/three.js-master/build/three.module.js",
+            "three/addons/controls/OrbitControls.js": "./js/three.js-master/examples/jsm/controls/OrbitControls.js"
             }
         }
     </script>
-
+    <script type="module" src="js/galaxy.js"></script>
 </body>
 
 </html>

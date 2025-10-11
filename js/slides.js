@@ -14,6 +14,117 @@
     let locked = false;
     let touchStartY = 0;
 
+    // Zmienne do kontroli galaktyki
+    let galaxyInstance = null;
+    let galaxyScale = 1;
+    let targetScale = 1;
+    let scaleAnimation = null;
+
+    function initializeGalaxy() {
+        if (window.GalaxyIntegrator && !galaxyInstance) {
+            galaxyInstance = new GalaxyIntegrator();
+            galaxyInstance.init().then(() => {
+                console.log('Galaxy initialized with scale animation');
+            });
+        }
+    }
+
+    function zoomGalaxy() {
+        targetScale = 1.8;
+        startScaleAnimation();
+    }
+
+    function resetGalaxy() {
+        targetScale = 1;
+        startScaleAnimation();
+    }
+
+    function startScaleAnimation() {
+        if (scaleAnimation) {
+            cancelAnimationFrame(scaleAnimation);
+        }
+        
+        const startTime = performance.now();
+        const startScale = galaxyScale;
+        const duration = 700;
+
+        function animateScale(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function
+            const easeProgress = progress < 0.5 
+                ? 4 * progress * progress * progress 
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+            galaxyScale = startScale + (targetScale - startScale) * easeProgress;
+            
+            // Apply scale to all galaxy components
+            applyGalaxyScale(galaxyScale);
+            
+            if (progress < 1) {
+                scaleAnimation = requestAnimationFrame(animateScale);
+            } else {
+                scaleAnimation = null;
+            }
+        }
+        
+        scaleAnimation = requestAnimationFrame(animateScale);
+    }
+
+    function applyGalaxyScale(scale) {
+    if (!galaxyInstance || !galaxyInstance.stars) return;
+    
+    // PODSTAWOWA POZYCJA GALAKTYKI - tutaj możesz dostosować
+    const baseGalaxyPosition = { x: 0, y: 5, z: 0 };
+    
+    // Scale all galaxy components
+    const components = [
+        galaxyInstance.stars.background,
+        galaxyInstance.stars.halo,
+        galaxyInstance.stars.nebula,
+        galaxyInstance.stars.glow,
+        galaxyInstance.stars.stars
+    ];
+    
+    components.forEach(component => {
+        if (component) {
+            component.scale.set(scale, scale, scale);
+            // Ustaw pozycję dla komponentów, które powinny być w centrum galaktyki
+            if (component !== galaxyInstance.stars.background) {
+                component.position.set(
+                    baseGalaxyPosition.x,
+                    baseGalaxyPosition.y, 
+                    baseGalaxyPosition.z
+                );
+            }
+        }
+    });
+    
+    // PODSTAWOWA POZYCJA KAMERY - tutaj możesz dostosować
+    const baseCameraPos = { x: -2, y: 6, z: 5 };
+    const zoomFactor = 1.5;
+    
+    if (scale > 1) {
+        const cameraScale = 1 + (scale - 1) * zoomFactor;
+        galaxyInstance.camera.position.x = baseCameraPos.x * cameraScale;
+        galaxyInstance.camera.position.y = baseCameraPos.y * cameraScale;
+        galaxyInstance.camera.position.z = baseCameraPos.z * cameraScale;
+    } else {
+        galaxyInstance.camera.position.x = baseCameraPos.x;
+        galaxyInstance.camera.position.y = baseCameraPos.y;
+        galaxyInstance.camera.position.z = baseCameraPos.z;
+    }
+    
+    // Punkt, w który kamera ma patrzeć (zwykle centrum galaktyki)
+    galaxyInstance.camera.lookAt(
+        baseGalaxyPosition.x,
+        baseGalaxyPosition.y,
+        baseGalaxyPosition.z
+    );
+    galaxyInstance.camera.updateProjectionMatrix();
+}
+
     function setContainerHeight() {
         const viewportWidth = window.innerWidth;
 
@@ -78,6 +189,19 @@
             ambient.style.background = bg;
             ambient.style.opacity = 1;
         }, 300);
+
+        // Kontrola galaktyki na podstawie scrollowania
+        if (i > 0) {
+            // Jeśli scrollujemy w dół (do kolejnych slajdów)
+            setTimeout(() => {
+                zoomGalaxy();
+            }, 200);
+        } else {
+            // Jeśli scrollujemy w górę (powrót do pierwszego slajdu)
+            setTimeout(() => {
+                resetGalaxy();
+            }, 200);
+        }
     }
 
     function goTo(index) {
@@ -85,11 +209,15 @@
         index = Math.max(0, Math.min(index, slides.length - 1));
         if (index === window.current) return;
         locked = true;
+        
         window.current = index;
 
         const slideHeight = slides[0].getBoundingClientRect().height;
         slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
         activateSlide(window.current);
+
+        // Zapisz aktualny slide w sessionStorage
+        sessionStorage.setItem('targetSlide', window.current.toString());
 
         setTimeout(() => locked = false, 900);
     }
@@ -100,7 +228,13 @@
 
     window.addEventListener('wheel', e => {
         if (locked) return;
-        e.deltaY > 0 ? goTo(window.current + 1) : goTo(window.current - 1);
+        const isScrollingDown = e.deltaY > 0;
+        
+        if (isScrollingDown) {
+            goTo(window.current + 1);
+        } else {
+            goTo(window.current - 1);
+        }
     }, {
         passive: true
     });
@@ -116,11 +250,15 @@
     });
     window.addEventListener('touchend', e => {
         const dy = e.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(dy) > 50) dy < 0 ? goTo(window.current + 1) : goTo(window.current - 1);
+        if (Math.abs(dy) > 50) {
+            if (dy < 0) goTo(window.current + 1);
+            else goTo(window.current - 1);
+        }
     });
 
     window.addEventListener('load', () => {
         setContainerHeight();
+        initializeGalaxy();
         activateSlide(window.current);
     });
 
@@ -130,70 +268,3 @@
         slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
     });
 })();
-
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-const hero = document.getElementById('heroimg');
-
-let particles = [];
-const particleCount = 300;
-
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-function getHeroCenter() {
-    const rect = hero.getBoundingClientRect();
-    return {
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2,
-        radius: Math.max(rect.width, rect.height) / 1.5
-    };
-}
-
-function createParticles() {
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 2 + 1,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5
-        });
-    }
-}
-
-function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const heroCenter = getHeroCenter();
-
-    particles.forEach(p => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
-
-        const dx = p.x - heroCenter.x;
-        const dy = p.y - heroCenter.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-
-        const maxDist = heroCenter.radius;
-        let alpha = 1 - Math.min(dist / maxDist, 1);
-        alpha = Math.pow(alpha, 1.5);
-
-        ctx.fillStyle = `rgba(255, 255, 200, ${alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fill();
-    });
-
-    requestAnimationFrame(drawParticles);
-}
-
-createParticles();
-drawParticles();
