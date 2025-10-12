@@ -12,7 +12,8 @@
     "JSON",
     "Firebase",
     "ChatGPT",
-    "DeepSeek"
+    "DeepSeek",
+    "Three.js"
   ],
   "features": [
     "Bezpieczny system uwierzytelniania Firebase",
