@@ -9,9 +9,14 @@ class GalaxyIntegrator {
         this.stars = null;
         this.animationId = null;
 
+        // Lepsze wykrywanie urządzeń mobilnych
+        this.isMobile = this.detectMobile();
+        this.isLowEndMobile = this.isMobile && this.detectLowEndDevice();
+        
         this.config = {
-            count: 100000,
-            size: 0.015,
+            // Znacząco zmniejszona liczba cząstek dla urządzeń mobilnych
+            count: this.isLowEndMobile ? 10000 : (this.isMobile ? 30000 : 60000),
+            size: 0.02,
             radius: 8,
             branches: 4,
             spin: 1.5,
@@ -27,7 +32,7 @@ class GalaxyIntegrator {
             whiteStarsPercentage: 0.15,
 
             position: {
-                x: 0,
+                x: this.isMobile ? 0 : -2,
                 y: 5,
                 z: 0
             },
@@ -38,14 +43,15 @@ class GalaxyIntegrator {
             },
             autoRotationSpeed: {
                 x: 0,
-                y: 0.00015,
+                y: this.isMobile ? 0.0015 : 0.00015,
                 z: 0
             },
 
+            // POPRAWIONE: Kamera ma inną pozycję niż galaktyka
             cameraPosition: {
-                x: -2,
-                y: 6,
-                z: 5
+                x: 0,  // Zmienione z -2 na 0
+                y: 8,  // Zmienione z 6 na 8
+                z: 12  // Zmienione z 5 na 12
             },
 
             enableControls: false,
@@ -54,26 +60,44 @@ class GalaxyIntegrator {
             fogEnabled: false,
             fogColor: '#000000ff',
             fogDensity: 0.03,
-            glowEnabled: true,
-            glowIntensity: 3.0,
+            glowEnabled: !this.isLowEndMobile, // Wyłącz glow na słabych urządzeniach
+            glowIntensity: this.isMobile ? 3.0 : 3.0,
 
-            // New parameters for nebula
-            nebulaCount: 800,
+            // Znacząco zredukowane mgławice i gwiazdy tła
+            nebulaCount: this.isLowEndMobile ? 300 : (this.isMobile ? 500 : 1000),
             nebulaSize: 10,
-            nebulaColor: 'rgba(63, 54, 0, 1)',
+            nebulaColor: 'rgba(70, 59, 0, 1)',
 
-            // New parameters for background and halo stars
-            backgroundStarsCount: 8000,
-            haloStarsCount: 4000,
+            backgroundStarsCount: this.isLowEndMobile ? 5000 : (this.isMobile ? 8000 : 10000),
+            haloStarsCount: this.isLowEndMobile ? 1000 : (this.isMobile ? 3000 : 5000),
             backgroundStarsColor: '#ffffff',
             haloStarsColor: '#ffffcc',
-            backgroundStarsSize: 0.1,  // Configurable background stars size
-            haloStarsSize: 0.04,         // Configurable halo stars size
+            backgroundStarsSize: this.isLowEndMobile ? 0.35 : (this.isMobile ? 0.35 : 0.15),
+            haloStarsSize: 0.04,
 
+            // Nowe opcje optymalizacji
+            useSimpleShaders: this.isMobile, // Uproszczone shadery na mobile
+            lowQualityMode: this.isLowEndMobile, // Tryb niskiej jakości
             ...config
         };
 
         this.isInitialized = false;
+        this.frameCount = 0;
+        this.rafActive = true;
+    }
+
+    detectMobile() {
+        return window.innerWidth <= 768 || 
+               /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    detectLowEndDevice() {
+        // Wykrywanie słabych urządzeń po liczbie rdzeni i pamięci
+        const hasLowCores = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+        const hasLowMemory = navigator.deviceMemory && navigator.deviceMemory <= 2;
+        const isOldCPU = /(A[0-9]|Snapdragon[0-9]{3}|Exynos[0-9]{4})/.test(navigator.userAgent);
+        
+        return hasLowCores || hasLowMemory || isOldCPU;
     }
 
     async init(containerId = 'galaxy-container') {
@@ -89,7 +113,10 @@ class GalaxyIntegrator {
 
         try {
             this.scene = new THREE.Scene();
-            this.camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            
+            // Optymalizacja kamery - mniejsze FOV na mobile
+            const fov = this.isMobile ? 60 : 75;
+            this.camera = new THREE.PerspectiveCamera(fov, container.clientWidth / container.clientHeight, 0.1, 1000);
 
             const canvas = document.getElementById('galaxy-canvas');
             if (!canvas) {
@@ -97,22 +124,32 @@ class GalaxyIntegrator {
                 return;
             }
 
+            // Optymalizacje renderera dla mobile
             this.renderer = new THREE.WebGLRenderer({
                 canvas: canvas,
-                antialias: true,
-                alpha: true
+                antialias: !this.isLowEndMobile, // Wyłącz antyaliasing na słabych urządzeniach
+                alpha: true,
+                powerPreference: this.isLowEndMobile ? 'low-power' : 'default'
             });
 
             this.renderer.setSize(container.clientWidth, container.clientHeight);
-            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Optymalizacja pixel ratio
+            const maxPixelRatio = this.isLowEndMobile ? 1 : (this.isMobile ? 1.5 : 2);
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
+            
+            // Dodatkowe optymalizacje renderera
+            this.renderer.autoClear = true;
+            this.renderer.sortObjects = false;
 
-            if (this.config.fogEnabled) {
+            if (this.config.fogEnabled && !this.isLowEndMobile) {
                 this.scene.fog = new THREE.FogExp2(
                     this.config.fogColor,
                     this.config.fogDensity
                 );
             }
 
+            // Ustawienie pozycji kamery
             this.camera.position.set(
                 this.config.cameraPosition.x,
                 this.config.cameraPosition.y,
@@ -133,7 +170,21 @@ class GalaxyIntegrator {
                 this.config.position.z
             );
 
-            window.addEventListener('resize', () => this.onWindowResize());
+            // DODANE: Kamera patrzy na galaktykę
+            this.camera.lookAt(
+                this.config.position.x,
+                this.config.position.y,
+                this.config.position.z
+            );
+
+            // Debug info
+            console.log('Galaxy position:', this.config.position);
+            console.log('Camera position:', this.camera.position);
+            console.log('Camera looking at:', this.config.position);
+
+            // Zoptymalizowany event resize z throttling
+            this.resizeThrottle = null;
+            window.addEventListener('resize', () => this.throttledResize());
 
             this.isInitialized = true;
             this.animate();
@@ -143,10 +194,49 @@ class GalaxyIntegrator {
         }
     }
 
+    throttledResize() {
+        if (this.resizeThrottle) return;
+        
+        this.resizeThrottle = setTimeout(() => {
+            this.onWindowResize();
+            this.resizeThrottle = null;
+        }, 250);
+    }
+
     async createGalaxy() {
         if (!this.scene) return;
 
-        // Create background stars geometry (static, far away)
+        // Uproszczone shadery dla urządzeń mobilnych
+        const createSimpleVertexShader = () => `
+            attribute float size;
+            attribute float opacity;
+            attribute vec3 color;
+            varying float vOpacity;
+            varying vec3 vColor;
+            
+            void main() {
+                vColor = color;
+                vOpacity = opacity;
+                
+                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                gl_PointSize = size * (250.0 / -mvPosition.z);
+                gl_Position = projectionMatrix * mvPosition;
+            }
+        `;
+
+        const createSimpleFragmentShader = () => `
+            uniform sampler2D pointTexture;
+            varying float vOpacity;
+            varying vec3 vColor;
+            
+            void main() {
+                vec4 texColor = texture2D(pointTexture, gl_PointCoord);
+                if (texColor.a < 0.1) discard;
+                gl_FragColor = vec4(vColor, texColor.a * vOpacity);
+            }
+        `;
+
+        // Create background stars geometry
         const backgroundGeometry = new THREE.BufferGeometry();
         const backgroundPositions = new Float32Array(this.config.backgroundStarsCount * 3);
         const backgroundColors = new Float32Array(this.config.backgroundStarsCount * 3);
@@ -154,11 +244,8 @@ class GalaxyIntegrator {
 
         const backgroundStarsColor = new THREE.Color(this.config.backgroundStarsColor);
 
-        // Create static background stars
         for (let i = 0; i < this.config.backgroundStarsCount; i++) {
             const i3 = i * 3;
-
-            // Random positions in a large sphere (far away)
             const distance = 40 + Math.random() * 80;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.acos(2 * Math.random() - 1);
@@ -167,10 +254,8 @@ class GalaxyIntegrator {
             backgroundPositions[i3 + 1] = distance * Math.sin(phi) * Math.sin(theta);
             backgroundPositions[i3 + 2] = distance * Math.cos(phi);
 
-            // Use configurable size with random variation
             backgroundSizes[i] = this.config.backgroundStarsSize * (0.5 + Math.random());
 
-            // Color variations for background stars
             const brightness = 0.4 + Math.random() * 0.6;
             backgroundColors[i3] = backgroundStarsColor.r * brightness;
             backgroundColors[i3 + 1] = backgroundStarsColor.g * brightness;
@@ -181,7 +266,7 @@ class GalaxyIntegrator {
         backgroundGeometry.setAttribute('color', new THREE.BufferAttribute(backgroundColors, 3));
         backgroundGeometry.setAttribute('size', new THREE.BufferAttribute(backgroundSizes, 1));
 
-        // Create halo stars geometry (following the galaxy)
+        // Create halo stars geometry
         const haloGeometry = new THREE.BufferGeometry();
         const haloPositions = new Float32Array(this.config.haloStarsCount * 3);
         const haloColors = new Float32Array(this.config.haloStarsCount * 3);
@@ -189,11 +274,8 @@ class GalaxyIntegrator {
 
         const haloStarsColor = new THREE.Color(this.config.haloStarsColor);
 
-        // Create halo stars around the galaxy
         for (let i = 0; i < this.config.haloStarsCount; i++) {
             const i3 = i * 3;
-
-            // Position in a sphere around the galaxy
             const distance = 9 + Math.random() * 12;
             const theta = Math.random() * Math.PI * 2;
             const phi = Math.acos(2 * Math.random() - 1);
@@ -202,10 +284,8 @@ class GalaxyIntegrator {
             haloPositions[i3 + 1] = Math.sin(phi) * Math.sin(theta) * distance;
             haloPositions[i3 + 2] = Math.cos(phi) * distance;
 
-            // Use configurable size with random variation
             haloSizes[i] = this.config.haloStarsSize * (0.5 + Math.random());
 
-            // Color variations for halo stars
             const brightness = 0.6 + Math.random() * 0.4;
             haloColors[i3] = haloStarsColor.r * brightness;
             haloColors[i3 + 1] = haloStarsColor.g * brightness;
@@ -216,59 +296,54 @@ class GalaxyIntegrator {
         haloGeometry.setAttribute('color', new THREE.BufferAttribute(haloColors, 3));
         haloGeometry.setAttribute('size', new THREE.BufferAttribute(haloSizes, 1));
 
-        // Create nebula geometry (large glow elements) with opacity based on distance
-        const nebulaGeometry = new THREE.BufferGeometry();
-        const nebulaPositions = new Float32Array(this.config.nebulaCount * 3);
-        const nebulaColors = new Float32Array(this.config.nebulaCount * 3);
-        const nebulaSizes = new Float32Array(this.config.nebulaCount);
-        const nebulaOpacities = new Float32Array(this.config.nebulaCount); // New opacity attribute for nebula
+        // Create nebula geometry only if enabled
+        let nebulaGeometry = null;
+        if (this.config.glowEnabled) {
+            nebulaGeometry = new THREE.BufferGeometry();
+            const nebulaPositions = new Float32Array(this.config.nebulaCount * 3);
+            const nebulaColors = new Float32Array(this.config.nebulaCount * 3);
+            const nebulaSizes = new Float32Array(this.config.nebulaCount);
+            const nebulaOpacities = new Float32Array(this.config.nebulaCount);
 
-        const nebulaColor = new THREE.Color(this.config.nebulaColor);
+            const nebulaColor = new THREE.Color(this.config.nebulaColor);
 
-        // Create large nebula clouds in spiral pattern
-        for (let i = 0; i < this.config.nebulaCount; i++) {
-            const i3 = i * 3;
+            for (let i = 0; i < this.config.nebulaCount; i++) {
+                const i3 = i * 3;
+                const radius = this.config.innerRadius * 0.7 + Math.random() * (this.config.outerRadius * 1.3);
+                const spinAngle = radius * this.config.spin;
+                const branchAngle = (i % this.config.branches) / this.config.branches * Math.PI * 2;
 
-            // Position in spiral arms - closer to galaxy center in Y axis
-            const radius = this.config.innerRadius * 0.7 + Math.random() * (this.config.outerRadius * 1.3);
-            const spinAngle = radius * this.config.spin;
-            const branchAngle = (i % this.config.branches) / this.config.branches * Math.PI * 2;
+                const randomX = (Math.random() - 0.5) * this.config.randomness * 3;
+                const randomY = (Math.random() - 0.5) * this.config.randomness * 0.3;
+                const randomZ = (Math.random() - 0.5) * this.config.randomness * 3;
 
-            // Reduced vertical spread for nebula clouds - much closer to center plane
-            const randomX = (Math.random() - 0.5) * this.config.randomness * 3;
-            const randomY = (Math.random() - 0.5) * this.config.randomness * 0.3;
-            const randomZ = (Math.random() - 0.5) * this.config.randomness * 3;
+                nebulaPositions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
+                nebulaPositions[i3 + 1] = randomY;
+                nebulaPositions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
 
-            nebulaPositions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX;
-            nebulaPositions[i3 + 1] = randomY;
-            nebulaPositions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ;
+                nebulaSizes[i] = this.config.nebulaSize * (0.7 + Math.random() * 0.6);
 
-            // Large sizes for nebula
-            nebulaSizes[i] = this.config.nebulaSize * (0.7 + Math.random() * 0.6);
+                const normalizedRadius = (radius - this.config.innerRadius) / (this.config.outerRadius - this.config.innerRadius);
+                nebulaOpacities[i] = Math.max(0, 0.1 - Math.pow(normalizedRadius, 1.5) * 0.1);
 
-            // Calculate opacity based on distance from center for nebula
-            // Nebula further from center have lower opacity (down to 0 at outer edge)
-            const normalizedRadius = (radius - this.config.innerRadius) / (this.config.outerRadius - this.config.innerRadius);
-            nebulaOpacities[i] = Math.max(0, 0.1 - Math.pow(normalizedRadius, 1.5) * 0.1); // Start from 0.1 and decrease
+                const colorVariation = 0.7 + Math.random() * 0.6;
+                nebulaColors[i3] = nebulaColor.r * colorVariation;
+                nebulaColors[i3 + 1] = nebulaColor.g * colorVariation * 0.8;
+                nebulaColors[i3 + 2] = nebulaColor.b * colorVariation * 0.6;
+            }
 
-            // Nebula colors with variations
-            const colorVariation = 0.7 + Math.random() * 0.6;
-            nebulaColors[i3] = nebulaColor.r * colorVariation;
-            nebulaColors[i3 + 1] = nebulaColor.g * colorVariation * 0.8;
-            nebulaColors[i3 + 2] = nebulaColor.b * colorVariation * 0.6;
+            nebulaGeometry.setAttribute('position', new THREE.BufferAttribute(nebulaPositions, 3));
+            nebulaGeometry.setAttribute('color', new THREE.BufferAttribute(nebulaColors, 3));
+            nebulaGeometry.setAttribute('size', new THREE.BufferAttribute(nebulaSizes, 1));
+            nebulaGeometry.setAttribute('opacity', new THREE.BufferAttribute(nebulaOpacities, 1));
         }
 
-        nebulaGeometry.setAttribute('position', new THREE.BufferAttribute(nebulaPositions, 3));
-        nebulaGeometry.setAttribute('color', new THREE.BufferAttribute(nebulaColors, 3));
-        nebulaGeometry.setAttribute('size', new THREE.BufferAttribute(nebulaSizes, 1));
-        nebulaGeometry.setAttribute('opacity', new THREE.BufferAttribute(nebulaOpacities, 1)); // Add opacity attribute for nebula
-
-        // Create star geometry with opacity based on distance
+        // Create main galaxy geometry
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(this.config.count * 3);
         const colors = new Float32Array(this.config.count * 3);
         const sizes = new Float32Array(this.config.count);
-        const opacities = new Float32Array(this.config.count); // New opacity attribute
+        const opacities = new Float32Array(this.config.count);
 
         const colorInside = new THREE.Color(this.config.insideColor);
         const colorOutside = new THREE.Color(this.config.outsideColor);
@@ -305,8 +380,6 @@ class GalaxyIntegrator {
             sizes[i] = this.config.size * (0.5 + Math.random() * 0.5) * 
                       (1 - radius / this.config.outerRadius * 0.7);
 
-            // Calculate opacity based on distance from center
-            // Stars further from center have lower opacity (down to 0 at outer edge)
             const normalizedRadius = (radius - this.config.innerRadius) / (this.config.outerRadius - this.config.innerRadius);
             opacities[i] = Math.max(0, 1.0 - Math.pow(normalizedRadius, 1.2));
 
@@ -339,10 +412,10 @@ class GalaxyIntegrator {
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
         geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-        geometry.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1)); // Add opacity attribute
+        geometry.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
 
-        // Texture creation functions
-        const createGlowTexture = (size = 128, color = '#ffffff') => {
+        // Texture creation with mobile optimization
+        const createGlowTexture = (size = this.isMobile ? 64 : 128, color = '#ffffff') => {
             const canvas = document.createElement('canvas');
             canvas.width = canvas.height = size;
             const ctx = canvas.getContext('2d');
@@ -367,7 +440,7 @@ class GalaxyIntegrator {
             return texture;
         };
 
-        const createSharpStarTexture = (size = 64, color = '#ffffff') => {
+        const createSharpStarTexture = (size = this.isMobile ? 32 : 64, color = '#ffffff') => {
             const canvas = document.createElement('canvas');
             canvas.width = canvas.height = size;
             const ctx = canvas.getContext('2d');
@@ -382,10 +455,10 @@ class GalaxyIntegrator {
             return texture;
         };
 
-        const glowTexture = createGlowTexture(128, '#ffffff');
-        const sharpStarTexture = createSharpStarTexture(64, '#ffffff');
+        const glowTexture = createGlowTexture();
+        const sharpStarTexture = createSharpStarTexture();
 
-        // Background stars material - small, sharp stars
+        // Materials with mobile optimization
         const backgroundStarsMaterial = new THREE.PointsMaterial({
             size: this.config.backgroundStarsSize,
             sizeAttenuation: true,
@@ -397,7 +470,6 @@ class GalaxyIntegrator {
             opacity: 0.9
         });
 
-        // Halo stars material - small, sharp stars
         const haloStarsMaterial = new THREE.PointsMaterial({
             size: this.config.haloStarsSize,
             sizeAttenuation: true,
@@ -409,132 +481,94 @@ class GalaxyIntegrator {
             opacity: 0.8
         });
 
-        // Custom shader material for nebula with distance-based opacity
-        const nebulaMaterial = new THREE.ShaderMaterial({
-            uniforms: {
-                pointTexture: { value: glowTexture }
-            },
-            vertexShader: `
-                attribute float size;
-                attribute float opacity;
-                attribute vec3 color;
-                varying float vOpacity;
-                varying vec3 vColor;
+        // Use simplified shaders for mobile
+        const vertexShader = this.config.useSimpleShaders ? createSimpleVertexShader() : `
+            attribute float size;
+            attribute float opacity;
+            attribute vec3 color;
+            varying float vOpacity;
+            varying vec3 vColor;
+            
+            void main() {
+                vColor = color;
+                vOpacity = opacity;
                 
-                void main() {
-                    vColor = color;
-                    vOpacity = opacity;
-                    
-                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                    gl_PointSize = size * (300.0 / -mvPosition.z);
-                    gl_Position = projectionMatrix * mvPosition;
-                }
-            `,
-            fragmentShader: `
-                uniform sampler2D pointTexture;
-                varying float vOpacity;
-                varying vec3 vColor;
-                
-                void main() {
-                    vec4 texColor = texture2D(pointTexture, gl_PointCoord);
-                    gl_FragColor = vec4(vColor, texColor.a * vOpacity);
-                }
-            `,
-            transparent: true,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending
-        });
+                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                gl_PointSize = size * (300.0 / -mvPosition.z);
+                gl_Position = projectionMatrix * mvPosition;
+            }
+        `;
 
+        const fragmentShader = this.config.useSimpleShaders ? createSimpleFragmentShader() : `
+            uniform sampler2D pointTexture;
+            varying float vOpacity;
+            varying vec3 vColor;
+            
+            void main() {
+                vec4 texColor = texture2D(pointTexture, gl_PointCoord);
+                gl_FragColor = vec4(vColor, texColor.a * vOpacity);
+            }
+        `;
 
-        // Custom shader material for galaxy stars with distance-based opacity
+        // Nebula material only if enabled
+        let nebulaMaterial = null;
+        if (this.config.glowEnabled) {
+            nebulaMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    pointTexture: { value: glowTexture }
+                },
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                transparent: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+            });
+        }
+
         const galaxyStarMaterial = new THREE.ShaderMaterial({
             uniforms: {
                 pointTexture: { value: sharpStarTexture }
             },
-            vertexShader: `
-                attribute float size;
-                attribute float opacity;
-                attribute vec3 color;
-                varying float vOpacity;
-                varying vec3 vColor;
-                
-                void main() {
-                    vColor = color;
-                    vOpacity = opacity;
-                    
-                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                    gl_PointSize = size * (300.0 / -mvPosition.z);
-                    gl_Position = projectionMatrix * mvPosition;
-                }
-            `,
-            fragmentShader: `
-                uniform sampler2D pointTexture;
-                varying float vOpacity;
-                varying vec3 vColor;
-                
-                void main() {
-                    vec4 texColor = texture2D(pointTexture, gl_PointCoord);
-                    gl_FragColor = vec4(vColor, texColor.a * vOpacity);
-                }
-            `,
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
             transparent: true,
             depthWrite: false,
             blending: THREE.NormalBlending
         });
 
-        // Custom shader material for galaxy glow with distance-based opacity
         const galaxyGlowMaterial = new THREE.ShaderMaterial({
             uniforms: {
                 pointTexture: { value: glowTexture }
             },
-            vertexShader: `
-                attribute float size;
-                attribute float opacity;
-                attribute vec3 color;
-                varying float vOpacity;
-                varying vec3 vColor;
-                
-                void main() {
-                    vColor = color;
-                    vOpacity = opacity * 0.2; // Reduce overall opacity for glow
-                    
-                    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                    gl_PointSize = size * 6.0 * (300.0 / -mvPosition.z);
-                    gl_Position = projectionMatrix * mvPosition;
-                }
-            `,
-            fragmentShader: `
-                uniform sampler2D pointTexture;
-                varying float vOpacity;
-                varying vec3 vColor;
-                
-                void main() {
-                    vec4 texColor = texture2D(pointTexture, gl_PointCoord);
-                    gl_FragColor = vec4(vColor, texColor.a * vOpacity);
-                }
-            `,
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
             transparent: true,
             depthWrite: false,
             blending: THREE.AdditiveBlending
         });
 
-        // Create points for all layers
+        // Create points
         const backgroundStarsPoints = new THREE.Points(backgroundGeometry, backgroundStarsMaterial);
         const haloStarsPoints = new THREE.Points(haloGeometry, haloStarsMaterial);
-        const nebulaPoints = new THREE.Points(nebulaGeometry, nebulaMaterial);
+        
+        let nebulaPoints = null;
+        if (this.config.glowEnabled && nebulaGeometry && nebulaMaterial) {
+            nebulaPoints = new THREE.Points(nebulaGeometry, nebulaMaterial);
+        }
+        
         const glowPoints = new THREE.Points(geometry, galaxyGlowMaterial);
         const starPoints = new THREE.Points(geometry, galaxyStarMaterial);
 
-        // Add to scene in correct order
-        this.scene.add(backgroundStarsPoints); // Static background stars (far away)
-        this.scene.add(haloStarsPoints);       // Halo stars (follow galaxy)
-        this.scene.add(nebulaPoints);          // Nebula clouds
-        this.scene.add(glowPoints);            // Galaxy glow
-        this.scene.add(starPoints);            // Galaxy stars
+        // Add to scene
+        this.scene.add(backgroundStarsPoints);
+        this.scene.add(haloStarsPoints);
+        if (nebulaPoints) this.scene.add(nebulaPoints);
+        if (this.config.glowEnabled) this.scene.add(glowPoints);
+        this.scene.add(starPoints);
 
         this.stars = {
-            background: backgroundStarsPoints,  // Static, don't move with galaxy
-            halo: haloStarsPoints,              // Move with galaxy
+            background: backgroundStarsPoints,
+            halo: haloStarsPoints,
             nebula: nebulaPoints,
             glow: glowPoints,
             stars: starPoints
@@ -543,25 +577,28 @@ class GalaxyIntegrator {
 
     setPosition(x, y, z) {
         if (this.stars) {
-            // Only halo, nebula and galaxy stars move with the galaxy
             this.stars.halo.position.set(x, y, z);
-            this.stars.nebula.position.set(x, y, z);
+            if (this.stars.nebula) this.stars.nebula.position.set(x, y, z);
             this.stars.glow.position.set(x, y, z);
             this.stars.stars.position.set(x, y, z);
-            // Background stars remain static
             this.config.position = { x, y, z };
+            
+            // DODANE: Kamera automatycznie patrzy na nową pozycję galaktyki
+            if (this.camera) {
+                this.camera.lookAt(x, y, z);
+            }
+            
+            console.log('Galaxy position set to:', x, y, z);
         }
         return this;
     }
 
     setRotation(x, y, z) {
         if (this.stars) {
-            // Only halo, nebula and galaxy stars rotate with the galaxy
             this.stars.halo.rotation.set(x, y, z);
-            this.stars.nebula.rotation.set(x, y, z);
+            if (this.stars.nebula) this.stars.nebula.rotation.set(x, y, z);
             this.stars.glow.rotation.set(x, y, z);
             this.stars.stars.rotation.set(x, y, z);
-            // Background stars remain static
             this.config.rotation = { x, y, z };
         }
         return this;
@@ -576,6 +613,15 @@ class GalaxyIntegrator {
         if (this.camera) {
             this.camera.position.set(x, y, z);
             this.config.cameraPosition = { x, y, z };
+            
+            // DODANE: Kamera patrzy na galaktykę po zmianie pozycji
+            this.camera.lookAt(
+                this.config.position.x,
+                this.config.position.y,
+                this.config.position.z
+            );
+            
+            console.log('Camera position set to:', x, y, z);
         }
         return this;
     }
@@ -583,13 +629,12 @@ class GalaxyIntegrator {
     setGlow(enabled = true) {
         this.config.glowEnabled = enabled;
         if (this.stars) {
-            this.stars.glow.visible = enabled;
-            this.stars.nebula.visible = enabled;
+            if (this.stars.glow) this.stars.glow.visible = enabled;
+            if (this.stars.nebula) this.stars.nebula.visible = enabled;
         }
         return this;
     }
 
-    // New method for setting stars sizes
     setStarsSizes(backgroundSize, haloSize) {
         this.config.backgroundStarsSize = backgroundSize;
         this.config.haloStarsSize = haloSize;
@@ -597,16 +642,22 @@ class GalaxyIntegrator {
     }
 
     animate() {
+        if (!this.rafActive) return;
+        
         this.animationId = requestAnimationFrame(() => this.animate());
+        this.frameCount++;
+
+        // Optymalizacja: pomijaj co drugą klatkę na słabych urządzeniach
+        if (this.isLowEndMobile && this.frameCount % 2 === 0) {
+            return;
+        }
 
         if (this.stars && this.config.enableAutoRotation) {
             const rotationSpeed = this.config.autoRotationSpeed.y;
-            // Only halo, nebula and galaxy stars rotate
             this.stars.halo.rotation.y += rotationSpeed;
-            this.stars.nebula.rotation.y += rotationSpeed;
+            if (this.stars.nebula) this.stars.nebula.rotation.y += rotationSpeed;
             this.stars.glow.rotation.y += rotationSpeed;
             this.stars.stars.rotation.y += rotationSpeed;
-            // Background stars remain static
         }
 
         if (this.renderer && this.scene && this.camera) {
@@ -621,13 +672,26 @@ class GalaxyIntegrator {
         this.camera.aspect = container.clientWidth / container.clientHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(container.clientWidth, container.clientHeight);
+        
+        // Ponowna optymalizacja pixel ratio przy resize
+        const maxPixelRatio = this.isLowEndMobile ? 1 : (this.isMobile ? 1.5 : 2);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
     }
 
     destroy() {
         this.isInitialized = false;
+        this.rafActive = false;
+        
         if (this.animationId) {
             cancelAnimationFrame(this.animationId);
         }
+        
+        if (this.resizeThrottle) {
+            clearTimeout(this.resizeThrottle);
+        }
+        
+        window.removeEventListener('resize', this.throttledResize);
+        
         if (this.renderer) {
             this.renderer.dispose();
         }

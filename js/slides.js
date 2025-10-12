@@ -6,7 +6,7 @@
     } else {
         window.current = 0;
     }
-    
+
     const slides = Array.from(document.querySelectorAll('.slide'));
     const slidesContainer = document.getElementById('slides');
     const arrowDown = document.querySelector('.arrow-down');
@@ -43,7 +43,7 @@
         if (scaleAnimation) {
             cancelAnimationFrame(scaleAnimation);
         }
-        
+
         const startTime = performance.now();
         const startScale = galaxyScale;
         const duration = 700;
@@ -51,79 +51,87 @@
         function animateScale(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            
+
             // Easing function
-            const easeProgress = progress < 0.5 
-                ? 4 * progress * progress * progress 
-                : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+            const easeProgress = progress < 0.5 ?
+                4 * progress * progress * progress :
+                1 - Math.pow(-2 * progress + 2, 3) / 2;
 
             galaxyScale = startScale + (targetScale - startScale) * easeProgress;
-            
+
             // Apply scale to all galaxy components
             applyGalaxyScale(galaxyScale);
-            
+
             if (progress < 1) {
                 scaleAnimation = requestAnimationFrame(animateScale);
             } else {
                 scaleAnimation = null;
             }
         }
-        
+
         scaleAnimation = requestAnimationFrame(animateScale);
     }
 
     function applyGalaxyScale(scale) {
-    if (!galaxyInstance || !galaxyInstance.stars) return;
-    
-    // PODSTAWOWA POZYCJA GALAKTYKI - tutaj możesz dostosować
-    const baseGalaxyPosition = { x: 0, y: 5, z: 0 };
-    
-    // Scale all galaxy components
-    const components = [
-        galaxyInstance.stars.background,
-        galaxyInstance.stars.halo,
-        galaxyInstance.stars.nebula,
-        galaxyInstance.stars.glow,
-        galaxyInstance.stars.stars
-    ];
-    
-    components.forEach(component => {
-        if (component) {
-            component.scale.set(scale, scale, scale);
-            // Ustaw pozycję dla komponentów, które powinny być w centrum galaktyki
-            if (component !== galaxyInstance.stars.background) {
-                component.position.set(
-                    baseGalaxyPosition.x,
-                    baseGalaxyPosition.y, 
-                    baseGalaxyPosition.z
-                );
+        if (!galaxyInstance || !galaxyInstance.stars) return;
+
+        // NOWA POZYCJA GALAKTYKI - przesunięta w prawo
+        const baseGalaxyPosition = {
+            x: 5,
+            y: 6,
+            z: 0
+        }; // Zwiększono x z 0 do 5
+
+        // Scale all galaxy components
+        const components = [
+            galaxyInstance.stars.background,
+            galaxyInstance.stars.halo,
+            galaxyInstance.stars.nebula,
+            galaxyInstance.stars.glow,
+            galaxyInstance.stars.stars
+        ];
+
+        components.forEach(component => {
+            if (component) {
+                component.scale.set(scale, scale, scale);
+                // Ustaw pozycję dla komponentów, które powinny być w centrum galaktyki
+                if (component !== galaxyInstance.stars.background) {
+                    component.position.set(
+                        baseGalaxyPosition.x,
+                        baseGalaxyPosition.y,
+                        baseGalaxyPosition.z
+                    );
+                }
             }
+        });
+
+        // NOWA POZYCJA KAMERY - dostosowana do nowej pozycji galaktyki
+        const baseCameraPos = {
+            x: 3,
+            y: 6,
+            z: 5
+        }; // Zwiększono x z -2 do 3
+        const zoomFactor = 1.5;
+
+        if (scale > 1) {
+            const cameraScale = 1 + (scale - 1) * zoomFactor;
+            galaxyInstance.camera.position.x = baseCameraPos.x * cameraScale;
+            galaxyInstance.camera.position.y = baseCameraPos.y * cameraScale;
+            galaxyInstance.camera.position.z = baseCameraPos.z * cameraScale;
+        } else {
+            galaxyInstance.camera.position.x = baseCameraPos.x;
+            galaxyInstance.camera.position.y = baseCameraPos.y;
+            galaxyInstance.camera.position.z = baseCameraPos.z;
         }
-    });
-    
-    // PODSTAWOWA POZYCJA KAMERY - tutaj możesz dostosować
-    const baseCameraPos = { x: -2, y: 6, z: 5 };
-    const zoomFactor = 1.5;
-    
-    if (scale > 1) {
-        const cameraScale = 1 + (scale - 1) * zoomFactor;
-        galaxyInstance.camera.position.x = baseCameraPos.x * cameraScale;
-        galaxyInstance.camera.position.y = baseCameraPos.y * cameraScale;
-        galaxyInstance.camera.position.z = baseCameraPos.z * cameraScale;
-    } else {
-        galaxyInstance.camera.position.x = baseCameraPos.x;
-        galaxyInstance.camera.position.y = baseCameraPos.y;
-        galaxyInstance.camera.position.z = baseCameraPos.z;
+
+        // Punkt, w który kamera ma patrzeć (centrum galaktyki)
+        galaxyInstance.camera.lookAt(
+            baseGalaxyPosition.x,
+            baseGalaxyPosition.y,
+            baseGalaxyPosition.z
+        );
+        galaxyInstance.camera.updateProjectionMatrix();
     }
-    
-    // Punkt, w który kamera ma patrzeć (zwykle centrum galaktyki)
-    galaxyInstance.camera.lookAt(
-        baseGalaxyPosition.x,
-        baseGalaxyPosition.y,
-        baseGalaxyPosition.z
-    );
-    galaxyInstance.camera.updateProjectionMatrix();
-}
 
     function setContainerHeight() {
         const viewportWidth = window.innerWidth;
@@ -209,7 +217,7 @@
         index = Math.max(0, Math.min(index, slides.length - 1));
         if (index === window.current) return;
         locked = true;
-        
+
         window.current = index;
 
         const slideHeight = slides[0].getBoundingClientRect().height;
@@ -229,7 +237,7 @@
     window.addEventListener('wheel', e => {
         if (locked) return;
         const isScrollingDown = e.deltaY > 0;
-        
+
         if (isScrollingDown) {
             goTo(window.current + 1);
         } else {
