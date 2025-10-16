@@ -25,10 +25,12 @@
     "Zaimplementowanie wszystkich treści z zachowaniem struktury linków oraz sitemapy, co pozwoliło utrzymać dotychczasową widoczność SEO",
     "Przeniesienie dotychczasowych postów i materiałów na nową stronę",
     "Pełna obsługa formularzy poprzez integrację Contact Form 7 z systemem Odoo przy użyciu PHP",
-    "Odtworzenie oryginalnego wyglądu strony z dostosowaniem do nowego środowiska edytora Elementor, co ułatwia dalszą edycję i rozwój serwisu"
+    "Odtworzenie oryginalnego wyglądu strony z dostosowaniem do nowego środowiska edytora Elementor, co ułatwia dalszą edycję i rozwój serwisu",
+    "Przeniesienie url redirects",
+    "Przeniesienie ustawień SEO"
   ],
-  "status": "in-progress",
-  "completionDate": "X-2025",
+  "status": "completed",
+  "completionDate": "16-10-2025",
   "demoLink": "https://m3group.pl/",
   "priority": 1,
   "showcase": true,

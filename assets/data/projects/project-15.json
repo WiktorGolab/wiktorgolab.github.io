@@ -12,8 +12,7 @@
     "JSON",
     "Firebase",
     "ChatGPT",
-    "DeepSeek",
-    "Three.js"
+    "DeepSeek"
   ],
   "features": [
     "Bezpieczny system uwierzytelniania Firebase",
@@ -21,6 +20,7 @@
     "System wyszukiwania i filtrowania po nazwie i dacie",
     "Automatyczne generowanie listy plików z JSON",
     "Ochrona dostępu dla niezalogowanych użytkowników",
+    "Dostęp do wybranych audio dla zalogowanych użytkowników",
     "Możliwość resetowania filtrów",
     "Dynamiczna \"latająca wyspa\" z obecnie odtwarzanym audio"
   ],
