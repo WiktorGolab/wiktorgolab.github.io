@@ -177,11 +177,6 @@ class GalaxyIntegrator {
                 this.config.position.z
             );
 
-            // Debug info
-            console.log('Galaxy position:', this.config.position);
-            console.log('Camera position:', this.camera.position);
-            console.log('Camera looking at:', this.config.position);
-
             // Zoptymalizowany event resize z throttling
             this.resizeThrottle = null;
             window.addEventListener('resize', () => this.throttledResize());
@@ -587,8 +582,6 @@ class GalaxyIntegrator {
             if (this.camera) {
                 this.camera.lookAt(x, y, z);
             }
-            
-            console.log('Galaxy position set to:', x, y, z);
         }
         return this;
     }
@@ -620,8 +613,6 @@ class GalaxyIntegrator {
                 this.config.position.y,
                 this.config.position.z
             );
-            
-            console.log('Camera position set to:', x, y, z);
         }
         return this;
     }

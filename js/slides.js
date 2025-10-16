@@ -24,7 +24,7 @@
         if (window.GalaxyIntegrator && !galaxyInstance) {
             galaxyInstance = new GalaxyIntegrator();
             galaxyInstance.init().then(() => {
-                console.log('Galaxy initialized with scale animation');
+                return;
             });
         }
     }

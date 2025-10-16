@@ -58,3 +58,14 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #333 #1a1a1a;
 }
+
+#cursor-style {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: white;
+    pointer-events: none;
+    position: fixed;
+    z-index: 99999999999;
+    opacity: 0.03;
+}
