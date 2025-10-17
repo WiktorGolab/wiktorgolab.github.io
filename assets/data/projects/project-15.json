@@ -22,6 +22,7 @@
     "Ochrona dostępu dla niezalogowanych użytkowników",
     "Dostęp do wybranych audio dla zalogowanych użytkowników",
     "Możliwość resetowania filtrów",
+    "Autoplay",
     "Dynamiczna \"latająca wyspa\" z obecnie odtwarzanym audio"
   ],
   "status": "completed",

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="css/slides/animations.css">
     <link rel="stylesheet" href="css/slides/gradients.css">
     <link rel="stylesheet" href="css/splash.css">
+    <link rel="stylesheet" href="css/slides/aboutslide.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .content {
@@ -151,11 +152,239 @@
                 </div>
             </div>
         </section>
-        <section class="slide rotate3d">
-            <div class="frame">
-                <div class="content">
-                    <h1>Projekt 1</h1>
-                    <p>Obrót 3D z zoomem.</p>
+        <section class="slide">
+            <div class="about-container">
+                <div class="side-column left-column">
+                    <div class="about-left-column">
+                        <span id="about-title">O mnie</span>
+                        <strong>Pozwól, że się przedstawię...</strong>
+                        <div class="about-separator"></div>
+
+                        <div class="pagination-container left-pagination">
+                            <div class="page active" data-page="1">
+                                <div class="about-left-text">
+                                    Jestem studentem trzeciego roku na Uniwersytecie Adama Mickiewicza w Poznaniu, z
+                                    pasją do projektowania stron internetowych, tworzenia aplikacji i sztucznej
+                                    inteligencji.<br><br>
+                                    Moją studencką podróż uzupełnia praktyczne doświadczenie zdobyte podczas staży i
+                                    pracy w branży technologicznej. Podczas stażu w M3 Group pracowałem jako projektant
+                                    stron internetowych (WordPress) i projektant aplikacji przy użyciu FlutterFlow,
+                                    gdzie doskonaliłem swoje umiejętności w budowaniu przyjaznych dla użytkownika i
+                                    responsywnych rozwiązań internetowych.
+                                </div>
+                            </div>
+
+                            <div class="page" data-page="2">
+                                <div class="about-left-text">
+                                    Aktualnie pełnię funkcję administratora i projektanta stron internetowych dla
+                                    EDU-CZAR oraz DermaExpert. W ramach tych obowiązków zarządzam i rozwijam strony
+                                    internetowe tych firm, dbając o ich funkcjonalność, atrakcyjność oraz łatwość
+                                    użytkowania, co przekłada się na wzrost satysfakcji klientów i usprawnienie procesów
+                                    biznesowych.
+                                </div>
+                            </div>
+
+                            <div class="page" data-page="3">
+                                <div class="about-left-text">
+                                    Stale poszerzam swoją wiedzę i podejmuję nowe wyzwania w świecie technologii i
+                                    designu. Moje projekty skupiają się na tworzeniu intuicyjnych interfejsów
+                                    użytkownika i nowoczesnych rozwiązań webowych, które łączą funkcjonalność z
+                                    estetyką.<br><br>
+                                    Dzięki zdobytemu doświadczeniu oraz certyfikatom, takim jak Fundamentals of
+                                    Accelerated Computing with CUDA Python, Fundamentals of Deep Learning oraz
+                                    Generative AI with Diffusion Models, jestem przygotowany na podejmowanie kolejnych
+                                    kroków w mojej karierze, z otwartością na rozwój i poszerzanie zakresu swoich
+                                    kompetencji zawodowych.
+                                </div>
+                            </div>
+
+                            <div class="pagination-controls">
+                                <button class="pagination-btn prev-btn" disabled>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M15 18l-6-6 6-6" />
+                                    </svg>
+                                </button>
+
+                                <div class="page-indicators">
+                                    <span class="page-indicator active" data-page="1"></span>
+                                    <span class="page-indicator" data-page="2"></span>
+                                    <span class="page-indicator" data-page="3"></span>
+                                </div>
+
+                                <button class="pagination-btn next-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M9 18l6-6-6-6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-column">
+                    <div class="about-image-container">
+                        <img src="assets/img/about.png" alt="Portrait" class="about-image" title="Wiktor">
+                        <div id="halo-container"></div>
+                    </div>
+                </div>
+                <div class="side-column right-column">
+                    <div class="about-right-column">
+                        <strong>Trochę więcej o mnie...</strong>
+                        <div class="about-separator"></div>
+
+                        <div class="pagination-container right-pagination">
+                            <div class="page active" data-page="1">
+                                <div class="about-right-text">
+                                    Poza pracą zawodową, osobiście interesuję się sztuczną inteligencją i od kilku lat
+                                    eksploruję narzędzia AI.<br><br>
+                                    Lubię również tworzyć materiały cyfrowe, wykorzystując narzędzia takie jak FL
+                                    Studio, Adobe Premiere Pro i GIMP do realizacji kreatywnych idei, które umieszczam
+                                    anonimowo na popularnych platformach social media.
+                                </div>
+                            </div>
+
+                            <div class="page" data-page="2">
+                                <div class="about-right-text">
+                                    W wolnym czasie chętnie sięgam również po gry komputerowe oraz filmy, co pozwala mi
+                                    odpocząć i czerpać inspiracje wizualne oraz koncepcyjne do własnych
+                                    projektów.<br><br>
+
+                                    Przejdź do mojego doświadczenia<br><br>
+
+                                    Przejdź do moich umiejętności
+                                </div>
+                            </div>
+
+                            <div class="pagination-controls">
+                                <button class="pagination-btn prev-btn" disabled>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M15 18l-6-6 6-6" />
+                                    </svg>
+                                </button>
+
+                                <div class="page-indicators">
+                                    <span class="page-indicator active" data-page="1"></span>
+                                    <span class="page-indicator" data-page="2"></span>
+                                </div>
+
+                                <button class="pagination-btn next-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M9 18l6-6-6-6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile combined pagination -->
+                <div class="mobile-combined-pagination">
+                    <div class="combined-pagination-container">
+                        <div class="combined-page active" data-page="1">
+                            <div class="combined-section">
+                                <span class="combined-title">O mnie</span>
+                                <strong>Pozwól, że się przedstawię...</strong>
+                                <div class="about-separator"></div>
+                                <div class="combined-text">
+                                    Jestem studentem trzeciego roku na Uniwersytecie Adama Mickiewicza w Poznaniu, z
+                                    pasją do projektowania stron internetowych, tworzenia aplikacji i sztucznej
+                                    inteligencji.<br><br>
+                                    Moją studencką podróż uzupełnia praktyczne doświadczenie zdobyte podczas staży i
+                                    pracy w branży technologicznej. Podczas stażu w M3 Group pracowałem jako projektant
+                                    stron internetowych (WordPress) i projektant aplikacji przy użyciu FlutterFlow,
+                                    gdzie doskonaliłem swoje umiejętności w budowaniu przyjaznych dla użytkownika i
+                                    responsywnych rozwiązań internetowych.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="combined-page" data-page="2">
+                            <div class="combined-section">
+                                <span class="combined-title">O mnie</span>
+                                <strong>Pozwól, że się przedstawię...</strong>
+                                <div class="about-separator"></div>
+                                <div class="combined-text">
+                                    Aktualnie pełnię funkcję administratora i projektanta stron internetowych dla
+                                    EDU-CZAR oraz DermaExpert. W ramach tych obowiązków zarządzam i rozwijam strony
+                                    internetowe tych firm, dbając o ich funkcjonalność, atrakcyjność oraz łatwość
+                                    użytkowania, co przekłada się na wzrost satysfakcji klientów i usprawnienie procesów
+                                    biznesowych.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="combined-page" data-page="3">
+                            <div class="combined-section">
+                                <span class="combined-title">O mnie</span>
+                                <strong>Pozwól, że się przedstawię...</strong>
+                                <div class="about-separator"></div>
+                                <div class="combined-text">
+                                    Stale poszerzam swoją wiedzę i podejmuję nowe wyzwania w świecie technologii i
+                                    designu. Moje projekty skupiają się na tworzeniu intuicyjnych interfejsów
+                                    użytkownika i nowoczesnych rozwiązań webowych, które łączą funkcjonalność z
+                                    estetyką.<br><br>
+                                    Dzięki zdobytemu doświadczeniu oraz certyfikatom, takim jak Fundamentals of
+                                    Accelerated Computing with CUDA Python, Fundamentals of Deep Learning oraz
+                                    Generative AI with Diffusion Models, jestem przygotowany na podejmowanie kolejnych
+                                    kroków w mojej karierze, z otwartością na rozwój i poszerzanie zakresu swoich
+                                    kompetencji zawodowych.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="combined-page" data-page="4">
+                            <div class="combined-section">
+                                <span class="combined-title">O mnie</span>
+                                <strong>Trochę więcej o mnie...</strong>
+                                <div class="about-separator"></div>
+                                <div class="combined-text">
+                                    Poza pracą zawodową, osobiście interesuję się sztuczną inteligencją i od kilku lat
+                                    eksploruję narzędzia AI.<br><br>
+                                    Lubię również tworzyć materiały cyfrowe, wykorzystując narzędzia takie jak FL
+                                    Studio, Adobe Premiere Pro i GIMP do realizacji kreatywnych idei, które umieszczam
+                                    anonimowo na popularnych platformach social media.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="combined-page" data-page="5">
+                            <div class="combined-section">
+                                <span class="combined-title">O mnie</span>
+                                <strong>Trochę więcej o mnie...</strong>
+                                <div class="about-separator"></div>
+                                <div class="combined-text">
+                                    W wolnym czasie chętnie sięgam również po gry komputerowe oraz filmy, co pozwala mi
+                                    odpocząć i czerpać inspiracje wizualne oraz koncepcyjne do własnych
+                                    projektów.<br><br>
+
+                                    Przejdź do mojego doświadczenia<br><br>
+
+                                    Przejdź do moich umiejętności
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pagination-controls combined-controls">
+                            <button class="pagination-btn combined-prev-btn" disabled>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M15 18l-6-6 6-6" />
+                                </svg>
+                            </button>
+
+                            <div class="page-indicators">
+                                <span class="page-indicator active" data-page="1"></span>
+                                <span class="page-indicator" data-page="2"></span>
+                                <span class="page-indicator" data-page="3"></span>
+                                <span class="page-indicator" data-page="4"></span>
+                                <span class="page-indicator" data-page="5"></span>
+                            </div>
+
+                            <button class="pagination-btn combined-next-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M9 18l6-6-6-6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -239,6 +468,7 @@
     </script>
     <script type="module" src="js/galaxy.js"></script>
     <script src="js/cursor.js"></script>
+    <script type="module" src="js/aboutslide.js"></script>
 </body>
 
 </html>
