@@ -4,7 +4,7 @@
     align-items: center;
     justify-items: center;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     box-sizing: border-box;
     position: relative;
 }
@@ -17,7 +17,8 @@
 }
 
 .about-image-container {
-    position: relative;
+    position: absolute;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: end;
@@ -291,11 +292,10 @@
     
     .about-image-container {
         height: 50vh;
-        min-height: 400px;
+        min-height: auto;
     }
     
     .about-image {
-        height: 80%;
         max-height: 400px;
         filter: drop-shadow(0 0 200px rgba(255, 115, 0, 1));
     }
@@ -325,12 +325,8 @@
         min-height: 300px;
     }
     
-    .about-image-container {
-        min-height: 300px;
-    }
-    
     .about-image {
-        height: 22vh;
+        height: 27vh;
         max-height: 350px;
         filter: drop-shadow(0 -20px 120px rgba(255, 115, 0, 1));
     }

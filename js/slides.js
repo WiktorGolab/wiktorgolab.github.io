@@ -136,10 +136,10 @@
          const safeAreaInsetTop = 'env(safe-area-inset-top, 0px)';
 
          if (this.arrowDown) {
-             this.arrowDown.style.bottom = `calc(70px + ${safeAreaInsetBottom})`;
+             this.arrowDown.style.bottom = `calc(60px + ${safeAreaInsetBottom})`;
          }
          if (this.arrowUp) {
-             this.arrowUp.style.top = `calc(70px + ${safeAreaInsetTop})`;
+             this.arrowUp.style.top = `calc(60px + ${safeAreaInsetTop})`;
          }
      }
 
