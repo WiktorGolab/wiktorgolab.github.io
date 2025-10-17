@@ -1,278 +1,538 @@
-(function () {
-    // Sprawdź czy mamy zapisany target slide
-    const savedSlide = sessionStorage.getItem('targetSlide');
-    if (savedSlide !== null) {
-        window.current = parseInt(savedSlide);
-    } else {
-        window.current = 0;
-    }
+ // Tymczasowe funkcje dla kompatybilności
+ let slideManager = null;
 
-    const slides = Array.from(document.querySelectorAll('.slide'));
-    const slidesContainer = document.getElementById('slides');
-    const arrowDown = document.querySelector('.arrow-down');
-    const arrowUp = document.querySelector('.arrow-up');
-    let locked = false;
-    let touchStartY = 0;
+ // Tymczasowe funkcje, które będą zastąpione po inicjalizacji
+ function tempGoTo(index) {
+     if (slideManager) {
+         slideManager.goTo(index);
+     } else {
+         // Jeśli slideManager nie jest jeszcze gotowy, zapisz żądanie
+         setTimeout(() => {
+             if (slideManager) {
+                 slideManager.goTo(index);
+             }
+         }, 100);
+     }
+ }
 
-    // Zmienne do kontroli galaktyki
-    let galaxyInstance = null;
-    let galaxyScale = 1;
-    let targetScale = 1;
-    let scaleAnimation = null;
+ function tempNext() {
+     if (slideManager) {
+         slideManager.next();
+     } else {
+         setTimeout(() => {
+             if (slideManager) slideManager.next();
+         }, 100);
+     }
+ }
 
-    function initializeGalaxy() {
-        if (window.GalaxyIntegrator && !galaxyInstance) {
-            galaxyInstance = new GalaxyIntegrator();
-            galaxyInstance.init().then(() => {
-                return;
-            });
-        }
-    }
+ function tempPrevious() {
+     if (slideManager) {
+         slideManager.previous();
+     } else {
+         setTimeout(() => {
+             if (slideManager) slideManager.previous();
+         }, 100);
+     }
+ }
 
-    function zoomGalaxy() {
-        targetScale = 1.8;
-        startScaleAnimation();
-    }
+ // Ulepszony system slajdów
+ class SlideManager {
+     constructor() {
+         this.slides = Array.from(document.querySelectorAll('.slide'));
+         this.slidesContainer = document.getElementById('slides');
+         this.arrowDown = document.querySelector('.arrow-down');
+         this.arrowUp = document.querySelector('.arrow-up');
 
-    function resetGalaxy() {
-        targetScale = 1;
-        startScaleAnimation();
-    }
+         this.current = this.loadCurrentSlide();
+         this.isAnimating = false;
+         this.isMobile = this.detectMobile();
+         this.touchStartY = 0;
 
-    function startScaleAnimation() {
-        if (scaleAnimation) {
-            cancelAnimationFrame(scaleAnimation);
-        }
+         // Galaktyka
+         this.galaxyInstance = null;
+         this.galaxyScale = 1;
+         this.targetScale = 1;
+         this.scaleAnimation = null;
 
-        const startTime = performance.now();
-        const startScale = galaxyScale;
-        const duration = 700;
+         this.init();
+     }
 
-        function animateScale(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
+     init() {
+         this.setupEventListeners();
+         this.setContainerHeight();
+         this.activateSlide(this.current);
 
-            // Easing function
-            const easeProgress = progress < 0.5 ?
-                4 * progress * progress * progress :
-                1 - Math.pow(-2 * progress + 2, 3) / 2;
+         // Inicjalizacja po załadowaniu
+         window.addEventListener('load', () => {
+             this.setContainerHeight();
+             this.initializeGalaxy();
+             this.activateSlide(this.current);
 
-            galaxyScale = startScale + (targetScale - startScale) * easeProgress;
+             if (this.isMobile) {
+                 document.body.classList.add('mobile');
+             }
+         });
+     }
 
-            // Apply scale to all galaxy components
-            applyGalaxyScale(galaxyScale);
+     loadCurrentSlide() {
+         const savedSlide = sessionStorage.getItem('targetSlide');
+         return savedSlide !== null ? parseInt(savedSlide) : 0;
+     }
 
-            if (progress < 1) {
-                scaleAnimation = requestAnimationFrame(animateScale);
-            } else {
-                scaleAnimation = null;
-            }
-        }
+     detectMobile() {
+         return window.innerWidth <= 768;
+     }
 
-        scaleAnimation = requestAnimationFrame(animateScale);
-    }
+     getRealViewportHeight() {
+         if (window.visualViewport) {
+             return window.visualViewport.height;
+         }
 
-    function applyGalaxyScale(scale) {
-        if (!galaxyInstance || !galaxyInstance.stars) return;
+         const vh = window.innerHeight * 0.01;
+         document.documentElement.style.setProperty('--vh', `${vh}px`);
+         return window.innerHeight;
+     }
 
-        // NOWA POZYCJA GALAKTYKI - przesunięta w prawo
-        const baseGalaxyPosition = {
-            x: 5,
-            y: 6,
-            z: 0
-        }; // Zwiększono x z 0 do 5
+     setContainerHeight() {
+         const viewportHeight = this.getRealViewportHeight();
+         this.isMobile = this.detectMobile();
 
-        // Scale all galaxy components
-        const components = [
-            galaxyInstance.stars.background,
-            galaxyInstance.stars.halo,
-            galaxyInstance.stars.nebula,
-            galaxyInstance.stars.glow,
-            galaxyInstance.stars.stars
-        ];
+         if (this.isMobile) {
+             const slideHeight = viewportHeight;
 
-        components.forEach(component => {
-            if (component) {
-                component.scale.set(scale, scale, scale);
-                // Ustaw pozycję dla komponentów, które powinny być w centrum galaktyki
-                if (component !== galaxyInstance.stars.background) {
-                    component.position.set(
-                        baseGalaxyPosition.x,
-                        baseGalaxyPosition.y,
-                        baseGalaxyPosition.z
-                    );
-                }
-            }
-        });
+             this.slidesContainer.style.height = `${this.slides.length * slideHeight}px`;
+             this.slidesContainer.style.transform = `translateY(-${this.current * slideHeight}px)`;
 
-        // NOWA POZYCJA KAMERY - dostosowana do nowej pozycji galaktyki
-        const baseCameraPos = {
-            x: 3,
-            y: 6,
-            z: 5
-        }; // Zwiększono x z -2 do 3
-        const zoomFactor = 1.5;
+             this.slides.forEach(slide => {
+                 slide.style.height = `${slideHeight}px`;
+                 slide.style.minHeight = `${slideHeight}px`;
+                 slide.style.overflow = 'hidden';
+             });
 
-        if (scale > 1) {
-            const cameraScale = 1 + (scale - 1) * zoomFactor;
-            galaxyInstance.camera.position.x = baseCameraPos.x * cameraScale;
-            galaxyInstance.camera.position.y = baseCameraPos.y * cameraScale;
-            galaxyInstance.camera.position.z = baseCameraPos.z * cameraScale;
-        } else {
-            galaxyInstance.camera.position.x = baseCameraPos.x;
-            galaxyInstance.camera.position.y = baseCameraPos.y;
-            galaxyInstance.camera.position.z = baseCameraPos.z;
-        }
+             // Dostosowanie elementów dla mobile
+             this.adjustMobileElements();
+         } else {
+             // Desktop
+             this.slidesContainer.style.height = '';
+             this.slidesContainer.style.transform = `translateY(-${this.current * 100}vh)`;
 
-        // Punkt, w który kamera ma patrzeć (centrum galaktyki)
-        galaxyInstance.camera.lookAt(
-            baseGalaxyPosition.x,
-            baseGalaxyPosition.y,
-            baseGalaxyPosition.z
-        );
-        galaxyInstance.camera.updateProjectionMatrix();
-    }
+             this.slides.forEach(slide => {
+                 slide.style.height = '100vh';
+                 slide.style.minHeight = '';
+                 slide.style.overflow = '';
+             });
 
-    function setContainerHeight() {
-        const viewportWidth = window.innerWidth;
+             this.resetDesktopElements();
+         }
+     }
 
-        if (viewportWidth <= 768) {
-            const viewportHeight = window.innerHeight;
-            const slideHeight = viewportHeight - 20;
+     adjustMobileElements() {
+         const customMask = document.querySelector('.custom-mask');
+         if (customMask) {
+             customMask.style.height = `${this.getRealViewportHeight()}px`;
+         }
 
-            slides.forEach(slide => {
-                slide.style.height = `${slideHeight}px`;
-            });
+         const safeAreaInsetBottom = 'env(safe-area-inset-bottom, 0px)';
+         const safeAreaInsetTop = 'env(safe-area-inset-top, 0px)';
 
-            const customMask = document.querySelector('.custom-mask');
-            if (customMask) {
-                customMask.style.height = `${slideHeight}px`;
-            }
+         if (this.arrowDown) {
+             this.arrowDown.style.bottom = `calc(70px + ${safeAreaInsetBottom})`;
+         }
+         if (this.arrowUp) {
+             this.arrowUp.style.top = `calc(70px + ${safeAreaInsetTop})`;
+         }
+     }
 
-            slidesContainer.style.height = `${slides.length * slideHeight}px`;
+     resetDesktopElements() {
+         const customMask = document.querySelector('.custom-mask');
+         if (customMask) customMask.style.height = '';
 
-            slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
-        } else {
-            slides.forEach(slide => slide.style.height = '');
-            slidesContainer.style.height = '';
-            slidesContainer.style.transform =
-                `translateY(-${window.current * slides[0].getBoundingClientRect().height}px)`;
+         if (this.arrowDown) this.arrowDown.style.bottom = '';
+         if (this.arrowUp) this.arrowUp.style.top = '';
+     }
 
-            const customMask = document.querySelector('.custom-mask');
-            if (customMask) customMask.style.height = '';
-        }
-    }
+     goTo(index) {
+         if (this.isAnimating) return;
 
-    function activateSlide(i) {
-        slides.forEach((s, idx) => {
-            if (idx === i) s.classList.add('active');
-            else setTimeout(() => s.classList.remove('active'), 50);
-        });
+         index = Math.max(0, Math.min(index, this.slides.length - 1));
+         if (index === this.current) return;
 
-        arrowDown.classList.toggle('hidden', i === slides.length - 1);
-        arrowUp.classList.toggle('hidden', i === 0);
+         this.isAnimating = true;
+         this.current = index;
 
-        const buttons = document.querySelectorAll('.navbar-buttons button');
-        buttons.forEach((btn, idx) => {
-            if (idx === i) btn.classList.add('active');
-            else btn.classList.remove('active');
-        });
+         // Animacja przejścia
+         this.animateTransition();
 
-        const ambient = document.getElementById('ambient');
-        const frame = slides[i].querySelector('.frame');
+         // Aktywacja slajdu
+         this.activateSlide(this.current);
 
-        let bg = "none";
-        if (frame) {
-            bg = window.getComputedStyle(frame).backgroundImage;
-        }
+         // Zapisanie stanu
+         sessionStorage.setItem('targetSlide', this.current.toString());
 
-        const noise = document.getElementById('noise');
-        if (noise) {
-            noise.style.opacity = 0.4;
-            setTimeout(() => noise.style.opacity = 0.3, 300);
-        }
+         // Odblokowanie po animacji
+         setTimeout(() => {
+             this.isAnimating = false;
+         }, this.isMobile ? 600 : 900);
+     }
 
-        ambient.style.opacity = 0;
-        setTimeout(() => {
-            ambient.style.background = bg;
-            ambient.style.opacity = 1;
-        }, 300);
+     animateTransition() {
+         if (this.isMobile) {
+             const slideHeight = this.getRealViewportHeight();
+             this.slidesContainer.style.transform = `translateY(-${this.current * slideHeight}px)`;
+         } else {
+             this.slidesContainer.style.transform = `translateY(-${this.current * 100}vh)`;
+         }
+     }
 
-        // Kontrola galaktyki na podstawie scrollowania
-        if (i > 0) {
-            // Jeśli scrollujemy w dół (do kolejnych slajdów)
-            setTimeout(() => {
-                zoomGalaxy();
-            }, 200);
-        } else {
-            // Jeśli scrollujemy w górę (powrót do pierwszego slajdu)
-            setTimeout(() => {
-                resetGalaxy();
-            }, 200);
-        }
-    }
+     next() {
+         this.goTo(this.current + 1);
+     }
 
-    function goTo(index) {
-        if (locked) return;
-        index = Math.max(0, Math.min(index, slides.length - 1));
-        if (index === window.current) return;
-        locked = true;
+     previous() {
+         this.goTo(this.current - 1);
+     }
 
-        window.current = index;
+     activateSlide(index) {
+         // Aktualizacja klas aktywności
+         this.slides.forEach((slide, idx) => {
+             if (idx === index) {
+                 slide.classList.add('active');
+             } else {
+                 setTimeout(() => slide.classList.remove('active'), 50);
+             }
+         });
 
-        const slideHeight = slides[0].getBoundingClientRect().height;
-        slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
-        activateSlide(window.current);
+         // Aktualizacja strzałek nawigacyjnych
+         this.updateNavigationArrows();
 
-        // Zapisz aktualny slide w sessionStorage
-        sessionStorage.setItem('targetSlide', window.current.toString());
+         // Aktualizacja przycisków navbar
+         this.updateNavbarButtons();
 
-        setTimeout(() => locked = false, 900);
-    }
+         // Aktualizacja efektów wizualnych
+         this.updateVisualEffects();
 
-    window.goTo = goTo;
-    window.goArrowDown = () => goTo(window.current + 1);
-    window.goArrowUp = () => goTo(window.current - 1);
+         // Kontrola galaktyki
+         this.controlGalaxy();
 
-    window.addEventListener('wheel', e => {
-        if (locked) return;
-        const isScrollingDown = e.deltaY > 0;
+         // Mobile navbar control
+         if (this.isMobile) {
+             this.controlMobileNavbar();
+         }
+     }
 
-        if (isScrollingDown) {
-            goTo(window.current + 1);
-        } else {
-            goTo(window.current - 1);
-        }
-    }, {
-        passive: true
-    });
+     updateNavigationArrows() {
+         if (this.arrowDown) {
+             this.arrowDown.classList.toggle('hidden', this.current === this.slides.length - 1);
+         }
+         if (this.arrowUp) {
+             this.arrowUp.classList.toggle('hidden', this.current === 0);
+         }
+     }
 
-    window.addEventListener('keydown', e => {
-        if (locked) return;
-        if (e.key === 'ArrowDown') goTo(window.current + 1);
-        if (e.key === 'ArrowUp') goTo(window.current - 1);
-    });
+     updateNavbarButtons() {
+         const buttons = document.querySelectorAll('.navbar-buttons button');
+         buttons.forEach((btn, idx) => {
+             if (idx === this.current) {
+                 btn.classList.add('active');
+             } else {
+                 btn.classList.remove('active');
+             }
+         });
+     }
 
-    window.addEventListener('touchstart', e => touchStartY = e.touches[0].clientY, {
-        passive: true
-    });
-    window.addEventListener('touchend', e => {
-        const dy = e.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(dy) > 50) {
-            if (dy < 0) goTo(window.current + 1);
-            else goTo(window.current - 1);
-        }
-    });
+     updateVisualEffects() {
+         const ambient = document.getElementById('ambient');
+         const frame = this.slides[this.current].querySelector('.frame');
+         const noise = document.getElementById('noise');
 
-    window.addEventListener('load', () => {
-        setContainerHeight();
-        initializeGalaxy();
-        activateSlide(window.current);
-    });
+         let bg = "none";
+         if (frame) {
+             bg = window.getComputedStyle(frame).backgroundImage;
+         }
 
-    window.addEventListener('resize', () => {
-        setContainerHeight();
-        const slideHeight = slides[0].getBoundingClientRect().height;
-        slidesContainer.style.transform = `translateY(-${window.current * slideHeight}px)`;
-    });
-})();
+         if (noise) {
+             noise.style.opacity = this.isMobile ? 0.3 : 0.4;
+             setTimeout(() => {
+                 noise.style.opacity = this.isMobile ? 0.2 : 0.3;
+             }, 300);
+         }
+
+         if (ambient) {
+             ambient.style.opacity = 0;
+             setTimeout(() => {
+                 ambient.style.background = bg;
+                 ambient.style.opacity = 1;
+             }, 300);
+         }
+     }
+
+     controlGalaxy() {
+         if (this.current > 0) {
+             setTimeout(() => {
+                 this.zoomGalaxy();
+             }, 200);
+         } else {
+             setTimeout(() => {
+                 this.resetGalaxy();
+             }, 200);
+         }
+     }
+
+     controlMobileNavbar() {
+         const navbar = document.querySelector('.navbar-buttons');
+         if (navbar) {
+             if (this.current === 0) {
+                 navbar.style.opacity = '1';
+                 navbar.style.pointerEvents = 'auto';
+             } else {
+                 navbar.style.opacity = '0';
+                 navbar.style.pointerEvents = 'none';
+             }
+         }
+     }
+
+     // Metody galaktyki
+     initializeGalaxy() {
+         if (window.GalaxyIntegrator && !this.galaxyInstance) {
+             this.galaxyInstance = new GalaxyIntegrator();
+             this.galaxyInstance.init().then(() => {
+                 return;
+             });
+         }
+     }
+
+     zoomGalaxy() {
+         this.targetScale = this.isMobile ? 1.3 : 1.8;
+         this.startScaleAnimation();
+     }
+
+     resetGalaxy() {
+         this.targetScale = 1;
+         this.startScaleAnimation();
+     }
+
+     startScaleAnimation() {
+         if (this.scaleAnimation) {
+             cancelAnimationFrame(this.scaleAnimation);
+         }
+
+         const startTime = performance.now();
+         const startScale = this.galaxyScale;
+         const duration = 700;
+
+         const animateScale = (currentTime) => {
+             const elapsed = currentTime - startTime;
+             const progress = Math.min(elapsed / duration, 1);
+
+             const easeProgress = progress < 0.5 ?
+                 4 * progress * progress * progress :
+                 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+             this.galaxyScale = startScale + (this.targetScale - startScale) * easeProgress;
+             this.applyGalaxyScale(this.galaxyScale);
+
+             if (progress < 1) {
+                 this.scaleAnimation = requestAnimationFrame(animateScale);
+             } else {
+                 this.scaleAnimation = null;
+             }
+         };
+
+         this.scaleAnimation = requestAnimationFrame(animateScale);
+     }
+
+     applyGalaxyScale(scale) {
+         if (!this.galaxyInstance || !this.galaxyInstance.stars) return;
+
+         const baseGalaxyPosition = this.isMobile ? {
+             x: 2,
+             y: 4,
+             z: 0
+         } : {
+             x: 5,
+             y: 6,
+             z: 0
+         };
+
+         const components = [
+             this.galaxyInstance.stars.background,
+             this.galaxyInstance.stars.halo,
+             this.galaxyInstance.stars.nebula,
+             this.galaxyInstance.stars.glow,
+             this.galaxyInstance.stars.stars
+         ];
+
+         components.forEach(component => {
+             if (component) {
+                 component.scale.set(scale, scale, scale);
+                 if (component !== this.galaxyInstance.stars.background) {
+                     component.position.set(
+                         baseGalaxyPosition.x,
+                         baseGalaxyPosition.y,
+                         baseGalaxyPosition.z
+                     );
+                 }
+             }
+         });
+
+         const baseCameraPos = this.isMobile ? {
+             x: 1,
+             y: 4,
+             z: 3
+         } : {
+             x: 3,
+             y: 6,
+             z: 5
+         };
+         const zoomFactor = this.isMobile ? 1.2 : 1.5;
+
+         if (scale > 1) {
+             const cameraScale = 1 + (scale - 1) * zoomFactor;
+             this.galaxyInstance.camera.position.x = baseCameraPos.x * cameraScale;
+             this.galaxyInstance.camera.position.y = baseCameraPos.y * cameraScale;
+             this.galaxyInstance.camera.position.z = baseCameraPos.z * cameraScale;
+         } else {
+             this.galaxyInstance.camera.position.x = baseCameraPos.x;
+             this.galaxyInstance.camera.position.y = baseCameraPos.y;
+             this.galaxyInstance.camera.position.z = baseCameraPos.z;
+         }
+
+         this.galaxyInstance.camera.lookAt(
+             baseGalaxyPosition.x,
+             baseGalaxyPosition.y,
+             baseGalaxyPosition.z
+         );
+         this.galaxyInstance.camera.updateProjectionMatrix();
+     }
+
+     setupEventListeners() {
+         // Delegowanie eventów dla przycisków
+         document.addEventListener('click', (e) => {
+             const target = e.target.closest('[data-slide]');
+             if (target) {
+                 const slideIndex = parseInt(target.getAttribute('data-slide'));
+                 this.goTo(slideIndex);
+                 return;
+             }
+
+             const actionTarget = e.target.closest('[data-action]');
+             if (actionTarget) {
+                 const action = actionTarget.getAttribute('data-action');
+                 if (action === 'next') this.next();
+                 if (action === 'previous') this.previous();
+                 return;
+             }
+
+             // Mobile navbar clicks
+             if (this.isMobile && e.target.closest('.navbar-buttons button')) {
+                 const button = e.target.closest('.navbar-buttons button');
+                 const buttons = Array.from(document.querySelectorAll('.navbar-buttons button'));
+                 const index = buttons.indexOf(button);
+                 if (index !== -1) {
+                     this.goTo(index);
+                 }
+             }
+         });
+
+         // Wheel events (desktop only)
+         window.addEventListener('wheel', (e) => {
+             if (this.isAnimating || this.isMobile) return;
+
+             const isScrollingDown = e.deltaY > 0;
+             if (isScrollingDown) {
+                 this.next();
+             } else {
+                 this.previous();
+             }
+         }, {
+             passive: true
+         });
+
+         // Keyboard events
+         window.addEventListener('keydown', (e) => {
+             if (this.isAnimating) return;
+             if (e.key === 'ArrowDown') this.next();
+             if (e.key === 'ArrowUp') this.previous();
+         });
+
+         // Touch events
+         window.addEventListener('touchstart', (e) => {
+             this.touchStartY = e.touches[0].clientY;
+         }, {
+             passive: true
+         });
+
+         window.addEventListener('touchmove', (e) => {
+             if (this.isAnimating) return;
+             e.preventDefault();
+         }, {
+             passive: false
+         });
+
+         window.addEventListener('touchend', (e) => {
+             const dy = e.changedTouches[0].clientY - this.touchStartY;
+             const minSwipeDistance = 50;
+
+             if (Math.abs(dy) > minSwipeDistance) {
+                 if (dy < 0) {
+                     this.next();
+                 } else {
+                     this.previous();
+                 }
+             }
+         });
+
+         // Resize events
+         let resizeTimeout;
+         window.addEventListener('resize', () => {
+             clearTimeout(resizeTimeout);
+             resizeTimeout = setTimeout(() => {
+                 this.setContainerHeight();
+                 this.goTo(this.current);
+             }, 150);
+         });
+
+         // Orientation change
+         window.addEventListener('orientationchange', () => {
+             setTimeout(() => {
+                 this.setContainerHeight();
+                 setTimeout(() => this.goTo(this.current), 50);
+             }, 400);
+         });
+
+         // Visual viewport
+         if (window.visualViewport) {
+             window.visualViewport.addEventListener('resize', () => this.setContainerHeight());
+             window.visualViewport.addEventListener('scroll', () => {
+                 window.visualViewport.scrollTo(0, 0);
+             });
+         }
+
+         // Prevent default scroll on mobile
+         document.addEventListener('touchmove', (e) => {
+             if (this.isMobile) {
+                 e.preventDefault();
+             }
+         }, {
+             passive: false
+         });
+     }
+
+     // Public method for external access
+     refresh() {
+         this.setContainerHeight();
+         setTimeout(() => this.goTo(this.current), 50);
+     }
+ }
+
+ // Inicjalizacja systemu slajdów po załadowaniu DOM
+ document.addEventListener('DOMContentLoaded', () => {
+     slideManager = new SlideManager();
+
+     // Aktualizacja globalnych funkcji
+     window.slideManager = slideManager;
+     window.goTo = (index) => slideManager.goTo(index);
+     window.goArrowDown = () => slideManager.next();
+     window.goArrowUp = () => slideManager.previous();
+     window.refreshSlideHeights = () => slideManager.refresh();
+ });

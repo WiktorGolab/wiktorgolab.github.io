@@ -28,6 +28,7 @@
 html,
 body {
     height: 100%;
+    position: relative;
     background: #000000;
     color: #fff;
     font-family: var(--font), sans-serif;
