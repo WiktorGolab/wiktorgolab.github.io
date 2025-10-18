@@ -64,9 +64,10 @@ body {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background-color: white;
+    background: radial-gradient(circle, #ffffff 0%, white 50%, #00000000 65%);
     pointer-events: none;
+    user-select: none;
     position: fixed;
     z-index: 99999999999;
-    opacity: 0.03;
+    opacity: 0.02;
 }
