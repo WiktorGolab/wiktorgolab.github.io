@@ -3,6 +3,8 @@ let currentSort = "newest"; // Domyślnie najnowsze
 // Inicjalizacja strony po załadowaniu
 document.addEventListener('DOMContentLoaded', function () {
     initProjectsPage();
+    initCompanyClickHandlers();
+    checkHashOnLoad();
 });
 
 async function initProjectsPage() {
@@ -29,10 +31,57 @@ async function initProjectsPage() {
     initScrollShadows();
 }
 
+// FUNKCJE DO KLIKALNEGO M3 GROUP
+function initCompanyClickHandlers() {
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('clickable-company')) {
+            e.preventDefault();
+            const projectId = e.target.getAttribute('data-project-id');
+            openCompanyProject(projectId);
+        }
+    });
+}
+
+function openCompanyProject(projectId) {
+    if (window.location.pathname.includes('projects.html')) {
+        openProjectModalById(projectId);
+    } else {
+        window.location.href = 'projects.html#project-' + projectId;
+    }
+}
+
+function openProjectModalById(projectId) {
+    if (typeof allProjects !== 'undefined' && allProjects.length > 0) {
+        const project = allProjects.find(p => p.id == projectId);
+        if (project) {
+            openProjectModal(project);
+            history.replaceState(null, null, ' ');
+        } else {
+            console.warn('Project not found:', projectId);
+        }
+    } else {
+        setTimeout(() => openProjectModalById(projectId), 100);
+    }
+}
+
+function checkHashOnLoad() {
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        if (hash.startsWith('project-')) {
+            const projectId = hash.replace('project-', '');
+            setTimeout(() => openProjectModalById(projectId), 800);
+        }
+    }
+}
+
+window.addEventListener('hashchange', function() {
+    checkHashOnLoad();
+});
+
+// POZOSTAŁE FUNKCJE BEZ ZMIAN
 function renderSortOptions() {
     const filtersContainer = document.querySelector('.filters-container');
     
-    // Sprawdź czy selektor sortowania już istnieje
     if (!document.getElementById('sortSelect')) {
         const sortContainer = document.createElement('div');
         sortContainer.className = 'sort-container';
@@ -48,7 +97,6 @@ function renderSortOptions() {
         filtersContainer.appendChild(sortContainer);
     }
     
-    // Ustaw domyślną wartość
     document.getElementById('sortSelect').value = currentSort;
 }
 
@@ -73,7 +121,6 @@ function renderCategories() {
     });
 }
 
-// Funkcja do pobierania wszystkich projektów z osobnych plików
 async function loadAllProjects() {
     try {
         const BATCH_SIZE = 10;
@@ -143,7 +190,6 @@ function renderProjects() {
         return true;
     });
 
-    // Sortowanie projektów
     sortProjects(filteredProjects);
 
     if (filteredProjects.length === 0) {
@@ -220,7 +266,6 @@ function createProjectCard(project) {
     return card;
 }
 
-// Funkcja pomocnicza do formatowania daty
 function formatDate(dateString) {
     if (!dateString) return '';
     
@@ -235,7 +280,6 @@ function formatDate(dateString) {
     return dateString;
 }
 
-// UPROSZCZONA funkcja do obsługi cieni
 function initScrollShadows() {
     const projectsSection = document.querySelector('.projects-section');
     if (!projectsSection) {
@@ -248,19 +292,12 @@ function initScrollShadows() {
         const isScrolled = scrollTop > 10;
         const canScrollDown = scrollTop + clientHeight < scrollHeight - 10;
         
-        // Tymczasowo ustaw cienie na stałe do testów
         projectsSection.classList.toggle('has-top-shadow', isScrolled);
         projectsSection.classList.toggle('has-bottom-shadow', canScrollDown);
-        
-        console.log('Scroll update:', { scrollTop, scrollHeight, clientHeight, isScrolled, canScrollDown });
     }
     
-    // Początkowa aktualizacja
     setTimeout(updateShadows, 100);
     
-    // Nasłuchuj zdarzeń
     projectsSection.addEventListener('scroll', updateShadows);
     window.addEventListener('resize', updateShadows);
-    
-    console.log('Scroll shadows initialized');
 }
