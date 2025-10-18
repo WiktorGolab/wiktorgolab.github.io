@@ -256,6 +256,7 @@ class AngledHalo {
 class PaginationManager {
     constructor() {
         this.isMobile = window.innerWidth <= 768;
+        this.eventListeners = [];
         this.init();
     }
 
@@ -338,18 +339,12 @@ class PaginationManager {
 
         // Aktualizacja stron
         pages.forEach(page => {
-            page.classList.remove('active');
-            if (parseInt(page.dataset.page) === currentPage) {
-                page.classList.add('active');
-            }
+            page.classList.toggle('active', parseInt(page.dataset.page) === currentPage);
         });
 
         // Aktualizacja wskaźników
         indicators.forEach(indicator => {
-            indicator.classList.remove('active');
-            if (parseInt(indicator.dataset.page) === currentPage) {
-                indicator.classList.add('active');
-            }
+            indicator.classList.toggle('active', parseInt(indicator.dataset.page) === currentPage);
         });
 
         // Aktualizacja przycisków
@@ -358,6 +353,8 @@ class PaginationManager {
     }
 
     setupEventListeners() {
+        this.removeEventListeners(); // Usuń poprzednie listenery
+
         if (this.isMobile) {
             this.setupMobileEventListeners();
         } else {
@@ -365,64 +362,59 @@ class PaginationManager {
         }
 
         // Obsługa zmiany rozmiaru okna
-        window.addEventListener('resize', () => {
+        const resizeListener = () => {
             const wasMobile = this.isMobile;
             this.isMobile = window.innerWidth <= 768;
 
             if (wasMobile !== this.isMobile) {
                 this.reinitializePagination();
             }
-        });
+        };
+
+        window.addEventListener('resize', resizeListener);
+        this.eventListeners.push({ target: window, type: 'resize', listener: resizeListener });
     }
 
     setupDesktopEventListeners() {
         // Lewa kolumna
-        if (this.leftPrevBtn) {
-            this.leftPrevBtn.addEventListener('click', () => {
-                if (this.leftCurrentPage > 1) {
-                    this.leftCurrentPage--;
-                    this.updateLeftPagination();
-                }
-            });
-        }
+        if (this.leftPrevBtn) this.addListener(this.leftPrevBtn, 'click', () => {
+            if (this.leftCurrentPage > 1) {
+                this.leftCurrentPage--;
+                this.updateLeftPagination();
+            }
+        });
 
-        if (this.leftNextBtn) {
-            this.leftNextBtn.addEventListener('click', () => {
-                if (this.leftCurrentPage < this.leftTotalPages) {
-                    this.leftCurrentPage++;
-                    this.updateLeftPagination();
-                }
-            });
-        }
+        if (this.leftNextBtn) this.addListener(this.leftNextBtn, 'click', () => {
+            if (this.leftCurrentPage < this.leftTotalPages) {
+                this.leftCurrentPage++;
+                this.updateLeftPagination();
+            }
+        });
 
         this.leftIndicators.forEach(indicator => {
-            indicator.addEventListener('click', () => {
+            this.addListener(indicator, 'click', () => {
                 this.leftCurrentPage = parseInt(indicator.dataset.page);
                 this.updateLeftPagination();
             });
         });
 
         // Prawa kolumna
-        if (this.rightPrevBtn) {
-            this.rightPrevBtn.addEventListener('click', () => {
-                if (this.rightCurrentPage > 1) {
-                    this.rightCurrentPage--;
-                    this.updateRightPagination();
-                }
-            });
-        }
+        if (this.rightPrevBtn) this.addListener(this.rightPrevBtn, 'click', () => {
+            if (this.rightCurrentPage > 1) {
+                this.rightCurrentPage--;
+                this.updateRightPagination();
+            }
+        });
 
-        if (this.rightNextBtn) {
-            this.rightNextBtn.addEventListener('click', () => {
-                if (this.rightCurrentPage < this.rightTotalPages) {
-                    this.rightCurrentPage++;
-                    this.updateRightPagination();
-                }
-            });
-        }
+        if (this.rightNextBtn) this.addListener(this.rightNextBtn, 'click', () => {
+            if (this.rightCurrentPage < this.rightTotalPages) {
+                this.rightCurrentPage++;
+                this.updateRightPagination();
+            }
+        });
 
         this.rightIndicators.forEach(indicator => {
-            indicator.addEventListener('click', () => {
+            this.addListener(indicator, 'click', () => {
                 this.rightCurrentPage = parseInt(indicator.dataset.page);
                 this.updateRightPagination();
             });
@@ -430,26 +422,22 @@ class PaginationManager {
     }
 
     setupMobileEventListeners() {
-        if (this.combinedPrevBtn) {
-            this.combinedPrevBtn.addEventListener('click', () => {
-                if (this.combinedCurrentPage > 1) {
-                    this.combinedCurrentPage--;
-                    this.updateCombinedPagination();
-                }
-            });
-        }
+        if (this.combinedPrevBtn) this.addListener(this.combinedPrevBtn, 'click', () => {
+            if (this.combinedCurrentPage > 1) {
+                this.combinedCurrentPage--;
+                this.updateCombinedPagination();
+            }
+        });
 
-        if (this.combinedNextBtn) {
-            this.combinedNextBtn.addEventListener('click', () => {
-                if (this.combinedCurrentPage < this.combinedTotalPages) {
-                    this.combinedCurrentPage++;
-                    this.updateCombinedPagination();
-                }
-            });
-        }
+        if (this.combinedNextBtn) this.addListener(this.combinedNextBtn, 'click', () => {
+            if (this.combinedCurrentPage < this.combinedTotalPages) {
+                this.combinedCurrentPage++;
+                this.updateCombinedPagination();
+            }
+        });
 
         this.combinedIndicators.forEach(indicator => {
-            indicator.addEventListener('click', () => {
+            this.addListener(indicator, 'click', () => {
                 this.combinedCurrentPage = parseInt(indicator.dataset.page);
                 this.updateCombinedPagination();
             });
@@ -457,26 +445,26 @@ class PaginationManager {
     }
 
     reinitializePagination() {
-        // Usuń wszystkie event listeners
         this.removeEventListeners();
-
-        // Ponowna inicjalizacja
         this.init();
     }
 
+    addListener(target, type, listener) {
+        target.addEventListener(type, listener);
+        this.eventListeners.push({ target, type, listener });
+    }
+
     removeEventListeners() {
-        // Ta metoda usuwa event listeners przy zmianie trybu
-        // W praktyce, przy przeładowaniu strony, stare event listeners są usuwane automatycznie
-        // W bardziej zaawansowanej implementacji można by tu użyć removeEventListener
+        this.eventListeners.forEach(({ target, type, listener }) => {
+            target.removeEventListener(type, listener);
+        });
+        this.eventListeners = [];
     }
 }
 
 // Inicjalizacja po załadowaniu DOM
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicjalizacja Three.js halo
-    new AngledHalo();
-
-    // Inicjalizacja paginacji
+    if (typeof AngledHalo !== 'undefined') new AngledHalo();
     new PaginationManager();
 });
 
@@ -485,7 +473,6 @@ if (typeof window !== 'undefined') {
     window.AngledHalo = AngledHalo;
     window.PaginationManager = PaginationManager;
 }
-
 
 
 
@@ -498,6 +485,7 @@ class AboutParticles {
         this.animationId = null;
         this.isActive = false;
         this.devicePixelRatio = window.devicePixelRatio || 1;
+        this.host = null; // kontener, w którym umieścimy canvas
 
         this.init();
     }
@@ -511,40 +499,89 @@ class AboutParticles {
     }
 
     setup() {
-        // Stwórz canvas który wypełnia cały ekran
+        // 🔹 Hostem jest #about-image-container
+        this.host = document.querySelector('.about-image-container');
+
+        // 🔹 Utwórz canvas
         this.canvas = document.createElement('canvas');
         this.canvas.className = 'about-particles-canvas';
-        document.body.appendChild(this.canvas);
-        this.ctx = this.canvas.getContext('2d');
 
+        // Stylowanie canvasa — absolutnie nad kontenerem zdjęcia
+        Object.assign(this.canvas.style, {
+            position: 'absolute',
+            inset: '0',
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+            opacity: '0',
+            transition: 'opacity 0.6s ease',
+            zIndex: '-2'
+        });
+
+        // Upewnij się, że host ma pozycję relative
+        const hostStyle = getComputedStyle(this.host);
+        if (hostStyle.position === 'static') {
+            this.host.style.position = 'relative';
+        }
+
+        // 🔹 Dodaj canvas do hosta
+        this.host.appendChild(this.canvas);
+
+        // 🔹 Inicjalizacja kontekstu
+        this.ctx = this.canvas.getContext('2d');
+        this.devicePixelRatio = window.devicePixelRatio || 1;
+
+        // 🔹 Rozmiar i cząsteczki
         this.resizeCanvas();
         this.createParticles();
+
+        // 🔹 Start animacji
         this.startAnimation();
 
-        // Obsługa zmiany rozmiaru okna
+        // 🔹 Reaguj na resize okna
         window.addEventListener('resize', () => {
+            this.devicePixelRatio = window.devicePixelRatio || 1;
             this.resizeCanvas();
             this.handleResponsiveChanges();
         });
 
-        // Obsługa zmiany slajdu
+        // 🔹 Reaguj na zmianę rozmiaru kontenera
+        if (window.ResizeObserver) {
+            this._resizeObserver = new ResizeObserver(() => {
+                this.resizeCanvas();
+                this.handleResponsiveChanges();
+            });
+            this._resizeObserver.observe(this.host);
+        }
+
+        // 🔹 Nasłuchuj zmian slajdów (fade-in/out)
         this.observeSlideChanges();
     }
 
     resizeCanvas() {
-        if (!this.canvas) return;
+        if (!this.canvas || !this.host) return;
 
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+        const rect = this.host.getBoundingClientRect();
+        const width = Math.max(1, Math.floor(rect.width));
+        const height = Math.max(1, Math.floor(rect.height));
+        const dpr = this.devicePixelRatio || 1;
 
-        // Uwzględnij device pixel ratio
-        this.canvas.width = width * this.devicePixelRatio;
-        this.canvas.height = height * this.devicePixelRatio;
+        this.canvas.width = Math.round(width * dpr);
+        this.canvas.height = Math.round(height * dpr);
         this.canvas.style.width = width + 'px';
         this.canvas.style.height = height + 'px';
 
-        // Skalowanie contextu dla retina
-        this.ctx.scale(this.devicePixelRatio, this.devicePixelRatio);
+        // Reset transformacji, aby uniknąć kumulacji skalowania
+        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const targetCount = this.getParticleCountByDevice();
+        if (this.particles.length > targetCount) {
+            this.particles = this.particles.slice(0, targetCount);
+        } else {
+            for (let i = this.particles.length; i < targetCount; i++) {
+                this.particles.push(this.createParticle());
+            }
+        }
     }
 
     createParticles() {
@@ -695,7 +732,7 @@ class AboutParticles {
             window.addEventListener('slideManagerReady', onSMReady);
         }
     }
-    
+
     setParticlesVisibility(index) {
         // Zakładamy: "O mnie" to slajd o indexie 1
         const aboutIndex = 1;
