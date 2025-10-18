@@ -1,5 +1,5 @@
- // Tymczasowe funkcje dla kompatybilności
- let slideManager = null;
+// Tymczasowe funkcje dla kompatybilności
+let slideManager = null;
 
  // Tymczasowe funkcje, które będą zastąpione po inicjalizacji
  function tempGoTo(index) {
@@ -218,6 +218,8 @@
          if (this.isMobile) {
              this.controlMobileNavbar();
          }
+
+         window.dispatchEvent(new CustomEvent('slideChanged', { detail: { index: this.current } }));
      }
 
      updateNavigationArrows() {
@@ -537,65 +539,63 @@
      window.refreshSlideHeights = () => slideManager.refresh();
  });
 
+ // Funkcja do obsługi kliknięć w klikalne firmy
+ function initCompanyClickHandlers() {
+     document.addEventListener('click', function (e) {
+         if (e.target.classList.contains('clickable-company')) {
+             e.preventDefault();
+             const projectId = e.target.getAttribute('data-project-id');
+             openCompanyProject(projectId);
+         }
+     });
+ }
 
+ // Funkcja do otwierania projektu firmy
+ function openCompanyProject(projectId) {
+     // Jeśli jesteśmy już na stronie projects.html
+     if (window.location.pathname.includes('projects.html')) {
+         // Otwórz modal bezpośrednio
+         openProjectModalById(projectId);
+     } else {
+         // Przejdź do projects.html z hash
+         window.location.href = 'projects.html#project-' + projectId;
+     }
+ }
 
-// Funkcja do obsługi kliknięć w klikalne firmy
-function initCompanyClickHandlers() {
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('clickable-company')) {
-            e.preventDefault();
-            const projectId = e.target.getAttribute('data-project-id');
-            openCompanyProject(projectId);
-        }
-    });
-}
+ // Funkcja do otwierania modala po ID projektu
+ function openProjectModalById(projectId) {
+     // Poczekaj aż projekty się załadują
+     if (typeof allProjects !== 'undefined' && allProjects.length > 0) {
+         const project = allProjects.find(p => p.id == projectId);
+         if (project) {
+             openProjectModal(project);
+             // Wyczyść hash
+             history.replaceState(null, null, ' ');
+         }
+     } else {
+         // Jeśli projekty jeszcze nie załadowane, poczekaj
+         setTimeout(() => openProjectModalById(projectId), 100);
+     }
+ }
 
-// Funkcja do otwierania projektu firmy
-function openCompanyProject(projectId) {
-    // Jeśli jesteśmy już na stronie projects.html
-    if (window.location.pathname.includes('projects.html')) {
-        // Otwórz modal bezpośrednio
-        openProjectModalById(projectId);
-    } else {
-        // Przejdź do projects.html z hash
-        window.location.href = 'projects.html#project-' + projectId;
-    }
-}
+ // Funkcja do sprawdzania hash przy załadowaniu strony
+ function checkHashOnLoad() {
+     if (window.location.hash) {
+         const hash = window.location.hash.substring(1); // Usuń #
+         if (hash.startsWith('project-')) {
+             const projectId = hash.replace('project-', '');
+             setTimeout(() => openProjectModalById(projectId), 500);
+         }
+     }
+ }
 
-// Funkcja do otwierania modala po ID projektu
-function openProjectModalById(projectId) {
-    // Poczekaj aż projekty się załadują
-    if (typeof allProjects !== 'undefined' && allProjects.length > 0) {
-        const project = allProjects.find(p => p.id == projectId);
-        if (project) {
-            openProjectModal(project);
-            // Wyczyść hash
-            history.replaceState(null, null, ' ');
-        }
-    } else {
-        // Jeśli projekty jeszcze nie załadowane, poczekaj
-        setTimeout(() => openProjectModalById(projectId), 100);
-    }
-}
+ // Inicjalizacja po załadowaniu DOM
+ document.addEventListener('DOMContentLoaded', function () {
+     initCompanyClickHandlers();
+     checkHashOnLoad();
+ });
 
-// Funkcja do sprawdzania hash przy załadowaniu strony
-function checkHashOnLoad() {
-    if (window.location.hash) {
-        const hash = window.location.hash.substring(1); // Usuń #
-        if (hash.startsWith('project-')) {
-            const projectId = hash.replace('project-', '');
-            setTimeout(() => openProjectModalById(projectId), 500);
-        }
-    }
-}
-
-// Inicjalizacja po załadowaniu DOM
-document.addEventListener('DOMContentLoaded', function() {
-    initCompanyClickHandlers();
-    checkHashOnLoad();
-});
-
-// Obsługa zmiany hash
-window.addEventListener('hashchange', function() {
-    checkHashOnLoad();
-});
+ // Obsługa zmiany hash
+ window.addEventListener('hashchange', function () {
+     checkHashOnLoad();
+ });
