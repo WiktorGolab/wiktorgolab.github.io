@@ -9,12 +9,10 @@ class GalaxyIntegrator {
         this.stars = null;
         this.animationId = null;
 
-        // Lepsze wykrywanie urządzeń mobilnych
         this.isMobile = this.detectMobile();
         this.isLowEndMobile = this.isMobile && this.detectLowEndDevice();
         
         this.config = {
-            // Znacząco zmniejszona liczba cząstek dla urządzeń mobilnych
             count: this.isLowEndMobile ? 10000 : (this.isMobile ? 30000 : 60000),
             size: 0.02,
             radius: 8,
@@ -47,11 +45,10 @@ class GalaxyIntegrator {
                 z: 0
             },
 
-            // POPRAWIONE: Kamera ma inną pozycję niż galaktyka
             cameraPosition: {
-                x: 0,  // Zmienione z -2 na 0
-                y: 8,  // Zmienione z 6 na 8
-                z: 12  // Zmienione z 5 na 12
+                x: 0,
+                y: 8,
+                z: 12
             },
 
             enableControls: false,
@@ -60,10 +57,9 @@ class GalaxyIntegrator {
             fogEnabled: false,
             fogColor: '#000000ff',
             fogDensity: 0.03,
-            glowEnabled: !this.isLowEndMobile, // Wyłącz glow na słabych urządzeniach
+            glowEnabled: !this.isLowEndMobile,
             glowIntensity: this.isMobile ? 3.0 : 3.0,
 
-            // Znacząco zredukowane mgławice i gwiazdy tła
             nebulaCount: this.isLowEndMobile ? 300 : (this.isMobile ? 500 : 1000),
             nebulaSize: 10,
             nebulaColor: 'rgba(70, 59, 0, 1)',
@@ -75,9 +71,8 @@ class GalaxyIntegrator {
             backgroundStarsSize: this.isLowEndMobile ? 0.35 : (this.isMobile ? 0.35 : 0.15),
             haloStarsSize: 0.04,
 
-            // Nowe opcje optymalizacji
-            useSimpleShaders: this.isMobile, // Uproszczone shadery na mobile
-            lowQualityMode: this.isLowEndMobile, // Tryb niskiej jakości
+            useSimpleShaders: this.isMobile,
+            lowQualityMode: this.isLowEndMobile,
             ...config
         };
 
@@ -92,7 +87,6 @@ class GalaxyIntegrator {
     }
 
     detectLowEndDevice() {
-        // Wykrywanie słabych urządzeń po liczbie rdzeni i pamięci
         const hasLowCores = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
         const hasLowMemory = navigator.deviceMemory && navigator.deviceMemory <= 2;
         const isOldCPU = /(A[0-9]|Snapdragon[0-9]{3}|Exynos[0-9]{4})/.test(navigator.userAgent);
@@ -113,8 +107,7 @@ class GalaxyIntegrator {
 
         try {
             this.scene = new THREE.Scene();
-            
-            // Optymalizacja kamery - mniejsze FOV na mobile
+
             const fov = this.isMobile ? 60 : 75;
             this.camera = new THREE.PerspectiveCamera(fov, container.clientWidth / container.clientHeight, 0.1, 1000);
 
@@ -124,21 +117,18 @@ class GalaxyIntegrator {
                 return;
             }
 
-            // Optymalizacje renderera dla mobile
             this.renderer = new THREE.WebGLRenderer({
                 canvas: canvas,
-                antialias: !this.isLowEndMobile, // Wyłącz antyaliasing na słabych urządzeniach
+                antialias: !this.isLowEndMobile,
                 alpha: true,
                 powerPreference: this.isLowEndMobile ? 'low-power' : 'default'
             });
 
             this.renderer.setSize(container.clientWidth, container.clientHeight);
-            
-            // Optymalizacja pixel ratio
+
             const maxPixelRatio = this.isLowEndMobile ? 1 : (this.isMobile ? 1.5 : 2);
             this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
-            
-            // Dodatkowe optymalizacje renderera
+
             this.renderer.autoClear = true;
             this.renderer.sortObjects = false;
 
@@ -149,7 +139,6 @@ class GalaxyIntegrator {
                 );
             }
 
-            // Ustawienie pozycji kamery
             this.camera.position.set(
                 this.config.cameraPosition.x,
                 this.config.cameraPosition.y,
@@ -170,14 +159,12 @@ class GalaxyIntegrator {
                 this.config.position.z
             );
 
-            // DODANE: Kamera patrzy na galaktykę
             this.camera.lookAt(
                 this.config.position.x,
                 this.config.position.y,
                 this.config.position.z
             );
 
-            // Zoptymalizowany event resize z throttling
             this.resizeThrottle = null;
             window.addEventListener('resize', () => this.throttledResize());
 
@@ -201,7 +188,6 @@ class GalaxyIntegrator {
     async createGalaxy() {
         if (!this.scene) return;
 
-        // Uproszczone shadery dla urządzeń mobilnych
         const createSimpleVertexShader = () => `
             attribute float size;
             attribute float opacity;
@@ -231,7 +217,6 @@ class GalaxyIntegrator {
             }
         `;
 
-        // Create background stars geometry
         const backgroundGeometry = new THREE.BufferGeometry();
         const backgroundPositions = new Float32Array(this.config.backgroundStarsCount * 3);
         const backgroundColors = new Float32Array(this.config.backgroundStarsCount * 3);
@@ -291,7 +276,6 @@ class GalaxyIntegrator {
         haloGeometry.setAttribute('color', new THREE.BufferAttribute(haloColors, 3));
         haloGeometry.setAttribute('size', new THREE.BufferAttribute(haloSizes, 1));
 
-        // Create nebula geometry only if enabled
         let nebulaGeometry = null;
         if (this.config.glowEnabled) {
             nebulaGeometry = new THREE.BufferGeometry();
@@ -333,7 +317,6 @@ class GalaxyIntegrator {
             nebulaGeometry.setAttribute('opacity', new THREE.BufferAttribute(nebulaOpacities, 1));
         }
 
-        // Create main galaxy geometry
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(this.config.count * 3);
         const colors = new Float32Array(this.config.count * 3);
@@ -409,7 +392,6 @@ class GalaxyIntegrator {
         geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
         geometry.setAttribute('opacity', new THREE.BufferAttribute(opacities, 1));
 
-        // Texture creation with mobile optimization
         const createGlowTexture = (size = this.isMobile ? 64 : 128, color = '#ffffff') => {
             const canvas = document.createElement('canvas');
             canvas.width = canvas.height = size;
@@ -453,7 +435,6 @@ class GalaxyIntegrator {
         const glowTexture = createGlowTexture();
         const sharpStarTexture = createSharpStarTexture();
 
-        // Materials with mobile optimization
         const backgroundStarsMaterial = new THREE.PointsMaterial({
             size: this.config.backgroundStarsSize,
             sizeAttenuation: true,
@@ -476,7 +457,6 @@ class GalaxyIntegrator {
             opacity: 0.8
         });
 
-        // Use simplified shaders for mobile
         const vertexShader = this.config.useSimpleShaders ? createSimpleVertexShader() : `
             attribute float size;
             attribute float opacity;
@@ -505,7 +485,6 @@ class GalaxyIntegrator {
             }
         `;
 
-        // Nebula material only if enabled
         let nebulaMaterial = null;
         if (this.config.glowEnabled) {
             nebulaMaterial = new THREE.ShaderMaterial({
@@ -542,7 +521,6 @@ class GalaxyIntegrator {
             blending: THREE.AdditiveBlending
         });
 
-        // Create points
         const backgroundStarsPoints = new THREE.Points(backgroundGeometry, backgroundStarsMaterial);
         const haloStarsPoints = new THREE.Points(haloGeometry, haloStarsMaterial);
         
@@ -554,7 +532,6 @@ class GalaxyIntegrator {
         const glowPoints = new THREE.Points(geometry, galaxyGlowMaterial);
         const starPoints = new THREE.Points(geometry, galaxyStarMaterial);
 
-        // Add to scene
         this.scene.add(backgroundStarsPoints);
         this.scene.add(haloStarsPoints);
         if (nebulaPoints) this.scene.add(nebulaPoints);
@@ -577,8 +554,7 @@ class GalaxyIntegrator {
             this.stars.glow.position.set(x, y, z);
             this.stars.stars.position.set(x, y, z);
             this.config.position = { x, y, z };
-            
-            // DODANE: Kamera automatycznie patrzy na nową pozycję galaktyki
+
             if (this.camera) {
                 this.camera.lookAt(x, y, z);
             }
@@ -606,8 +582,7 @@ class GalaxyIntegrator {
         if (this.camera) {
             this.camera.position.set(x, y, z);
             this.config.cameraPosition = { x, y, z };
-            
-            // DODANE: Kamera patrzy na galaktykę po zmianie pozycji
+
             this.camera.lookAt(
                 this.config.position.x,
                 this.config.position.y,
@@ -638,7 +613,6 @@ class GalaxyIntegrator {
         this.animationId = requestAnimationFrame(() => this.animate());
         this.frameCount++;
 
-        // Optymalizacja: pomijaj co drugą klatkę na słabych urządzeniach
         if (this.isLowEndMobile && this.frameCount % 2 === 0) {
             return;
         }
@@ -663,8 +637,7 @@ class GalaxyIntegrator {
         this.camera.aspect = container.clientWidth / container.clientHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(container.clientWidth, container.clientHeight);
-        
-        // Ponowna optymalizacja pixel ratio przy resize
+
         const maxPixelRatio = this.isLowEndMobile ? 1 : (this.isMobile ? 1.5 : 2);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
     }

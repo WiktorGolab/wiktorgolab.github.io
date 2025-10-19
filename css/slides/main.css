@@ -43,10 +43,12 @@
 @media (max-width: 425px) {
     .arrow-down {
         bottom: 60px;
+        height: 40px;
     }
 
     .arrow-up {
         top: auto;
         bottom: 120px;
+        height: 40px;
     }
 }

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/slides/gradients.css">
     <link rel="stylesheet" href="css/splash.css">
     <link rel="stylesheet" href="css/slides/aboutslide.css">
+    <link rel="stylesheet" href="css/slides/projectsslide.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .content {
@@ -197,8 +198,8 @@
                                     Stale poszerzam swoją wiedzę i podejmuję nowe wyzwania w świecie technologii i
                                     designu. Moje projekty skupiają się na tworzeniu <strong>intuicyjnych interfejsów
                                         użytkownika</strong> i <strong>nowoczesnych rozwiązań webowych</strong>, które
-                                    łączą funkcjonalność z estetyką.<br><br>
-                                    Dzięki zdobytemu doświadczeniu oraz certyfikatom, takim jak <strong>Fundamentals of
+                                    łączą funkcjonalność z estetyką.<br><br>Dzięki zdobytemu doświadczeniu oraz
+                                    certyfikatom, takim jak <strong>Fundamentals of
                                         Accelerated Computing with CUDA Python</strong>, <strong>Fundamentals of Deep
                                         Learning</strong> oraz
                                     <strong>Generative AI with Diffusion Models</strong>, jestem przygotowany na
@@ -244,12 +245,10 @@
                             <div class="page active" data-page="1">
                                 <div class="about-right-text">
                                     Poza pracą zawodową, osobiście interesuję się <strong>sztuczną inteligencją</strong>
-                                    i od kilku lat
-                                    eksploruję narzędzia AI.<br><br>
+                                    i od kilku lat eksploruję narzędzia AI.<br><br>
                                     Lubię również tworzyć materiały cyfrowe, wykorzystując narzędzia takie jak
-                                    <strong>FL
-                                        Studio, Adobe Premiere Pro i GIMP</strong> do realizacji kreatywnych idei, które
-                                    umieszczam
+                                    <strong>FL Studio, Adobe Premiere Pro i GIMP</strong> do realizacji kreatywnych
+                                    idei, które umieszczam
                                     anonimowo na popularnych platformach social media.
                                 </div>
                             </div>
@@ -365,8 +364,7 @@
                                 <div class="about-separator"></div>
                                 <div class="combined-text">
                                     Poza pracą zawodową, osobiście interesuję się <strong>sztuczną inteligencją</strong>
-                                    i od kilku lat
-                                    eksploruję narzędzia AI.<br><br>
+                                    i od kilku lat eksploruję narzędzia AI.<br><br>
                                     Lubię również tworzyć materiały cyfrowe, wykorzystując narzędzia takie jak
                                     <strong>FL Studio, Adobe Premiere Pro i GIMP</strong> do realizacji kreatywnych
                                     idei, które umieszczam
@@ -425,11 +423,23 @@
         <section class="slide clip">
             <div class="custom-mask">
                 <div class="frame">
-                    <div class="content">
-                        <h1>Projekty</h1>
-                        <a href="projects.html" class="splash-transition">
-                            <p>Przejdź</p>
-                        </a>
+                    <div class="content" style="width: 100%; height: 100%;">
+                        <div class="projects-carousel">
+                            <div class="carousel-header">
+                                <h1>Najnowsze Projekty</h1>
+                            </div>
+
+                            <div class="carousel-track">
+                                <!-- Slajdy będą wstawiane dynamicznie przez JavaScript -->
+                            </div>
+
+                            <div class="all-projects-cta">
+                                <a href="projects.html" class="splash-transition all-projects-btn">
+                                    <span>Zobacz wszystkie projekty</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -503,6 +513,7 @@
     <script type="module" src="js/galaxy.js"></script>
     <script src="js/cursor.js"></script>
     <script type="module" src="js/aboutslide.js"></script>
+    <script type="module" src="js/projectsslide.js"></script>
 </body>
 
 </html>
