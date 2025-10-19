@@ -1,7 +1,7 @@
 /* Projects Carousel Styles - ZASTOSOWANO OBECNY STYL */
 .projects-carousel {
     margin: auto auto;
-    padding: 15px 2rem;
+    padding: 80px 200px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@
 }
 
 .carousel-header h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     color: white;
     margin: 0;
     font-weight: 600;
@@ -31,7 +31,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1.1rem;
+    height: max-content;
+    margin-top: 20px;
 }
 
 .carousel-btn {
@@ -69,8 +70,10 @@
 /* Główna zawartość karuzeli */
 .carousel-track {
     position: relative;
-    height: 100%;
+    height: auto;
     margin-bottom: 2rem;
+    filter: drop-shadow(0 0 50px rgba(0, 0, 0, 1));
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.6);
 }
 
 .carousel-slide {
@@ -78,7 +81,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s ease-in-out;
@@ -91,6 +94,7 @@
 .carousel-slide.active {
     opacity: 1;
     visibility: visible;
+    position: relative;
 }
 
 .project-content-wrapper {
@@ -101,12 +105,71 @@
     padding: 2rem;
 }
 
+.project-content-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0.98);
+    animation: subtle-pulse 3s ease-in-out infinite;
+    transition: all 0.1s ease-in-out;
+    pointer-events: none;
+}
+
+.project-content-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border: 10px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0.98);
+    animation: subtle-pulse 1.5s ease-in-out infinite;
+    transition: all 0.1s ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes subtle-pulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    10% {
+        opacity: 0.15;
+    }
+    90% {
+        transform: scale(3);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
 /* Sekcja obrazka */
 .project-image-section {
     position: relative;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    overflow: hidden;
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    transition: transform 0.2s ease-in-out !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    backdrop-filter: unset !important;
+    width: 100% !important;
+    cursor: crosshair !important;
 }
 
 .project-image {
@@ -118,8 +181,13 @@
     aspect-ratio: 16 / 9;
 }
 
-.project-image:hover {
+.project-image-section:hover {
     transform: scale(1.02);
+    border-radius: 12px;
+}
+
+.project-image-section:hover .project-badge {
+    opacity: 0;
 }
 
 .project-badge {
@@ -134,13 +202,16 @@
     font-weight: 600;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: opacity 0.35s ease-in-out;
+    opacity: 1;
 }
 
 /* Sekcja informacji */
 .project-info-section {
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
+    gap: 1rem;
+    justify-content: space-between;
 }
 
 .project-meta {
@@ -197,13 +268,12 @@
 }
 
 .project-features li {
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
+    line-height: 1.5;
     text-align: start;
 }
 
 .project-actions {
-    margin-top: auto;
+    margin-top: 10px;
 }
 
 .project-details-btn {
@@ -216,7 +286,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%;
+    width: max-content;
     backdrop-filter: blur(10px);
 }
 
@@ -263,11 +333,8 @@
 /* CTA sekcja */
 .all-projects-cta {
     text-align: center;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    width: max-content;
+    margin: 0 auto;
 }
 
 .cta-description {
@@ -433,8 +500,8 @@
     flex-direction: row;
     align-items: center;
     padding-left: 12px;
-    padding-right: 12px;
-    gap: 12px
+    padding-right: 25%;
+    gap: 25%
 }
 
 .project-window-controls  {
@@ -468,4 +535,45 @@
     height: 7px;
     width: 100%;
     border-radius: 8px;
+}
+
+.project-image-topbar {
+    pointer-events: none;
+}
+
+.project-window-controls,
+.project-window-searchbar {
+    pointer-events: none;
+}
+
+.carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.8s ease-in-out, transform 1.2s ease-in-out;
+    z-index: 1;
+    opacity: 0;
+    transform: scale(1.05);
+    filter: brightness(0.3) blur(8px);
+}
+
+.carousel-background.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.carousel-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
