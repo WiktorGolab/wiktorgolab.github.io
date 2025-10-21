@@ -716,7 +716,7 @@
 
 @media (max-width: 480px) {
     .carousel-header h1 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     .project-title {
@@ -791,5 +791,18 @@
     .carousel-counter {
         font-size: 0.6rem;
     }
-}
 
+    .all-projects-cta {
+        margin: 10px auto;
+    }
+
+    .carousel-controls {
+        margin-top: 10px;
+        gap: 0.5rem;
+    }
+
+    .carousel-btn {
+        height: 32px;
+        width: 32px;
+    }
+}
