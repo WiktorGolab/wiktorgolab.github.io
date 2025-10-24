@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/tools/regex.css">
     <link rel="stylesheet" href="css/tools/imageResize.css">
     <link rel="stylesheet" href="css/tools/fileAttributes.css">
+    <link rel="stylesheet" href="css/tools/generateCV.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -158,6 +159,8 @@
                                 Generator Lorem Ipsum</li>
                             <li class="submenu-item" data-content="generator-kolorow" data-title="Generator kolorów">
                                 Generator kolorów</li>
+                            <li class="submenu-item" data-content="generator-cv" data-title="Generator CV">Stwórz
+                                CV</li>
                         </ul>
                     </li>
 
@@ -285,6 +288,11 @@
                         <div class="tile" data-title="Zmień atrybuty pliku">
                             <i class="fa-solid fa-info"></i>
                             <span>Zmień atrybuty pliku</span>
+                        </div>
+
+                        <div class="tile" data-title="Generator CV">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Generator CV</span>
                         </div>
                     </div>
                 </div>
@@ -656,6 +664,374 @@
                 </div>
 
 
+                <div class="content-item" id="generator-cv-content" style="height: 100%; overflow-y: auto;">
+                    <h2>
+                        <i class="fas fa-chevron-left back-to-dashboard" title="Cofnij"></i>
+                        Generator CV
+                    </h2>
+                    <p>Twórz profesjonalne CV z gotowymi presetami. Edytuj treść, wybierz styl i eksportuj do PDF/JPG.
+                    </p>
+
+                    <div class="cv-generator">
+                        <div class="cv-controls">
+                            <div class="cv-presets">
+                                <h3>Wybierz preset stylu</h3>
+                                <div class="preset-grid" id="presetGrid">
+                                    <!-- Presets will be loaded here -->
+                                </div>
+                            </div>
+
+                            <div class="cv-form">
+                                <div class="form-section">
+                                    <h4>
+                                        Informacje osobiste
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Imię</label>
+                                            <input type="text" id="firstName" placeholder="Jan">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nazwisko</label>
+                                            <input type="text" id="lastName" placeholder="Kowalski">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Płeć</label>
+                                            <select id="gender">
+                                                <option value="">Wybierz</option>
+                                                <option value="Kobieta">Kobieta</option>
+                                                <option value="Mężczyzna">Mężczyzna</option>
+                                                <option value="Inna">Inna</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Data urodzenia</label>
+                                            <input type="date" id="birthDate">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Narodowość</label>
+                                            <input type="text" id="nationality" placeholder="Polska">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Prawo jazdy</label>
+                                            <select id="drivingLicense">
+                                                <option value="">Brak</option>
+                                                <option value="AM">AM</option>
+                                                <option value="A1">A1</option>
+                                                <option value="A2">A2</option>
+                                                <option value="A">A</option>
+                                                <option value="B1">B1</option>
+                                                <option value="B">B</option>
+                                                <option value="BE">BE</option>
+                                                <option value="C1">C1</option>
+                                                <option value="C1E">C1E</option>
+                                                <option value="C">C</option>
+                                                <option value="CE">CE</option>
+                                                <option value="D1">D1</option>
+                                                <option value="D1E">D1E</option>
+                                                <option value="D">D</option>
+                                                <option value="DE">DE</option>
+                                                <option value="T">T</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" id="email" placeholder="jan@example.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Telefon</label>
+                                            <input type="tel" id="phone" placeholder="+48 123 456 789">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lokalizacja</label>
+                                        <input type="text" id="address" placeholder="Warszawa, Polska">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Strona WWW</label>
+                                            <input type="url" id="website" placeholder="https://example.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>LinkedIn</label>
+                                            <input type="url" id="linkedin"
+                                                placeholder="https://linkedin.com/in/username">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>GitHub</label>
+                                        <input type="url" id="github" placeholder="https://github.com/username">
+                                    </div>
+
+                                    <div class="photo-upload">
+                                        <h5>Zdjęcie profilowe</h5>
+                                        <div class="photo-preview" id="photoPreview">
+                                            <div class="placeholder">Brak zdjęcia</div>
+                                        </div>
+                                        <div class="photo-actions">
+                                            <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                                            <button type="button"
+                                                onclick="document.getElementById('photoUpload').click()"
+                                                class="btn-small">Wybierz zdjęcie</button>
+                                            <button type="button" id="removePhoto"
+                                                class="btn-small btn-danger">Usuń</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Styl CV
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div class="form-row">
+                                        <div class="form-group color-picker-group">
+                                            <label>Kolor główny</label>
+                                            <input type="color" id="primaryColor" value="#2563eb">
+                                        </div>
+                                        <div class="form-group color-picker-group">
+                                            <label>Kolor drugi</label>
+                                            <input type="color" id="secondaryColor" value="#64748b">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group color-picker-group">
+                                            <label>Tło</label>
+                                            <input type="color" id="backgroundColor" value="#ffffff">
+                                        </div>
+                                        <div class="form-group color-picker-group">
+                                            <label>Tekst</label>
+                                            <input type="color" id="textColor" value="#333333">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Czcionka główna</label>
+                                            <select id="fontFamily">
+                                                <option value="Arial, sans-serif">Arial</option>
+                                                <option value="Georgia, serif">Georgia</option>
+                                                <option value="Times New Roman, serif">Times New Roman</option>
+                                                <option value="Helvetica, sans-serif">Helvetica</option>
+                                                <option value="Calibri, sans-serif">Calibri</option>
+                                                <option value="Verdana, sans-serif">Verdana</option>
+                                                <option value="Comic Sans MS, cursive">Comic Sans MS</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Czcionka nagłówków</label>
+                                            <select id="headerFont">
+                                                <option value="Arial, sans-serif">Arial</option>
+                                                <option value="Georgia, serif">Georgia</option>
+                                                <option value="Times New Roman, serif">Times New Roman</option>
+                                                <option value="Helvetica, sans-serif">Helvetica</option>
+                                                <option value="Cambria, serif">Cambria</option>
+                                                <option value="Impact, sans-serif">Impact</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Nowe kontrolki rozmiarów czcionek -->
+                                    <div class="font-size-controls">
+                                        <h5>Rozmiary czcionek (px)</h5>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Imię i nazwisko</label>
+                                                <input type="number" id="nameFontSize" min="10" max="100" value="40"
+                                                    placeholder="40">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tytuł zawodowy</label>
+                                                <input type="number" id="titleFontSize" min="10" max="50" value="22"
+                                                    placeholder="22">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Tytuły sekcji</label>
+                                                <input type="number" id="sectionTitleFontSize" min="10" max="50"
+                                                    value="22" placeholder="22">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tytuły pozycji</label>
+                                                <input type="number" id="itemTitleFontSize" min="10" max="40" value="18"
+                                                    placeholder="18">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Podtytuły</label>
+                                                <input type="number" id="itemSubtitleFontSize" min="10" max="40"
+                                                    value="17" placeholder="17">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tekst główny</label>
+                                                <input type="number" id="bodyFontSize" min="8" max="30" value="14"
+                                                    placeholder="14">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Tekst pomocniczy</label>
+                                                <input type="number" id="smallTextSize" min="8" max="30" value="14"
+                                                    placeholder="14">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Profil zawodowy
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div class="form-group">
+                                        <label>Podsumowanie</label>
+                                        <textarea id="summary"
+                                            placeholder="Opisz swoje doświadczenie i cele zawodowe..."
+                                            rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Doświadczenie zawodowe
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div id="experienceItems" class="section-items">
+                                        <!-- Experience items will be loaded here -->
+                                    </div>
+                                    <button type="button" id="addExperienceBtn" class="btn-small">+ Dodaj
+                                        doświadczenie</button>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Edukacja
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div id="educationItems" class="section-items">
+                                        <!-- Education items will be loaded here -->
+                                    </div>
+                                    <button type="button" id="addEducationBtn" class="btn-small">+ Dodaj
+                                        edukację</button>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Umiejętności
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div class="skills-input">
+                                        <input type="text" id="skillInput" placeholder="np. JavaScript, React, Python">
+                                        <button type="button" id="addSkillBtn" class="btn-small">Dodaj</button>
+                                    </div>
+                                    <div id="skillsList" class="skills-list">
+                                        <!-- Skills will be loaded here -->
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Języki
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div id="languageItems" class="section-items">
+                                        <!-- Language items will be loaded here -->
+                                    </div>
+                                    <button type="button" id="addLanguageBtn" class="btn-small">+ Dodaj język</button>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Certyfikaty
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div id="certificateItems" class="section-items">
+                                        <!-- Certificate items will be loaded here -->
+                                    </div>
+                                    <button type="button" id="addCertificateBtn" class="btn-small">+ Dodaj
+                                        certyfikat</button>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Zainteresowania
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div class="skills-input">
+                                        <input type="text" id="interestInput"
+                                            placeholder="np. Fotografia, Podróże, Sport">
+                                        <button type="button" id="addInterestBtn" class="btn-small">Dodaj</button>
+                                    </div>
+                                    <div id="interestsList" class="skills-list">
+                                        <!-- Interests will be loaded here -->
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Projekty
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div id="projectItems" class="section-items">
+                                        <!-- Project items will be loaded here -->
+                                    </div>
+                                    <button type="button" id="addProjectBtn" class="btn-small">+ Dodaj projekt</button>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
+                                        Sekcje niestandardowe
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div id="customSections" class="section-items">
+                                        <!-- Custom sections will be loaded here -->
+                                    </div>
+                                    <button type="button" id="addCustomSectionBtn" class="btn-small">+ Dodaj
+                                        sekcję</button>
+                                </div>
+
+                                <div class="cv-actions">
+                                    <button id="exportPdfBtn">Eksportuj PDF</button>
+                                    <button id="exportJpgBtn">Eksportuj JPG</button>
+                                    <button id="saveCvBtn">Zapisz CV</button>
+                                    <button id="loadCvBtn">Wczytaj CV</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cv-preview-container">
+                            <div class="cv-preview-wrapper">
+                                <iframe id="cvPreview" class="cv-preview" title="Podgląd CV"></iframe>
+                            </div>
+                            <div class="zoom-controls">
+                                <label>Powiększenie:</label>
+                                <input type="range" id="zoomLevel" min="0.5" max="1.5" step="0.1" value="1">
+                                <span id="zoomValue">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </main>
         </div>
     </div>
@@ -681,6 +1057,8 @@
     <script src="js/tools/imageResize.js"></script>
     <script src="js/tools/fileAttributes.js"></script>
     <script src="js/cursor.js"></script>
+    <script src="js/tools/generateCV.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 
 </html>
