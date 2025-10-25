@@ -912,19 +912,29 @@
                                     </div>
                                 </div>
 
-                                
-
                                 <div class="form-section">
                                     <h4>
                                         Profil zawodowy
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div class="form-group">
                                         <label>Podsumowanie</label>
                                         <textarea id="summary"
                                             placeholder="Opisz swoje doświadczenie i cele zawodowe..."
                                             rows="4"></textarea>
+                                    </div>
+
+                                    <!-- DODANE: Kontrolka marginesu - input number -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="summaryMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
                                     </div>
                                 </div>
 
@@ -934,11 +944,23 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div id="experienceItems" class="section-items">
                                         <!-- Experience items will be loaded here -->
                                     </div>
                                     <button type="button" id="addExperienceBtn" class="btn-small">+ Dodaj
                                         doświadczenie</button>
+
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="experienceMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
+                                    </div>
                                 </div>
 
                                 <div class="form-section">
@@ -947,11 +969,23 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div id="educationItems" class="section-items">
                                         <!-- Education items will be loaded here -->
                                     </div>
                                     <button type="button" id="addEducationBtn" class="btn-small">+ Dodaj
                                         edukację</button>
+                                    
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="educationMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
+                                    </div>
                                 </div>
 
                                 <div class="form-section">
@@ -960,12 +994,24 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div class="skills-input">
                                         <input type="text" id="skillInput" placeholder="np. JavaScript, React, Python">
                                         <button type="button" id="addSkillBtn" class="btn-small">+</button>
                                     </div>
                                     <div id="skillsList" class="skills-list">
                                         <!-- Skills will be loaded here -->
+                                    </div>
+
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="skillsMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
                                     </div>
                                 </div>
 
@@ -975,10 +1021,22 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div id="languageItems" class="section-items">
                                         <!-- Language items will be loaded here -->
                                     </div>
                                     <button type="button" id="addLanguageBtn" class="btn-small">+ Dodaj język</button>
+
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="languagesMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
+                                    </div>
                                 </div>
 
                                 <div class="form-section">
@@ -987,11 +1045,23 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div id="certificateItems" class="section-items">
                                         <!-- Certificate items will be loaded here -->
                                     </div>
                                     <button type="button" id="addCertificateBtn" class="btn-small">+ Dodaj
                                         certyfikat</button>
+
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="certificatesMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
+                                    </div>
                                 </div>
 
                                 <div class="form-section">
@@ -1000,6 +1070,7 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div class="skills-input">
                                         <input type="text" id="interestInput"
                                             placeholder="np. Fotografia, Podróże, Sport">
@@ -1007,6 +1078,17 @@
                                     </div>
                                     <div id="interestsList" class="skills-list">
                                         <!-- Interests will be loaded here -->
+                                    </div>
+
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="interestsMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
                                     </div>
                                 </div>
 
@@ -1016,10 +1098,22 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div id="projectItems" class="section-items">
                                         <!-- Project items will be loaded here -->
                                     </div>
                                     <button type="button" id="addProjectBtn" class="btn-small">+ Dodaj projekt</button>
+
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="projectsMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
+                                    </div>
                                 </div>
 
                                 <div class="form-section">
@@ -1028,17 +1122,29 @@
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
                                     </h4>
+
                                     <div id="customSections" class="section-items">
                                         <!-- Custom sections will be loaded here -->
                                     </div>
                                     <button type="button" id="addCustomSectionBtn" class="btn-small">+ Dodaj
                                         sekcję</button>
+
+                                    <!-- DODANE: Kontrolka marginesu -->
+                                    <div class="margin-control">
+                                        <label>Dolny margines sekcji</label>
+                                        <div class="margin-input-group">
+                                            <input type="number" id="customMargin" min="0" max="200" value="20"
+                                                class="margin-input">
+                                            <span class="margin-unit">px</span>
+                                        </div>
+                                        <small class="help-text">Wartość domyślna: 20px</small>
+                                    </div>
                                 </div>
 
                                 <div class="cv-actions">
                                     <button id="exportPdfBtn">Eksportuj PDF</button>
                                     <button id="exportJpgBtn">Eksportuj JPG</button>
-                                    <button id="saveCvBtn">Zapisz CV (Cookies)</button>
+                                    <button id="saveCvBtn">Zapisz (Cookies)</button>
                                 </div>
                             </div>
                         </div>
@@ -1082,8 +1188,11 @@
     <script src="js/tools/imageResize.js"></script>
     <script src="js/tools/fileAttributes.js"></script>
     <script src="js/cursor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/tools/generateCV.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </body>
 
 </html>

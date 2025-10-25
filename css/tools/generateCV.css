@@ -1014,3 +1014,625 @@
     border: none;
     padding: 4px;
 }
+
+/* Style dla kontrolek marginesów */
+.margin-control {
+    background: #1a1a1a;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border: 1px solid #222;
+    transition: all 0.3s ease;
+}
+
+.margin-control:hover {
+    border-color: #333;
+    background: #1e1e1e;
+}
+
+.margin-control label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.margin-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.margin-input {
+    width: 80px;
+    padding: 0.75rem;
+    border: 1px solid #222;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+    background: #111;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.margin-input:focus {
+    outline: none;
+    border-color: #888;
+    box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
+    background: #0e0e0e;
+}
+
+.margin-input:hover {
+    border-color: #333;
+}
+
+.margin-unit {
+    font-size: 0.9rem;
+    color: #888;
+    font-weight: 500;
+    min-width: 30px;
+}
+
+.help-text {
+    font-size: 0.75rem;
+    color: #666;
+    display: block;
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+/* Responsywność dla kontrolek marginesów */
+@media (max-width: 768px) {
+    .margin-control {
+        padding: 0.75rem;
+        margin: 0.75rem 0;
+    }
+    
+    .margin-input-group {
+        gap: 0.5rem;
+    }
+    
+    .margin-input {
+        width: 70px;
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .margin-unit {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .margin-control {
+        padding: 0.6rem;
+    }
+    
+    .margin-input {
+        width: 60px;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .margin-control label {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Style dla inputów number - usunięcie strzałek w niektórych przeglądarkach */
+.margin-input::-webkit-outer-spin-button,
+.margin-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.margin-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Animacja dla zmiany wartości */
+.margin-input:focus {
+    transform: scale(1.02);
+}
+
+/* Dodatkowe style dla grup kontrolek marginesów w sekcjach */
+.form-section .margin-control:first-child {
+    margin-top: 0;
+}
+
+.form-section .margin-control:last-child {
+    margin-bottom: 0;
+}
+
+/* Wyrównanie kontrolek marginesów z resztą formularza */
+.margin-control + .form-group {
+    margin-top: 1rem;
+}
+
+.form-group + .margin-control {
+    margin-top: 1rem;
+}
+
+/* Style dla stanu disabled (jeśli będzie potrzebny) */
+.margin-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #0a0a0a;
+}
+
+.margin-input:disabled:hover {
+    border-color: #222;
+    transform: none;
+}
+
+/* Style dla stanu invalid */
+.margin-input:invalid {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+.margin-input:invalid:focus {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.3);
+}
+
+/* Tooltip dla pomocy (opcjonalnie) */
+.margin-control {
+    position: relative;
+}
+
+.margin-control .help-text {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    position: absolute;
+    background: #222;
+    color: #f0f0f0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    margin-bottom: 0.5rem;
+    z-index: 10;
+    border: 1px solid #333;
+    pointer-events: none;
+    user-select: none;
+}
+
+.margin-control:hover .help-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Alternatywny styl dla kontrolek marginesów - kompaktowy */
+.margin-control.compact {
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+}
+
+.margin-control.compact .margin-input-group {
+    margin-bottom: 0;
+}
+
+.margin-control.compact .help-text {
+    margin-top: 0.5rem;
+}
+
+/* Styl dla kontrolek marginesów w trybie edycji */
+.margin-control.editing {
+    border-color: #888;
+    background: #1f1f1f;
+    box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.1);
+}
+
+.margin-control.editing .margin-input {
+    border-color: #888;
+    background: #0a0a0a;
+}
+
+/* Progress indicator dla zmian marginesów (opcjonalnie) */
+.margin-control::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #888;
+    transition: width 0.3s ease;
+}
+
+.margin-control.changing::after {
+    width: 100%;
+}
+
+/* Dark theme variations */
+@media (prefers-color-scheme: dark) {
+    .margin-control {
+        background: #0a0a0a;
+        border-color: #1a1a1a;
+    }
+    
+    .margin-control:hover {
+        background: #0d0d0d;
+        border-color: #222;
+    }
+    
+    .margin-input {
+        background: #050505;
+        border-color: #1a1a1a;
+        color: #e0e0e0;
+    }
+    
+    .margin-input:focus {
+        background: #000;
+        border-color: #888;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .margin-control {
+        border: 2px solid #fff;
+        background: #000;
+    }
+    
+    .margin-input {
+        border: 2px solid #fff;
+        background: #000;
+        color: #fff;
+    }
+    
+    .margin-input:focus {
+        border-color: #888;
+        box-shadow: 0 0 0 3px rgba(136, 136, 136, 0.5);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .margin-control,
+    .margin-input,
+    .help-text {
+        transition: none;
+    }
+    
+    .margin-input:focus {
+        transform: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .margin-control {
+        display: none;
+    }
+}
+
+/* Additional utility classes for margin controls */
+.margin-control.success {
+    border-color: #10b981;
+}
+
+.margin-control.warning {
+    border-color: #f59e0b;
+}
+
+.margin-control.error {
+    border-color: #ef4444;
+}
+
+/* Stacked layout for multiple margin controls */
+.margin-controls-stacked .margin-control {
+    margin: 0.5rem 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+}
+
+.margin-controls-stacked .margin-control:first-child {
+    border-top: none;
+    border-radius: 8px 8px 0 0;
+}
+
+.margin-controls-stacked .margin-control:last-child {
+    border-bottom: none;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Grid layout for multiple margin controls */
+.margin-controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.margin-controls-grid .margin-control {
+    margin: 0;
+}
+
+/* Compact variant */
+.margin-control.compact-variant {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+}
+
+.margin-control.compact-variant .margin-input-group {
+    margin-bottom: 0;
+}
+
+.margin-control.compact-variant .help-text {
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+}
+
+/* Style dla inputów umiejętności i zainteresowań */
+#skillInput, #interestInput {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #222;
+    border-radius: 6px;
+    background: #111;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    margin-bottom: 0.5rem;
+}
+
+#skillInput:focus, #interestInput:focus {
+    outline: none;
+    border-color: #888;
+    box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
+    background: #0e0e0e;
+}
+
+#skillInput::placeholder, #interestInput::placeholder {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* Kontenery dla inputów */
+.skills-input, .interests-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: stretch;
+}
+
+.skills-input input, .interests-input input {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Przyciski dodawania */
+#addSkillBtn, #addInterestBtn {
+    padding: 0;
+    background: #454545;
+    color: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    min-width: 44px;
+}
+
+#addSkillBtn:hover, #addInterestBtn:hover {
+    background: #555;
+    transform: translateY(-1px);
+}
+
+#addSkillBtn:active, #addInterestBtn:active {
+    transform: translateY(0);
+}
+
+#addSkillBtn:disabled, #addInterestBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Listy tagów */
+.skills-list, .interests-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    min-height: 20px;
+}
+
+/* Style dla tagów umiejętności i zainteresowań */
+.skill-tag, .interest-tag {
+    background: #454545;
+    color: #f0f0f0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.skill-tag:hover, .interest-tag:hover {
+    background: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(136, 136, 136, 0.3);
+    border-color: #666;
+}
+
+/* Przyciski usuwania w tagach */
+.remove-skill, .remove-interest {
+    cursor: pointer;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    padding: 2px;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.remove-skill:hover, .remove-interest:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+}
+
+/* Specyficzne style dla zainteresowań */
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.interest-tag {
+    background: #111;
+    padding: 0.5rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid #222;
+    color: #f0f0f0;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.interest-tag:hover {
+    background: #1a1a1a;
+    border-color: #888;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(136, 136, 136, 0.2);
+}
+
+/* Animacje dla nowych tagów */
+.skill-tag.new, .interest-tag.new {
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Style dla pustych stanów */
+.skills-list:empty::before, .interests-list:empty::before {
+    content: "Brak umiejętności";
+    color: #666;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.interests-list:empty::before {
+    content: "Brak zainteresowań";
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .skills-input, .interests-input {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    #addSkillBtn, #addInterestBtn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .interests-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.4rem;
+    }
+    
+    .skill-tag, .interest-tag {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #skillInput, #interestInput {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    .skills-list, .interests-list {
+        gap: 0.4rem;
+    }
+    
+    .interests-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+    
+    .interest-tag {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Style dla stanu focus z klawiatury */
+#skillInput:focus-visible, #interestInput:focus-visible {
+    outline: 2px solid #888;
+    outline-offset: 2px;
+}
+
+/* Style dla stanu invalid */
+#skillInput:invalid, #interestInput:invalid {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+/* Style dla trybu wysokiego kontrastu */
+@media (prefers-contrast: high) {
+    #skillInput, #interestInput {
+        border: 2px solid #fff;
+        background: #000;
+    }
+    
+    .skill-tag, .interest-tag {
+        border: 1px solid #fff;
+        background: #000;
+    }
+}
+
+/* Style dla reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    #skillInput, #interestInput,
+    .skill-tag, .interest-tag,
+    .remove-skill, .remove-interest {
+        transition: none;
+    }
+    
+    .skill-tag:hover, .interest-tag:hover {
+        transform: none;
+    }
+    
+    .skill-tag.new, .interest-tag.new {
+        animation: none;
+    }
+}
