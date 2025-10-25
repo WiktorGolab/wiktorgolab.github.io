@@ -227,7 +227,7 @@
 .cv-actions {
     margin-top: 2rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
 }
 
@@ -989,4 +989,28 @@
         transform: scaleX(1);
         opacity: 0;
     }
+}
+
+.font-size-group {
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.font-size-group h6 {
+    margin: 0 0 0.75rem 0;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.help-text {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+#skillInput, #interestInput {
+    border-radius: 4px;
+    border: none;
+    padding: 4px;
 }

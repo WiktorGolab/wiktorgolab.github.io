@@ -15,6 +15,8 @@ class CVGenerator {
         this.setupEventListeners();
         this.setupDragAndDrop();
         this.loadFromLocalStorage();
+        this.updateFontSelects();
+        this.updateFormStyles();
         this.updatePreview();
     }
 
@@ -50,17 +52,23 @@ class CVGenerator {
                 secondaryColor: '#64748b',
                 backgroundColor: '#ffffff',
                 textColor: '#333333',
-                fontFamily: 'Arial, sans-serif',
-                fontSize: '14px',
-                headerFont: 'Arial, sans-serif',
-                // Zmienione właściwości rozmiarów czcionek - teraz w px
-                nameFontSize: '34px',
-                titleFontSize: '20px',
-                sectionTitleFontSize: '20px',
-                itemTitleFontSize: '18px',
-                itemSubtitleFontSize: '14px',
-                bodyFontSize: '12px',
-                smallTextSize: '14px'
+                fontFamily: 'Aptos, sans-serif',
+                headerFont: 'Aptos, sans-serif',
+                fontSizes: {
+                    headers: {
+                        name: '32px',
+                        sectionTitle: '20px',
+                        itemTitle: '15px'
+                    },
+                    body: {
+                        main: '12.5px',
+                        subtitle: '14px',
+                        small: '14px'
+                    },
+                    special: {
+                        professionalTitle: '20px'
+                    }
+                }
             },
             sectionOrder: [
                 'summary',
@@ -79,123 +87,122 @@ class CVGenerator {
     setupPresets() {
         const presets = {
             modern: {
-                name: 'Modernny',
-                colors: {
-                    primary: '#2563eb',
-                    secondary: '#64748b',
-                    background: '#ffffff',
-                    text: '#333333'
-                },
-                fonts: {
-                    main: 'Arial, sans-serif',
-                    header: 'Arial, sans-serif'
-                },
-                fontSizes: {
-                    name: '40px',
-                    title: '22px',
-                    sectionTitle: '22px',
-                    itemTitle: '18px',
-                    itemSubtitle: '17px',
-                    body: '14px',
-                    small: '14px'
-                },
-                template: 'modern'
-            },
-            classic: {
-                name: 'Klasyczny',
+                name: 'Modny',
                 colors: {
                     primary: '#000000',
-                    secondary: '#666666',
-                    background: '#f8f9fa',
-                    text: '#333333'
-                },
-                fonts: {
-                    main: 'Georgia, serif',
-                    header: 'Times New Roman, serif'
-                },
-                fontSizes: {
-                    name: '37px',
-                    title: '21px',
-                    sectionTitle: '22px',
-                    itemTitle: '18px',
-                    itemSubtitle: '16px',
-                    body: '13px',
-                    small: '14px'
-                },
-                template: 'classic'
-            },
-            creative: {
-                name: 'Kreatywny',
-                colors: {
-                    primary: '#ec4899',
-                    secondary: '#8b5cf6',
+                    secondary: '#000000',
                     background: '#ffffff',
-                    text: '#333333'
+                    text: '#000000'
                 },
                 fonts: {
-                    main: 'Comic Sans MS, cursive',
-                    header: 'Impact, sans-serif'
+                    main: 'Aptos, sans-serif',
+                    header: 'Aptos, sans-serif'
                 },
-                fontSizes: {
-                    name: '45px',
-                    title: '24px',
-                    sectionTitle: '23px',
-                    itemTitle: '19px',
-                    itemSubtitle: '18px',
-                    body: '15px',
-                    small: '15px'
-                },
-                template: 'creative'
+                template: 'modern'
             },
             professional: {
                 name: 'Profesjonalny',
                 colors: {
-                    primary: '#059669',
-                    secondary: '#047857',
+                    primary: '#045e41',
+                    secondary: '#045e41',
                     background: '#ffffff',
-                    text: '#333333'
+                    text: '#1e293b'
                 },
                 fonts: {
                     main: 'Calibri, sans-serif',
                     header: 'Cambria, serif'
                 },
-                fontSizes: {
-                    name: '38px',
-                    title: '22px',
-                    sectionTitle: '22px',
-                    itemTitle: '18px',
-                    itemSubtitle: '16px',
-                    body: '13px',
-                    small: '14px'
-                },
                 template: 'professional'
+            },
+            elegant: {
+                name: 'Elegancki',
+                colors: {
+                    primary: '#7c3aed',
+                    secondary: '#5b21b6',
+                    background: '#ffffff',
+                    text: '#2d3748'
+                },
+                fonts: {
+                    main: 'Georgia, serif',
+                    header: 'Playfair, serif'
+                },
+                template: 'elegant'
             },
             minimal: {
                 name: 'Minimalistyczny',
                 colors: {
-                    primary: '#374151',
-                    secondary: '#6b7280',
+                    primary: '#5a5853',
+                    secondary: '#5a5853',
                     background: '#ffffff',
-                    text: '#333333'
+                    text: '#000000'
                 },
                 fonts: {
-                    main: 'Helvetica, sans-serif',
-                    header: 'Helvetica, sans-serif'
-                },
-                fontSizes: {
-                    name: '35px',
-                    title: '21px',
-                    sectionTitle: '21px',
-                    itemTitle: '17px',
-                    itemSubtitle: '16px',
-                    body: '12px',
-                    small: '13px'
+                    main: 'Arial, sans-serif',
+                    header: 'Cambria, sans-serif'
                 },
                 template: 'minimal'
+            },
+            creative: {
+                name: 'Kreatywny',
+                colors: {
+                    primary: '#dc2626',
+                    secondary: '#b91c1c',
+                    background: '#ffffff',
+                    text: '#1e293b'
+                },
+                fonts: {
+                    main: 'Aptos, sans-serif',
+                    header: 'Aptos, sans-serif'
+                },
+                template: 'creative'
+            },
+            corporate: {
+                name: 'Korporacyjny',
+                colors: {
+                    primary: '#0369a1',
+                    secondary: '#0c4a6e',
+                    background: '#ffffff',
+                    text: '#0f172a'
+                },
+                fonts: {
+                    main: 'Arial, sans-serif',
+                    header: 'Arial, sans-serif'
+                },
+                template: 'corporate'
+            },
+            warm: {
+                name: 'Ciepły',
+                colors: {
+                    primary: '#ea580c',
+                    secondary: '#c2410c',
+                    background: '#ffffff',
+                    text: '#431407'
+                },
+                fonts: {
+                    main: 'Merriweather, serif',
+                    header: 'Merriweather, serif'
+                },
+                template: 'warm'
+            },
+            tech: {
+                name: 'Technologiczny',
+                colors: {
+                    primary: '#0f766e',
+                    secondary: '#115e59',
+                    background: '#ffffff',
+                    text: '#134e4a'
+                },
+                fonts: {
+                    main: 'Segoe UI, sans-serif',
+                    header: 'Segoe UI, sans-serif'
+                },
+                template: 'tech'
             }
         };
 
         const presetGrid = document.querySelector('.preset-grid');
+        if (!presetGrid) return;
+
         presetGrid.innerHTML = '';
 
         Object.entries(presets).forEach(([key, preset]) => {
@@ -218,15 +225,6 @@ class CVGenerator {
         this.cvData.style.fontFamily = preset.fonts.main;
         this.cvData.style.headerFont = preset.fonts.header;
 
-        // Aktualizuj rozmiary czcionek z presetu
-        this.cvData.style.nameFontSize = preset.fontSizes.name;
-        this.cvData.style.titleFontSize = preset.fontSizes.title;
-        this.cvData.style.sectionTitleFontSize = preset.fontSizes.sectionTitle;
-        this.cvData.style.itemTitleFontSize = preset.fontSizes.itemTitle;
-        this.cvData.style.itemSubtitleFontSize = preset.fontSizes.itemSubtitle;
-        this.cvData.style.bodyFontSize = preset.fontSizes.body;
-        this.cvData.style.smallTextSize = preset.fontSizes.small;
-
         document.querySelectorAll('.preset-item').forEach(item => item.classList.remove('active'));
         event.target.closest('.preset-item').classList.add('active');
 
@@ -234,32 +232,73 @@ class CVGenerator {
         this.updatePreview();
     }
 
-    updateFormStyles() {
-        // Kolory
-        document.getElementById('primaryColor').value = this.cvData.style.primaryColor;
-        document.getElementById('secondaryColor').value = this.cvData.style.secondaryColor;
-        document.getElementById('backgroundColor').value = this.cvData.style.backgroundColor;
-        document.getElementById('textColor').value = this.cvData.style.textColor;
-        document.getElementById('fontFamily').value = this.cvData.style.fontFamily;
-        document.getElementById('headerFont').value = this.cvData.style.headerFont;
+    updateFontSelects() {
+        const fontOptions = [
+            'Calibri, sans-serif',
+            'Arial, sans-serif',
+            'Helvetica, sans-serif',
+            'Georgia, serif',
+            'Cambria, serif',
+            'Merriweather, serif',
+            'Segoe UI, sans-serif',
+            'Aptos, sans-serif',
+            'Playfair, serif'
+        ];
 
-        // Rozmiary czcionek - teraz jako pola tekstowe
-        document.getElementById('nameFontSize').value = this.cvData.style.nameFontSize.replace('px', '');
-        document.getElementById('titleFontSize').value = this.cvData.style.titleFontSize.replace('px', '');
-        document.getElementById('sectionTitleFontSize').value = this.cvData.style.sectionTitleFontSize.replace('px', '');
-        document.getElementById('itemTitleFontSize').value = this.cvData.style.itemTitleFontSize.replace('px', '');
-        document.getElementById('itemSubtitleFontSize').value = this.cvData.style.itemSubtitleFontSize.replace('px', '');
-        document.getElementById('bodyFontSize').value = this.cvData.style.bodyFontSize.replace('px', '');
-        document.getElementById('smallTextSize').value = this.cvData.style.smallTextSize.replace('px', '');
+        const fontFamilySelect = document.getElementById('fontFamily');
+        const headerFontSelect = document.getElementById('headerFont');
+
+        if (fontFamilySelect) {
+            const currentValue = this.cvData.style.fontFamily;
+            fontFamilySelect.innerHTML = fontOptions.map(font =>
+                `<option value="${font}">${font.split(',')[0]}</option>`
+            ).join('');
+            fontFamilySelect.value = currentValue;
+        }
+
+        if (headerFontSelect) {
+            const currentValue = this.cvData.style.headerFont;
+            headerFontSelect.innerHTML = fontOptions.map(font =>
+                `<option value="${font}">${font.split(',')[0]}</option>`
+            ).join('');
+            headerFontSelect.value = currentValue;
+        }
     }
 
-    updateFormColors() {
-        document.getElementById('primaryColor').value = this.cvData.style.primaryColor;
-        document.getElementById('secondaryColor').value = this.cvData.style.secondaryColor;
-        document.getElementById('backgroundColor').value = this.cvData.style.backgroundColor;
-        document.getElementById('textColor').value = this.cvData.style.textColor;
-        document.getElementById('fontFamily').value = this.cvData.style.fontFamily;
-        document.getElementById('headerFont').value = this.cvData.style.headerFont;
+    updateFormStyles() {
+        // Kolory
+        const primaryColor = document.getElementById('primaryColor');
+        const secondaryColor = document.getElementById('secondaryColor');
+        const backgroundColor = document.getElementById('backgroundColor');
+        const textColor = document.getElementById('textColor');
+        const fontFamily = document.getElementById('fontFamily');
+        const headerFont = document.getElementById('headerFont');
+
+        if (primaryColor) primaryColor.value = this.cvData.style.primaryColor;
+        if (secondaryColor) secondaryColor.value = this.cvData.style.secondaryColor;
+        if (backgroundColor) backgroundColor.value = this.cvData.style.backgroundColor;
+        if (textColor) textColor.value = this.cvData.style.textColor;
+        if (fontFamily) fontFamily.value = this.cvData.style.fontFamily;
+        if (headerFont) headerFont.value = this.cvData.style.headerFont;
+
+        // Rozmiary czcionek
+        const fs = this.cvData.style.fontSizes;
+
+        const nameFontSize = document.getElementById('nameFontSize');
+        const sectionTitleFontSize = document.getElementById('sectionTitleFontSize');
+        const itemTitleFontSize = document.getElementById('itemTitleFontSize');
+        const bodyFontSize = document.getElementById('bodyFontSize');
+        const itemSubtitleFontSize = document.getElementById('itemSubtitleFontSize');
+        const smallTextSize = document.getElementById('smallTextSize');
+        const titleFontSize = document.getElementById('titleFontSize');
+
+        if (nameFontSize) nameFontSize.value = fs.headers.name.replace('px', '');
+        if (sectionTitleFontSize) sectionTitleFontSize.value = fs.headers.sectionTitle.replace('px', '');
+        if (itemTitleFontSize) itemTitleFontSize.value = fs.headers.itemTitle.replace('px', '');
+        if (bodyFontSize) bodyFontSize.value = fs.body.main.replace('px', '');
+        if (itemSubtitleFontSize) itemSubtitleFontSize.value = fs.body.subtitle.replace('px', '');
+        if (smallTextSize) smallTextSize.value = fs.body.small.replace('px', '');
+        if (titleFontSize) titleFontSize.value = fs.special.professionalTitle.replace('px', '');
     }
 
     setupEventListeners() {
@@ -277,113 +316,125 @@ class CVGenerator {
                     this.cvData.personal[field] = e.target.value;
                     this.updatePreview();
                 });
+            }
+        });
+
+        // Summary
+        const summary = document.getElementById('summary');
+        if (summary) {
+            summary.addEventListener('input', (e) => {
+                this.cvData.summary = e.target.value;
+                this.updatePreview();
+            });
+        }
+
+        // Style controls - kolory
+        const styleControls = [
+            'primaryColor', 'secondaryColor', 'backgroundColor', 'textColor',
+            'fontFamily', 'headerFont'
+        ];
+
+        styleControls.forEach(control => {
+            const element = document.getElementById(control);
+            if (element) {
+                element.addEventListener('input', (e) => {
+                    this.cvData.style[control] = e.target.value;
+                    this.updatePreview();
+                });
                 element.addEventListener('change', (e) => {
-                    this.cvData.personal[field] = e.target.value;
+                    this.cvData.style[control] = e.target.value;
                     this.updatePreview();
                 });
             }
         });
 
-        // Summary
-        document.getElementById('summary').addEventListener('input', (e) => {
-            this.cvData.summary = e.target.value;
-            this.updatePreview();
-        });
-
-        // Style controls - kolory
-        document.getElementById('primaryColor').addEventListener('input', (e) => {
-            this.cvData.style.primaryColor = e.target.value;
-            this.updatePreview();
-        });
-
-        document.getElementById('secondaryColor').addEventListener('input', (e) => {
-            this.cvData.style.secondaryColor = e.target.value;
-            this.updatePreview();
-        });
-
-        document.getElementById('backgroundColor').addEventListener('input', (e) => {
-            this.cvData.style.backgroundColor = e.target.value;
-            this.updatePreview();
-        });
-
-        document.getElementById('textColor').addEventListener('input', (e) => {
-            this.cvData.style.textColor = e.target.value;
-            this.updatePreview();
-        });
-
-        document.getElementById('fontFamily').addEventListener('change', (e) => {
-            this.cvData.style.fontFamily = e.target.value;
-            this.updatePreview();
-        });
-
-        document.getElementById('headerFont').addEventListener('change', (e) => {
-            this.cvData.style.headerFont = e.target.value;
-            this.updatePreview();
-        });
-
         // Style controls - rozmiary czcionek
-        document.getElementById('nameFontSize').addEventListener('input', (e) => {
-            this.cvData.style.nameFontSize = e.target.value + 'px';
-            this.updatePreview();
-        });
+        const fontSizeControls = [
+            'nameFontSize', 'sectionTitleFontSize', 'itemTitleFontSize',
+            'bodyFontSize', 'itemSubtitleFontSize', 'smallTextSize', 'titleFontSize'
+        ];
 
-        document.getElementById('titleFontSize').addEventListener('input', (e) => {
-            this.cvData.style.titleFontSize = e.target.value + 'px';
-            this.updatePreview();
-        });
+        fontSizeControls.forEach(control => {
+            const element = document.getElementById(control);
+            if (element) {
+                element.addEventListener('input', (e) => {
+                    const propertyMap = {
+                        nameFontSize: 'headers.name',
+                        sectionTitleFontSize: 'headers.sectionTitle',
+                        itemTitleFontSize: 'headers.itemTitle',
+                        bodyFontSize: 'body.main',
+                        itemSubtitleFontSize: 'body.subtitle',
+                        smallTextSize: 'body.small',
+                        titleFontSize: 'special.professionalTitle'
+                    };
 
-        document.getElementById('sectionTitleFontSize').addEventListener('input', (e) => {
-            this.cvData.style.sectionTitleFontSize = e.target.value + 'px';
-            this.updatePreview();
+                    const property = propertyMap[control];
+                    if (property) {
+                        const [category, subProperty] = property.split('.');
+                        this.cvData.style.fontSizes[category][subProperty] = e.target.value + 'px';
+                        this.updatePreview();
+                    }
+                });
+            }
         });
-
-        document.getElementById('itemTitleFontSize').addEventListener('input', (e) => {
-            this.cvData.style.itemTitleFontSize = e.target.value + 'px';
-            this.updatePreview();
-        });
-
-        document.getElementById('itemSubtitleFontSize').addEventListener('input', (e) => {
-            this.cvData.style.itemSubtitleFontSize = e.target.value + 'px';
-            this.updatePreview();
-        });
-
-        document.getElementById('bodyFontSize').addEventListener('input', (e) => {
-            this.cvData.style.bodyFontSize = e.target.value + 'px';
-            this.updatePreview();
-        });
-
-        document.getElementById('smallTextSize').addEventListener('input', (e) => {
-            this.cvData.style.smallTextSize = e.target.value + 'px';
-            this.updatePreview();
-        });
-
 
         // Zoom control
-        document.getElementById('zoomLevel').addEventListener('input', (e) => {
-            this.scale = parseFloat(e.target.value);
-            document.getElementById('zoomValue').textContent = Math.round(this.scale * 100) + '%';
-            this.updatePreviewScale();
-        });
+        const zoomLevel = document.getElementById('zoomLevel');
+        if (zoomLevel) {
+            zoomLevel.addEventListener('input', (e) => {
+                this.scale = parseFloat(e.target.value);
+                const zoomValue = document.getElementById('zoomValue');
+                if (zoomValue) {
+                    zoomValue.textContent = Math.round(this.scale * 100) + '%';
+                }
+                this.updatePreviewScale();
+            });
+        }
 
         // Photo upload
-        document.getElementById('photoUpload').addEventListener('change', (e) => this.handlePhotoUpload(e));
-        document.getElementById('removePhoto').addEventListener('click', () => this.removePhoto());
+        const photoUpload = document.getElementById('photoUpload');
+        if (photoUpload) {
+            photoUpload.addEventListener('change', (e) => this.handlePhotoUpload(e));
+        }
 
-        // Buttons
-        document.getElementById('addExperienceBtn').addEventListener('click', () => this.addExperience());
-        document.getElementById('addEducationBtn').addEventListener('click', () => this.addEducation());
-        document.getElementById('addSkillBtn').addEventListener('click', () => this.addSkill());
-        document.getElementById('addLanguageBtn').addEventListener('click', () => this.addLanguage());
-        document.getElementById('addCertificateBtn').addEventListener('click', () => this.addCertificate());
-        document.getElementById('addInterestBtn').addEventListener('click', () => this.addInterest());
-        document.getElementById('addProjectBtn').addEventListener('click', () => this.addProject());
-        document.getElementById('addCustomSectionBtn').addEventListener('click', () => this.addCustomSection());
+        const removePhoto = document.getElementById('removePhoto');
+        if (removePhoto) {
+            removePhoto.addEventListener('click', () => this.removePhoto());
+        }
 
-        // Export buttons
-        document.getElementById('exportPdfBtn').addEventListener('click', () => this.exportPDF());
-        document.getElementById('exportJpgBtn').addEventListener('click', () => this.exportJPG());
-        document.getElementById('saveCvBtn').addEventListener('click', () => this.saveToLocalStorage());
-        document.getElementById('loadCvBtn').addEventListener('click', () => this.loadFromFile());
+        // Buttons - POPRAWIONE
+        const buttonHandlers = {
+            'addExperienceBtn': () => this.addExperience(),
+            'addEducationBtn': () => this.addEducation(),
+            'addSkillBtn': () => this.addSkill(),
+            'addLanguageBtn': () => this.addLanguage(),
+            'addCertificateBtn': () => this.addCertificate(),
+            'addInterestBtn': () => this.addInterest(),
+            'addProjectBtn': () => this.addProject(),
+            'addCustomSectionBtn': () => this.addCustomSection()
+        };
+
+        Object.keys(buttonHandlers).forEach(buttonId => {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.addEventListener('click', buttonHandlers[buttonId]);
+            }
+        });
+
+        // Export buttons - POPRAWIONE
+        const exportButtonHandlers = {
+            'exportPdfBtn': () => this.exportPDF(),
+            'exportJpgBtn': () => this.exportJPG(),
+            'saveCvBtn': () => this.saveToLocalStorage(),
+            'loadCvBtn': () => this.loadFromFile()
+        };
+
+        Object.keys(exportButtonHandlers).forEach(buttonId => {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.addEventListener('click', exportButtonHandlers[buttonId]);
+            }
+        });
 
         // Initialize with empty sections
         this.renderSections();
@@ -392,8 +443,8 @@ class CVGenerator {
     setupDragAndDrop() {
         let draggedItem = null;
 
-        // Make sections draggable
-        document.querySelectorAll('.form-section').forEach(section => {
+        const sections = document.querySelectorAll('.form-section');
+        sections.forEach(section => {
             section.setAttribute('draggable', 'true');
 
             section.addEventListener('dragstart', (e) => {
@@ -473,11 +524,16 @@ class CVGenerator {
         this.cvData.personal.photo = null;
         this.updatePhotoPreview();
         this.updatePreview();
-        document.getElementById('photoUpload').value = '';
+        const photoUpload = document.getElementById('photoUpload');
+        if (photoUpload) {
+            photoUpload.value = '';
+        }
     }
 
     updatePhotoPreview() {
         const preview = document.getElementById('photoPreview');
+        if (!preview) return;
+
         if (this.cvData.personal.photo) {
             preview.innerHTML = `<img src="${this.cvData.personal.photo}" alt="Zdjęcie profilowe">`;
         } else {
@@ -485,6 +541,7 @@ class CVGenerator {
         }
     }
 
+    // Add methods for different sections
     addExperience() {
         if (!this.cvData.experience) this.cvData.experience = [];
         this.cvData.experience.push({
@@ -515,6 +572,8 @@ class CVGenerator {
     addSkill() {
         if (!this.cvData.skills) this.cvData.skills = [];
         const skillInput = document.getElementById('skillInput');
+        if (!skillInput) return;
+
         const skill = skillInput.value.trim();
         if (skill && !this.cvData.skills.includes(skill)) {
             this.cvData.skills.push(skill);
@@ -549,6 +608,8 @@ class CVGenerator {
     addInterest() {
         if (!this.cvData.interests) this.cvData.interests = [];
         const interestInput = document.getElementById('interestInput');
+        if (!interestInput) return;
+
         const interest = interestInput.value.trim();
         if (interest && !this.cvData.interests.includes(interest)) {
             this.cvData.interests.push(interest);
@@ -580,6 +641,7 @@ class CVGenerator {
         this.updatePreview();
     }
 
+    // Render methods for all sections
     renderSections() {
         this.renderExperience();
         this.renderEducation();
@@ -615,30 +677,30 @@ class CVGenerator {
                 <div class="form-row">
                     <div class="form-group">
                         <label>Stanowisko</label>
-                        <input type="text" value="${exp.position || ''}" 
+                        <input type="text" value="${this.escapeHTML(exp.position || '')}" 
                                oninput="cvGenerator.updateExperience(${index}, 'position', this.value)">
                     </div>
                     <div class="form-group">
                         <label>Firma</label>
-                        <input type="text" value="${exp.company || ''}" 
+                        <input type="text" value="${this.escapeHTML(exp.company || '')}" 
                                oninput="cvGenerator.updateExperience(${index}, 'company', this.value)">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Data rozpoczęcia</label>
-                        <input type="text" value="${exp.startDate || ''}" 
+                        <input type="text" value="${this.escapeHTML(exp.startDate || '')}" 
                                oninput="cvGenerator.updateExperience(${index}, 'startDate', this.value)">
                     </div>
                     <div class="form-group">
                         <label>Data zakończenia</label>
-                        <input type="text" value="${exp.endDate || ''}" 
+                        <input type="text" value="${this.escapeHTML(exp.endDate || '')}" 
                                oninput="cvGenerator.updateExperience(${index}, 'endDate', this.value)">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Opis</label>
-                    <textarea oninput="cvGenerator.updateExperience(${index}, 'description', this.value)">${exp.description || ''}</textarea>
+                    <textarea oninput="cvGenerator.updateExperience(${index}, 'description', this.value)">${this.escapeHTML(exp.description || '')}</textarea>
                 </div>
             `;
             container.appendChild(item);
@@ -668,30 +730,30 @@ class CVGenerator {
                 <div class="form-row">
                     <div class="form-group">
                         <label>Tytuł</label>
-                        <input type="text" value="${edu.degree || ''}" 
+                        <input type="text" value="${this.escapeHTML(edu.degree || '')}" 
                                oninput="cvGenerator.updateEducation(${index}, 'degree', this.value)">
                     </div>
                     <div class="form-group">
                         <label>Instytucja</label>
-                        <input type="text" value="${edu.institution || ''}" 
+                        <input type="text" value="${this.escapeHTML(edu.institution || '')}" 
                                oninput="cvGenerator.updateEducation(${index}, 'institution', this.value)">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Data rozpoczęcia</label>
-                        <input type="text" value="${edu.startDate || ''}" 
+                        <input type="text" value="${this.escapeHTML(edu.startDate || '')}" 
                                oninput="cvGenerator.updateEducation(${index}, 'startDate', this.value)">
                     </div>
                     <div class="form-group">
                         <label>Data zakończenia</label>
-                        <input type="text" value="${edu.endDate || ''}" 
+                        <input type="text" value="${this.escapeHTML(edu.endDate || '')}" 
                                oninput="cvGenerator.updateEducation(${index}, 'endDate', this.value)">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Opis</label>
-                    <textarea oninput="cvGenerator.updateEducation(${index}, 'description', this.value)">${edu.description || ''}</textarea>
+                    <textarea oninput="cvGenerator.updateEducation(${index}, 'description', this.value)">${this.escapeHTML(edu.description || '')}</textarea>
                 </div>
             `;
             container.appendChild(item);
@@ -710,7 +772,7 @@ class CVGenerator {
             const tag = document.createElement('div');
             tag.className = 'skill-tag';
             tag.innerHTML = `
-                ${skill}
+                ${this.escapeHTML(skill)}
                 <span class="remove-skill" onclick="cvGenerator.removeSkill(${index})">✕</span>
             `;
             container.appendChild(tag);
@@ -743,7 +805,7 @@ class CVGenerator {
                 <div class="form-row">
                     <div class="form-group">
                         <label>Język</label>
-                        <input type="text" value="${languageValue}" 
+                        <input type="text" value="${this.escapeHTML(languageValue)}" 
                                oninput="cvGenerator.updateLanguage(${index}, 'language', this.value)">
                     </div>
                     <div class="form-group">
@@ -785,24 +847,24 @@ class CVGenerator {
                 </div>
                 <div class="form-group">
                     <label>Nazwa certyfikatu</label>
-                    <input type="text" value="${cert.name || ''}" 
+                    <input type="text" value="${this.escapeHTML(cert.name || '')}" 
                            oninput="cvGenerator.updateCertificate(${index}, 'name', this.value)">
                 </div>
                 <div class="form-group">
                     <label>Instytucja</label>
-                    <input type="text" value="${cert.institution || ''}" 
+                    <input type="text" value="${this.escapeHTML(cert.institution || '')}" 
                            oninput="cvGenerator.updateCertificate(${index}, 'institution', this.value)">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Data uzyskania</label>
-                        <input type="text" value="${cert.date || ''}" 
+                        <input type="text" value="${this.escapeHTML(cert.date || '')}" 
                                oninput="cvGenerator.updateCertificate(${index}, 'date', this.value)">
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Opis</label>
-                    <textarea oninput="cvGenerator.updateCertificate(${index}, 'description', this.value)">${cert.description || ''}</textarea>
+                    <textarea oninput="cvGenerator.updateCertificate(${index}, 'description', this.value)">${this.escapeHTML(cert.description || '')}</textarea>
                 </div>
             `;
             container.appendChild(item);
@@ -821,7 +883,7 @@ class CVGenerator {
             const tag = document.createElement('div');
             tag.className = 'skill-tag';
             tag.innerHTML = `
-                ${interest}
+                ${this.escapeHTML(interest)}
                 <span class="remove-skill" onclick="cvGenerator.removeInterest(${index})">✕</span>
             `;
             container.appendChild(tag);
@@ -850,21 +912,21 @@ class CVGenerator {
                 </div>
                 <div class="form-group">
                     <label>Nazwa projektu</label>
-                    <input type="text" value="${project.name || ''}" 
+                    <input type="text" value="${this.escapeHTML(project.name || '')}" 
                            oninput="cvGenerator.updateProject(${index}, 'name', this.value)">
                 </div>
                 <div class="form-group">
                     <label>Opis</label>
-                    <textarea oninput="cvGenerator.updateProject(${index}, 'description', this.value)">${project.description || ''}</textarea>
+                    <textarea oninput="cvGenerator.updateProject(${index}, 'description', this.value)">${this.escapeHTML(project.description || '')}</textarea>
                 </div>
                 <div class="form-group">
                     <label>Technologie</label>
-                    <input type="text" value="${project.technologies || ''}" 
+                    <input type="text" value="${this.escapeHTML(project.technologies || '')}" 
                            oninput="cvGenerator.updateProject(${index}, 'technologies', this.value)">
                 </div>
                 <div class="form-group">
                     <label>Link</label>
-                    <input type="text" value="${project.link || ''}" 
+                    <input type="text" value="${this.escapeHTML(project.link || '')}" 
                            oninput="cvGenerator.updateProject(${index}, 'link', this.value)">
                 </div>
             `;
@@ -894,12 +956,12 @@ class CVGenerator {
                 </div>
                 <div class="form-group">
                     <label>Tytuł sekcji</label>
-                    <input type="text" value="${section.title || ''}" 
+                    <input type="text" value="${this.escapeHTML(section.title || '')}" 
                            oninput="cvGenerator.updateCustomSection(${index}, 'title', this.value)">
                 </div>
                 <div class="form-group">
                     <label>Treść</label>
-                    <textarea oninput="cvGenerator.updateCustomSection(${index}, 'content', this.value)">${section.content || ''}</textarea>
+                    <textarea oninput="cvGenerator.updateCustomSection(${index}, 'content', this.value)">${this.escapeHTML(section.content || '')}</textarea>
                 </div>
             `;
             container.appendChild(item);
@@ -1110,11 +1172,7 @@ class CVGenerator {
             return;
         }
 
-        // Sprawdź czy kontener istnieje przed pokazaniem loadera
-        const previewContainer = document.querySelector('.preview-container');
-        if (previewContainer) {
-            this.showLoader();
-        }
+        this.showLoader();
 
         const cvHTML = this.generateCVHTML();
         preview.srcdoc = `
@@ -1144,7 +1202,6 @@ class CVGenerator {
             this.isUpdating = false;
         };
 
-        // Fallback - ukryj loader po 3 sekundach na wypadek błędu
         setTimeout(() => {
             this.hideLoader();
             this.isUpdating = false;
@@ -1152,12 +1209,8 @@ class CVGenerator {
     }
 
     showLoader() {
-        // Sprawdź czy kontener podglądu istnieje
         const previewContainer = document.querySelector('.preview-container');
-        if (!previewContainer) {
-            console.warn('Preview container not found');
-            return;
-        }
+        if (!previewContainer) return;
 
         let loader = document.getElementById('previewLoader');
         if (!loader) {
@@ -1169,8 +1222,6 @@ class CVGenerator {
             <div class="loader-text">Aktualizowanie podglądu...</div>
         `;
             previewContainer.appendChild(loader);
-
-            // Dodaj klasę loading do kontenera
             previewContainer.classList.add('loading');
         }
         loader.classList.add('active');
@@ -1277,7 +1328,24 @@ class CVGenerator {
             ...data
         };
 
-        // Migracja języków ze stringów na obiekty
+        if (data.style && !data.style.fontSizes) {
+            migratedData.style.fontSizes = {
+                headers: {
+                    name: data.style.nameFontSize || defaultData.style.fontSizes.headers.name,
+                    sectionTitle: data.style.sectionTitleFontSize || defaultData.style.fontSizes.headers.sectionTitle,
+                    itemTitle: data.style.itemTitleFontSize || defaultData.style.fontSizes.headers.itemTitle
+                },
+                body: {
+                    main: data.style.bodyFontSize || defaultData.style.fontSizes.body.main,
+                    subtitle: data.style.itemSubtitleFontSize || defaultData.style.fontSizes.body.subtitle,
+                    small: data.style.smallTextSize || defaultData.style.fontSizes.body.small
+                },
+                special: {
+                    professionalTitle: data.style.titleFontSize || defaultData.style.fontSizes.special.professionalTitle
+                }
+            };
+        }
+
         if (migratedData.languages && migratedData.languages.length > 0) {
             migratedData.languages = migratedData.languages.map(lang => {
                 if (typeof lang === 'string') {
@@ -1290,7 +1358,6 @@ class CVGenerator {
             });
         }
 
-        // Upewnij się, że wszystkie wymagane tablice istnieją
         if (!migratedData.experience) migratedData.experience = [];
         if (!migratedData.education) migratedData.education = [];
         if (!migratedData.skills) migratedData.skills = [];
@@ -1305,403 +1372,446 @@ class CVGenerator {
 
     generateCVStyles() {
         const style = this.cvData.style;
+        const fs = style.fontSizes;
+
         return `
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: ${style.fontFamily};
+        font-size: ${fs.body.main};
+        line-height: 1.6;
+        letter-spacing: -0.3px;
+        color: ${style.textColor};
+        background: #f0f0f0;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+    }
+    
+    .page-navigation {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 12px 24px;
+        border-radius: 50px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        z-index: 1000;
+        border: 2px solid ${style.primaryColor}30;
+        backdrop-filter: blur(12px);
+        min-width: 200px;
+        justify-content: center;
+    }
+    
+    .page-nav-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .page-nav-btn {
+        background: ${style.primaryColor};
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .page-info {
+        font-size: ${fs.body.small};
+        color: #333;
+        font-weight: 600;
+        min-width: 60px;
+        text-align: center;
+        font-family: ${style.fontFamily};
+    }
+    
+    .cv-pages-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 210mm;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .cv-page {
+        background: ${style.backgroundColor};
+        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        min-height: 297mm;
+        height: auto;
+        width: 210mm;
+        position: relative;
+        padding: 5mm;
+        overflow: hidden;
+        page-break-after: always;
+        margin: 0;
+    }
+    
+    .cv-header {
+        background: ${style.primaryColor};
+        color: white;
+        padding: 1.7rem;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        border-radius: 8px;
+    }
+    
+    .photo-container {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid white;
+        flex-shrink: 0;
+    }
+    
+    .photo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .header-content {
+        flex: 1;
+    }
+    
+    .cv-name {
+        font-family: ${style.headerFont};
+        font-size: ${fs.headers.name};
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    .cv-title {
+        font-size: ${fs.special.professionalTitle};
+        opacity: 0.95;
+        margin-bottom: 1rem;
+        font-weight: 300;
+    }
+    
+    .personal-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
+        font-size: ${fs.body.small};
+        margin-bottom: 1rem;
+    }
+    
+    .personal-info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .personal-info-item .icon {
+        width: 16px;
+        height: 16px;
+        opacity: 0.9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .cv-contact {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
+        font-size: ${fs.body.small};
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .contact-item .icon {
+        width: 16px;
+        height: 16px;
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+    
+    .cv-section {
+        margin: 2rem 0;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    .section-title {
+        color: ${style.primaryColor};
+        font-family: ${style.headerFont};
+        font-size: ${fs.headers.sectionTitle};
+        font-weight: bold;
+        margin-bottom: 1rem;
+        border-bottom: 3px solid ${style.secondaryColor};
+        padding-bottom: 0.5rem;
+        page-break-after: avoid;
+        break-after: avoid;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .section-title .icon {
+        width: 20px;
+        height: 20px;
+        opacity: 0.9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .summary-text {
+        text-align: justify;
+        line-height: 1.8;
+        font-size: 1.05em;
+    }
+    
+    .experience-item, .education-item, .project-item, .certificate-item, .custom-section {
+        margin-bottom: 1.8rem;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    .experience-item:last-child, .education-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+        page-break-after: avoid;
+    }
+    
+    .item-title {
+        font-weight: bold;
+        font-size: ${fs.headers.itemTitle};
+        color: ${style.secondaryColor};
+        flex: 1;
+    }
+    
+    .item-date {
+        color: #666;
+        font-style: italic;
+        font-size: ${fs.body.small};
+        min-width: 120px;
+        text-align: right;
+    }
+    
+    .item-subtitle {
+        color: #555;
+        margin-bottom: 0.8rem;
+        font-size: ${fs.body.subtitle};
+        font-weight: 500;
+    }
+    
+    .item-description {
+        text-align: justify;
+        line-height: 1.7;
+        color: #444;
+        font-size: ${fs.body.main};
+    }
+    
+    .skills-grid, .languages-grid, .interests-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 0.4rem;
+    }
+    
+    .skill-tag, .language-tag, .interest-tag {
+        background: #00000008;
+        color: ${style.primaryColor};
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: ${fs.body.small};
+        text-align: center;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .language-item {
+        margin-bottom: 1rem;
+        padding: 0.8rem;
+        background: ${style.primaryColor}08;
+        border-radius: 10px;
+    }
+    
+    .language-item .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.3rem;
+    }
+    
+    .item-level {
+        color: #666;
+        font-style: italic;
+        font-size: ${fs.body.small};
+    }
+    
+    .custom-section-content {
+        line-height: 1.6;
+        text-align: justify;
+        font-size: ${fs.body.main};
+    }
+    
+    /* TIMELINE STYLES */
+    .experience-timeline {
+        position: relative;
+        margin-left: 30px;
+        padding-left: 20px;
+    }
+    
+    .experience-timeline::before {
+        content: '';
+        position: absolute;
+        left: -11px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: ${style.primaryColor};
+        margin-top: 20px;
+    }
+    
+    .experience-timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+    }
+    
+    .experience-timeline-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .timeline-marker {
+        position: absolute;
+        left: -36px;
+        top: 8px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: ${style.primaryColor};
+        border: 3px solid ${style.backgroundColor};
+        box-shadow: 0 0 0 2px ${style.primaryColor};
+        z-index: 2;
+    }
+    
+    .timeline-content {
+        margin-left: 0;
+    }
+    
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+        height: 0;
+        visibility: hidden;
+    }
+    
+    /* Lepsze zarządzanie podziałami stron */
+    .cv-section:first-child {
+        page-break-before: auto;
+    }
+    
+    .experience-item, .education-item {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    /* Unikaj pozostawiania pojedynczych wierszy na stronie */
+    .item-header, .item-title, .item-subtitle {
+        page-break-after: avoid;
+    }
+    
+    .item-description {
+        orphans: 3;
+        widows: 3;
+    }
+    
+    @media screen {
+        .cv-page {
+            margin-bottom: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
         }
-        
+    }
+    
+    @media print {
         body {
-            font-family: ${style.fontFamily};
-            font-size: ${style.bodyFontSize};
-            line-height: 1.6;
-            letter-spacing: -0.5px;
-            color: ${style.textColor};
-            background: #f0f0f0;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
-        
-        .page-navigation {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95);
-            padding: 12px 24px;
-            border-radius: 50px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            z-index: 1000;
-            border: 2px solid ${style.primaryColor}30;
-            backdrop-filter: blur(12px);
-            min-width: 200px;
-            justify-content: center;
-        }
-        
-        .page-nav-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .page-nav-btn {
-            background: ${style.primaryColor};
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .page-info {
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            min-width: 60px;
-            text-align: center;
-            font-family: ${style.fontFamily};
+            background: white !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 210mm !important;
         }
         
         .cv-pages-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            max-width: 210mm;
-            margin: 0;
-            padding: 0;
+            max-width: none !important;
+            gap: 0 !important;
         }
         
         .cv-page {
-            background: ${style.backgroundColor};
-            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-            min-height: 297mm;
-            height: auto;
-            width: 210mm;
-            position: relative;
-            padding: 5mm;
-            overflow: hidden;
-            page-break-after: always;
-            margin: 0;
+            box-shadow: none !important;
+            margin: 0 !important;
+            page-break-after: always !important;
+            border-radius: 0 !important;
+            padding: 20mm !important;
+            min-height: 297mm !important;
+            height: auto !important;
         }
         
-        .cv-header {
-            background: ${style.primaryColor};
-            color: white;
-            padding: 1.7rem;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
+        .page-navigation {
+            display: none !important;
         }
         
-        .photo-container {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid white;
-            flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        .cv-page {
+            display: block !important;
         }
-        
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .header-content {
-            flex: 1;
-        }
-        
-        .cv-name {
-            font-family: ${style.headerFont};
-            font-size: ${style.nameFontSize};
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .cv-title {
-            font-size: ${style.titleFontSize};
-            opacity: 0.95;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-        
-        .personal-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.5rem;
-            font-size: ${style.smallTextSize};
-            margin-bottom: 1rem;
-        }
-        
-        .personal-info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .personal-info-item .icon {
-            width: 16px;
-            height: 16px;
-            opacity: 0.9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .cv-contact {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.5rem;
-            font-size: ${style.smallTextSize};
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .contact-item .icon {
-            width: 16px;
-            height: 16px;
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        
-        .cv-section {
-            margin: 2rem 0;
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-        
-        .section-title {
-            color: ${style.primaryColor};
-            font-family: ${style.headerFont};
-            font-size: ${style.sectionTitleFontSize};
-            font-weight: bold;
-            margin-bottom: 1rem;
-            border-bottom: 3px solid ${style.secondaryColor};
-            padding-bottom: 0.5rem;
-            page-break-after: avoid;
-            break-after: avoid;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .section-title .icon {
-            width: 20px;
-            height: 20px;
-            opacity: 0.9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .summary-text {
-            text-align: justify;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-        
-        .experience-item, .education-item, .project-item, .certificate-item, .custom-section {
-            margin-bottom: 1.8rem;
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-        
-        .experience-item:last-child, .education-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-            page-break-after: avoid;
-        }
-        
-        .item-title {
-            font-weight: bold;
-            font-size: ${style.itemTitleFontSize};
-            color: ${style.secondaryColor};
-            flex: 1;
-        }
-        
-        .item-date {
-            color: #666;
-            font-style: italic;
-            font-size: ${style.smallTextSize};
-            min-width: 120px;
-            text-align: right;
-        }
-        
-        .item-subtitle {
-            color: #555;
-            margin-bottom: 0.8rem;
-            font-size: ${style.itemSubtitleFontSize};
-            font-weight: 500;
-        }
-        
-        .item-description {
-            text-align: justify;
-            line-height: 1.7;
-            color: #444;
-            font-size: ${style.bodyFontSize};
-        }
-        
-        .skills-grid, .languages-grid, .interests-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 0.4rem;
-        }
-        
-        .skill-tag, .language-tag, .interest-tag {
-            background: #00000008;
-            color: ${style.primaryColor};
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: ${style.smallTextSize};
-            text-align: center;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .language-item {
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            background: ${style.primaryColor}08;
-            border-radius: 10px;
-        }
-        
-        .language-item .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.3rem;
-        }
-        
-        .item-level {
-            color: #666;
-            font-style: italic;
-            font-size: ${style.smallTextSize};
-        }
-        
-        .custom-section-content {
-            line-height: 1.6;
-            text-align: justify;
-            font-size: ${style.bodyFontSize};
-        }
-        
-        .page-break {
-            page-break-before: always;
-            break-before: page;
-            height: 0;
-            visibility: hidden;
-        }
-        
-        /* Lepsze zarządzanie podziałami stron */
-        .cv-section:first-child {
-            page-break-before: auto;
-        }
-        
-        .experience-item, .education-item {
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-        
-        /* Unikaj pozostawiania pojedynczych wierszy na stronie */
-        .item-header, .item-title, .item-subtitle {
-            page-break-after: avoid;
-        }
-        
-        .item-description {
-            orphans: 3;
-            widows: 3;
-        }
-        
-        @media screen {
-            .cv-page {
-                margin-bottom: 20px;
-                box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            }
-        }
-        
-        @media print {
-            body {
-                background: white !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                width: 210mm !important;
-            }
-            
-            .cv-pages-container {
-                max-width: none !important;
-                gap: 0 !important;
-            }
-            
-            .cv-page {
-                box-shadow: none !important;
-                margin: 0 !important;
-                page-break-after: always !important;
-                border-radius: 0 !important;
-                padding: 20mm !important;
-                min-height: 297mm !important;
-                height: auto !important;
-            }
-            
-            .page-navigation {
-                display: none !important;
-            }
-            
-            .cv-page {
-                display: block !important;
-            }
-        }
+    }
     `;
     }
 
     generateCVHTML() {
         const data = this.cvData;
-
-        // Inicjalizacja brakujących tablic
         this.initializeDataArrays(data);
 
-        // Ustaw domyślną kolejność sekcji jeśli brak
         if (!data.sectionOrder || !Array.isArray(data.sectionOrder)) {
             data.sectionOrder = ['summary', 'experience', 'education', 'skills', 'languages', 'certificates', 'interests', 'projects', 'custom'];
         }
 
-        // Generuj poszczególne części CV
         const headerHTML = this.generateHeaderHTML(data);
         const sectionsHTML = this.generateSectionsHTML(data);
 
@@ -1715,7 +1825,6 @@ class CVGenerator {
     `;
     }
 
-    // Inicjalizuje wszystkie wymagane tablice danych
     initializeDataArrays(data) {
         const arrays = ['experience', 'education', 'skills', 'languages', 'certificates', 'interests', 'projects', 'customSections'];
         arrays.forEach(key => {
@@ -1725,7 +1834,6 @@ class CVGenerator {
         });
     }
 
-    // Generuje nagłówek CV
     generateHeaderHTML(data) {
         const personalInfoHTML = this.generatePersonalInfoHTML(data.personal);
         const contactInfoHTML = this.generateContactInfoHTML(data.personal);
@@ -1744,7 +1852,6 @@ class CVGenerator {
     `;
     }
 
-    // Generuje sekcję informacji osobistych
     generatePersonalInfoHTML(personal) {
         const items = [];
         const fields = [{
@@ -1774,7 +1881,6 @@ class CVGenerator {
         return items.length > 0 ? `<div class="personal-info">${items.join('')}</div>` : '';
     }
 
-    // Generuje sekcję kontaktową
     generateContactInfoHTML(personal) {
         const items = [];
         const fields = [{
@@ -1812,7 +1918,6 @@ class CVGenerator {
         return items.length > 0 ? `<div class="cv-contact">${items.join('')}</div>` : '';
     }
 
-    // Generuje wszystkie sekcje treści CV
     generateSectionsHTML(data) {
         const sections = {
             summary: this.generateSummarySection(data.summary),
@@ -1826,14 +1931,12 @@ class CVGenerator {
             custom: this.generateCustomSections(data.customSections)
         };
 
-        // Zwróć sekcje w odpowiedniej kolejności
         return data.sectionOrder
             .map(sectionKey => sections[sectionKey] || '')
             .filter(section => section !== '')
             .join('');
     }
 
-    // Generuje sekcję podsumowania
     generateSummarySection(summary) {
         if (!summary) return '';
 
@@ -1845,30 +1948,33 @@ class CVGenerator {
     `;
     }
 
-    // Generuje sekcję doświadczenia
     generateExperienceSection(experience) {
         if (!experience || experience.length === 0) return '';
 
         const itemsHTML = experience.map((exp, index) => `
-        <div class="experience-item" data-item-index="${index}">
-            <div class="item-header">
-                <h3 class="item-title">${this.escapeHTML(exp.position || '')}</h3>
-                <span class="item-date">${this.escapeHTML(exp.startDate || '')} - ${this.escapeHTML(exp.endDate || 'obecnie')}</span>
+        <div class="experience-timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+                <div class="item-header">
+                    <h3 class="item-title">${this.escapeHTML(exp.position || '')}</h3>
+                    <span class="item-date">${this.escapeHTML(exp.startDate || '')} - ${exp.current ? 'obecnie' : this.escapeHTML(exp.endDate || '')}</span>
+                </div>
+                <div class="item-subtitle">${this.escapeHTML(exp.company || '')}</div>
+                <div class="item-description">${this.formatTextWithLineBreaks(exp.description || '')}</div>
             </div>
-            <div class="item-subtitle">${this.escapeHTML(exp.company || '')}</div>
-            <div class="item-description">${this.formatTextWithLineBreaks(exp.description || '')}</div>
         </div>
     `).join('');
 
         return `
-        <section class="cv-section experience-section">
-            <h2 class="section-title">${this.getIcon('experience')}Doświadczenie zawodowe</h2>
+    <section class="cv-section experience-section">
+        <h2 class="section-title">${this.getIcon('experience')}Doświadczenie zawodowe</h2>
+        <div class="experience-timeline">
             ${itemsHTML}
-        </section>
+        </div>
+    </section>
     `;
     }
 
-    // Generuje sekcję edukacji
     generateEducationSection(education) {
         if (!education || education.length === 0) return '';
 
@@ -1891,7 +1997,6 @@ class CVGenerator {
     `;
     }
 
-    // Generuje sekcję umiejętności
     generateSkillsSection(skills) {
         if (!skills || skills.length === 0) return '';
 
@@ -1907,7 +2012,6 @@ class CVGenerator {
     `;
     }
 
-    // Generuje sekcję języków
     generateLanguagesSection(languages) {
         if (!languages || languages.length === 0) return '';
 
@@ -1933,7 +2037,6 @@ class CVGenerator {
     `;
     }
 
-    // Generuje sekcję certyfikatów
     generateCertificatesSection(certificates) {
         if (!certificates || certificates.length === 0) return '';
 
@@ -1956,7 +2059,6 @@ class CVGenerator {
     `;
     }
 
-    // Generuje sekcję zainteresowań
     generateInterestsSection(interests) {
         if (!interests || interests.length === 0) return '';
 
@@ -1972,7 +2074,6 @@ class CVGenerator {
     `;
     }
 
-    // Generuje sekcję projektów
     generateProjectsSection(projects) {
         if (!projects || projects.length === 0) return '';
 
@@ -1993,7 +2094,6 @@ class CVGenerator {
     `;
     }
 
-    // Generuje niestandardowe sekcje
     generateCustomSections(customSections) {
         if (!customSections || customSections.length === 0) return '';
 
@@ -2005,7 +2105,6 @@ class CVGenerator {
     `).join('');
     }
 
-    // Pomocnicza funkcja do escapowania HTML
     escapeHTML(text) {
         if (!text) return '';
         const div = document.createElement('div');
@@ -2013,13 +2112,11 @@ class CVGenerator {
         return div.innerHTML;
     }
 
-    // Formatuje tekst zamieniając znaki nowej linii na <br>
     formatTextWithLineBreaks(text) {
         if (!text) return '';
         return this.escapeHTML(text).replace(/\n/g, '<br>');
     }
 
-    // Zwraca ikonę SVG dla danego klucza
     getIcon(iconKey) {
         const icons = {
             gender: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`,
@@ -2049,59 +2146,171 @@ class CVGenerator {
         const printWindow = window.open('', '_blank');
         const style = this.cvData.style;
 
-        const pdfStyles = `
-            @media print {
-                @page {
-                    margin: 0;
-                    size: A4;
-                }
-                body {
-                    margin: 0;
-                    padding: 0;
-                    width: 210mm;
-                    height: 297mm;
-                }
-                .cv-page {
-                    width: 210mm;
-                    height: 297mm;
-                    page-break-after: always;
-                    box-shadow: none;
-                    margin: 0;
-                    padding: 20mm;
-                    position: relative;
-                }
-                .cv-header {
-                    margin-bottom: 2rem;
-                }
-                .cv-section {
-                    margin: 1.5rem 0;
+        // Pobierz pełne style z podglądu
+        const preview = document.getElementById('cvPreview');
+        let additionalStyles = '';
+
+        if (preview && preview.contentDocument) {
+            const stylesheets = preview.contentDocument.styleSheets;
+            for (let i = 0; i < stylesheets.length; i++) {
+                try {
+                    const rules = stylesheets[i].cssRules;
+                    for (let j = 0; j < rules.length; j++) {
+                        additionalStyles += rules[j].cssText + '\n';
+                    }
+                } catch (e) {
+                    // Pomijamy stylesheety z różnych domen (CORS)
+                    console.log('Pominięto zewnętrzny stylesheet:', e);
                 }
             }
-            ${this.generateCVStyles()}
-        `;
+        }
+
+        const pdfStyles = `
+        @media print {
+            @page {
+                margin: 0;
+                size: A4;
+            }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                width: 210mm;
+                height: 297mm;
+                background: ${style.backgroundColor} !important;
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            .cv-pages-container {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .cv-page {
+                width: 210mm !important;
+                height: 297mm !important;
+                min-height: 297mm !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                break-after: page !important;
+                break-inside: avoid !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 5mm !important;
+                background: ${style.backgroundColor} !important;
+                position: relative;
+                display: block !important;
+            }
+            .cv-header {
+                background: ${style.primaryColor} !important;
+                color: white !important;
+                margin-bottom: 2rem;
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            .cv-section {
+                margin: 1.5rem 0;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            .section-title {
+                color: ${style.primaryColor} !important;
+                border-bottom-color: ${style.secondaryColor} !important;
+            }
+            .skill-tag, .language-tag, .interest-tag {
+                background: #00000008 !important;
+                color: ${style.primaryColor} !important;
+            }
+            .timeline-marker {
+                background: ${style.primaryColor} !important;
+                border-color: ${style.backgroundColor} !important;
+                box-shadow: 0 0 0 2px ${style.primaryColor} !important;
+            }
+            .experience-timeline::before {
+                background: ${style.primaryColor} !important;
+            }
+            .page-navigation {
+                display: none !important;
+            }
+            .cv-page {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .cv-content {
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+        }
+        
+        /* Style dla podglądu na ekranie */
+        @media screen {
+            body {
+                background: #f0f0f0;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 0;
+            }
+            .cv-page {
+                box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+                margin-bottom: 20px;
+            }
+        }
+        
+        ${this.generateCVStyles()}
+        ${additionalStyles}
+    `;
+
+        const cvHTML = this.generateCVHTML();
 
         printWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>CV - ${this.cvData.personal.firstName} ${this.cvData.personal.lastName}</title>
-                <style>
-                    ${pdfStyles}
-                </style>
-            </head>
-            <body>
-                ${this.generateCVHTML()}
-                <script>
-                    window.onload = function() {
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>CV - ${this.escapeHTML(this.cvData.personal.firstName)} ${this.escapeHTML(this.cvData.personal.lastName)}</title>
+            <style>
+                ${pdfStyles}
+            </style>
+        </head>
+        <body>
+            ${cvHTML}
+            <script>
+                window.onload = function() {
+                    // Dodatkowe zabezpieczenie - wymuś kolory przed drukowaniem
+                    document.querySelectorAll('.cv-header').forEach(header => {
+                        header.style.backgroundColor = '${style.primaryColor}' + ' !important';
+                    });
+                    
+                    document.querySelectorAll('.section-title').forEach(title => {
+                        title.style.color = '${style.primaryColor}' + ' !important';
+                    });
+                    
+                    setTimeout(() => {
                         window.print();
                         setTimeout(() => {
                             window.close();
                         }, 1000);
-                    };
-                <\/script>
-            </body>
-            </html>
-        `);
+                    }, 500);
+                };
+                
+                // Obsługa przed drukowaniem - wymuś style
+                window.onbeforeprint = function() {
+                    document.body.style.backgroundColor = '${style.backgroundColor}' + ' !important';
+                    document.querySelectorAll('.cv-page').forEach(page => {
+                        page.style.backgroundColor = '${style.backgroundColor}' + ' !important';
+                    });
+                };
+            <\/script>
+        </body>
+        </html>
+    `);
         printWindow.document.close();
     }
 
@@ -2110,7 +2319,6 @@ class CVGenerator {
             const preview = document.getElementById('cvPreview');
             if (!preview) return;
 
-            // Wait for iframe to fully load
             await new Promise(resolve => {
                 if (preview.contentDocument.readyState === 'complete') {
                     resolve();
@@ -2119,23 +2327,37 @@ class CVGenerator {
                 }
             });
 
-            const canvas = await html2canvas(preview.contentDocument.body, {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#ffffff'
-            });
+            // Użyj html2canvas jeśli jest dostępny
+            if (typeof html2canvas !== 'undefined') {
+                // Znajdź kontener .cv-pages-container w dokumencie iframe
+                const cvPagesContainer = preview.contentDocument.querySelector('.cv-pages-container');
 
-            const link = document.createElement('a');
-            link.download = `CV_${this.cvData.personal.firstName}_${this.cvData.personal.lastName}.jpg`;
-            link.href = canvas.toDataURL('image/jpeg', 0.9);
-            link.click();
+                if (!cvPagesContainer) {
+                    alert('Nie znaleziono kontenera CV do eksportu.');
+                    return;
+                }
+
+                const canvas = await html2canvas(cvPagesContainer, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    width: cvPagesContainer.scrollWidth,
+                    height: cvPagesContainer.scrollHeight
+                });
+
+                const link = document.createElement('a');
+                link.download = `CV_${this.cvData.personal.firstName}_${this.cvData.personal.lastName}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+            } else {
+                alert('Biblioteka html2canvas nie jest załadowana. Eksport JPG nie jest możliwy.');
+            }
         } catch (error) {
             console.error('Error exporting JPG:', error);
             alert('Błąd podczas eksportu JPG. Spróbuj ponownie.');
         }
     }
-
     saveToLocalStorage() {
         localStorage.setItem('cvData', JSON.stringify(this.cvData));
         alert('CV zapisane pomyślnie!');
@@ -2184,24 +2406,27 @@ class CVGenerator {
 
     populateForm() {
         // Personal info
-        document.getElementById('firstName').value = this.cvData.personal.firstName || '';
-        document.getElementById('lastName').value = this.cvData.personal.lastName || '';
-        document.getElementById('gender').value = this.cvData.personal.gender || '';
-        document.getElementById('birthDate').value = this.cvData.personal.birthDate || '';
-        document.getElementById('nationality').value = this.cvData.personal.nationality || '';
-        document.getElementById('drivingLicense').value = this.cvData.personal.drivingLicense || '';
-        document.getElementById('email').value = this.cvData.personal.email || '';
-        document.getElementById('phone').value = this.cvData.personal.phone || '';
-        document.getElementById('address').value = this.cvData.personal.address || '';
-        document.getElementById('website').value = this.cvData.personal.website || '';
-        document.getElementById('linkedin').value = this.cvData.personal.linkedin || '';
-        document.getElementById('github').value = this.cvData.personal.github || '';
+        const personalFields = [
+            'firstName', 'lastName', 'gender', 'birthDate', 'nationality',
+            'drivingLicense', 'email', 'phone', 'address', 'website',
+            'linkedin', 'github'
+        ];
+
+        personalFields.forEach(field => {
+            const element = document.getElementById(field);
+            if (element) {
+                element.value = this.cvData.personal[field] || '';
+            }
+        });
 
         // Summary
-        document.getElementById('summary').value = this.cvData.summary || '';
+        const summary = document.getElementById('summary');
+        if (summary) {
+            summary.value = this.cvData.summary || '';
+        }
 
         // Style
-        this.updateFormColors();
+        this.updateFormStyles();
 
         // Render sections
         this.renderSections();
@@ -2215,6 +2440,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Back button functionality
-document.querySelector('.back-to-dashboard').addEventListener('click', () => {
-    console.log('Back to dashboard clicked');
-});
+const backButton = document.querySelector('.back-to-dashboard');
+if (backButton) {
+    backButton.addEventListener('click', () => {
+        console.log('Back to dashboard clicked');
+    });
+}

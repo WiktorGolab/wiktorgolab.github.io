@@ -684,6 +684,131 @@
                             <div class="cv-form">
                                 <div class="form-section">
                                     <h4>
+                                        Styl CV
+                                        <i class="fas fa-grip-lines section-handle"
+                                            title="Przeciągnij aby zmienić kolejność"></i>
+                                    </h4>
+                                    <div class="form-row">
+                                        <div class="form-group color-picker-group">
+                                            <label>Kolor główny</label>
+                                            <input type="color" id="primaryColor" value="#2563eb">
+                                        </div>
+                                        <div class="form-group color-picker-group">
+                                            <label>Kolor drugi</label>
+                                            <input type="color" id="secondaryColor" value="#64748b">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group color-picker-group">
+                                            <label>Tło</label>
+                                            <input type="color" id="backgroundColor" value="#ffffff">
+                                        </div>
+                                        <div class="form-group color-picker-group">
+                                            <label>Tekst</label>
+                                            <input type="color" id="textColor" value="#333333">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Czcionka główna</label>
+                                            <select id="fontFamily">
+                                                <option value="Arial, sans-serif">Arial</option>
+                                                <option value="Georgia, serif">Georgia</option>
+                                                <option value="Times New Roman, serif">Times New Roman</option>
+                                                <option value="Helvetica, sans-serif">Helvetica</option>
+                                                <option value="Calibri, sans-serif">Calibri</option>
+                                                <option value="Verdana, sans-serif">Verdana</option>
+                                                <option value="Comic Sans MS, cursive">Comic Sans MS</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Czcionka nagłówków</label>
+                                            <select id="headerFont">
+                                                <option value="Arial, sans-serif">Arial</option>
+                                                <option value="Georgia, serif">Georgia</option>
+                                                <option value="Times New Roman, serif">Times New Roman</option>
+                                                <option value="Helvetica, sans-serif">Helvetica</option>
+                                                <option value="Cambria, serif">Cambria</option>
+                                                <option value="Impact, sans-serif">Impact</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Nowe kontrolki rozmiarów czcionek -->
+                                    <div class="font-size-controls">
+                                        <h5>Rozmiary czcionek (px)</h5>
+
+                                        <!-- Grupa 1: Nagłówki -->
+                                        <div class="font-size-group">
+                                            <h6>Nagłówki</h6>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Imię i nazwisko</label>
+                                                    <input type="number" id="nameFontSize" min="20" max="80" value="34"
+                                                        placeholder="34">
+                                                    <small class="help-text">Główny nagłówek CV</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tytuły sekcji</label>
+                                                    <input type="number" id="sectionTitleFontSize" min="14" max="40"
+                                                        value="20" placeholder="20">
+                                                    <small class="help-text">Doświadczenie, Edukacja, itp.</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Tytuły pozycji</label>
+                                                    <input type="number" id="itemTitleFontSize" min="12" max="30"
+                                                        value="18" placeholder="18">
+                                                    <small class="help-text">Stanowiska, tytuły edukacyjne</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Grupa 2: Tekst główny -->
+                                        <div class="font-size-group">
+                                            <h6>Tekst główny</h6>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Opis / Tekst główny</label>
+                                                    <input type="number" id="bodyFontSize" min="8" max="20" value="12"
+                                                        placeholder="12">
+                                                    <small class="help-text">Główna treść opisów</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Podtytuły</label>
+                                                    <input type="number" id="itemSubtitleFontSize" min="10" max="20"
+                                                        value="14" placeholder="14">
+                                                    <small class="help-text">Firmy, instytucje, daty</small>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Tekst pomocniczy</label>
+                                                    <input type="number" id="smallTextSize" min="8" max="18" value="14"
+                                                        placeholder="14">
+                                                    <small class="help-text">Kontakt, dodatkowe informacje</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Grupa 3: Specjalne -->
+                                        <div class="font-size-group">
+                                            <h6>Specjalne</h6>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Tytuł zawodowy</label>
+                                                    <input type="number" id="titleFontSize" min="14" max="30" value="20"
+                                                        placeholder="20">
+                                                    <small class="help-text">Pod imieniem i nazwiskiem</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h4>
                                         Informacje osobiste
                                         <i class="fas fa-grip-lines section-handle"
                                             title="Przeciągnij aby zmienić kolejność"></i>
@@ -787,106 +912,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-section">
-                                    <h4>
-                                        Styl CV
-                                        <i class="fas fa-grip-lines section-handle"
-                                            title="Przeciągnij aby zmienić kolejność"></i>
-                                    </h4>
-                                    <div class="form-row">
-                                        <div class="form-group color-picker-group">
-                                            <label>Kolor główny</label>
-                                            <input type="color" id="primaryColor" value="#2563eb">
-                                        </div>
-                                        <div class="form-group color-picker-group">
-                                            <label>Kolor drugi</label>
-                                            <input type="color" id="secondaryColor" value="#64748b">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group color-picker-group">
-                                            <label>Tło</label>
-                                            <input type="color" id="backgroundColor" value="#ffffff">
-                                        </div>
-                                        <div class="form-group color-picker-group">
-                                            <label>Tekst</label>
-                                            <input type="color" id="textColor" value="#333333">
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Czcionka główna</label>
-                                            <select id="fontFamily">
-                                                <option value="Arial, sans-serif">Arial</option>
-                                                <option value="Georgia, serif">Georgia</option>
-                                                <option value="Times New Roman, serif">Times New Roman</option>
-                                                <option value="Helvetica, sans-serif">Helvetica</option>
-                                                <option value="Calibri, sans-serif">Calibri</option>
-                                                <option value="Verdana, sans-serif">Verdana</option>
-                                                <option value="Comic Sans MS, cursive">Comic Sans MS</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Czcionka nagłówków</label>
-                                            <select id="headerFont">
-                                                <option value="Arial, sans-serif">Arial</option>
-                                                <option value="Georgia, serif">Georgia</option>
-                                                <option value="Times New Roman, serif">Times New Roman</option>
-                                                <option value="Helvetica, sans-serif">Helvetica</option>
-                                                <option value="Cambria, serif">Cambria</option>
-                                                <option value="Impact, sans-serif">Impact</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Nowe kontrolki rozmiarów czcionek -->
-                                    <div class="font-size-controls">
-                                        <h5>Rozmiary czcionek (px)</h5>
-                                        <div class="form-row">
-                                            <div class="form-group">
-                                                <label>Imię i nazwisko</label>
-                                                <input type="number" id="nameFontSize" min="10" max="100" value="40"
-                                                    placeholder="40">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tytuł zawodowy</label>
-                                                <input type="number" id="titleFontSize" min="10" max="50" value="22"
-                                                    placeholder="22">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group">
-                                                <label>Tytuły sekcji</label>
-                                                <input type="number" id="sectionTitleFontSize" min="10" max="50"
-                                                    value="22" placeholder="22">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tytuły pozycji</label>
-                                                <input type="number" id="itemTitleFontSize" min="10" max="40" value="18"
-                                                    placeholder="18">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group">
-                                                <label>Podtytuły</label>
-                                                <input type="number" id="itemSubtitleFontSize" min="10" max="40"
-                                                    value="17" placeholder="17">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tekst główny</label>
-                                                <input type="number" id="bodyFontSize" min="8" max="30" value="14"
-                                                    placeholder="14">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group">
-                                                <label>Tekst pomocniczy</label>
-                                                <input type="number" id="smallTextSize" min="8" max="30" value="14"
-                                                    placeholder="14">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                                 <div class="form-section">
                                     <h4>
@@ -936,7 +962,7 @@
                                     </h4>
                                     <div class="skills-input">
                                         <input type="text" id="skillInput" placeholder="np. JavaScript, React, Python">
-                                        <button type="button" id="addSkillBtn" class="btn-small">Dodaj</button>
+                                        <button type="button" id="addSkillBtn" class="btn-small">+</button>
                                     </div>
                                     <div id="skillsList" class="skills-list">
                                         <!-- Skills will be loaded here -->
@@ -977,7 +1003,7 @@
                                     <div class="skills-input">
                                         <input type="text" id="interestInput"
                                             placeholder="np. Fotografia, Podróże, Sport">
-                                        <button type="button" id="addInterestBtn" class="btn-small">Dodaj</button>
+                                        <button type="button" id="addInterestBtn" class="btn-small">+</button>
                                     </div>
                                     <div id="interestsList" class="skills-list">
                                         <!-- Interests will be loaded here -->
@@ -1012,8 +1038,7 @@
                                 <div class="cv-actions">
                                     <button id="exportPdfBtn">Eksportuj PDF</button>
                                     <button id="exportJpgBtn">Eksportuj JPG</button>
-                                    <button id="saveCvBtn">Zapisz CV</button>
-                                    <button id="loadCvBtn">Wczytaj CV</button>
+                                    <button id="saveCvBtn">Zapisz CV (Cookies)</button>
                                 </div>
                             </div>
                         </div>
