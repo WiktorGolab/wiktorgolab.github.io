@@ -539,52 +539,90 @@ class CVGenerator {
     }
 
     setupDragAndDrop() {
-        let draggedItem = null;
+    let draggedItem = null;
+    let isDraggingEnabled = false;
 
-        const sections = document.querySelectorAll('.form-section');
-        sections.forEach(section => {
+    const sections = document.querySelectorAll('.form-section');
+    
+    sections.forEach(section => {
+        const sectionHandle = section.querySelector('.section-handle');
+        
+        if (!sectionHandle) return;
+
+        // Włącz przeciąganie tylko gdy kursor jest na section-handle
+        sectionHandle.addEventListener('mouseenter', () => {
             section.setAttribute('draggable', 'true');
+            isDraggingEnabled = true;
+        });
 
-            section.addEventListener('dragstart', (e) => {
-                draggedItem = section;
-                setTimeout(() => section.classList.add('dragging'), 0);
-            });
+        sectionHandle.addEventListener('mouseleave', () => {
+            if (!draggedItem) {
+                section.setAttribute('draggable', 'false');
+                isDraggingEnabled = false;
+            }
+        });
 
-            section.addEventListener('dragend', () => {
-                section.classList.remove('dragging');
-                draggedItem = null;
-                document.querySelectorAll('.form-section').forEach(s => s.classList.remove('drag-over'));
-            });
-
-            section.addEventListener('dragover', (e) => {
+        section.addEventListener('dragstart', (e) => {
+            if (!isDraggingEnabled) {
                 e.preventDefault();
-                section.classList.add('drag-over');
-            });
+                return;
+            }
+            
+            draggedItem = section;
+            setTimeout(() => section.classList.add('dragging'), 0);
+        });
 
-            section.addEventListener('dragleave', () => {
-                section.classList.remove('drag-over');
-            });
-
-            section.addEventListener('drop', (e) => {
-                e.preventDefault();
-                section.classList.remove('drag-over');
-
-                if (draggedItem && draggedItem !== section) {
-                    const allSections = Array.from(document.querySelectorAll('.form-section'));
-                    const draggedIndex = allSections.indexOf(draggedItem);
-                    const targetIndex = allSections.indexOf(section);
-
-                    if (draggedIndex < targetIndex) {
-                        section.parentNode.insertBefore(draggedItem, section.nextSibling);
-                    } else {
-                        section.parentNode.insertBefore(draggedItem, section);
-                    }
-
-                    this.updateSectionOrder();
+        section.addEventListener('dragend', () => {
+            section.classList.remove('dragging');
+            draggedItem = null;
+            isDraggingEnabled = false;
+            
+            // Przywróć stan draggable po zakończeniu przeciągania
+            sections.forEach(s => {
+                const handle = s.querySelector('.section-handle');
+                if (handle) {
+                    s.setAttribute('draggable', 'false');
                 }
             });
+            
+            document.querySelectorAll('.form-section').forEach(s => s.classList.remove('drag-over'));
         });
-    }
+
+        section.addEventListener('dragover', (e) => {
+            if (!draggedItem) return;
+            e.preventDefault();
+            section.classList.add('drag-over');
+        });
+
+        section.addEventListener('dragleave', () => {
+            section.classList.remove('drag-over');
+        });
+
+        section.addEventListener('drop', (e) => {
+            e.preventDefault();
+            section.classList.remove('drag-over');
+
+            if (draggedItem && draggedItem !== section && isDraggingEnabled) {
+                const allSections = Array.from(document.querySelectorAll('.form-section'));
+                const draggedIndex = allSections.indexOf(draggedItem);
+                const targetIndex = allSections.indexOf(section);
+
+                if (draggedIndex < targetIndex) {
+                    section.parentNode.insertBefore(draggedItem, section.nextSibling);
+                } else {
+                    section.parentNode.insertBefore(draggedItem, section);
+                }
+
+                this.updateSectionOrder();
+            }
+        });
+    });
+
+    // Domyślnie wyłącz przeciąganie
+    sections.forEach(section => {
+        section.setAttribute('draggable', 'false');
+    });
+}
 
     updateSectionOrder() {
         const sections = Array.from(document.querySelectorAll('.form-section'));
@@ -1847,7 +1885,6 @@ class CVGenerator {
     
     .experience-timeline-item {
         position: relative;
-        margin-bottom: 2rem;
         padding-bottom: 1rem;
     }
     
