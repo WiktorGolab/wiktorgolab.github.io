@@ -247,14 +247,14 @@ class CVGenerator {
         if (!this.cvData.style.sectionMargins) {
             this.cvData.style.sectionMargins = this.getDefaultData().style.sectionMargins;
         }
-        
+
         this.cvData.style.sectionMargins[section] = value;
         this.updatePreview();
     }
 
     updateFormMargins() {
         const margins = this.cvData.style.sectionMargins;
-        
+
         if (!margins) return;
 
         const marginControls = {
@@ -474,8 +474,7 @@ class CVGenerator {
         const exportButtonHandlers = {
             'exportPdfBtn': () => this.exportPDF(),
             'exportJpgBtn': () => this.exportJPG(),
-            'saveCvBtn': () => this.saveToLocalStorage(),
-            'loadCvBtn': () => this.loadFromFile()
+            'saveCvBtn': () => this.saveToLocalStorage()
         };
 
         Object.keys(exportButtonHandlers).forEach(buttonId => {
@@ -488,7 +487,7 @@ class CVGenerator {
         // Marginesy
         const marginControls = {
             'summaryMargin': 'summary',
-            'experienceMargin': 'experience', 
+            'experienceMargin': 'experience',
             'educationMargin': 'education',
             'skillsMargin': 'skills',
             'languagesMargin': 'languages',
@@ -539,90 +538,90 @@ class CVGenerator {
     }
 
     setupDragAndDrop() {
-    let draggedItem = null;
-    let isDraggingEnabled = false;
+        let draggedItem = null;
+        let isDraggingEnabled = false;
 
-    const sections = document.querySelectorAll('.form-section');
-    
-    sections.forEach(section => {
-        const sectionHandle = section.querySelector('.section-handle');
-        
-        if (!sectionHandle) return;
+        const sections = document.querySelectorAll('.form-section');
 
-        // Włącz przeciąganie tylko gdy kursor jest na section-handle
-        sectionHandle.addEventListener('mouseenter', () => {
-            section.setAttribute('draggable', 'true');
-            isDraggingEnabled = true;
-        });
+        sections.forEach(section => {
+            const sectionHandle = section.querySelector('.section-handle');
 
-        sectionHandle.addEventListener('mouseleave', () => {
-            if (!draggedItem) {
-                section.setAttribute('draggable', 'false');
-                isDraggingEnabled = false;
-            }
-        });
+            if (!sectionHandle) return;
 
-        section.addEventListener('dragstart', (e) => {
-            if (!isDraggingEnabled) {
-                e.preventDefault();
-                return;
-            }
-            
-            draggedItem = section;
-            setTimeout(() => section.classList.add('dragging'), 0);
-        });
+            // Włącz przeciąganie tylko gdy kursor jest na section-handle
+            sectionHandle.addEventListener('mouseenter', () => {
+                section.setAttribute('draggable', 'true');
+                isDraggingEnabled = true;
+            });
 
-        section.addEventListener('dragend', () => {
-            section.classList.remove('dragging');
-            draggedItem = null;
-            isDraggingEnabled = false;
-            
-            // Przywróć stan draggable po zakończeniu przeciągania
-            sections.forEach(s => {
-                const handle = s.querySelector('.section-handle');
-                if (handle) {
-                    s.setAttribute('draggable', 'false');
+            sectionHandle.addEventListener('mouseleave', () => {
+                if (!draggedItem) {
+                    section.setAttribute('draggable', 'false');
+                    isDraggingEnabled = false;
                 }
             });
-            
-            document.querySelectorAll('.form-section').forEach(s => s.classList.remove('drag-over'));
-        });
 
-        section.addEventListener('dragover', (e) => {
-            if (!draggedItem) return;
-            e.preventDefault();
-            section.classList.add('drag-over');
-        });
-
-        section.addEventListener('dragleave', () => {
-            section.classList.remove('drag-over');
-        });
-
-        section.addEventListener('drop', (e) => {
-            e.preventDefault();
-            section.classList.remove('drag-over');
-
-            if (draggedItem && draggedItem !== section && isDraggingEnabled) {
-                const allSections = Array.from(document.querySelectorAll('.form-section'));
-                const draggedIndex = allSections.indexOf(draggedItem);
-                const targetIndex = allSections.indexOf(section);
-
-                if (draggedIndex < targetIndex) {
-                    section.parentNode.insertBefore(draggedItem, section.nextSibling);
-                } else {
-                    section.parentNode.insertBefore(draggedItem, section);
+            section.addEventListener('dragstart', (e) => {
+                if (!isDraggingEnabled) {
+                    e.preventDefault();
+                    return;
                 }
 
-                this.updateSectionOrder();
-            }
-        });
-    });
+                draggedItem = section;
+                setTimeout(() => section.classList.add('dragging'), 0);
+            });
 
-    // Domyślnie wyłącz przeciąganie
-    sections.forEach(section => {
-        section.setAttribute('draggable', 'false');
-    });
-}
+            section.addEventListener('dragend', () => {
+                section.classList.remove('dragging');
+                draggedItem = null;
+                isDraggingEnabled = false;
+
+                // Przywróć stan draggable po zakończeniu przeciągania
+                sections.forEach(s => {
+                    const handle = s.querySelector('.section-handle');
+                    if (handle) {
+                        s.setAttribute('draggable', 'false');
+                    }
+                });
+
+                document.querySelectorAll('.form-section').forEach(s => s.classList.remove('drag-over'));
+            });
+
+            section.addEventListener('dragover', (e) => {
+                if (!draggedItem) return;
+                e.preventDefault();
+                section.classList.add('drag-over');
+            });
+
+            section.addEventListener('dragleave', () => {
+                section.classList.remove('drag-over');
+            });
+
+            section.addEventListener('drop', (e) => {
+                e.preventDefault();
+                section.classList.remove('drag-over');
+
+                if (draggedItem && draggedItem !== section && isDraggingEnabled) {
+                    const allSections = Array.from(document.querySelectorAll('.form-section'));
+                    const draggedIndex = allSections.indexOf(draggedItem);
+                    const targetIndex = allSections.indexOf(section);
+
+                    if (draggedIndex < targetIndex) {
+                        section.parentNode.insertBefore(draggedItem, section.nextSibling);
+                    } else {
+                        section.parentNode.insertBefore(draggedItem, section);
+                    }
+
+                    this.updateSectionOrder();
+                }
+            });
+        });
+
+        // Domyślnie wyłącz przeciąganie
+        sections.forEach(section => {
+            section.setAttribute('draggable', 'false');
+        });
+    }
 
     updateSectionOrder() {
         const sections = Array.from(document.querySelectorAll('.form-section'));
@@ -716,7 +715,7 @@ class CVGenerator {
             skillInput.value = '';
             this.renderSkills();
             this.updatePreview();
-            
+
             // Focus na input po dodaniu
             setTimeout(() => skillInput.focus(), 10);
         }
@@ -755,7 +754,7 @@ class CVGenerator {
             interestInput.value = '';
             this.renderInterests();
             this.updatePreview();
-            
+
             // Focus na input po dodaniu
             setTimeout(() => interestInput.focus(), 10);
         }
@@ -2530,8 +2529,161 @@ class CVGenerator {
     }
 
     saveToLocalStorage() {
-        localStorage.setItem('cvData', JSON.stringify(this.cvData));
-        alert('CV zapisane pomyślnie!');
+        try {
+            localStorage.setItem('cvData', JSON.stringify(this.cvData));
+            this.showSaveNotification('CV zostało pomyślnie zapisane!', 'success');
+        } catch (error) {
+            console.error('Błąd zapisu do localStorage:', error);
+            this.showSaveNotification('Błąd podczas zapisywania CV. Spróbuj ponownie.', 'error');
+        }
+    }
+
+    showSaveNotification(message, type = 'success') {
+        // Sprawdź czy już istnieje powiadomienie i usuń je
+        const existingNotification = document.getElementById('saveNotification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+
+        // Utwórz nowe powiadomienie
+        const notification = document.createElement('div');
+        notification.id = 'saveNotification';
+        notification.className = `save-notification save-notification-${type}`;
+
+        const icon = type === 'success' ?
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>' :
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';
+
+        notification.innerHTML = `
+        <div class="save-notification-content">
+            <span class="save-notification-icon">${icon}</span>
+            <span class="save-notification-text">${message}</span>
+        </div>
+        <button class="save-notification-close" onclick="this.parentElement.remove()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+        </button>
+    `;
+
+        // Dodaj stylowanie jeśli nie istnieje
+        if (!document.getElementById('saveNotificationStyles')) {
+            const styles = document.createElement('style');
+            styles.id = 'saveNotificationStyles';
+            styles.textContent = `
+            .save-notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #0e0e0e;
+                border-radius: 12px;
+                padding: 16px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border-left: 4px solid white;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                max-width: 400px;
+                z-index: 10000;
+                animation: slideInRight 0.3s ease-out;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            }
+            
+            .save-notification-error {
+                border-left-color: #ef4444;
+            }
+            
+            .save-notification-content {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex: 1;
+            }
+            
+            .save-notification-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background: white;
+                color: black;
+                flex-shrink: 0;
+            }
+            
+            .save-notification-error .save-notification-icon {
+                background: #ef4444;
+            }
+            
+            .save-notification-text {
+                color: white;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 1.4;
+            }
+            
+            .save-notification-close {
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                padding: 4px;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+                flex-shrink: 0;
+            }
+            
+            .save-notification-close:hover {
+                background: #f3f4f6;
+                color: #6b7280;
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            .save-notification.hiding {
+                animation: slideOutRight 0.3s ease-in forwards;
+            }
+        `;
+            document.head.appendChild(styles);
+        }
+
+        document.body.appendChild(notification);
+
+        // Automatyczne ukrywanie po 5 sekundach
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.classList.add('hiding');
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }
+        }, 5000);
     }
 
     loadFromLocalStorage() {
@@ -2543,36 +2695,16 @@ class CVGenerator {
                 this.populateForm();
                 this.setupPresets();
                 this.updatePreview();
+                this.showSaveNotification('CV zostało przywrócone z zapisanej wersji!', 'success');
             } catch (error) {
                 console.error('Error loading from localStorage:', error);
                 this.cvData = this.getDefaultData();
                 this.populateForm();
+                this.showSaveNotification('Błąd podczas wczytywania zapisanego CV. Przywrócono domyślne ustawienia.', 'error');
             }
+        } else {
+            this.showSaveNotification('Brak zapisanego CV. Możesz rozpocząć tworzenie nowego dokumentu.', 'info');
         }
-    }
-
-    loadFromFile() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.json';
-        input.onchange = (e) => {
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                try {
-                    const parsedData = JSON.parse(event.target.result);
-                    this.cvData = this.migrateOldData(parsedData);
-                    this.populateForm();
-                    this.setupPresets();
-                    this.updatePreview();
-                    alert('CV załadowane pomyślnie!');
-                } catch (error) {
-                    alert('Błąd podczas wczytywania pliku.');
-                }
-            };
-            reader.readAsText(file);
-        };
-        input.click();
     }
 
     populateForm() {

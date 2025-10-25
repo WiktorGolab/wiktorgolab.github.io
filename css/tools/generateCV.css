@@ -1636,3 +1636,11 @@
         animation: none;
     }
 }
+
+.save-notification-info {
+    border-left-color: #3b82f6;
+}
+
+.save-notification-info .save-notification-icon {
+    background: #3b82f6;
+}
