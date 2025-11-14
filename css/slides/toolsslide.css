@@ -207,17 +207,38 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 30px;
-    border: 1px solid rgba(255, 115, 0, 0.4);
+    padding: 10px 20px;
+    background: rgba(255, 115, 0, 0.1);
+    border-radius: 35px;
+    border: 1px solid #ddd;
     color: white;
     text-decoration: none;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
+    transition: all 0.2s ease-in-out;
+    font-weight: 300;
+    font-family: var(--font);
+    font-size: 1.1rem;
+    cursor: pointer;
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 1));
 }
 
 .tools-btn:hover {
-    background: rgba(255, 115, 0, 0.3);
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 115, 0, 0.4);
+    background-color: rgba(255, 115, 0, 0.25);
+    border: 1px solid rgb(255, 210, 173);
+    color: rgb(255, 227, 204);
+    transform: translateY(-5px);
+}
+
+.tools-btn i {
+    transition: color 0.2s ease-in-out;
+}
+
+.tools-btn:hover i {
+    color: rgb(255, 227, 204);
+}
+
+@media (max-width: 768px) {
+    .tools-btn {
+        padding: 7px 14px;
+        font-size: 0.8rem;
+    }
 }

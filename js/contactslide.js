@@ -186,9 +186,126 @@ class ContactGalaxy {
         const backgroundStarsPoints = new THREE.Points(backgroundGeometry, backgroundStarsMaterial);
         this.scene.add(backgroundStarsPoints);
         
+        // Create glow effects as 3D objects
+        this.createGlowEffects();
+        
         this.stars = {
             background: backgroundStarsPoints
         };
+    }
+    
+    createGlowEffects() {
+        if (!this.scene || !this.camera) {
+            console.log('Contact glow: scene or camera not ready');
+            return;
+        }
+        
+        // Number of glow effects (between 10-15)
+        const glowCount = Math.floor(Math.random() * 6) + 10;
+        console.log(`Creating ${glowCount} glow effects`);
+        
+        // Create glow texture (larger and brighter)
+        const createGlowTexture = (size = 256) => {
+            const canvas = document.createElement('canvas');
+            canvas.width = canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            const gradient = ctx.createRadialGradient(
+                size / 2, size / 2, 0,
+                size / 2, size / 2, size / 2
+            );
+            gradient.addColorStop(0, 'rgba(255, 115, 0, 1)');
+            gradient.addColorStop(0.15, 'rgba(255, 115, 0, 0.9)');
+            gradient.addColorStop(0.3, 'rgba(255, 115, 0, 0.7)');
+            gradient.addColorStop(0.5, 'rgba(255, 115, 0, 0.4)');
+            gradient.addColorStop(0.7, 'rgba(255, 115, 0, 0.2)');
+            gradient.addColorStop(1, 'rgba(255, 115, 0, 0)');
+            
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            const texture = new THREE.Texture(canvas);
+            texture.needsUpdate = true;
+            return texture;
+        };
+        
+        const glowTexture = createGlowTexture();
+        
+        for (let i = 0; i < glowCount; i++) {
+            // Generate random 3D position similar to stars but closer to camera
+            const distance = 30 + Math.random() * 60; // Closer range
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            
+            const x = distance * Math.sin(phi) * Math.cos(theta);
+            const y = distance * Math.sin(phi) * Math.sin(theta);
+            const z = distance * Math.cos(phi);
+            
+            // Random size between 30 and 60 (much larger for visibility)
+            const size = Math.random() * 30 + 30;
+            
+            // Create sprite for glow
+            const glowMaterial = new THREE.SpriteMaterial({
+                map: glowTexture,
+                transparent: true,
+                opacity: (Math.random() * 0.3 + 0.6) * 0.2, // 0.12 to 0.18 (20% of original)
+                blending: THREE.AdditiveBlending,
+                depthWrite: false,
+                color: new THREE.Color(0.2, 0.09, 0) // 20% of orange tint
+            });
+            
+            const glowSprite = new THREE.Sprite(glowMaterial);
+            glowSprite.scale.set(size, size, 1);
+            glowSprite.position.set(x, y, z);
+            
+            // Store animation properties
+            glowSprite.userData = {
+                basePosition: { x, y, z },
+                baseOpacity: glowMaterial.opacity,
+                baseSize: size,
+                animationSpeed: Math.random() * 0.02 + 0.01,
+                animationOffset: Math.random() * Math.PI * 2,
+                moveRange: Math.random() * 3 + 2,
+                scaleRange: Math.random() * 0.3 + 0.2
+            };
+            
+            this.scene.add(glowSprite);
+            
+            if (!this.glowSprites) {
+                this.glowSprites = [];
+            }
+            this.glowSprites.push(glowSprite);
+        }
+        
+        console.log(`Created ${this.glowSprites.length} glow sprites`);
+    }
+    
+    animateGlows() {
+        if (!this.glowSprites || !this.rafActive) return;
+        
+        const time = Date.now() * 0.001;
+        
+        this.glowSprites.forEach(glow => {
+            const { basePosition, baseOpacity, animationSpeed, animationOffset, moveRange, scaleRange } = glow.userData;
+            
+            // Animate position
+            const wave = Math.sin(time * animationSpeed + animationOffset);
+            glow.position.x = basePosition.x + wave * moveRange;
+            glow.position.y = basePosition.y + wave * moveRange * 0.5;
+            glow.position.z = basePosition.z + wave * moveRange * 0.7;
+            
+            // Animate scale
+            const scaleWave = Math.sin(time * animationSpeed * 1.5 + animationOffset);
+            const scale = 1 + scaleWave * scaleRange;
+            const baseSize = glow.userData.baseSize || 40;
+            glow.scale.set(baseSize * scale, baseSize * scale, 1);
+            
+            // Animate opacity
+            const opacityWave = Math.sin(time * animationSpeed * 0.8 + animationOffset);
+            glow.material.opacity = Math.max(0.06, Math.min(0.2, baseOpacity + opacityWave * 0.04));
+        });
     }
     
     setPosition(x, y, z) {
@@ -223,6 +340,9 @@ class ContactGalaxy {
             this.stars.background.rotation.y += rotationSpeed;
         }
         
+        // Animate glow effects
+        this.animateGlows();
+        
         if (this.renderer && this.scene && this.camera) {
             this.renderer.render(this.scene, this.camera);
         }
@@ -254,7 +374,7 @@ class ContactGalaxy {
 // Initialize contact galaxy
 let contactGalaxyInstance = null;
 
-function initContactGalaxy() {
+function contactSlideInitGalaxy() {
     if (contactGalaxyInstance && contactGalaxyInstance.isInitialized) return;
     
     const container = document.getElementById('contact-galaxy-container');
@@ -262,7 +382,7 @@ function initContactGalaxy() {
     
     if (!container || !canvas) {
         // Retry after a short delay
-        setTimeout(initContactGalaxy, 100);
+        setTimeout(contactSlideInitGalaxy, 100);
         return;
     }
     
@@ -277,10 +397,11 @@ function initContactGalaxy() {
     }
 }
 
-// Initialize when DOM is ready
-function setupContactGalaxy() {
-    // Try to initialize
-    setTimeout(initContactGalaxy, 1000);
+
+// Initialize contact slide
+function contactSlideSetup() {
+    // Try to initialize galaxy (glows will be created after galaxy is ready)
+    setTimeout(contactSlideInitGalaxy, 1000);
     
     // Also try to initialize when slide becomes active
     const contactSlide = document.querySelector('.slide.contact');
@@ -288,7 +409,7 @@ function setupContactGalaxy() {
         const observer = new MutationObserver(() => {
             if (contactSlide.classList.contains('active')) {
                 if (!contactGalaxyInstance || !contactGalaxyInstance.isInitialized) {
-                    initContactGalaxy();
+                    contactSlideInitGalaxy();
                 } else {
                     contactGalaxyInstance.rafActive = true;
                     if (!contactGalaxyInstance.animationId) {
@@ -305,17 +426,18 @@ function setupContactGalaxy() {
         
         // Check immediately
         if (contactSlide.classList.contains('active')) {
-            setTimeout(initContactGalaxy, 500);
+            setTimeout(contactSlideInitGalaxy, 500);
         }
     } else {
         // Retry if slide not found yet
-        setTimeout(setupContactGalaxy, 100);
+        setTimeout(contactSlideSetup, 100);
     }
 }
 
+// Initialize when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupContactGalaxy);
+    document.addEventListener('DOMContentLoaded', contactSlideSetup);
 } else {
-    setupContactGalaxy();
+    contactSlideSetup();
 }
 
