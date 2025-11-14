@@ -1,0 +1,223 @@
+/* TOOLS SLIDE */
+.slide.tools {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.tools-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.tools-line {
+    position: absolute;
+    white-space: nowrap;
+    padding: 15px 0;
+    width: max-content;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Nieparzyste linie - lewo */
+.tools-line.odd {
+    animation: scrollLeft 30s linear infinite;
+}
+
+/* Parzyste linie - prawo */
+.tools-line.even {
+    animation: scrollRight 30s linear infinite;
+}
+
+.tools-word {
+    display: inline-block;
+    margin: 0 30px;
+    transition: all 0.8s ease;
+    position: relative;
+}
+
+.tools-word.highlight {
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 
+        0 0 10px rgba(255, 115, 0, 0.9),
+        0 0 20px rgba(255, 115, 0, 0.6);
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.tools-word.fade {
+    opacity: 0.03;
+    transform: scale(0.9);
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(100vw);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100vw);
+    }
+}
+
+/* FILTER GLITCH */
+.tools-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    animation: glitchAppear 0.3s ease-out;
+}
+
+.glitch-line {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.6);
+    animation: glitchLine 0.2s ease-out;
+}
+
+.glitch-block {
+    position: absolute;
+    background: rgba(0, 255, 255, 0.4);
+    animation: glitchBlock 0.3s ease-out;
+}
+
+@keyframes glitchAppear {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes glitchLine {
+    0% { 
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    50% { 
+        opacity: 1;
+        transform: scaleX(1);
+    }
+    100% { 
+        opacity: 0;
+        transform: scaleX(0);
+    }
+}
+
+@keyframes glitchBlock {
+    0% { 
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    70% { 
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% { 
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+/* Subtelny glitch w tle */
+.tools-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(255, 0, 0, 0.03) 20%,
+            transparent 40%,
+            rgba(0, 255, 255, 0.03) 60%,
+            transparent 80%,
+            rgba(255, 0, 255, 0.03) 100%
+        );
+    animation: backgroundGlitch 8s infinite linear;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes backgroundGlitch {
+    0%, 100% {
+        opacity: 0.1;
+        transform: translateX(0);
+    }
+    25% {
+        opacity: 0.15;
+        transform: translateX(-2px);
+    }
+    50% {
+        opacity: 0.1;
+        transform: translateX(2px);
+    }
+    75% {
+        opacity: 0.15;
+        transform: translateX(-1px);
+    }
+}
+
+/* Treść */
+.tools-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.tools-content h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+.tools-content p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.tools-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    border: 1px solid rgba(255, 115, 0, 0.4);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.tools-btn:hover {
+    background: rgba(255, 115, 0, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 115, 0, 0.4);
+}
