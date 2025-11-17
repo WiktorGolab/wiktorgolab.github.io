@@ -4,12 +4,10 @@ let currentSlide = 0;
 
 // Inicjalizacja karuzeli po załadowaniu DOM
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM loaded - initializing carousel');
     initProjectsCarousel();
 });
 
 async function initProjectsCarousel() {
-    console.log('Initializing projects carousel');
     await loadLatestProjects();
     await preloadCarouselImages(); // Dodaj preload dla lepszej płynności
     renderProjectsSlides();
@@ -31,26 +29,22 @@ async function preloadCarouselImages() {
     });
     
     await Promise.all(preloadPromises);
-    console.log('Carousel background images preloaded');
 }
 
 async function loadLatestProjects() {
     try {
-        console.log('Loading latest projects...');
+        
 
         // Spróbuj użyć istniejących projektów
         if (typeof allProjects !== 'undefined' && allProjects.length > 0) {
-            console.log('Using existing allProjects');
             latestProjects = allProjects
                 .filter(project => project.showcase !== false)
                 .sort((a, b) => (b.id || 0) - (a.id || 0))
                 .slice(0, 3);
         } else {
-            console.log('Loading projects directly');
             latestProjects = await loadProjectsDirectly();
         }
-
-        console.log(`Loaded ${latestProjects.length} projects for carousel:`, latestProjects.map(p => p.title));
+        
 
         // Aktualizuj licznik slajdów
         const totalSlidesElement = document.querySelector('.total-slides');
@@ -168,37 +162,42 @@ function renderProjectsSlides() {
         </div>
     `).join('');
 
-    console.log('Projects slides rendered successfully with controls inside track');
+    
 }
 
 function initCarouselEvents() {
-    console.log('Initializing carousel events');
+    
 
     // Event delegation dla dynamicznych elementów
     document.addEventListener('click', function (e) {
-        // Przyciski nawigacji - teraz wewnątrz tracku
-        if (e.target.closest('.next-btn') || e.target.classList.contains('fa-chevron-right')) {
-            console.log('Next button clicked');
+        const carousel = document.querySelector('.projects-carousel');
+        if (!carousel) return;
+
+        // Przyciski nawigacji - reagujemy tylko jeśli kliknięcie jest wewnątrz karuzeli
+        if (e.target.closest('.projects-carousel .next-btn') || e.target.closest('.projects-carousel .fa-chevron-right')) {
             nextSlide();
+            return;
         }
 
-        if (e.target.closest('.prev-btn') || e.target.classList.contains('fa-chevron-left')) {
-            console.log('Prev button clicked');
+        if (e.target.closest('.projects-carousel .prev-btn') || e.target.closest('.projects-carousel .fa-chevron-left')) {
             prevSlide();
+            return;
         }
 
-        // Kropki
-        if (e.target.classList.contains('dot')) {
-            const index = parseInt(e.target.getAttribute('data-index'));
-            console.log('Dot clicked, index:', index);
+        // Kropki (dots) wewnątrz karuzeli
+        const dot = e.target.closest('.projects-carousel .dot');
+        if (dot) {
+            const index = parseInt(dot.getAttribute('data-index'));
             goToSlide(index);
+            return;
         }
 
-        // Przyciski szczegółów projektu
-        if (e.target.classList.contains('project-details-btn')) {
-            const projectId = e.target.getAttribute('data-project-id');
-            console.log('Details button clicked, projectId:', projectId);
+        // Przyciski szczegółów projektu — obsługujemy tylko te wewnątrz karuzeli
+        const detailsBtn = e.target.closest('.projects-carousel .project-details-btn');
+        if (detailsBtn) {
+            const projectId = detailsBtn.getAttribute('data-project-id');
             openProjectModalById(projectId);
+            return;
         }
     });
 
@@ -208,28 +207,24 @@ function initCarouselEvents() {
         if (!carousel) return;
 
         if (e.key === 'ArrowLeft') {
-            console.log('Left arrow pressed');
             prevSlide();
         } else if (e.key === 'ArrowRight') {
-            console.log('Right arrow pressed');
             nextSlide();
         }
     });
-
-    console.log('Carousel events initialized');
+    
 }
 
 function updateCarousel() {
-    console.log('Updating carousel to slide:', currentSlide);
+    
 
     const slides = document.querySelectorAll('.carousel-slide');
     const currentSlideElement = document.querySelector('.current-slide');
     const totalSlidesElement = document.querySelector('.total-slides');
 
-    console.log('Found slides:', slides.length);
+    
 
     if (slides.length === 0) {
-        console.log('No slides found');
         return;
     }
 
@@ -241,7 +236,6 @@ function updateCarousel() {
     // Pokaż aktualny slajd
     if (slides[currentSlide]) {
         slides[currentSlide].classList.add('active');
-        console.log('Activated slide:', currentSlide);
         
         // Ustaw tło na obraz aktualnego projektu z płynnym przejściem
         if (latestProjects[currentSlide]) {
@@ -261,7 +255,7 @@ function updateCarousel() {
         element.textContent = latestProjects.length;
     });
 
-    console.log('Updated counter to:', currentSlide + 1);
+    
 }
 
 function setBackgroundWithTransition(project) {
@@ -286,45 +280,36 @@ function setBackgroundWithTransition(project) {
             backgroundElement.classList.add('loaded');
         }, 50);
         
-        console.log('Background transition to:', imageUrl);
+        
     }, 400); // Czas odpowiada transition time w CSS
 }
 
 // Funkcje nawigacji
 function nextSlide() {
-    console.log('nextSlide called, currentSlide:', currentSlide, 'total:', latestProjects.length);
     if (latestProjects.length === 0) {
-        console.log('No projects available');
         return;
     }
 
     currentSlide = (currentSlide + 1) % latestProjects.length;
-    console.log('new currentSlide:', currentSlide);
     updateCarousel();
 }
 
 function prevSlide() {
-    console.log('prevSlide called, currentSlide:', currentSlide, 'total:', latestProjects.length);
     if (latestProjects.length === 0) {
-        console.log('No projects available');
         return;
     }
 
     currentSlide = (currentSlide - 1 + latestProjects.length) % latestProjects.length;
-    console.log('new currentSlide:', currentSlide);
     updateCarousel();
 }
 
 function goToSlide(index) {
-    console.log('goToSlide called, index:', index);
     if (latestProjects.length === 0) {
-        console.log('No projects available');
         return;
     }
 
     if (index >= 0 && index < latestProjects.length) {
         currentSlide = index;
-        console.log('new currentSlide:', currentSlide);
         updateCarousel();
     }
 }
@@ -345,7 +330,7 @@ function formatCarouselDate(dateString) {
 
 // Funkcja pomocnicza do otwierania modala
 function openProjectModalById(projectId) {
-    console.log('Opening project modal for id:', projectId);
+    
     if (typeof allProjects !== 'undefined' && allProjects.length > 0) {
         const project = allProjects.find(p => p.id == projectId);
         if (project) {

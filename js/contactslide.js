@@ -65,8 +65,6 @@ class ContactGalaxy {
             return;
         }
         
-        console.log('Initializing contact galaxy...', { container, canvas });
-        
         try {
             this.scene = new THREE.Scene();
             
@@ -114,7 +112,6 @@ class ContactGalaxy {
             
             this.isInitialized = true;
             this.rafActive = true;
-            console.log('Contact galaxy initialized successfully');
             this.animate();
             
         } catch (error) {
@@ -202,7 +199,6 @@ class ContactGalaxy {
         
         // Number of glow effects (between 10-15)
         const glowCount = Math.floor(Math.random() * 6) + 10;
-        console.log(`Creating ${glowCount} glow effects`);
         
         // Create glow texture (larger and brighter)
         const createGlowTexture = (size = 256) => {
@@ -279,7 +275,7 @@ class ContactGalaxy {
             this.glowSprites.push(glowSprite);
         }
         
-        console.log(`Created ${this.glowSprites.length} glow sprites`);
+        
     }
     
     animateGlows() {

@@ -14,8 +14,8 @@
     border-radius: 14px;
     padding: 8px 10px;
     filter: drop-shadow(0 0 30px rgba(0, 0, 0, 1));
-    max-width: 709px;
-    width: 50vw;
+    width: max-content;
+    max-width: 50vw;
 }
 
 .navbar.transparent {
