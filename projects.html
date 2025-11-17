@@ -41,7 +41,7 @@
 
         <div class="navbar-buttons" id="navbarButtons">
             <a href="../index.html" class="splash-transition" data-slide="0">
-                <button title="Strona główna">
+                <button data-i18n-attr="title:nav.home" title="Strona główna">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="24" height="24" fill="#ffffff"
                         style="transform: translateY(2px);">
                         <path
@@ -49,17 +49,17 @@
                     </svg>
                 </button>
             </a>
-            <button onclick="navigateWithTransition('../index.html', 1)">O mnie</button>
-            <button onclick="navigateWithTransition('../index.html', 2)" class="active">Projekty</button>
-            <button onclick="navigateWithTransition('../index.html', 3)">Doświadczenie</button>
-            <button onclick="navigateWithTransition('../index.html', 4)">Umiejętności</button>
-            <button onclick="navigateWithTransition('../index.html', 5)">Narzędzia</button>
-            <button onclick="navigateWithTransition('../index.html', 6)">Kontakt</button>
+            <button onclick="navigateWithTransition('../index.html', 1)" data-i18n="nav.about">O mnie</button>
+            <button onclick="navigateWithTransition('../index.html', 2)" class="active" data-i18n="nav.projects">Projekty</button>
+            <button onclick="navigateWithTransition('../index.html', 3)" data-i18n="nav.experience">Doświadczenie</button>
+            <button onclick="navigateWithTransition('../index.html', 4)" data-i18n="nav.skills">Umiejętności</button>
+            <button onclick="navigateWithTransition('../index.html', 5)" data-i18n="nav.tools">Narzędzia</button>
+            <button onclick="navigateWithTransition('../index.html', 6)" data-i18n="nav.contact">Kontakt</button>
         </div>
     </div>
 
     <div class="socialbar">
-        <a href="https://github.com/WiktorGolab" target="_blank" title="Profil Github"
+        <a href="https://github.com/WiktorGolab" target="_blank" data-i18n-attr="title:social.github"
             style="height: 25px; transform: translateY(0);">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="25" height="25">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -78,7 +78,7 @@
                     d="M126 130v-26c0-9.941-8.059-18-18-18v0c-9.941 0-18 8.059-18 18v26"></path>
             </svg>
         </a>
-        <a href="downloads/pl_Wiktor Gołąb CV.pdf" download title="Pobierz CV"
+        <a href="downloads/pl_Wiktor Gołąb CV.pdf" download data-cv-toggle data-i18n-attr="title:cv.download"
             style="display:inline-block; width:25px; height:25px; transform: translateY(0);">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="25" height="25" fill="white">
                 <path
@@ -88,10 +88,10 @@
     </div>
 
     <div class="langbar">
-        <button title="Switch language to english">
+        <button data-lang="en" data-i18n-attr="title:lang.en_title" title="Switch language to english">
             EN
         </button>
-        <button title="Zmień język na polski">
+        <button data-lang="pl" data-i18n-attr="title:lang.pl_title" title="Zmień język na polski">
             PL
         </button>
     </div>
