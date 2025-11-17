@@ -1,7 +1,7 @@
 {
   "id": 12,
   "title": "Skuzar",
-  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie:)",
+  "description": "Strona internetowa \"<b>wizytówka</b>\" stworzona na zlecenie:)",
   "fullDescription": "Strona skuzar.pl działa w oparciu o system <strong>WordPress</strong> i jest zbudowana przy użyciu wizualnego edytora <strong>Elementor</strong>.<br><br>Dzięki temu możliwe jest tworzenie i edytowanie treści w trybie graficznym, z wykorzystaniem gotowych sekcji, widgetów oraz animacji, co pozwala na uzyskanie <strong>atrakcyjnego i responsywnego wyglądu strony bez konieczności pisania kodu</strong>.<br><br>Strona została stworzona na zlecenie <strong>M3 Group</strong> z wykorzystaniem <strong>motywu premium</strong>, co zapewnia stabilne i nowoczesne rozwiązania wizualne.<br><br>Publikowane są również <strong>wpisy i aktualności</strong>, obsługiwane przez standardowe mechanizmy WordPressa, a także udostępniane <strong>pliki</strong>.<br><br>Administracja strony obejmuje <strong>dodawanie i edytowanie treści, zarządzanie użytkownikami oraz aktualizowanie wtyczek i elementów wizualnych</strong>.<br><br>Całość jest prowadzona i utrzymywana w taki sposób, aby zapewnić <strong>sprawne działanie serwisu, jego czytelność oraz łatwą nawigację</strong>.",
   "image": "assets/img/projects/pic12.png",
   "category": ["webpage"],
@@ -12,10 +12,10 @@
     "JavaScript"
   ],
   "technologies": [
-    {
-      "name": "WordPress",
-      "version": "Elementor"
-    }
+    { "name": "WordPress", "version": "Elementor" },
+    { "name": "HTML" },
+    { "name": "CSS" },
+    { "name": "JavaScript" }
   ],
   "status": "in-progress",
   "completionDate": "X-2025",

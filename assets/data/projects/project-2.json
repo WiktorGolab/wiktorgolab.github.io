@@ -1,7 +1,7 @@
 {
   "id": 2,
   "title": "Kalkulator naukowy",
-  "description": "Przyjemny w obsłudze kalkulator naukowy.",
+  "description": "Przyjemny w obsłudze <b>kalkulator naukowy</b>.",
   "fullDescription": "Prosty kalkulator stworzony w JavaScript, który obsługuje podstawowe <strong>operacje matematyczne</strong>, <strong>funkcje specjalne</strong>, a także <strong>tryb ciemny</strong> oraz <strong>historię obliczeń</strong>. Kalkulator jest przyjazny dla użytkownika i intuicyjny w obsłudze.",
   "image": "assets/img/projects/pic2.png",
   "category": ["web"],
@@ -9,6 +9,11 @@
     "HTML",
     "CSS",
     "JavaScript"
+  ],
+  "technologies": [
+    { "name": "HTML" },
+    { "name": "CSS" },
+    { "name": "JavaScript" }
   ],
   "features": [
     "<strong>Podstawowe operacje</strong> (dodawanie, odejmowanie, mnożeniem, dzielenie, potęgowanie).",

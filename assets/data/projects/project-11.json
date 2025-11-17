@@ -1,7 +1,7 @@
 {
   "id": 11,
   "title": "Koło Łowieckie \"Cyranka\"",
-  "description": "Strona internetowa z systemem logowania dla Koła Łowieckiego.",
+  "description": "Strona internetowa z <b>systemem logowania</b> dla Koła Łowieckiego.",
   "fullDescription": "Strona internetowa cyranka-sroda.pl działa w oparciu o system <strong>WordPress</strong> i jest zbudowana przy użyciu wizualnego edytora <strong>Elementor</strong>.<br><br>Dzięki temu możliwe jest tworzenie i edytowanie treści w trybie graficznym, z wykorzystaniem gotowych sekcji, widgetów oraz animacji, co pozwala na uzyskanie <strong>atrakcyjnego i responsywnego wyglądu strony bez konieczności pisania kodu</strong>.<br><br>Na stronie działa <strong>system kont oparty na wtyczce Ultimate Member</strong>, który umożliwia logowanie jedynie wybranym osobom.<br><br>Mechanizm ten pozwala administratorowi <strong>kontrolować dostęp do określonych treści i materiałów</strong>, takich jak dokumenty do pobrania, które mogą być dostępne tylko po zalogowaniu.<br><br>Publikowane są również <strong>wpisy i aktualności</strong>, obsługiwane przez standardowe mechanizmy WordPressa, a także udostępniane <strong>pliki i formularze</strong>.<br><br>Administracja strony obejmuje <strong>dodawanie i edytowanie treści, zarządzanie użytkownikami, kontrolę nad dostępem do wybranych sekcji oraz aktualizowanie wtyczek i elementów wizualnych</strong>.<br><br>Całość jest prowadzona i utrzymywana w taki sposób, aby zapewnić <strong>sprawne działanie serwisu, jego czytelność oraz łatwą nawigację</strong> zarówno dla użytkowników publicznych, jak i zalogowanych członków.",
   "image": "assets/img/projects/pic11.png",
   "category": ["webpage", "web"],
@@ -14,13 +14,13 @@
     "Ultimate Member"
   ],
   "technologies": [
-    {
-      "name": "WordPress",
-      "version": "Elementor"
-    },
-    {
-      "name": "Firebase"
-    }
+    { "name": "WordPress", "version": "Elementor" },
+    { "name": "HTML" },
+    { "name": "CSS" },
+    { "name": "JavaScript" },
+    { "name": "GIMP" },
+    { "name": "Ultimate Member" },
+    { "name": "Firebase" }
   ],
   "status": "completed",
   "completionDate": "26-02-2025",

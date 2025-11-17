@@ -1,7 +1,7 @@
 {
   "id": 5,
   "title": "EKSERO24.PL",
-  "description": "Strona internetowa stworzona podczas stażu w M3Group:)",
+  "description": "Strona internetowa stworzona podczas stażu w <b>M3Group</b>:)",
   "fullDescription": "Projekt interaktywnej strony internetowej dla PWT, który został stworzony od podstaw z pełnym uwzględnieniem <strong>responsywności i estetycznego dopasowania</strong> do specyfiki oraz potrzeb świadczonych usług.<br><br> Strona została zaprojektowana tak, aby zapewnić użytkownikom <strong>intuicyjne doświadczenie</strong>, a jednocześnie skutecznie prezentować ofertę klienta.<br><br>Dzięki zastosowaniu narzędzia <strong>Elementor</strong>, wzbogacono witrynę o <strong>dynamiczne animacje</strong>, które zwiększają atrakcyjność wizualną i angażują odwiedzających.<br><br>Wprowadzono także <strong>system obsługi płatności online za pomocą Przelewy24</strong>, co umożliwia bezpieczne i wygodne dokonywanie transakcji przez użytkowników.<br><br>Strona zawiera również <strong>w pełni funkcjonalny formularz kontaktowy</strong>, który ułatwia komunikację między firmą a klientami, oraz <strong>system kont użytkowników</strong>, który pozwala na personalizację doświadczenia i zarządzanie interakcjami z platformą.<br><br>Projekt ten obejmował <strong>wszystkie etapy realizacji</strong> – od analizy wymagań i projektowania, po implementację i testowanie.",
   "image": "assets/img/projects/pic5.png",
   "category": ["webpage"],
@@ -13,10 +13,11 @@
     "PHP"
   ],
   "technologies": [
-    {
-      "name": "WordPress",
-      "version": "Elementor & WooCommerce"
-    }
+    { "name": "WordPress", "version": "Elementor & WooCommerce" },
+    { "name": "HTML" },
+    { "name": "CSS" },
+    { "name": "JavaScript" },
+    { "name": "PHP" }
   ],
   "status": "completed",
   "completionDate": "07-2024",

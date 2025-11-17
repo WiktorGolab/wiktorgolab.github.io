@@ -1,7 +1,7 @@
 {
   "id": 1,
   "title": "PONG",
-  "description": "Moja interpretacja klasycznej gry Pong z 1972 roku wydana przez Atari.",
+  "description": "Moja interpretacja klasycznej gry <b>Pong</b> z 1972 roku wydana przez <b>Atari</b>.",
   "fullDescription": "<strong>Pong</strong> – klasyczna już gra komputerowa będąca symulacją tenisa stołowego przy użyciu grafiki dwuwymiarowej. Celem rozgrywki jest pokonanie przeciwnika poprzez uzyskanie wyższego wyniku punktowego. Gra wydana została w 1972 roku przez Atari i jest jedną z najstarszych przeznaczonych na automaty.",
   "image": "assets/img/projects/pic1.png",
   "category": ["web", "games"],
@@ -13,10 +13,11 @@
     "FL Studio"
   ],
   "technologies": [
-    {
-      "name": "Node.js",
-      "version": "18.0.0"
-    }
+    { "name": "JavaScript" },
+    { "name": "HTML" },
+    { "name": "Node.js", "version": "18.0.0" },
+    { "name": "CSS" },
+    { "name": "FL Studio" }
   ],
   "features": [
     "Gra Pong w nowym wydaniu.",

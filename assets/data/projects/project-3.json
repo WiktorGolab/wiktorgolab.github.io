@@ -1,7 +1,7 @@
 {
   "id": 3,
   "title": "EDU-CZAR",
-  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie:)",
+  "description": "Strona internetowa \"<b>wizytówka</b>\" stworzona na zlecenie:)",
   "fullDescription": "Wdrożono kompletny proces tworzenia i administrowania stroną internetową z wykorzystaniem <strong>WordPress'a</strong>, dostosowując rozwiązania do <strong>potrzeb edukacyjnych</strong> i <strong>komunikacyjnych</strong> organizacji, przyjaznej zarówno dla oka dziecka, jak i rodzica.<br><br> <strong>Aktualizacja treści</strong> przez ponad dwa lata i <strong>wprowadzanie na bieżąco nowych postów</strong>.",
   "image": "assets/img/projects/pic3.png",
   "category": ["webpage"],
@@ -9,10 +9,7 @@
     "Wordpress"
   ],
   "technologies": [
-    {
-      "name": "Wordpress",
-      "version": "current"
-    }
+    { "name": "WordPress", "version": "current" }
   ],
   "status": "completed",
   "completionDate": "4-12-2024",

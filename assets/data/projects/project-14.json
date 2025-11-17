@@ -1,7 +1,7 @@
 {
   "id": 14,
   "title": "Portfolio 2.0",
-  "description": "Strona internetowa \"wizytówka\" stworzona na zajawce:)",
+  "description": "Strona internetowa \"<b>wizytówka</b>\" stworzona na zajawce:)",
   "fullDescription": "Portfolio online to projekt stworzony z założeniem ograniczenia technologicznego do wyłącznie <strong>HTML, CSS, JavaScript i JSON</strong>, co stanowiło inspirujące wyzwanie kreatywne i techniczne.<br><br>Całość – od koncepcji projektu, przez design, aż po implementację – została w pełni zrealizowana samodzielnie.<br><br>Aby poszerzyć dostępność i użytkowość strony, została ona <strong>przetłumaczona na dwa języki: polski i angielski</strong>, co umożliwia skuteczną komunikację z szerokim gronem odbiorców.<br><br>Projekt stanowi dowód <strong>umiejętności technicznych, estetycznego wyczucia oraz zdolności do samodzielnej realizacji złożonych zadań</strong>.",
   "image": "assets/img/projects/pic14.png",
   "category": ["webpage", "web", "tools"],
@@ -14,6 +14,16 @@
     "ChatGPT",
     "DeepSeek",
     "Three.js"
+  ],
+  "technologies": [
+    { "name": "HTML" },
+    { "name": "CSS" },
+    { "name": "JavaScript" },
+    { "name": "JSON" },
+    { "name": "GIMP" },
+    { "name": "ChatGPT" },
+    { "name": "DeepSeek" },
+    { "name": "Three.js" }
   ],
   "features": [
     "Odświeżona wersja portfolio na podstawie treści oryginalnej strony",

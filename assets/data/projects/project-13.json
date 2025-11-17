@@ -1,12 +1,13 @@
 {
   "id": 13,
   "title": "M3 Group",
-  "description": "Strona internetowa \"wizytówka\" stworzona na zlecenie",
+  "description": "Strona internetowa \"<b>wizytówka</b>\" stworzona na zlecenie",
   "fullDescription": "Projekt firmy M3 Group obejmował kompleksowe przeniesienie istniejącej strony ze starego CMS na nowoczesną platformę <strong>WordPress z wykorzystaniem edytora Elementor</strong>.<br><br>Efektem jest <strong>nowoczesna, łatwa w obsłudze i w pełni funkcjonalna strona wizytówka</strong>, zgodna z wymaganiami klienta.",
   "image": "assets/img/projects/pic13.png",
   "category": ["webpage"],
   "tags": [
     "WordPress",
+    "Elementor PRO",
     "HTML",
     "CSS",
     "JavaScript",
@@ -16,10 +17,14 @@
     "Screaming Frog SEO Spider"
   ],
   "technologies": [
-    {
-      "name": "WordPress",
-      "version": "Elementor"
-    }
+    { "name": "WordPress", "version": "Elementor PRO" },
+    { "name": "HTML" },
+    { "name": "CSS" },
+    { "name": "JavaScript" },
+    { "name": "PHP" },
+    { "name": "GIMP" },
+    { "name": "Figma" },
+    { "name": "Screaming Frog SEO Spider" }
   ],
   "features": [
     "Zaimplementowanie wszystkich treści z zachowaniem struktury linków oraz sitemapy, co pozwoliło utrzymać dotychczasową widoczność SEO",

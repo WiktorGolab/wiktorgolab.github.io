@@ -1,7 +1,7 @@
 {
   "id": 4,
   "title": "Wodna Służba Ratownicza",
-  "description": "Strona internetowa stworzona podczas stażu w M3Group:)",
+  "description": "Strona internetowa stworzona podczas stażu w <b>M3Group</b>:)",
   "fullDescription": "Zrealizowano kompleksową modyfikację strony internetowej dla WSR, skupiającą się na dostosowaniu do współczesnych standardów oraz odzwierciedleniu specyfiki usług oferowanych przez klienta.<br><br>",
   "image": "assets/img/projects/pic4.png",
   "category": ["webpage"],
@@ -10,6 +10,12 @@
     "HTML",
     "CSS"
   ],
+  "technologies": [
+    { "name": "WordPress", "version": "WPBakery" },
+    { "name": "HTML" },
+    { "name": "CSS" }
+  ],
+
   "features": [
     "Pełna responsywność strony dla różnych urządzeń",
     "Usprawnienia wizualne przy użyciu <strong>WP Bakery</strong>",
@@ -19,12 +25,7 @@
     "Wdrożenie wyskakujących okienek zwiększających interaktywność",
     "Implementacja <strong>RSS Stream</strong> do automatycznego wyświetlania aktualności"
   ],
-  "technologies": [
-    {
-      "name": "WordPress",
-      "version": "WPBakery"
-    }
-  ],
+  
   "status": "completed",
   "completionDate": "06-2024",
   "demoLink": "https://wodnasluzbaratownicza.pl/",

@@ -1,7 +1,7 @@
 {
   "id": 8,
   "title": "Projekt Outsider",
-  "description": "Poznaj moją internetową twórczość.",
+  "description": "Poznaj moją <b>internetową twórczość</b>.",
   "fullDescription": "Pod pseudonimem artystycznym zajmuję się produkcją muzyczną od 2018 roku, wykorzystując środowiska <strong>DAW (Digital Audio Workstation)</strong>.<br><br>Moje umiejętności obejmują dogłębną znajomość i biegłość w obsłudze <strong>wiodących narzędzi oraz wtyczek muzycznych</strong>, takich jak Xfer Serum, reFX Nexus, a także wielu innych narzędzi wspierających kreatywną produkcję dźwięku.<br><br>W ramach mojej działalności tworzę i udostępniam <strong>profesjonalne presety i sample</strong>, które odzwierciedlają najnowsze trendy w muzyce elektronicznej.<br><br>Moje portfolio obejmuje <strong>szeroki zakres prac</strong>, w tym oryginalne utwory, remix'y, edit'y, składanki oraz albumy, które zdobyły uznanie zarówno wśród słuchaczy, jak i innych twórców.<br><br>Równolegle prowadzę działania na platformach społecznościowych, gdzie <strong>zarządzam swoimi stronami artystycznymi</strong>, angażując się w budowanie społeczności i promowanie swojej twórczości.<br><br>Moja działalność łączy <strong>paszę do tworzenia muzyki z profesjonalizmem</strong> w zakresie produkcji i zarządzania wizerunkiem artystycznym.",
   "image": "assets/img/projects/pic8.png",
   "category": ["webpage", "tools", "other"],
@@ -18,10 +18,16 @@
     "ChatGPT"
   ],
   "technologies": [
-    {
-      "name": "FL Studio",
-      "version": "(12-21.1)"
-    }
+    { "name": "WordPress" },
+    { "name": "My Spread Shop" },
+    { "name": "GIMP" },
+    { "name": "Adobe Premiere Pro" },
+    { "name": "OBS Studio" },
+    { "name": "XMedia Recode" },
+    { "name": "FL Studio", "version": "12-21.1" },
+    { "name": "VirtualDJ" },
+    { "name": "Topaz Gigapixel AI" },
+    { "name": "ChatGPT" }
   ],
   "status": "in-progress",
   "demoLink": "https://outsidertracks.wordpress.com/",

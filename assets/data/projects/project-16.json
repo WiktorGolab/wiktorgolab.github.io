@@ -1,0 +1,30 @@
+{
+  "id": 16,
+  "title": "Hodowla Bursztynowy Raj",
+  "description": "Strona hodowli psów \"<b>Bursztynowy Raj</b>\" — oferta, <b>mioty</b> i <b>kontakt</b>.",
+  "fullDescription": "<b>Hodowla Bursztynowy Raj</b> to profesjonalne miejsce z pasją do pracy z psami. Strona prezentuje aktualne <b>mioty</b>, szczegóły hodowli, <b>galerię zdjęć</b> oraz <b>formularz kontaktowy</b> dla zainteresowanych adopcją lub współpracą. Witryna została zaprojektowana tak, aby ułatwić klientom szybki <b>kontakt</b> oraz przejrzyste zapoznanie się z ofertą hodowli.",
+  "image": "assets/img/projects/pic16.png",
+  "category": ["webpage"],
+  "tags": [
+    "WordPress",
+    "Elementor",
+    "CSS"
+  ],
+  "technologies": [
+    { "name": "WordPress", "version": "Elementor" },
+    { "name": "Elementor" },
+    { "name": "CSS" }
+  ],
+  "features": [
+    "Prezentacja aktualnych miotów i profili reproduktorów",
+    "Galeria zdjęć",
+    "Łatwe zarządzanie treścią przez panel WordPress/Elementor",
+    "Integracja z mediami społecznościowymi"
+  ],
+  "status": "completed",
+  "completionDate": "17-11-2025",
+  "demoLink": "https://bordercolliefci.pl",
+  "priority": 1,
+  "showcase": true,
+  "collaborators": []
+}
