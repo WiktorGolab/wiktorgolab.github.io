@@ -81,6 +81,9 @@ function openProjectModal(project) {
                          class="main-image"
                          onerror="this.src='assets/img/projects/default.png'">
                     `}
+                    
+                    <!-- Lekki napis z ID projektu pod obrazem -->
+                    <div class="project-id" title="ID projektu" aria-label="ID projektu">id: (${project.id})</div>
                     ${project.images && project.images.length > 0 ? `
                     <div class="gallery-thumbnails">
                         ${project.images.map((img, index) => `

@@ -17,8 +17,8 @@
     { "name": "CSS" },
     { "name": "JavaScript" }
   ],
-  "status": "in-progress",
-  "completionDate": "X-2025",
+  "status": "completed",
+  "completionDate": "25-11-2025",
   "demoLink": "https://www.skuzar.pl/",
   "priority": 1,
   "showcase": true,
