@@ -1,0 +1,79 @@
+
+1
+
+Automatic Zoom
+   
+ 
+  1 
+ 
+4.1. Wprowadzenie 
+Niniejszy  rozdział  przedstawia  proces  projektowania  oraz  implementacji 
+interfejsu  użytkownika  systemu  PRI,  którego  celem  jest  wsparcie  koordynatorów, 
+opiekunów i studentów w zarządzaniu projektami inżynierskimi. Prace realizowane były 
+w formie projektu grupowego  i  stanowiły  kontynuację  systemu  rozwijanego 
+przez poprzednią grupę  studentów.  Ze  względu  na  charakter  przejęcia  projektu 
+szczególny nacisk położono na analizę dotychczasowych rozwiązań, ocenę ich jakości 
+oraz modernizację tych obszarów interfejsu, które wymagały poprawy lub rozszerzenia 
+funkcjonalnego. 
+Zakres działań obejmował: 
+• analizę potrzeb użytkowników końcowych i aktualnych procesów pracy, 
+• reorganizację i uproszczenie istniejących widoków, 
+• implementację nowych modułów: giełdy projektów oraz statystyk, 
+• modyfikacja kryteriów projektowych w celu ujednolicenia ich struktury, 
+• utrzymanie i rozwój komponentów frontendowych, 
+• wdrożenie spójnych standardów kodowania, 
+• rozbudowę procesu translacji interfejsu na wiele języków. 
+Głównym celem prac było opracowanie interfejsu, który jest czytelny, logiczny 
+i  prosty  w  obsłudze,  a  równocześnie  umożliwia  dalszą  rozbudowę  przez  następne 
+zespoły projektowe.  W rozdziale opisano źródła wymagań użytkowników i ich wpływ 
+na priorytety funkcjonalne; przyjęte założenia technologiczne i organizacyjne; strukturę 
+modułową  oraz  koncepcję  układu  interfejsu;  a  także  szczegóły  implementacji 
+kluczowych  modułów,  mechanizmy  zapewnienia  jakości  i  automatyzacji  wdrożeń. 
+Ponadto wskazano rozwiązania  ułatwiające  przyszłe  przejęcie  i  rozwój  systemu 
+przez kolejne zespoły, takie jak spójne konwencje kodowania oraz modularny podział 
+funkcjonalny. 
+4.2. Analiza wymagań użytkowników 
+Opisane zakresy  działań w rozdziale 4.1 zostały  sformułowane  w  oparciu 
+o  dokładną  weryfikację  potrzeb  osób  korzystających  z  systemu.  Analiza  wymagań 
+została przeprowadzona na podstawie dokumentacji pozostawionej przez poprzednią 
+grupę projektową, przeglądu kodu źródłowego, konsultacji z koordynatorem przedmiotu 
+oraz rozmów ze studentami korzystającymi z systemu [23]. 
+   
+ 
+  2 
+ 
+W wyniku przeprowadzonych badań zidentyfikowano specyficzne oczekiwania 
+dla trzech głównych grup odbiorców systemu PRI. Szczegółowe wymagania funkcjonalne 
+dla tych ról zostały opisane w poniższych podrozdziałach. 
+4.2.1. Student 
+Dla studenta kluczowe były funkcje związane z wyborem tematu inżynierskiego, 
+przeglądaniem  statusu  wniosków  o  dołączenie  do  grupy  projektowej,  akceptacją 
+przypisań do konkretnych projektów oraz przygotowaniem dokumentacji do obrony. 
+Użytkownicy  oczekiwali  uproszczonych  oraz  czytelnych  widoków,  minimalizujących 
+liczbę kroków podczas wykonywania najpopularniejszych zadań. 
+4.2.2. Opiekun 
+Opiekunowie  pełnią  rolę  promotorów  i  mentorów  projektów.  Ich  potrzeby 
+obejmowały szybki dostęp do danych kontaktowych przydzielonych im grup, możliwość 
+przeglądania składów osobowych, ocenianie postępów prac oraz wypełnianie cyfrowych 
+formularzy  kryteriów  oceniania. Wymagało to stworzenia interfejsu, który nie obciąża 
+nadmiarem informacji, ale pozwala sprawnie zarządzać listą grup. 
+4.2.3. Koordynator 
+Koordynatorzy potrzebowali narzędzi administracyjnych i organizacyjnych, takich jak: 
+• import i eksport danych, 
+• zarządzanie harmonogramem obron prac inżynierskich, 
+• analiza obciążenia opiekunów, 
+• weryfikacja kompletności danych projektów, 
+• przygotowywanie zestawień statystycznych. 
+W oparciu o zidentyfikowane potrzeby ustalono kierunek dalszych prac 
+programistycznych nad wartswą wizualną. W ramach modernizacji systemu skupiono 
+się  na  usprawnieniu  dostępu  do  listy  tematów  oraz  kryteriów  ich  oceniania. 
+Zaprojektowano  od  podstaw  moduł  giełdy  projektów,  który  upraszcza  proces 
+wyszukiwania tematów i dołączania studentów do grup. Równolegle wdrożono moduł 
+analityczny  wspierający  procesy  nadzorcze  i  kontrolę  integralności  danych. 
+Oba rozwiązania stanowią całkowicie nowe rozszerzenie architektury systemu. 
+Zidentyfikowane potrzeby studentów, opiekunów i koordynatorów nie tylko 
+wyznaczyły priorytety w procesie modernizacji interfejsu, ale również określiły kluczowe 
+kryteria  oceny  jakości  końcowego  rozwiązania.  Aby  sprostać  tym  wieloaspektowym 
+oczekiwaniom, konieczne  było  precyzyjne  dobranie  narzędzi  programistycznych 
+oraz  ustalenie  efektywnego  modelu  pracy  zespołowej,  który  umożliwiłby  realizację 
+założonych celów przy zachowaniu kompatybilności z istniejącą architekturą systemu. 

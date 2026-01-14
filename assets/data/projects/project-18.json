@@ -1,0 +1,53 @@
+{
+  "id": 18,
+  "title": "System PRI - Zarządzanie projektami inżynierskimi",
+  "description": "Projekt grupowy - <b>interfejs użytkownika</b> systemu wspierającego zarządzanie <b>projektami inżynierskimi</b> dla studentów, opiekunów i koordynatorów.",
+  "fullDescription": "Praca inżynierska realizowana w formie <strong>projektu grupowego</strong>, stanowiąca kontynuację systemu PRI rozwijanego przez poprzednią grupę studentów. Celem było wsparcie koordynatorów, opiekunów i studentów w zarządzaniu projektami inżynierskimi poprzez stworzenie <strong>nowoczesnego interfejsu użytkownika</strong>.<br><br>Zakres prac obejmował <strong>analizę wymagań</strong> trzech grup użytkowników (studenci, opiekunowie, koordynatorzy), reorganizację i uproszczenie istniejących widoków oraz implementację kluczowych modułów funkcjonalnych. Szczególny nacisk położono na <strong>giełdę projektów</strong> - moduł ułatwiający wyszukiwanie tematów i proces dołączania studentów do grup, oraz <strong>moduł statystyk</strong> wspierający procesy nadzorcze i kontrolę integralności danych.<br><br>W ramach projektu zmodernizowano również system kryteriów oceniania projektów oraz wdrożono <strong>autorski system translacji</strong>, który zapewnia elastyczność w tłumaczeniu trudniej dostępnych tekstów i dynamicznych treści. Dodatkowo ustanowiono spójne standardy kodowania umożliwiające dalszy rozwój przez następne zespoły. Projekt wymagał przeglądu kodu źródłowego poprzedników, konsultacji z koordynatorem oraz bezpośrednich rozmów z użytkownikami końcowymi w celu precyzyjnego dopasowania funkcjonalności do rzeczywistych potrzeb.",
+  "image": "assets/img/projects/pic18.png",
+  "category": ["web", "other", "tools"],
+  "tags": [
+    "TypeScript",
+    "React",
+    "Frontend",
+    "UI/UX",
+    "Translation System",
+    "Team Project"
+  ],
+  "technologies": [
+    {
+      "name": "TypeScript"
+    },
+    {
+      "name": "React"
+    },
+    {
+      "name": "HTML5"
+    },
+    {
+      "name": "CSS3"
+    },
+    {
+      "name": "Custom Translation System"
+    }
+  ],
+  "features": [
+    "<strong>Giełda projektów</strong> - moduł wyszukiwania i wyboru tematów inżynierskich przez studentów.",
+    "<strong>Moduł statystyk</strong> - narzędzie analityczne dla koordynatorów wspierające procesy nadzorcze.",
+    "System zarządzania <strong>kryteriami oceniania</strong> projektów z możliwością cyfrowego wypełniania formularzy.",
+    "Panel studenta z funkcjami wyboru tematu, zarządzania wnioskami i dokumentacją.",
+    "Panel opiekuna umożliwiający <strong>zarządzanie grupami projektowymi</strong> i ocenę postępów.",
+    "Panel koordynatora z narzędziami administracyjnymi: import/eksport danych, harmonogram obron.",
+    "<strong>Autorski system translacji</strong> zapewniający elastyczność w tłumaczeniu trudniej dostępnych tekstów i dynamicznych treści.",
+    "Reorganizacja i uproszczenie widoków dla zwiększenia <strong>czytelności i użyteczności</strong>.",
+    "Spójne standardy kodowania ułatwiające przejęcie projektu przez kolejne zespoły.",
+    "Modularny podział funkcjonalny umożliwiający dalszą rozbudowę systemu.",
+    "Automatyzacja procesów wdrożenia i zapewnienia jakości kodu."
+  ],
+  "status": "completed",
+  "completionDate": "17.01.2026",
+  "priority": 2,
+  "showcase": true,
+  "collaborators": [],
+  "academicWork": true,
+  "degree": "Praca inżynierska"
+}

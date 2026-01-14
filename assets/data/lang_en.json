@@ -8,8 +8,8 @@
   "nav.contact": "Contact",
   "hero.greeting": "I'm <strong>Wiktor</strong> :)",
   "hero.subtitle": "Web Developer • Web creator",
-  "hero.projects": "Projects",
-  "hero.tools": "Tools",
+  "hero.projects": "<i class=\"fas fa-folder-open\" style=\"margin-right: 8px;\"></i>Projects",
+  "hero.tools": "<i class=\"fas fa-tools\" style=\"margin-right: 8px;\"></i>Tools",
   "about.title": "About Me"
   ,"splash.loading": "Loading main page...",
   "social.github": "Github profile",
@@ -24,16 +24,44 @@
   "about.right.title": "A bit more about me...",
   "about.right.page1": "Outside of work, I am personally interested in <strong>artificial intelligence</strong> and have been exploring AI tools for several years. I also create digital materials using tools like <strong>FL Studio, Adobe Premiere Pro and GIMP</strong>.",
   "about.right.page2": "In my free time I also enjoy <strong>video games and movies</strong>, which help me relax and draw <strong>visual and conceptual inspirations</strong> for my projects.",
-  "about.buttons.goto_experience": "Go to my experience",
-  "about.buttons.goto_skills": "Go to my skills"
+  "about.buttons.goto_experience": "<i class=\"fas fa-briefcase\" style=\"margin-right: 8px;\"></i>Go to my experience",
+  "about.buttons.goto_skills": "<i class=\"fas fa-code\" style=\"margin-right: 8px;\"></i>Go to my skills"
   ,
   "tools.title": "Tools",
   "tools.description": "A collection of useful developer tools",
-  "tools.cta": "Go to tools",
+  "tools.cta": "<i class=\"fas fa-tools\" style=\"margin-right: 8px;\"></i>Go to tools",
   "projects.header": "Latest Projects",
-  "projects.cta": "See all projects",
+  "projects.cta": "<i class=\"fas fa-folder-open\" style=\"margin-right: 8px;\"></i>See all projects",
   "contact.description": "Check my social profiles and download my CV to learn more about my projects and experience.",
-  "contact.github": "GitHub",
-  "contact.linkedin": "LinkedIn",
-  "contact.cv": "Download CV"
+  "contact.github": "<i class=\"fab fa-github\" style=\"margin-right: 8px;\"></i>GitHub",
+  "contact.linkedin": "<i class=\"fab fa-linkedin\" style=\"margin-right: 8px;\"></i>LinkedIn",
+  "contact.cv": "<i class=\"fas fa-file-pdf\" style=\"margin-right: 8px;\"></i>Download CV",
+
+  "experience.title": "Experience",
+  "experience.subtitle": "Navigate the timeline left/right and select a year to see the event description.",
+  
+  "experience.items.start.date": "Start",
+  "experience.items.start.role": "Early Experience & Education",
+  "experience.items.start.org": "University • Intermarché • KFC",
+  "experience.items.start.body": "<strong>Adam Mickiewicz University in Poznań</strong><br>Computer Science studies (2022 – 2026)<br><br><strong>Intermarché — Store Employee</strong> <span style=\"opacity:.8\">(Jul 2021 – Aug 2021)</span><br>Contract/Freelancing<br>Work in the store, shelving products, receiving deliveries.<br><br><strong>KFC — Cook</strong> <span style=\"opacity:.8\">(Jul 2022 – Sep 2022)</span><br>Contract/Freelancing<br>Worked in the kitchen, preparing meals and receiving deliveries.",
+
+  "experience.items.2023.date": "2023",
+  "experience.items.2023.role": "EDU-CZAR / DermaExpert",
+  "experience.items.2023.org": "Website admin • Web designer • Graphic designer",
+  "experience.items.2023.body": "<strong>EDU-CZAR</strong> <span style=\"opacity:.8\">(2023 – Nov 2025)</span><br>Website Administrator, Web Designer, Graphic Designer<br><br>Delivered an end-to-end process of building and administering a WordPress website, tailored to the organization's educational and communication needs — friendly for both children and parents.<br><br>Scope: content updates, publishing new posts.<br><a href=\"https://educzar.pl/\" target=\"_blank\" rel=\"noopener\">https://educzar.pl/</a><br><br><strong>DermaExpert</strong> <span style=\"opacity:.8\">(2023 – present)</span><br>Website Administrator, Web Designer<br><br>Built a complete WordPress website from scratch, including information architecture and layout, plus visual elements and content tailored to the dermatology industry. Focused on a responsive and intuitive user interface.<br><a href=\"https://dermaexpert.pl/\" target=\"_blank\" rel=\"noopener\">https://dermaexpert.pl/</a>",
+
+  "experience.items.2024.date": "2024",
+  "experience.items.2024.role": "M3 Group — Internship",
+  "experience.items.2024.org": "Website admin • Web designer • Graphic designer • App designer",
+  "experience.items.2024.body": "<span style=\"opacity:.8\">(May 2024 – Jul 2024)</span><br>Website Administrator, Web Designer, App Designer, Graphic Designer<br><br>Created graphic designs and worked on UI development for e-commerce platforms using WordPress (Elementor, WPBakery) and additional plugins (e.g. social media feed, pop-up content, RSS feed).<br><br>Ensured responsive web layouts and designed applications for Windows, Linux, Android and iOS.<br><a href=\"https://wodnasluzbaratownicza.pl/\" target=\"_blank\" rel=\"noopener\">https://wodnasluzbaratownicza.pl/</a><br><a href=\"https://www.eksero24.pl/\" target=\"_blank\" rel=\"noopener\">https://www.eksero24.pl/</a>",
+
+  "experience.items.2025.date": "2025",
+  "experience.items.2025.role": "M3 Group — Developer",
+  "experience.items.2025.org": "Contract/Freelancing • Remote",
+  "experience.items.2025.body": "<span style=\"opacity:.8\">(Sep 2025 – present)</span><br>Developer<br><br>Working with M3 Group team as a developer, focusing on web applications and systems development. Working on projects using modern web technologies, including HTML, CSS, JavaScript and other development tools.<br><br><strong>PRI System — UI & modules</strong><br><span style=\"opacity:.8\">Team project (engineering thesis)</span><br><br>Modernizing an existing system UI, delivering new modules (project marketplace, statistics) and a custom translation system that improves flexibility for hard-to-reach and dynamic texts.",
+
+  "experience.items.2026.date": "2026",
+  "experience.items.2026.role": "PRI System — UI & modules",
+  "experience.items.2026.org": "Team project (engineering thesis)",
+  "experience.items.2026.body": "Modernizing an existing system UI, delivering new modules (project marketplace, statistics) and a custom translation system that improves flexibility for hard-to-reach and dynamic texts."
 }

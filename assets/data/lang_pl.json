@@ -8,8 +8,8 @@
   "nav.contact": "Kontakt",
   "hero.greeting": "Jestem <strong>Wiktor</strong> :)",
   "hero.subtitle": "Web Developer • Twórca internetowy",
-  "hero.projects": "Projekty",
-  "hero.tools": "Narzędzia",
+  "hero.projects": "<i class=\"fas fa-folder-open\" style=\"margin-right: 8px;\"></i>Projekty",
+  "hero.tools": "<i class=\"fas fa-tools\" style=\"margin-right: 8px;\"></i>Narzędzia",
   "about.title": "O mnie"
   ,"splash.loading": "Ładowanie strony głównej...",
   "social.github": "Profil Github",
@@ -24,16 +24,43 @@
   "about.right.title": "Trochę więcej o mnie...",
   "about.right.page1": "Poza pracą zawodową, osobiście interesuję się <strong>sztuczną inteligencją</strong> i od kilku lat eksploruję narzędzia AI. Lubię również tworzyć materiały cyfrowe, wykorzystując narzędzia takie jak <strong>FL Studio, Adobe Premiere Pro i GIMP</strong>.",
   "about.right.page2": "W wolnym czasie chętnie sięgam również po <strong>gry komputerowe oraz filmy</strong>, co pozwala mi odpocząć i czerpać <strong>inspiracje wizualne oraz koncepcyjne</strong> do własnych projektów.",
-  "about.buttons.goto_experience": "Przejdź do mojego doświadczenia",
-  "about.buttons.goto_skills": "Przejdź do moich umiejętności"
+  "about.buttons.goto_experience": "<i class=\"fas fa-briefcase\" style=\"margin-right: 8px;\"></i>Przejdź do mojego doświadczenia",
+  "about.buttons.goto_skills": "<i class=\"fas fa-code\" style=\"margin-right: 8px;\"></i>Przejdź do moich umiejętności"
   ,
   "tools.title": "Narzędzia",
   "tools.description": "Kolekcja przydatnych narzędzi developerskich",
-  "tools.cta": "Przejdź do narzędzi",
+  "tools.cta": "<i class=\"fas fa-tools\" style=\"margin-right: 8px;\"></i>Przejdź do narzędzi",
   "projects.header": "Najnowsze Projekty",
-  "projects.cta": "Zobacz wszystkie projekty",
+  "projects.cta": "<i class=\"fas fa-folder-open\" style=\"margin-right: 8px;\"></i>Zobacz wszystkie projekty",
   "contact.description": "Sprawdź moje profile społecznościowe i pobierz CV, aby dowiedzieć się więcej o moich projektach i doświadczeniu.",
-  "contact.github": "GitHub",
-  "contact.linkedin": "LinkedIn",
-  "contact.cv": "Pobierz CV"
+  "contact.github": "<i class=\"fab fa-github\" style=\"margin-right: 8px;\"></i>GitHub",
+  "contact.linkedin": "<i class=\"fab fa-linkedin\" style=\"margin-right: 8px;\"></i>LinkedIn",
+  "contact.cv": "<i class=\"fas fa-file-pdf\" style=\"margin-right: 8px;\"></i>Pobierz CV",
+
+  "experience.title": "Doświadczenie",
+  "experience.subtitle": "Przewijaj oś czasu w lewo/prawo i wybierz rok, aby zobaczyć opis wydarzenia.",
+  "experience.items.start.date": "Start",
+  "experience.items.start.role": "Uniwersytet im. Adama Mickiewicza w Poznaniu",
+  "experience.items.start.org": "Informatyka (2022)",
+  "experience.items.start.body": "Rozpoczęcie studiów na kierunku Informatyka.",
+
+  "experience.items.2023.date": "2023",
+  "experience.items.2023.role": "EDU-CZAR / DermaExpert",
+  "experience.items.2023.org": "Administrator stron • Projektant stron • Grafik",
+  "experience.items.2023.body": "<strong>EDU-CZAR</strong> <span style=\"opacity:.8\">(2023 – lis 2025)</span><br>Administrator stron internetowych, Projektant stron internetowych, Grafik komputerowy<br><br>Zrealizowano kompletny proces tworzenia i administrowania stroną internetową z wykorzystaniem WordPressa, dostosowując rozwiązania do potrzeb edukacyjnych i komunikacyjnych organizacji — przyjaznych zarówno dla oka dziecka, jak i rodzica.<br><br>Zakres: aktualizacja treści, wprowadzanie nowych postów.<br><a href=\"https://educzar.pl/\" target=\"_blank\" rel=\"noopener\">https://educzar.pl/</a><br><br><strong>DermaExpert</strong> <span style=\"opacity:.8\">(2023 – obecnie)</span><br>Administrator stron internetowych, Projektant stron internetowych<br><br>Od podstaw stworzono kompletną stronę internetową w WordPress — zaprojektowano strukturę i układ witryny oraz wdrożono elementy wizualne i treści dopasowane do branży dermatologicznej. Skupiono się na responsywnym i intuicyjnym interfejsie użytkownika.<br><a href=\"https://dermaexpert.pl/\" target=\"_blank\" rel=\"noopener\">https://dermaexpert.pl/</a>",
+
+  "experience.items.2024.date": "2024",
+  "experience.items.2024.role": "M3 Group — Staż",
+  "experience.items.2024.org": "Administrator stron • Projektant • Grafik • Projektant aplikacji",
+  "experience.items.2024.body": "<span style=\"opacity:.8\">(maj 2024 – lip 2024)</span><br>Administrator stron internetowych, Projektant stron internetowych, Projektant aplikacji, Grafik komputerowy<br><br>Projektowanie grafiki komputerowej oraz praca nad rozwojem interfejsów użytkownika dla platform e-commerce z wykorzystaniem WordPress (Elementor, WPBakery) oraz innych wtyczek (m.in. strumień mediów społecznościowych, wyskakujące treści, strumień RSS).<br><br>Dbałość o responsywność stron internetowych oraz projektowanie aplikacji na Windows, Linux, Android i iOS.<br><a href=\"https://wodnasluzbaratownicza.pl/\" target=\"_blank\" rel=\"noopener\">https://wodnasluzbaratownicza.pl/</a><br><a href=\"https://www.eksero24.pl/\" target=\"_blank\" rel=\"noopener\">https://www.eksero24.pl/</a>",
+
+  "experience.items.2025.date": "2025",
+  "experience.items.2025.role": "M3 Group — Developer",
+  "experience.items.2025.org": "Umowa zlecenie/freelancing • Praca zdalna",
+  "experience.items.2025.body": "<span style=\"opacity:.8\">(wrz 2025 – obecnie)</span><br>Developer<br><br>Praca w zespole M3 Group jako developer, zajmując się rozwojem aplikacji i systemów webowych. Praca nad projektami z wykorzystaniem nowoczesnych technologii webowych, w tym HTML, CSS, JavaScript oraz innych narzędzi deweloperskich.<br><br><strong>System PRI — UI i moduły</strong><br><span style=\"opacity:.8\">Projekt grupowy (praca inżynierska)</span><br><br>Modernizacja interfejsu istniejącego systemu, wdrożenie nowych modułów (giełda projektów, statystyki) oraz autorskiego systemu translacji zwiększającego elastyczność tłumaczeń.",
+
+  "experience.items.2026.date": "2026",
+  "experience.items.2026.role": "System PRI — UI i moduły",
+  "experience.items.2026.org": "Projekt grupowy (praca inżynierska)",
+  "experience.items.2026.body": "Modernizacja interfejsu istniejącego systemu, wdrożenie nowych modułów (giełda projektów, statystyki) oraz autorskiego systemu translacji zwiększającego elastyczność tłumaczeń."
 }

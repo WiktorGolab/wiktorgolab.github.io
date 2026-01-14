@@ -106,7 +106,6 @@ class SlideManager {
             this.slides.forEach(slide => {
                 slide.style.height = `${slideHeight}px`;
                 slide.style.minHeight = `${slideHeight}px`;
-                slide.style.overflow = 'hidden';
             });
 
             // Dostosowanie elementów dla mobile
@@ -119,7 +118,6 @@ class SlideManager {
             this.slides.forEach(slide => {
                 slide.style.height = '100vh';
                 slide.style.minHeight = '';
-                slide.style.overflow = '';
             });
 
             this.resetDesktopElements();
