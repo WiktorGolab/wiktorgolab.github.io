@@ -68,6 +68,13 @@ function openProjectModal(project) {
 
             <div class="modal-body">
                 <div class="project-gallery">
+                    ${project.images && project.images.length > 0 ? `
+                    <div class="gallery-thumbnails">
+                        ${[project.image || 'assets/img/projects/default.png', ...project.images].map((img, index) => `
+                            <img src="${img}" alt="Screen ${index + 1}" class="thumbnail">
+                        `).join('')}
+                    </div>
+                    ` : ''}
                     ${project.demoLink ? `
                     <a href="${project.demoLink}" target="_blank" class="main-image-link">
                         <img src="${project.image || 'assets/img/projects/default.png'}" 
@@ -81,16 +88,7 @@ function openProjectModal(project) {
                          class="main-image"
                          onerror="this.src='assets/img/projects/default.png'">
                     `}
-                    
-                    <!-- Lekki napis z ID projektu pod obrazem -->
                     <div class="project-id" title="ID projektu" aria-label="ID projektu">id: (${project.id})</div>
-                    ${project.images && project.images.length > 0 ? `
-                    <div class="gallery-thumbnails">
-                        ${project.images.map((img, index) => `
-                            <img src="${img}" alt="Screen ${index + 1}" class="thumbnail">
-                        `).join('')}
-                    </div>
-                    ` : ''}
                 </div>
 
                 <div class="project-details">

@@ -1,0 +1,93 @@
+{
+  "id": 19,
+  "title": "Analiza pola",
+  "description": "Mobilna aplikacja do analizy stanu upraw na podstawie zdjęć wykonanych dronem lub smartfonem.",
+  "fullDescription": "Analiza pola to mobilna aplikacja wspierająca ocenę kondycji upraw rolnych na podstawie zdjęć lotniczych i terenowych. Użytkownik wczytuje zdjęcie, wyznacza granice analizowanego obszaru za pomocą interaktywnego wielokąta, a następnie uruchamia analizę obrazu. System oblicza indeks Excess Green (ExG) dla każdego piksela znajdującego się wewnątrz zaznaczonego obszaru oraz wykorzystuje metodę progowania Otsu do automatycznej klasyfikacji roślinności. Wyniki prezentowane są w postaci kolorowej nakładki na zdjęcie oraz procentowego udziału obszarów zdrowych i uszkodzonych. Aplikacja została napisana w czystym JavaScript z wykorzystaniem Canvas API, a następnie przeniesiona na urządzenia mobilne Android dzięki technologii Capacitor. Całe przetwarzanie odbywa się lokalnie na urządzeniu użytkownika bez konieczności przesyłania danych do serwera, co zwiększa prywatność i szybkość działania.",
+
+  "category": ["other", "tools"],
+
+  "tags": [
+    "JavaScript",
+    "HTML5",
+    "CSS3",
+    "Capacitor",
+    "Android",
+    "Mobile App",
+    "Canvas API"
+  ],
+
+  "technologies": [
+    {
+      "name": "JavaScript",
+      "version": "ES6+"
+    },
+    {
+      "name": "HTML5",
+      "version": "5"
+    },
+    {
+      "name": "CSS3",
+      "version": "3"
+    },
+    {
+      "name": "Canvas API",
+      "version": "HTML5"
+    },
+    {
+      "name": "Capacitor",
+      "version": "7"
+    },
+    {
+      "name": "Android",
+      "version": "Native Build"
+    }
+  ],
+
+  "image": "assets/img/projects/pic19.png",
+
+  "images": [
+    "assets/img/projects/pic19a.jpg",
+    "assets/img/projects/pic19b.png",
+    "assets/img/projects/pic19c.png",
+    "assets/img/projects/pic19d.png"
+  ],
+
+  "features": [
+    "Mobilna analiza zdjęć upraw",
+    "Import zdjęć z pamięci urządzenia",
+    "Interaktywny wybór obszaru analizy",
+    "Edycja i przesuwanie punktów wielokąta",
+    "Obliczanie indeksu Excess Green (ExG)",
+    "Automatyczne progowanie metodą Otsu",
+    "Klasyfikacja zdrowej i uszkodzonej roślinności",
+    "Kolorowa nakładka wyników na zdjęciu",
+    "Regulacja przezroczystości nakładki",
+    "Obliczanie procentowego udziału zdrowych i uszkodzonych obszarów",
+    "Przetwarzanie obrazu offline na urządzeniu",
+    "Responsywny interfejs dostosowany do ekranów mobilnych",
+    "Aplikacja Android zbudowana przy użyciu Capacitor"
+  ],
+
+  "status": "completed",
+
+  "completionDate": "2025-06-15",
+
+  "demoLink": "",
+  "codeLink": "",
+  "documentationLink": "",
+  "videoLink": "",
+
+  "priority": 3,
+
+  "showcase": true,
+
+  "collaborators": [],
+
+  "client": "",
+
+  "repositoryType": "private",
+
+  "license": "MIT",
+
+  "projectSize": "medium"
+}

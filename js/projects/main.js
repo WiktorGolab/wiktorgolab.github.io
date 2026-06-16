@@ -13,12 +13,35 @@ async function initProjectsPage() {
     await loadAllProjects();
     renderProjects();
 
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchButton = document.querySelector('.clear-search');
+
+    const updateClearSearchVisibility = () => {
+        if (searchInput.value.trim().length > 0) {
+            clearSearchButton.classList.add('visible');
+        } else {
+            clearSearchButton.classList.remove('visible');
+        }
+    };
+
     // Obsługa wyszukiwania
-    document.getElementById('searchInput').addEventListener('input', function (e) {
+    searchInput.addEventListener('input', function (e) {
         currentSearch = e.target.value.toLowerCase();
         renderProjects();
+        updateClearSearchVisibility();
         setTimeout(initScrollShadows, 50);
     });
+
+    clearSearchButton.addEventListener('click', function () {
+        searchInput.value = '';
+        currentSearch = '';
+        renderProjects();
+        updateClearSearchVisibility();
+        setTimeout(initScrollShadows, 50);
+        searchInput.focus();
+    });
+
+    updateClearSearchVisibility();
 
     // Obsługa sortowania
     document.getElementById('sortSelect').addEventListener('change', function (e) {

@@ -102,6 +102,7 @@
     font-size: 0.9rem;
     white-space: nowrap;
     font-family: var(--font);
+    user-select: none;
 }
 
 .category-btn:hover {
@@ -142,6 +143,29 @@
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
+}
+
+.clear-search {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    display: none;
+}
+
+.clear-search.visible {
+    display: block;
+}
+
+.clear-search:hover {
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .projects-grid {

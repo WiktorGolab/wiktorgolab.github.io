@@ -97,7 +97,7 @@
 .project-gallery {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 1rem;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .main-image {
-    aspect-ratio: 16 / 9;
+    /* aspect-ratio: 16 / 9; */
     object-fit: cover;
     border-radius: 8px;
     background: rgba(30, 30, 30, 0.7);
