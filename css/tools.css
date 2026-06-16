@@ -354,6 +354,7 @@ body, html {
     font-size: 0.9rem;
     outline: none;
     transition: border 0.3s ease, background 0.3s ease;
+    user-select: none;
 }
 
 .sidebar-search input::placeholder {

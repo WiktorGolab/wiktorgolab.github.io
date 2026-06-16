@@ -118,6 +118,7 @@
     border-radius: 8px;
     transition: background .25s;
     font-family: var(--font);
+    user-select: none;
 }
 
 .navbar button:hover {

@@ -219,6 +219,7 @@
     font-size: 1.1rem;
     cursor: pointer;
     filter: drop-shadow(0 0 15px rgba(0, 0, 0, 1));
+    user-select: none;
 }
 
 .tools-btn:hover {

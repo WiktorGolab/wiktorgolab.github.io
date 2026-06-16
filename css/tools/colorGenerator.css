@@ -156,6 +156,7 @@
     cursor: pointer;
     font-size: 14px;
     transition: background 0.2s;
+    user-select: none;
 }
 
 .color-actions button:hover {
@@ -179,6 +180,7 @@
     font-size: 13px;
     transition: background 0.2s;
     white-space: nowrap;
+    user-select: none;
 }
 
 .copy-btn:hover {

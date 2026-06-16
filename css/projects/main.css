@@ -202,6 +202,7 @@
     border-radius: 10px;
     transition: transform 0.2s ease-out;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
 }
 
 .project-card:hover .project-image {
@@ -289,7 +290,8 @@
     transition: background 0.3s ease;
     flex: 1;
     justify-content: center;
-    min-height: 44px; /* Better touch targets */
+    min-height: 44px;
+    user-select: none;
 }
 
 .project-link:hover {
@@ -606,6 +608,7 @@
     height: 34px;
     transition: all 0.3s ease;
     font-family: var(--font);
+    user-select: none;
 }
 
 .sort-select:hover {
